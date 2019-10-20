@@ -6,7 +6,8 @@ sp_codelists <- tidyr::tribble(~id, ~name,
 get_codelist <- function(codelist) {
   url <- get_codelist_url(codelist)
   message("Downloading codelist data")
-  vy <- xml2::read_xml(url) %>% xml2::xml_children()
+  vy <- httr::with_config(config = httr::config(useragent = usr),
+                          xml2::read_xml(url)) %>% xml2::xml_children()
   message("Processing codelist data")
   xnames <- purrr::map(vy, function(x) x %>% xml2::xml_children() %>% xml2::xml_name())
   if(length(unique(xnames)) == 1)
