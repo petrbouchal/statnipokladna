@@ -1,0 +1,21 @@
+Package: statnipokladna
+Title: Use Data from the Czech Public Finance Database
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Petr",
+           family = "Bouchal",
+           role = c("aut", "cre"),
+           email = "pbouchal@gmail.com")
+Description: This package provides programmatic access to
+    data from the Czech public budgeting and accounting database, Státní
+    pokladna.
+License: MIT + file LICENSE
+Imports: 
+    httr (>= 1.4.1),
+    stringr (>= 1.4.0),
+    magrittr
+Encoding: UTF-8
+Language: en
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
