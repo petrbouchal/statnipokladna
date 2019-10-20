@@ -10,6 +10,14 @@ This package provides programmatic access to
     data from the Czech public budgeting and accounting database, Státní
     pokladna.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/petrbouchal/statnipokladna}
+  \item Report bugs at \url{https://github.com/petrbouchal/statnipokladna/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Petr Bouchal \email{pbouchal@gmail.com}
 
