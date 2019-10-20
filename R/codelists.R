@@ -1,6 +1,6 @@
 sp_codelists <- tidyr::tribble(~id, ~name,
                                "ucjed", "\\u00da\\u010detn\\u00ed jednotka",
-                               "polvyk", "\\u00da\\u010detn\\u00ed jednotka") %>%
+                               "polvyk", "Polo\\u017eka v\\u00fdkazu") %>%
   dplyr::mutate(name = stringi::stri_unescape_unicode(name))
 
 get_codelist <- function(codelist) {
