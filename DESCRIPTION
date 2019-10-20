@@ -19,3 +19,5 @@ Language: en
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
+URL: https://github.com/petrbouchal/statnipokladna
+BugReports: https://github.com/petrbouchal/statnipokladna/issues
