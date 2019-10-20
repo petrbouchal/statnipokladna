@@ -6,9 +6,8 @@ Authors@R:
            family = "Bouchal",
            role = c("aut", "cre"),
            email = "pbouchal@gmail.com")
-Description: This package provides programmatic access to
-    data from the Czech public budgeting and accounting database, Státní
-    pokladna.
+Description: This package provides programmatic access to data from the
+    Czech public budgeting and accounting database, Státní pokladna.
 License: MIT + file LICENSE
 URL: https://github.com/petrbouchal/statnipokladna
 BugReports: https://github.com/petrbouchal/statnipokladna/issues
@@ -18,7 +17,7 @@ Imports:
     lubridate (>= 1.7.4),
     magrittr,
     purrr (>= 0.3.2),
-    rlang (>= 0.4.0.9003),
+    rlang (>= 0.4.0),
     stringi (>= 1.4.3),
     stringr (>= 1.4.0),
     tibble (>= 2.1.3),
