@@ -8,3 +8,8 @@
 ^\.here$
 ^\.pre-commit-config\.yaml$
 ^\.travis\.yml$
+^vignettes/articles$
+^vignettes/test-art.Rmd$
+^prep$
+^doc$
+^Meta$
