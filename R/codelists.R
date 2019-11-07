@@ -1,7 +1,18 @@
 sp_codelists <- tibble::tribble(~id, ~name,
                                "ucjed", "\\u00da\\u010detn\\u00ed jednotka",
+                               "paragraf", "Paragraf",
+                               "typorg", "Typ OSS",
+                               "finmisto", "Finan\\u010dn\\u00ed m\\u00edsto (kapitoly, OSS)",
+                               "druhuj", "Druh \\u00fa\\u010detn\\u00ed jednotky",
+                               "poddruhuj", "Poddruh \\u00fa\\u010detn\\u00ed jednotky",
+                               "paragraf_long", "Paragraf (\\u0161estim\\u00edstn\\u00fd k\\u00f3d)",
+                               "polvkk", "Z\\u00e1vazn\\u00e9 ukazatele st\\u00e1tn\\u00edho rozpo\\u010dtu (Do 2014)",
+                               "psuk", "Z\\u00e1vazn\\u00e9 ukazatele st\\u00e1tn\\u00edho rozpo\\u010dtu (Od 2015)",
+                               "kapitola", "Kapitola rozpo\\u010detu",
                                "polvyk", "Polo\\u017eka v\\u00fdkazu") %>%
   dplyr::mutate(name = stringi::stri_unescape_unicode(name))
+
+# stringi::stri_escape_unicode("str")
 
 get_codelist <- function(codelist) {
   url <- get_codelist_url(codelist)
