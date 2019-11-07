@@ -108,7 +108,8 @@
 <a href="https://www.zakonyprolidi.cz/cs/2002-323#p2">vyhláška o rozpočtové skladbě</a> - k tomu viz níže</li>
 <li>v popisu struktury v excelech <a href="http://monitor.statnipokladna.cz/2019/zdrojova-data/transakcni-data#fin2-12m">u jednotlivých datasetů</a>
 </li>
-<li>ledacos se hodí bazálně ověřit proti ručně sestavené tabulce v analytickém rozhraní</li>
+<li>ledacos se hodí bazálně ověřit proti ručně sestavené tabulce v <a href="http://monitor.statnipokladna.cz/analyza/">analytickém rozhraní</a>
+</li>
 <li>při ověřování může taky pomoct např.
 <ul>
 <li>příloha vyhlášky o RUD (<a href="https://www.mfcr.cz/cs/legislativa/legislativni-dokumenty/2019/vyhlaska-c-219-2019-sb-36077">2019</a>)</li>
@@ -230,12 +231,12 @@
 <div id="jak-se-to-odráží-v-datech-2" class="section level3">
 <h3 class="hasAnchor">
 <a href="#jak-se-to-odr%C3%A1%C5%BE%C3%AD-v-datech-2" class="anchor"></a>Jak se to odráží v datech</h3>
-<p>V číselnících rozpočtové skladby jsou sloupce začínající <code>kon_</code> s hodnotou true nebo false. Pro konsolidaci na úrovni okresu je to <code>kon_okr</code> atd.</p>
+<p>V rozpočtových (a možná i jiných) výkazech jsou sloupce začínající <code>kon_</code> s hodnotou true nebo false. Pro konsolidaci na úrovni okresu je to <code>kon_okr</code> atd.</p>
 </div>
 <div id="co-s-tím" class="section level3">
 <h3 class="hasAnchor">
 <a href="#co-s-t%C3%ADm" class="anchor"></a>Co s tím</h3>
-<p>Pokud chci zajistit, že se mi nedublují výdaje kraje a obcí (např. dotace kraje obcím), potřebuju si nechat v datasetu pouze řádky, kde <code>kon_okr</code> je true. Pokud chci konsolidovat vše (tj. zajímají mě údaje na úrovni státu), musím takto filtrovat všechny sloupce začínající <code>kon_</code></p>
+<p>Pokud chci zajistit, že se mi nedublují výdaje kraje a obcí (např. dotace kraje obcím), potřebuju si nechat v datasetu pouze řádky, kde <code>kon_okr</code> je true. Pokud chci konsolidovat vše (tj. zajímají mě údaje na úrovni státu), musím takto filtrovat všechny sloupce začínající <code>kon_</code>, a tak dál.</p>
 </div>
 <div id="reportování-daňových-příjmů" class="section level3">
 <h3 class="hasAnchor">
@@ -259,7 +260,7 @@
 <li>zdrojové třídění u rozpočtů samospráv - jen indidentálně jako součást reportu účelového financování</li>
 <li>údaje o regulaci zaměstnanosti ve veřejném sektoru neboli rozpočtované a skutečné počty zaměstnanců a průměrné platy, ač se sledují a částečně zveřejňují ve státním závěrečném účtu, viz <a href="https://petrbouchal.github.io/urednici2019/">petrbouchal/urednici2019</a>
 </li>
-<li>informace o tom, kde se peníze utratily (pokud vím, plošně se nedleduje, něco je v CEDRu a docela se to ví u eurofondů)</li>
+<li>informace o tom, na jakém místě se peníze utratily (pokud vím, plošně se nedleduje, něco je v CEDRu a docela se to ví u eurofondů)</li>
 </ul>
 </div>
 <div id="známe-neznámé" class="section level2">
@@ -267,7 +268,7 @@
 <a href="#zn%C3%A1me-nezn%C3%A1m%C3%A9" class="anchor"></a>Známe neznámé:</h2>
 <ul>
 <li>nevím, co je finanční místo</li>
-<li>ne zcela rozumím položkám ke konsolidaci (fungují v praxi, ale…)</li>
+<li>ne zcela rozumím položkám ke konsolidaci (fungují v praxi, ale…), navíc jsem je zkoušel jen u příjmů a výdajů rozpočtůx</li>
 <li>některé součty při práci s obecími daty mi vycházely malinko jinak oproti reportům z analytické části monitoru (o desetiny procent)</li>
 <li>nerozumím programovému financování</li>
 <li>nevím, jaký je rozdíl mezi číselník položek a směrnou účetní osnovou</li>
