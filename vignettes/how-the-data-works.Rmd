@@ -145,7 +145,7 @@ Technicky se netýká konsolidace, ale souvisí to: na příjmové straně je t�
 
 - zdrojové třídění u rozpočtů samospráv - jen indidentálně jako součást reportu účelového financování
 - údaje o regulaci zaměstnanosti ve veřejném sektoru neboli rozpočtované a skutečné počty zaměstnanců a průměrné platy, ač se sledují a částečně zveřejňují ve státním závěrečném účtu, viz [petrbouchal/urednici2019](https://petrbouchal.github.io/urednici2019/) 
-- informace o tom, kde se peníze utratily (pokud vím, plošně se nedleduje, něco je v CEDRu a docela se to ví u eurofondů)
+- informace o tom, na jakém místě se peníze utratily (pokud vím, plošně se nedleduje, něco je v CEDRu a docela se to ví u eurofondů)
 
 ## Známe neznámé:
 
