@@ -6,8 +6,11 @@
 \alias{statnipokladna-package}
 \title{statnipokladna: Use Data from the Czech Public Finance Database}
 \description{
-This package provides programmatic access to data from the
-    Czech public budgeting and accounting database, Státní pokladna.
+\if{html}{\figure{logo.png}{options: align='right'}}
+
+This package provides programmatic access to
+    data from the Czech public budgeting and accounting database, Státní
+    pokladna.
 }
 \seealso{
 Useful links:
