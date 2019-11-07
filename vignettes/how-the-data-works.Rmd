@@ -23,7 +23,7 @@ library(statnipokladna)
 - [základní glosář k terminologii](http://monitor.statnipokladna.cz/2019/metodika/#prijmy)
 - [vyhláška o rozpočtové skladbě](https://www.zakonyprolidi.cz/cs/2002-323#p2) - k tomu viz níže
 - v popisu struktury v excelech [u jednotlivých datasetů](http://monitor.statnipokladna.cz/2019/zdrojova-data/transakcni-data#fin2-12m)
-- ledacos se hodí bazálně ověřit proti ručně sestavené tabulce v analytickém rozhraní
+- ledacos se hodí bazálně ověřit proti ručně sestavené tabulce v [analytickém rozhraní](http://monitor.statnipokladna.cz/analyza/)
 - při ověřování může taky pomoct např.
   - příloha vyhlášky o RUD ([2019](https://www.mfcr.cz/cs/legislativa/legislativni-dokumenty/2019/vyhlaska-c-219-2019-sb-36077))
   - státní závěrečné účty nejlépe z [webu sněmovny](http://www.psp.cz/sqw/tisky.sqw?o=8&F=H&PT=U&dx=1&na=N%E1vrh+st%E1tn%EDho+z%E1v%ECre%E8n%E9ho+%FA%E8tu+%C8R&t=&za=&f_N=on&f_S=on&f_R=on&f_I=on&f_Z=on&f_V=on&f_U=on&f_P=on&f_O=on&ra=20)
@@ -125,11 +125,11 @@ K tomu slouží konsolidace a open data státní pokladny ji naštěstí umožň
 
 ### Jak se to odráží v datech
 
-V číselnících rozpočtové skladby jsou sloupce začínající `kon_` s hodnotou true nebo false. Pro konsolidaci na úrovni okresu je to `kon_okr` atd. 
+V rozpočtových (a možná i jiných) výkazech jsou sloupce začínající `kon_` s hodnotou true nebo false. Pro konsolidaci na úrovni okresu je to `kon_okr` atd. 
 
 ### Co s tím
 
-Pokud chci zajistit, že se mi nedublují výdaje kraje a obcí (např. dotace kraje obcím), potřebuju si nechat v datasetu pouze řádky, kde `kon_okr` je true. Pokud chci konsolidovat vše (tj. zajímají mě údaje na úrovni státu), musím takto filtrovat všechny sloupce začínající `kon_`
+Pokud chci zajistit, že se mi nedublují výdaje kraje a obcí (např. dotace kraje obcím), potřebuju si nechat v datasetu pouze řádky, kde `kon_okr` je true. Pokud chci konsolidovat vše (tj. zajímají mě údaje na úrovni státu), musím takto filtrovat všechny sloupce začínající `kon_`, a tak dál.
 
 ### Reportování daňových příjmů
 
@@ -150,7 +150,7 @@ Technicky se netýká konsolidace, ale souvisí to: na příjmové straně je t�
 ## Známe neznámé:
 
 - nevím, co je finanční místo
-- ne zcela rozumím položkám ke konsolidaci (fungují v praxi, ale...)
+- ne zcela rozumím položkám ke konsolidaci (fungují v praxi, ale...), navíc jsem je zkoušel jen u příjmů a výdajů rozpočtůx
 - některé součty při práci s obecími daty mi vycházely malinko jinak oproti reportům z analytické části monitoru (o desetiny procent)
 - nerozumím programovému financování
 - nevím, jaký je rozdíl mezi číselník položek a směrnou účetní osnovou
