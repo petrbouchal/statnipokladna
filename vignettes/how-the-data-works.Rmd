@@ -14,29 +14,34 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, echo=F}
 library(statnipokladna)
 ```
 
-# Kde brát informace
+## Kde brát informace
 
 - [základní glosář k terminologii](http://monitor.statnipokladna.cz/2019/metodika/#prijmy)
-- [Vyhláška o rozpočtové skladbě](https://www.zakonyprolidi.cz/cs/2002-323#p2) - k tomu viz níže
-- v dokumentaci k datasetům
+- [vyhláška o rozpočtové skladbě](https://www.zakonyprolidi.cz/cs/2002-323#p2) - k tomu viz níže
+- v popisu struktury v excelech [u jednotlivých datasetů](http://monitor.statnipokladna.cz/2019/zdrojova-data/transakcni-data#fin2-12m)
 - ledacos se hodí bazálně ověřit proti ručně sestavené tabulce v analytickém rozhraní
 - při ověřování může taky pomoct např.
   - příloha vyhlášky o RUD ([2019](https://www.mfcr.cz/cs/legislativa/legislativni-dokumenty/2019/vyhlaska-c-219-2019-sb-36077))
   - státní závěrečné účty nejlépe z [webu sněmovny](http://www.psp.cz/sqw/tisky.sqw?o=8&F=H&PT=U&dx=1&na=N%E1vrh+st%E1tn%EDho+z%E1v%ECre%E8n%E9ho+%FA%E8tu+%C8R&t=&za=&f_N=on&f_S=on&f_R=on&f_I=on&f_Z=on&f_V=on&f_U=on&f_P=on&f_O=on&ra=20)
+  - údaje o výběru daní od Finanční správy:  ([tabulky](https://www.financnisprava.cz/cs/dane/kraje-a-obce/danove-prijmy-kraju-a-obci/prubeh-celostatniho-inkasa-sdilenych-dani-3735), [statistiky](https://www.financnisprava.cz/cs/dane/analyzy-a-statistiky/udaje-z-vyberu-dani))
 
-# Soustava prvků
+## Soustava prvků dostupných ze státní pokladny
 
-- číselníky
+- [číselníky](http://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky)
 - výkazy (publikovány jako "transakční data") bez téměř jakýkcholi lidsky čitelných identifikátorů - k tomu je potřeba napojit číselníky
 - části výkazu (tabulky - v datech označeny v daném sloupci)
 
 Prakticky to vypadá tak, že jeden balík s výkazem obsahuje více CSV souborů, kdy jednotlivé soubory obsahují jeden nebo víc tabulek daného výkazu.
 
-# Typy výkazů
+Číselníky jsou v XML, ale dají se i prohlížet ([příklad](http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/vykaz?date=7.11.2019) a tamtéž stáhnout)
+
+Pozor: číselníky jsou časově determinované a pokud neodfiltrujete položky nerelevantní pro dané časové období, můžou při napojování JOINem vzniknout nechtěné duplicity...
+
+### Typy výkazů
 
 - účetní: drží se účetnické logiky
   - rozvaha
@@ -47,16 +52,16 @@ Prakticky to vypadá tak, že jeden balík s výkazem obsahuje více CSV soubor�
 - rozpočty: drží se rozpočtářské logiky
 - specifické výkazy: transfery přijaté územními organizacemi, transfery poskytnuté ústedními organizacemi územním, specifické ukazatele, účelové třídění/programové financování
 
-## Jak se to odráží v datech?
+#### Jak se to odráží v datech?
 
 - pokud to správně cháp, tak sloupce začínající ZU_ jsou údaje, sloupce začínající ZC_ slouží k napojení na číselník identifikovaný zbytkem názvu
 - někdy jsou atributy daných řádků vidět až v číselnících: například se může stát, že v datech je nějaký řádek označen jako program X a není tam sloupec označující zdroj peněz, ale informaci o zdroji obsahuje až číselník programů, který je potřeba napojit.
 
-# Příjmy, výdaje, financování
+## Příjmy, výdaje, financování
 
 - jedna praktická poznámka: veřejné rozpočty se formálně skládají z příjmů, výdajů a financování, přičemž financování znamená hrubě řečeno půjčky.
 
-# Rozpočtová skladba
+## Rozpočtová skladba
 
 Tomuto je dobré rozumět: český státní rozpočet umí peníze rozdělovat do různých druhů škatulek. tyto **druhy škatulek** se jmenují třídění.
 
@@ -75,7 +80,7 @@ Každý typ třídění má typicky několik úrovní, např.
 - u funkčního ... skupina, podskupina, paragraf
 - atd.
 
-## Jak se to odráží v datech
+### Jak se to odráží v datech
 
 Rozpočtová data si lze představit jako tabulku v "dlouhém formátu", kde každá koruna má svůj řádek a pro každý typ členění má tabulka sloupec, který danou korunu zařazuje do nejjemnějšího rozpadu daného členění. (Třeba paragraf 1234, který spadá do skupiny 12, podskupiny 123 atd. - tyto kódy a hierarchie lze rozklíčovat napojením číselníku.) Plus tabulka obsahuje organizaci, pro kterou je tato koruna rozpočtována nebo účtována. (V praxi nejde o jednotlivé koruny, ale o kyblíky všech korun, které odpovídají dané kombinaci atributů/členění).
 
@@ -94,7 +99,7 @@ Toto platí pro běžné rozpočtové výkazy (datasety). Všechna členění js
 |: Částka | Druhové třídění: skupina | Druhové třídění: podskupina | Funkční třídění: seskupení | Funkční třídění: podseskupení |
 123 | Výdaje | Kapitálové | 
 
-# Jednotky analýzy: o kom a čem se vykazuje
+## Jednotky analýzy: o kom a čem se vykazuje
 
 - typ organizace: toto se odráží na úrovni výkazů/datasetů: místně řízené organizace (M) mají jiné výkazy než ústředně řízení (U) a jsou i odděleně zveřejňovány, ovšem sdílí číselníky a rozpočtovou skladbu.
 
@@ -110,38 +115,39 @@ Toto platí pro běžné rozpočtové výkazy (datasety). Všechna členění js
 - finanční místo: netuším
 - kapitola = jednotka, za kterou se rozpočtuje a skládají účty v rámci státního rozpočtu, tj. "centrální" úrovně státu. Každá kapitola zahrnuje jednu nebo víc organizací (snad s výjimkou pokladní správy), popř. za ni je nějaká organizace odpovědná - buď ministerstvo nebo někdo jiný (takže kapitola nerovná se ministerstvo ani sektor/funkce).
 
-# Konsolidace: co sčítat a co ne
+## Konsolidace: co sčítat a co ne
 
-## Oč jde
+### Oč jde
 
 Pro některé účely je dobré vědět, kde peníze finálně skončily - kdo je utratil a za jakým účelem - i když tyto peníze předtím protekly jinými částmi veřejného sektory. V ten moment se koukám na nějaký celek (kraj se všemi jeho obcemi, stát se všemi samosprávami, stát se všemi svými ministerstvy) jako na jednu organizaci a potřebuju tedy očistit přesuny peněz, které jsou z této perspektivy interní, aby se mi do případných součtů nezapočítaly dvakrát.
 
 K tomu slouží konsolidace a open data státní pokladny ji naštěstí umožňují.
 
-## Jak se to odráží v datech
+### Jak se to odráží v datech
 
 V číselnících rozpočtové skladby jsou sloupce začínající `kon_` s hodnotou true nebo false. Pro konsolidaci na úrovni okresu je to `kon_okr` atd. 
 
-## Co s tím
+### Co s tím
 
 Pokud chci zajistit, že se mi nedublují výdaje kraje a obcí (např. dotace kraje obcím), potřebuju si nechat v datasetu pouze řádky, kde `kon_okr` je true. Pokud chci konsolidovat vše (tj. zajímají mě údaje na úrovni státu), musím takto filtrovat všechny sloupce začínající `kon_`
 
-## Reportování daňových příjmů
+### Reportování daňových příjmů
 
-- technicky se netýká konsolidace, ale na příjmové straně je třeba myslet na to, že kvůli zákonu o rozpočtovém určení daní státní rozpočet část centrálně vybraných daní alokuje rovnou obcím, tj. ve výkazu centrálních institucí je v některých daňových příjmech zaneseno jen cca 70 % toho, co se zkutečně vybere. (Týká se to daní z příjmu a DPH.) K analýze daňových příjmů je lepší použít data Finanční správy.
+Technicky se netýká konsolidace, ale souvisí to: na příjmové straně je třeba myslet na to, že kvůli zákonu o rozpočtovém určení daní státní rozpočet část centrálně vybraných daní alokuje rovnou obcím, tj. ve výkazu centrálních institucí je v některých daňových příjmech zaneseno jen cca 70 % toho, co se zkutečně vybere. (Týká se to daní z příjmu a DPH.) K analýze daňových příjmů je lepší použít data Finanční správy.
 
-# Známé datové zádrhele
+## Známé datové zádrhele
 
 - v některých souborech jsou záporná čísla zapsaná tak, že minus je na konci, takže většina parserů sloupec načte jako text a převod na číslo běžným způsobem nefunguje
 - některé CSV soubory jsou oddělované čárkou (a obsahují desetinnou tečku), jiné středníkem (s desetinnou čárkou)
+- u číselníků je třeba myslet na to, že můžou obsahovat duplicitní položky (např. stejný kód, jiný název), z nichž každá platí v jiném časovém období - pokud se to neodfiltruje, můžou při napojení JOINem vznikat duplicity.
 
-# Co v datech není nebo jsem to nenašel
+## Co v datech není nebo jsem to nenašel
 
 - zdrojové třídění u rozpočtů samospráv - jen indidentálně jako součást reportu účelového financování
 - údaje o regulaci zaměstnanosti ve veřejném sektoru neboli rozpočtované a skutečné počty zaměstnanců a průměrné platy, ač se sledují a částečně zveřejňují ve státním závěrečném účtu, viz [petrbouchal/urednici2019](https://petrbouchal.github.io/urednici2019/) 
 - informace o tom, kde se peníze utratily (pokud vím, plošně se nedleduje, něco je v CEDRu a docela se to ví u eurofondů)
 
-# Známe neznámé:
+## Známe neznámé:
 
 - nevím, co je finanční místo
 - ne zcela rozumím položkám ke konsolidaci (fungují v praxi, ale...)
