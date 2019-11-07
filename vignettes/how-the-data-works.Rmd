@@ -94,10 +94,10 @@ Toto platí pro běžné rozpočtové výkazy (datasety). Všechna členění js
 - rozpočtových ukazatelů (ústřední MIS-RIS výkaz ze sady FINU_ZU a samosprávný výkaz 51 tabulka 700 nebo 800 ze sady FINM)
 - tabulky 400 výkazu 51 (FINM - samosprávy), tj. rekapitulace
 
-## Příklad standardního rozpočtového výkazu
+<!-- ## Příklad standardního rozpočtového výkazu -->
 
-|: Částka | Druhové třídění: skupina | Druhové třídění: podskupina | Funkční třídění: seskupení | Funkční třídění: podseskupení |
-123 | Výdaje | Kapitálové | 
+<!-- |: Částka | Druhové třídění: skupina | Druhové třídění: podskupina | Funkční třídění: seskupení | Funkční třídění: podseskupení | -->
+<!-- 123 | Výdaje | Kapitálové |  -->
 
 ## Jednotky analýzy: o kom a čem se vykazuje
 
