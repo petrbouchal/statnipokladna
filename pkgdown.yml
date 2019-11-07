@@ -1,5 +1,10 @@
 pandoc: '2.2'
 pkgdown: 1.4.1
 pkgdown_sha: ~
-articles: []
+articles:
+  how-the-data-works: how-the-data-works.html
+  test-art: test-art.html
+urls:
+  reference: https://petrbouchal.github.io/statnipokladna/reference
+  article: https://petrbouchal.github.io/statnipokladna/articles
 
