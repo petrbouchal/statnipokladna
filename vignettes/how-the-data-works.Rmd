@@ -18,6 +18,16 @@ knitr::opts_chunk$set(
 library(statnipokladna)
 ```
 
+## Co je toto za text
+
+Soupis skoro všeho, co vím a nevím o hrubých datech státní pokladny. Mohl by být užitečný pro 
+
+- mě při tvorbě balíku
+- kohokoli, kdo bude chtít balík použít
+- kohokoli, kdo chce data použít jinak
+
+Nejsem rozpočtář ani účetní - tato data primárně používám k zodpovídání ekonomických otázek, takže nemusím bazírovat na přesné terminologii nebo přesnosti dat do poslední koruny. Pokud ale je v textu něco špatně nebo je potřeba doplnit, budu rád za [pull request](https://github.com/petrbouchal/statnipokladna/pull/new) nebo [issue](https://github.com/petrbouchal/statnipokladna/issues).
+
 ## Kde brát informace
 
 - [základní glosář k terminologii](http://monitor.statnipokladna.cz/2019/metodika/#prijmy)
