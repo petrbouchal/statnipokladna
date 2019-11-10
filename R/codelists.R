@@ -29,7 +29,7 @@
                                 "polvkk", "Z\\u00e1vazn\\u00e9 ukazatele st\\u00e1tn\\u00edho rozpo\\u010dtu (Do 2014)",
                                 "psuk", "Z\\u00e1vazn\\u00e9 ukazatele st\\u00e1tn\\u00edho rozpo\\u010dtu (Od 2015)",
                                 "smeruc", "Sm\\u011brn\\u00e1 \\u00fa\\u010dtov\\u00e1 osnova (polo\\u017eky \\u00fa\\u010detn\\u00edch v\\u00fdkaz\\u016f)",
-                                "typfinmista", "Typ finančního místa",
+                                "typfinmista", "Typ finan\\u010dn\\u00edho m\\u00edst",
                                 "typorg", "Typ OSS",
                                 "ucel", "\u00da\\u010del",
                                 "ucjed", "\\u00da\\u010detn\\u00ed jednotka",
