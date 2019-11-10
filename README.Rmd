@@ -45,7 +45,7 @@ remotes::install_github("petrbouchal/statnipokladna")
   - the package draws on the online data and returns a clean data frame 
   - the resulting data is ready to merge into time series
 - do this through a consistent API which supplements some of the documentation that is missing from the official endpoints (*in development*)
-- access registers published alongside the data (e.g. lists of public organisations with their identifiers and metadata), some of which can be useful in other contexts (*in development, partially available*)
+- access registers published alongside the data (e.g. lists of public organisations with their identifiers and metadata), some of which can be useful in other contexts (*ready*)
 - augment the core data with the desired type of register (*in development*)
 
 ## What will this do compared to the [official analytical interface](http://monitor.statnipokladna.cz/)?

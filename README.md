@@ -49,8 +49,7 @@ remotes::install_github("petrbouchal/statnipokladna")
     development*)
   - access registers published alongside the data (e.g. lists of public
     organisations with their identifiers and metadata), some of which
-    can be useful in other contexts (*in development, partially
-    available*)
+    can be useful in other contexts (*ready*)
   - augment the core data with the desired type of register (*in
     development*)
 
