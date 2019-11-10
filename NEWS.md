@@ -1,3 +1,8 @@
+# statnipokladna 0.1.1
+
+* added feedback info to data vignette
+* fixed typos and testing infrastructure
+
 # statnipokladna 0.1.0
 
 * exported `get_codelist()`
