@@ -1,19 +1,61 @@
-sp_codelists <- tibble::tribble(~id, ~name,
-                               "ucjed", "\\u00da\\u010detn\\u00ed jednotka",
-                               "paragraf", "Paragraf",
-                               "typorg", "Typ OSS",
-                               "finmisto", "Finan\\u010dn\\u00ed m\\u00edsto (kapitoly, OSS)",
-                               "druhuj", "Druh \\u00fa\\u010detn\\u00ed jednotky",
-                               "poddruhuj", "Poddruh \\u00fa\\u010detn\\u00ed jednotky",
-                               "paragraf_long", "Paragraf (\\u0161estim\\u00edstn\\u00fd k\\u00f3d)",
-                               "polvkk", "Z\\u00e1vazn\\u00e9 ukazatele st\\u00e1tn\\u00edho rozpo\\u010dtu (Do 2014)",
-                               "psuk", "Z\\u00e1vazn\\u00e9 ukazatele st\\u00e1tn\\u00edho rozpo\\u010dtu (Od 2015)",
-                               "kapitola", "Kapitola rozpo\\u010detu",
-                               "polvyk", "Polo\\u017eka v\\u00fdkazu") %>%
-  dplyr::mutate(name = stringi::stri_unescape_unicode(name))
 
-# stringi::stri_escape_unicode("str")
+#' List of available codelists
+#'
+#' Contains IDs and names of all available codelists that can be retrieved by get_codelist.
+#' Go to https://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky to see more detailed
+#' descriptions and a GUI for exploring the lists.
+#'
+#' The `id` is to be used as the `codelist` parameter in `get_codelist`.
+#'
+#' @format A data frame with 27 rows and 2 variables:
+#' \describe{
+#'   \item{\code{id}}{character. ID, used to construct URL of codelist}
+#'   \item{\code{name}}{character. Short name, mostly corresponds to title used on statnipokladna.cz.}
+#' }
+"sp_codelists" <- tibble::tribble(~id, ~name,
+                                "aktorg", "Aktivn\\u00ed organizace",
+                                "cofog", "Klasifikace funkc\\u00ed vl\\u00e1dn\\u00edch instituc\\u00ed COFOG",
+                                "druhrizeni", "Druh \\u0159\\u00edzen\\u00ed",
+                                "druhuj", "Druh \\u00fa\\u010detn\\u00ed jednotky",
+                                "finmisto", "Finan\\u010dn\\u00ed m\\u00edsto (kapitoly, OSS)",
+                                "forma", "Forma \\u00fa\\u010detn\\u00ed jednotky",
+                                "kapitola", "Kapitola rozpo\\u010detu",
+                                "katobyv", "Kategorie po\\u010dtu obyvatel",
+                                "nuts", "Klasifikace \\u00fazemn\\u00edch statistick\\u00fdch jednotek NUTS",
+                                "paragraf", "Paragraf",
+                                "paragraf_long", "Paragraf (\\u0161estim\\u00edstn\\u00fd k\\u00f3d)",
+                                "poddruhuj", "Poddruh \\u00fa\\u010detn\\u00ed jednotky",
+                                "polvyk", "Polo\\u017eka v\\u00fdkazu",
+                                "polvkk", "Z\\u00e1vazn\\u00e9 ukazatele st\\u00e1tn\\u00edho rozpo\\u010dtu (Do 2014)",
+                                "psuk", "Z\\u00e1vazn\\u00e9 ukazatele st\\u00e1tn\\u00edho rozpo\\u010dtu (Od 2015)",
+                                "smeruc", "Sm\\u011brn\\u00e1 \\u00fa\\u010dtov\\u00e1 osnova (polo\\u017eky \\u00fa\\u010detn\\u00edch v\\u00fdkaz\\u016f)",
+                                "typfinmista", "Typ finančního místa",
+                                "typorg", "Typ OSS",
+                                "ucel", "\u00da\\u010del",
+                                "ucjed", "\\u00da\\u010detn\\u00ed jednotka",
+                                "ucznak", "\\u00da\\u010delov\\u00fd znak",
+                                "vykaz", "\\u010c\\u00edseln\\u00edk v\\u00fdkaz\\u016f a tabulek",
+                                "zazjedn", "Z\\u00e1znamov\\u00e1 jednotka (konsolida\\u010dn\\u00ed t\\u0159\\u00edd\\u011bn\\u00ed)",
+                                "zdroj", "Zdroj",
+                                "zdrojfin", "Zdroj financov\\u00e1n\\u00ed organizac\\u00ed",
+                                "zpodm", "Zp\\u016fsob odm\\u011b\\u0148ov\\u00e1n\\u00ed",
+                                "zuj", "Z\\u00e1kladn\\u00ed \\u00fazemn\\u00ed jednotka") %>%
+  dplyr::mutate(name = stringi::stri_unescape_unicode(name)) %>%
+  dplyr::arrange(id)
 
+# stringi::stri_escape_unicode("xxx")
+
+#' Get codelist
+#'
+#' Downloads and processes codelist identified by `codelist`. See `sp_codelists` for a list of
+#' of available codelists with their IDs and names.
+#'
+#' @param codelist A codelist ID. See `id` column in `sp_codelists` for a list of available codelists.
+#'
+#' @return A tibble
+#' @examples
+#' # ADD_EXAMPLES_HERE
+#' @export
 get_codelist <- function(codelist) {
   url <- get_codelist_url(codelist)
   message("Downloading codelist data")
