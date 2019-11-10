@@ -8,7 +8,7 @@ dataset_from_table <- function(table) {
 
 get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists = T) {
   if(!(month %in% c(3, 6, 9, 12))) stop("`Month` must be 3, 6, 9, or 12")
-  if(!(dataset_id %in% sp_datsets$id)) stop("Not a valid dataset ID")
+  if(!(dataset_id %in% sp_datasets$id)) stop("Not a valid dataset ID")
   dataset_name <- sp_datasets[sp_datasets$id == dataset_id, "name"]
   month <- formatC(month, width = 2, format = "d", flag = "0")
   message(stringr::str_glue("Building URL for dataset `{dataset_id}`: {dataset_name}"))
