@@ -1,1 +1,1 @@
-sp_tables <- tibble::tribble(~dataset_id, ~table_num, ~table_id, ~table_name, ~dataset_name, ~implemented)
+sp_tables <- tibble::tribble(~table_num, ~table_id, ~table_name, ~dataset_id, ~implemented)
