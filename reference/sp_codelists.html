@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>statnipokladna: Use Data from the Czech Public Finance Database — statnipokladna-package • statnipokladna</title>
+<title>List of available codelists — sp_codelists • statnipokladna</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,11 +42,10 @@
 
 
 
-<meta property="og:title" content="statnipokladna: Use Data from the Czech Public Finance Database — statnipokladna-package" />
-<meta property="og:description" content="
-This package provides programmatic access to
-    data from the Czech public budgeting and accounting database, Státní
-    pokladna." />
+<meta property="og:title" content="List of available codelists — sp_codelists" />
+<meta property="og:description" content="Contains IDs and names of all available codelists that can be retrieved by get_codelist.
+Go to https://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky to see more detailed
+descriptions and a GUI for exploring the lists." />
 <meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -131,38 +130,39 @@ This package provides programmatic access to
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>statnipokladna: Use Data from the Czech Public Finance Database</h1>
-    <small class="dont-index">Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/R/statnipokladna-package.R'><code>R/statnipokladna-package.R</code></a></small>
-    <div class="hidden name"><code>statnipokladna-package.Rd</code></div>
+    <h1>List of available codelists</h1>
+    <small class="dont-index">Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/R/codelists.R'><code>R/codelists.R</code></a></small>
+    <div class="hidden name"><code>sp_codelists.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><img src='figures/logo.png' align='right' /></p>
-<p>This package provides programmatic access to
-    data from the Czech public budgeting and accounting database, Státní
-    pokladna.</p>
+    <p>Contains IDs and names of all available codelists that can be retrieved by get_codelist.
+Go to https://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky to see more detailed
+descriptions and a GUI for exploring the lists.</p>
     </div>
 
+    <pre class="usage"><span class='no'>sp_codelists</span></pre>
 
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <div class='dont-index'><p>Useful links:</p><ul>
-<li><p><a href='https://github.com/petrbouchal/statnipokladna'>https://github.com/petrbouchal/statnipokladna</a></p></li>
-<li><p>Report bugs at <a href='https://github.com/petrbouchal/statnipokladna/issues'>https://github.com/petrbouchal/statnipokladna/issues</a></p></li>
-</ul>
+    <p>A data frame with 27 rows and 2 variables:</p><dl class='dl-horizontal'>
+<dt><code>id</code></dt><dd><p>character. ID, used to construct URL of codelist</p></dd>
+<dt><code>name</code></dt><dd><p>character. Short name, mostly corresponds to title used on statnipokladna.cz.</p></dd>
 
-</div>
+</dl>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The <code>id</code> is to be used as the <code>codelist</code> parameter in <code>get_codelist</code>.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#format">Format</a></li>
+      <li><a href="#details">Details</a></li>
     </ul>
 
-    <h2>Author</h2>
-    <p><strong>Maintainer</strong>: Petr Bouchal <a href='mailto:pbouchal@gmail.com'>pbouchal@gmail.com</a></p>
   </div>
 </div>
 
