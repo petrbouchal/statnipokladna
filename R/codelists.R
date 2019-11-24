@@ -2,17 +2,18 @@
 #' List of available codelists
 #'
 #' Contains IDs and names of all available codelists that can be retrieved by get_codelist.
-#' Go to https://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky to see more detailed
+#' See <https://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky> for a more detailed
 #' descriptions and a GUI for exploring the lists.
 #'
-#' The `id` is to be used as the `codelist` parameter in `get_codelist`.
+#' The `id` is to be used as the `codelist_id` parameter in `get_codelist`.
 #'
 #' @format A data frame with 27 rows and 2 variables:
 #' \describe{
-#'   \item{\code{id}}{character. ID, used to construct URL of codelist}
+#'   \item{\code{id}}{character. ID, used as `codelist_id` argument in `get_codelist`.}
 #'   \item{\code{name}}{character. Short name, mostly corresponds to title used on statnipokladna.cz.}
 #' }
-"sp_codelists" <- tibble::tribble(~id, ~name,
+#'
+sp_codelists <- tibble::tribble(~id, ~name,
                                 "aktorg", "Aktivn\\u00ed organizace",
                                 "cofog", "Klasifikace funkc\\u00ed vl\\u00e1dn\\u00edch instituc\\u00ed COFOG",
                                 "druhrizeni", "Druh \\u0159\\u00edzen\\u00ed",
@@ -42,8 +43,8 @@
                                 "zuj", "Z\\u00e1kladn\\u00ed \\u00fazemn\\u00ed jednotka") %>%
   dplyr::mutate(name = stringi::stri_unescape_unicode(name)) %>%
   dplyr::arrange(id)
-
 # stringi::stri_escape_unicode("xxx")
+# usethis::use_data(sp_codelists, overwrite = T)
 
 #' Get codelist
 #'

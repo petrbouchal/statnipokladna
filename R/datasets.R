@@ -1,10 +1,31 @@
-sp_datasets <- tibble::tribble(~id, ~name, ~implemented,
-                                      "finm", "FIN 2-12 M - Pln\\u011bn\\u00ed rozpo\\u010dtu M\\u0158O", F) %>%
-  dplyr::mutate(name = stringi::stri_unescape_unicode(name))
 
-dataset_from_table <- function(table) {
-  dataset <- table
-}
+sp_datasets_i <- tibble::tribble(~id, ~name, ~implemented,
+                               "finm", "FIN 2-12 M - Pln\\u011bn\\u00ed rozpo\\u010dtu M\\u0158O", F,
+                               "finu", "FIN 2-04 U - Pln\\u011bn\\u00ed rozpo\\u010dtu KAP, OSS a SF (2010 - 2014)", F,
+                               "finsf", "FIN 2-04 U - Pln\\u011bn\\u00ed rozpo\\u010dtu SF", F,
+                               "misris", "FIN 1-12 OSS - Pln\\u011bn\\u00ed rozpo\\u010dtu KAP a OSS", F,
+                               "rozv", "Rozvaha", F,
+                               "ppt", "P\\u0159ehled pen\\u011b\\u017en\\u00edch tok\\u016f", F,
+                               "pozvk", "P\\u0159ehled o zm\\u011bn\\u00e1ch vlastn\\u00edho kapit\\u00e1lu", F,
+                               "pril", "P\\u0159\\u00edloha", F,
+                               "vykzz", "V\\u00fdkaz zisk\\u016f a ztr\\u00e1t", F) %>%
+  dplyr::mutate(name = stringi::stri_unescape_unicode(name)) %>%
+  dplyr::arrange(id)
+# stringi::stri_escape_unicode("xxx")
+
+#' List of available datasets
+#'
+#' Contains IDs and names of all available datasets that can be retrieved by get_dataset.
+#' See <https://monitor.statnipokladna.cz/2019/zdrojova-data/transakcni-data> for a more detailed descriptions
+#' of the datasets.
+#'
+#' @format A data frame with 9 rows and 3 variables:
+#' \describe{
+#'   \item{\code{id}}{character. Dataset ID, used as `id` argument to `get_dataset`.}
+#'   \item{\code{name}}{character. Dataset name, mostly corresponds to title on the statnipokladna GUI.}
+#' }
+sp_datasets <- sp_datasets_i %>% dplyr::select(id, name)
+# usethis::use_data(sp_datasets, overwrite = T)
 
 get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists = T) {
   if(!(month %in% c(3, 6, 9, 12))) stop("`Month` must be 3, 6, 9, or 12")
