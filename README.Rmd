@@ -39,16 +39,17 @@ or the current development version with
 remotes::install_github("petrbouchal/statnipokladna")
 ```
 
-# What you will be able to do when this is done
+# What this package aims to enable you to do:
 
-- get cleaned-up, ready to analyse data frames based on open data dumps from the public finance database (*in development*)
-  - the package draws on the online data and returns a clean data frame 
-  - the resulting data is ready to merge into time series
-- do this through a consistent API which supplements some of the documentation that is missing from the official endpoints (*in development*)
-- access registers published alongside the data (e.g. lists of public organisations with their identifiers and metadata), some of which can be useful in other contexts (*ready*)
-- augment the core data with the desired type of register (*in development*)
+- get cleaned-up, ready to analyse data frames based on open data dumps from the public finance database 
+  - the package draws on the online data and returns a clean data frame (*available in experimental form*)
+  - the resulting data is ready to merge into time series (*to do*)
+  - time series is built based on user input 
+- do this through a consistent API which supplements some of the documentation that is missing from the official endpoints (*partly available*)
+- access registers published alongside the data (e.g. lists of public organisations with their identifiers and metadata), some of which can be useful in other contexts (*done*)
+- augment the core data with the desired type of register (*to do*)
 
-## What will this do compared to the [official analytical interface](http://monitor.statnipokladna.cz/)?
+## How does this compare to the [official analytical interface](http://monitor.statnipokladna.cz/)?
 
 - no limit on the number of data points
 - no limits on the number of organisations, unlike the official interface which forces you to use a filter on some tables
@@ -60,7 +61,53 @@ remotes::install_github("petrbouchal/statnipokladna")
 - drawback: for some reports, the data is published in different forms for different time periods (pre- and post-2015)
 - drawback: consolidation must be done manually
 
-Note the official analysis GUI is due to be overhauled in November 2018.
+Note the official analysis GUI is due to be [overhauled in November 2018](https://twitter.com/otevrenadatamf/status/1190329092916289536).
+
+# Getting started
+
+```{r}
+library(statnipokladna)
+library(dplyr)
+```
+
+Get data from a particular part (file) of a dataset ("výkaz"):
+
+```{r}
+local_finance <- get_table(table_id = "51100", # table ID, see `sp_tables`
+                           year = 2018,
+                           month = 12)
+```
+
+It is a rather raw-looking data frame...
+
+```{r}
+head(local_finance)
+```
+
+...but it has been cleaned up, and can be enriched with any of the metadata codelists:
+
+```{r}
+functional_breakdown <- get_codelist("paragraf")
+```
+
+```{r}
+functional_breakdown
+```
+
+(The functions to safely join these two together is not yet there, so be careful if doing this manually.)
+
+Download a whole "výkaz" (dataset):
+
+```{r}
+get_dataset("finm") # dataset ID, see `sp_datasets`
+```
+
+and look at its documentation:
+
+```{r}
+statnipokladna::get_dataset_doc("finm")
+```
+
 
 # Background information
 

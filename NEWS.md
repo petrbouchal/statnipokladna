@@ -1,6 +1,7 @@
 # statnipokladna 0.2.1
 
 * improved documentation
+* updated README
 
 # statnipokladna 0.2.0
 
