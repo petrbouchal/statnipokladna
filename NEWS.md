@@ -1,3 +1,5 @@
+# statnipokladna 0.2.3
+
 # statnipokladna 0.2.2
 
 * bug fix in get_table and get_codelist: corrected logic around druhove trideni (polozka codelist)
