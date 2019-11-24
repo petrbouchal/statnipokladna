@@ -4,16 +4,16 @@
 \alias{get_codelist}
 \title{Get codelist}
 \usage{
-get_codelist(codelist)
+get_codelist(codelist_id)
 }
 \arguments{
-\item{codelist}{A codelist ID. See \code{id} column in \code{sp_codelists} for a list of available codelists.}
+\item{codelist_id}{A codelist ID. See \code{id} column in \code{sp_codelists} for a list of available codelists.}
 }
 \value{
 A tibble
 }
 \description{
-Downloads and processes codelist identified by \code{codelist}. See \code{sp_codelists} for a list of
+Downloads and processes codelist identified by \code{codelist_id}. See \code{sp_codelists} for a list of
 of available codelists with their IDs and names.
 }
 \examples{

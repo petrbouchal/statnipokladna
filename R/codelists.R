@@ -48,21 +48,22 @@ sp_codelists <- tibble::tribble(~id, ~name,
 
 #' Get codelist
 #'
-#' Downloads and processes codelist identified by `codelist`. See `sp_codelists` for a list of
+#' Downloads and processes codelist identified by `codelist_id`. See `sp_codelists` for a list of
 #' of available codelists with their IDs and names.
 #'
-#' @param codelist A codelist ID. See `id` column in `sp_codelists` for a list of available codelists.
+#' @param codelist_id A codelist ID. See `id` column in `sp_codelists` for a list of available codelists.
 #'
 #' @return A tibble
 #' @examples
 #' # ADD_EXAMPLES_HERE
 #' @export
-get_codelist <- function(codelist) {
-  url <- get_codelist_url(codelist)
+get_codelist <- function(codelist_id) {
+  url <- get_codelist_url(codelist_id)
   message("Downloading codelist data")
   vy <- httr::with_config(config = httr::config(useragent = usr),
                           xml2::read_xml(url)) %>% xml2::xml_children()
   message("Processing codelist data")
+  if(codelist_id %in% c("ucjed")) message("Large codelist: this will take a while...")
   xnames <- purrr::map(vy, function(x) x %>% xml2::xml_children() %>% xml2::xml_name())
   if(length(unique(xnames)) == 1)
   {nms <- xnames[[1]]}
@@ -73,7 +74,8 @@ get_codelist <- function(codelist) {
       xml2::xml_text() %>%
       as.character() %>%
       t() %>% tibble::as_tibble()}) %>%
-    purrr::set_names(nms)
+    purrr::set_names(nms) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), lubridate::dmy)
   return(xvals)
 }
 
@@ -117,11 +119,11 @@ join_codelist <- function(data, codelist_id = NULL, codelist_df = NULL, period_c
   return(slepeno)
 }
 
-get_codelist_url <- function(codelist, check_if_exists = T) {
-  if(!(codelist %in% sp_codelists$id)) stop("Not a valid codelist ID")
-  codelist_name <- sp_codelists[sp_codelists$id == codelist, "name"]
-  message(stringr::str_glue("Building URL for codelist {codelist} - {codelist_name}"))
-  x <- stringr::str_glue("{sp_base_url}/data/{codelist}.xml")
+get_codelist_url <- function(codelist_id, check_if_exists = T) {
+  if(!(codelist_id %in% sp_codelists$id)) stop("Not a valid codelist ID")
+  codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
+  message(stringr::str_glue("Building URL for codelist {codelist_id} - {codelist_name}"))
+  x <- stringr::str_glue("{sp_base_url}/data/{codelist_id}.xml")
   if(check_if_exists) {
     iserror <- httr::http_error(x, httr::config(followlocation = 0L), USE.NAMES = FALSE)
     if(iserror) stop("Codelist XML for a codelist with this ID does not exist")
