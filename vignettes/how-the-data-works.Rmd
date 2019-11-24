@@ -141,7 +141,7 @@ K tomu slouží konsolidace a open data státní pokladny ji naštěstí umožň
 
 ### Jak se to odráží v datech
 
-V rozpočtových (a možná i jiných) výkazech jsou sloupce začínající `kon_` s hodnotou true nebo false. Pro konsolidaci na úrovni okresu je to `kon_okr` atd. 
+~~V rozpočtových (a možná i jiných) výkazech~~ **V číselníku polozka ("Rozpočtová položka" neboli číselník druhového třídění)** jsou sloupce začínající `kon_` s hodnotou true nebo false. Pro konsolidaci na úrovni okresu je to `kon_okr` atd. 
 
 ### Co s tím
 
