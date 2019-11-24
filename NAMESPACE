@@ -2,4 +2,6 @@
 
 export("%>%")
 export(get_codelist)
+export(get_dataset)
+export(get_table)
 importFrom(magrittr,"%>%")
