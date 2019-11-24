@@ -27,16 +27,19 @@ The goal of statnipokladna is to provide programmatic access to open data from t
 
 The package is not on CRAN.
 
-You can install the latest development release version of statnipokladna from [GitHub](https://github.com/petrbouchal/statnipokladna) with:
+You can install the current released version of statnipokladna from [GitHub](https://github.com/petrbouchal/statnipokladna) with:
 
 ``` r
-remotes::install_github("petrbouchal/statnipokladna", ref = github_release())
+remotes::install_github("petrbouchal/statnipokladna",
+                        build_vignettes = T,
+                        ref = github_release())
 ```
 
-or the current development version with
+or the latest development version with
 
 ``` r
-remotes::install_github("petrbouchal/statnipokladna")
+remotes::install_github("petrbouchal/statnipokladna",
+                         build_vignettes = T)
 ```
 
 ## What this package aims to enable you to do:
@@ -76,6 +79,8 @@ local_budgets <- get_table(table_id = "51100", # table ID, see `sp_tables`
                            year = 2018,
                            month = 12)
 ```
+
+The data is automatically downloaded to a cache directory, so it will be reused by future calls to `get_table()` made in the same session, unless you set `force_redownload = T`. 
 
 It is a rather raw-looking data frame...
 

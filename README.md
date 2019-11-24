@@ -24,17 +24,20 @@ open data from that system available at
 
 The package is not on CRAN.
 
-You can install the latest development release version of statnipokladna
-from [GitHub](https://github.com/petrbouchal/statnipokladna) with:
+You can install the current released version of statnipokladna from
+[GitHub](https://github.com/petrbouchal/statnipokladna) with:
 
 ``` r
-remotes::install_github("petrbouchal/statnipokladna", ref = github_release())
+remotes::install_github("petrbouchal/statnipokladna",
+                        build_vignettes = T,
+                        ref = github_release())
 ```
 
-or the current development version with
+or the latest development version with
 
 ``` r
-remotes::install_github("petrbouchal/statnipokladna")
+remotes::install_github("petrbouchal/statnipokladna",
+                         build_vignettes = T)
 ```
 
 ## What this package aims to enable you to do:
@@ -89,8 +92,12 @@ local_budgets <- get_table(table_id = "51100", # table ID, see `sp_tables`
 #> Building URL for dataset `finm`: FIN 2-12 M - Plnění rozpočtu MŘO
 #> http://monitor.statnipokladna.cz/data/2018_12_Data_CSUIS_FINM.zip
 #> Get the dataset documentation at http://monitor.statnipokladna.cz/data/struktura/finm.xlsx
-#> Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm
+#> Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzBTora/statnipokladna/finm
 ```
+
+The data is automatically downloaded to a cache directory, so it will be
+reused by future calls to `get_table()` made in the same session, unless
+you set `force_redownload = T`.
 
 It is a rather raw-looking data frame…
 
@@ -147,13 +154,13 @@ get_dataset("finm") # dataset ID, see `sp_datasets`
 #> Building URL for dataset `finm`: FIN 2-12 M - Plnění rozpočtu MŘO
 #> http://monitor.statnipokladna.cz/data/2018_12_Data_CSUIS_FINM.zip
 #> Get the dataset documentation at http://monitor.statnipokladna.cz/data/struktura/finm.xlsx
-#> Files already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm, not downloading. Set `force_redownload` to TRUE if needed.
-#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm/FINM201_2018012.csv"
-#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm/FINM202_2018012.csv"
-#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm/FINM203_2018012.csv"
-#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm/FINM204_2018012.csv"
-#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm/FINM205_2018012.csv"
-#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm/FINM207_2018012.csv"
+#> Files already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzBTora/statnipokladna/finm, not downloading. Set `force_redownload` to TRUE if needed.
+#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzBTora/statnipokladna/finm/FINM201_2018012.csv"
+#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzBTora/statnipokladna/finm/FINM202_2018012.csv"
+#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzBTora/statnipokladna/finm/FINM203_2018012.csv"
+#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzBTora/statnipokladna/finm/FINM204_2018012.csv"
+#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzBTora/statnipokladna/finm/FINM205_2018012.csv"
+#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzBTora/statnipokladna/finm/FINM207_2018012.csv"
 ```
 
 and look at its documentation:
