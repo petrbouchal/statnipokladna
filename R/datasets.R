@@ -28,22 +28,62 @@ sp_datasets <- sp_datasets_i %>% dplyr::select(id, name)
 # usethis::use_data(sp_datasets, overwrite = T)
 
 get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists = T) {
-  if(!(month %in% c(3, 6, 9, 12))) stop("`Month` must be 3, 6, 9, or 12")
-  if(!(dataset_id %in% sp_datasets$id)) stop("Not a valid dataset ID")
-  dataset_name <- sp_datasets[sp_datasets$id == dataset_id, "name"]
-  month <- formatC(month, width = 2, format = "d", flag = "0")
+  if(!(dataset_id %in% sp_datasets_i$id)) stop("Not a valid dataset ID")
+  dataset_name <- sp_datasets_i[sp_datasets_i$id == dataset_id, "name"]
   message(stringr::str_glue("Building URL for dataset `{dataset_id}`: {dataset_name}"))
   x <- stringr::str_glue("{sp_base_url}/data/{year}_{month}_Data_CSUIS_{toupper(dataset_id)}.zip")
+  print(x)
   if(check_if_exists) {
     iserror <- httr::http_error(x, httr::config(followlocation = 0L), USE.NAMES = FALSE)
-    if(iserror) stop("File for this does not exist for this dataset and period combination.")
+    if(iserror) stop("File does not exist for this dataset and period combination.")
   }
   doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
   message(stringr::str_glue("Get the dataset documentation at {doc_url}"))
   return(x)
 }
 
+
+#' Get dataset documentation
+#'
+#' Downloads XLS file with dataset documentation, or opens link to this file in browser.
+#'
+#' @param dataset_id DESCRIPTION.
+#' @param destdir character. Where the file should be written. Defaults to working directory.
+#' @param download Whether to download (the default) or open link in browser.
+#'
+#' @return RETURN_DESCRIPTION
+#' @examples
+#' # ADD_EXAMPLES_HERE
+get_dataset_doc <- function(dataset_id, destdir = ".", download = T) {
+  doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
+  if(!download) {
+    browseURL(doc_url)
+    return(stringr::str_glue("Link to file opened in browser."))
+    } else {
+    file_path <- stringr::str_glue("{destdir}/{dataset_id}.xlsx")
+    message(stringr::str_glue("Getting dataset documentation from {doc_url}"))
+    download.file(doc_url, file_path)
+    return(stringr::str_glue("File downloaded to {file_path}."))
+  }
+}
+
+
+#' Retrieve dataset from statnipokladna
+#'
+#' Downloads and unzips files for a given dataset.
+#'
+#' @param dataset_id A dataset ID. See `id` column in `sp_datasets` for a list of available codelists.
+#' @param year year, numeric, 2015-2018 for some datasets, 2010-2018 for others.
+#' @param month month, numeric. Must be 3, 6, 9 or 12.
+#' @param force_redownload Redownload even if recent file present? Defaults to FALSE.
+#'
+#' @return character string with complete paths to downloaded paths
+#' @examples
+#' # ADD_EXAMPLES_HERE
+#' @export
 get_dataset <- function(dataset_id, year = 2018, month = 12, force_redownload = F) {
+  if(!(month %in% c(3, 6, 9, 12))) stop("`Month` must be 3, 6, 9, or 12")
+  month <- formatC(month, width = 2, format = "d", flag = "0")
   dataset_url <- get_dataset_url(dataset_id = dataset_id, year = year, month = month)
   td <- tempdir()
   dir.create(paste0(td, "/statnipokladna"), showWarnings = F)
@@ -57,5 +97,6 @@ get_dataset <- function(dataset_id, year = 2018, month = 12, force_redownload = 
     utils::download.file(dataset_url, tf, headers = c('User-Agent' = usr))
     utils::unzip(tf, exdir = td)
   }
-  list.files(td, pattern = "*.csv")
+  paste0(td, "/", list.files(td, pattern = paste0("*_", year, "0", month, ".csv")))
 }
+
