@@ -3,7 +3,7 @@
 \docType{data}
 \name{sp_tables}
 \alias{sp_tables}
-\title{List of available tables}
+\title{List of available tables (PARTIAL AND MESSY RIGHT NOW)}
 \format{A data frame with 2 rows and 4 variables:
 \describe{
 \item{\code{id}}{integer Table id, used as \code{id} argument to \code{get_table}. Comprises report number and table number.}

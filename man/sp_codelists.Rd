@@ -13,7 +13,7 @@
 sp_codelists
 }
 \description{
-Contains IDs and names of all available codelists that can be retrieved by get_codelist.
+Contains IDs and names of all (most) available codelists that can be retrieved by get_codelist.
 }
 \details{
 The \code{id} is to be used as the \code{codelist_id} parameter in \code{get_codelist}.

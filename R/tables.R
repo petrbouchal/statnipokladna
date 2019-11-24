@@ -10,7 +10,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id, ~table_code, ~datas
 # stringi::stri_escape_unicode("xxx")
 
 
-#' List of available tables
+#' List of available tables (PARTIAL AND MESSY RIGHT NOW)
 #'
 #' Contains IDs and names of all available tables that can be
 #' retrieved by get_table. Look inside the XLS documentation for each dataset at <https://monitor.statnipokladna.cz/2019/zdrojova-data/transakcni-data>
@@ -59,7 +59,7 @@ get_table <- function(table_id, year = 2018, month = 12, force_redownload = FALS
                                                              `ZC_UCJED:ZC_UCJED` = "c",
                                                              `0FM_AREA:0FM_AREA` = 'c',
                                                              `ZCMMT_ITM:ZCMMT_ITM` = "c"))
-  print(head(dt))
+  # print(head(dt))
   dt <- dt %>%
     magrittr::set_names(stringr::str_remove(names(.), "^[A-Z_0-9/]*:")) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::starts_with("ZU_")), ~switch_minus(.) %>% as.numeric(.)) %>%
