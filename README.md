@@ -37,7 +37,7 @@ or the current development version with
 remotes::install_github("petrbouchal/statnipokladna")
 ```
 
-# What this package aims to enable you to do:
+## What this package aims to enable you to do:
 
   - get cleaned-up, ready to analyse data frames based on open data
     dumps from the public finance database
@@ -74,49 +74,37 @@ remotes::install_github("petrbouchal/statnipokladna")
 Note the official analysis GUI is due to be [overhauled in
 November 2018](https://twitter.com/otevrenadatamf/status/1190329092916289536).
 
-# Getting started
+## Getting started
 
 ``` r
 library(statnipokladna)
-library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 ```
 
 Get data from a particular part (file) of a dataset (“výkaz”):
 
 ``` r
-local_finance <- get_table(table_id = "51100", # table ID, see `sp_tables`
+local_budgets <- get_table(table_id = "51100", # table ID, see `sp_tables`
                            year = 2018,
                            month = 12)
 #> Building URL for dataset `finm`: FIN 2-12 M - Plnění rozpočtu MŘO
 #> http://monitor.statnipokladna.cz/data/2018_12_Data_CSUIS_FINM.zip
 #> Get the dataset documentation at http://monitor.statnipokladna.cz/data/struktura/finm.xlsx
-#> Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm
-#> Using ',' as decimal and '.' as grouping mark. Use read_delim() for more control.
-#> Warning: The following named parsers don't match the column names:
-#> ZU_ROZKZM:ZU_ROZKZM, ZU_KROZP:ZU_KROZP, 0FM_AREA:0FM_AREA
+#> Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm
 ```
 
 It is a rather raw-looking data frame…
 
 ``` r
-head(local_finance)
+head(local_budgets)
 #> # A tibble: 6 x 15
-#>   vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polvyk
-#>   <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr>      <dbl> <chr>    <chr> 
-#> 1 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 3412     6341  
-#> 2 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5011  
-#> 3 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5021  
-#> 4 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5024  
-#> 5 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5031  
-#> 6 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5032  
+#>   vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka
+#>   <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr>      <dbl> <chr>    <chr>  
+#> 1 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 3412     6341   
+#> 2 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5011   
+#> 3 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5021   
+#> 4 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5024   
+#> 5 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5031   
+#> 6 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5032   
 #> # … with 4 more variables: ZU_ROZSCH <dbl>, ZU_ROZPZM <dbl>, ZU_ROZKZ <dbl>,
 #> #   period_vykaz <date>
 ```
@@ -125,14 +113,14 @@ head(local_finance)
 metadata codelists:
 
 ``` r
-functional_breakdown <- get_codelist("paragraf")
+functional_categories <- get_codelist("paragraf")
 #> Building URL for codelist paragraf - Paragraf
 #> Downloading codelist data
 #> Processing codelist data
 ```
 
 ``` r
-functional_breakdown
+functional_categories
 #> # A tibble: 550 x 9
 #>    paragraf skupina oddil pododdil nazev kr_nazev str_nazev start_date
 #>    <chr>    <chr>   <chr> <chr>    <chr> <chr>    <chr>     <date>    
@@ -159,13 +147,13 @@ get_dataset("finm") # dataset ID, see `sp_datasets`
 #> Building URL for dataset `finm`: FIN 2-12 M - Plnění rozpočtu MŘO
 #> http://monitor.statnipokladna.cz/data/2018_12_Data_CSUIS_FINM.zip
 #> Get the dataset documentation at http://monitor.statnipokladna.cz/data/struktura/finm.xlsx
-#> Files already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm, not downloading. Set `force_redownload` to TRUE if needed.
-#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm/FINM201_2018012.csv"
-#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm/FINM202_2018012.csv"
-#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm/FINM203_2018012.csv"
-#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm/FINM204_2018012.csv"
-#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm/FINM205_2018012.csv"
-#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm/FINM207_2018012.csv"
+#> Files already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm, not downloading. Set `force_redownload` to TRUE if needed.
+#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm/FINM201_2018012.csv"
+#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm/FINM202_2018012.csv"
+#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm/FINM203_2018012.csv"
+#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm/FINM204_2018012.csv"
+#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm/FINM205_2018012.csv"
+#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm/FINM207_2018012.csv"
 ```
 
 and look at its documentation:

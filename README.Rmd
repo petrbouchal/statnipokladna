@@ -39,7 +39,7 @@ or the current development version with
 remotes::install_github("petrbouchal/statnipokladna")
 ```
 
-# What this package aims to enable you to do:
+## What this package aims to enable you to do:
 
 - get cleaned-up, ready to analyse data frames based on open data dumps from the public finance database 
   - the package draws on the online data and returns a clean data frame (*available in experimental form*)
@@ -63,17 +63,16 @@ remotes::install_github("petrbouchal/statnipokladna")
 
 Note the official analysis GUI is due to be [overhauled in November 2018](https://twitter.com/otevrenadatamf/status/1190329092916289536).
 
-# Getting started
+## Getting started
 
-```{r}
+```{r message=FALSE, warning=F}
 library(statnipokladna)
-library(dplyr)
 ```
 
 Get data from a particular part (file) of a dataset ("výkaz"):
 
 ```{r}
-local_finance <- get_table(table_id = "51100", # table ID, see `sp_tables`
+local_budgets <- get_table(table_id = "51100", # table ID, see `sp_tables`
                            year = 2018,
                            month = 12)
 ```
@@ -81,17 +80,17 @@ local_finance <- get_table(table_id = "51100", # table ID, see `sp_tables`
 It is a rather raw-looking data frame...
 
 ```{r}
-head(local_finance)
+head(local_budgets)
 ```
 
 ...but it has been cleaned up, and can be enriched with any of the metadata codelists:
 
 ```{r}
-functional_breakdown <- get_codelist("paragraf")
+functional_categories <- get_codelist("paragraf")
 ```
 
 ```{r}
-functional_breakdown
+functional_categories
 ```
 
 (The functions to safely join these two together is not yet there, so be careful if doing this manually.)
