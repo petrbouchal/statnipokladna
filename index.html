@@ -106,10 +106,9 @@
 <p>or the current development version with</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"petrbouchal/statnipokladna"</span>)</a></code></pre></div>
 </div>
-</div>
-<div id="what-this-package-aims-to-enable-you-to-do" class="section level1">
-<h1 class="hasAnchor">
-<a href="#what-this-package-aims-to-enable-you-to-do" class="anchor"></a>What this package aims to enable you to do:</h1>
+<div id="what-this-package-aims-to-enable-you-to-do" class="section level2">
+<h2 class="hasAnchor">
+<a href="#what-this-package-aims-to-enable-you-to-do" class="anchor"></a>What this package aims to enable you to do:</h2>
 <ul>
 <li>get cleaned-up, ready to analyse data frames based on open data dumps from the public finance database
 <ul>
@@ -122,6 +121,7 @@
 <li>access registers published alongside the data (e.g. lists of public organisations with their identifiers and metadata), some of which can be useful in other contexts (<em>done</em>)</li>
 <li>augment the core data with the desired type of register (<em>to do</em>)</li>
 </ul>
+</div>
 <div id="how-does-this-compare-to-the-official-analytical-interface" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-does-this-compare-to-the-official-analytical-interface" class="anchor"></a>How does this compare to the <a href="http://monitor.statnipokladna.cz/">official analytical interface</a>?</h2>
@@ -138,50 +138,37 @@
 </ul>
 <p>Note the official analysis GUI is due to be <a href="https://twitter.com/otevrenadatamf/status/1190329092916289536">overhauled in November 2018</a>.</p>
 </div>
-</div>
-<div id="getting-started" class="section level1">
-<h1 class="hasAnchor">
-<a href="#getting-started" class="anchor"></a>Getting started</h1>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(statnipokladna)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; Attaching package: 'dplyr'</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; The following objects are masked from 'package:stats':</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt;     filter, lag</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; The following objects are masked from 'package:base':</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt;     intersect, setdiff, setequal, union</span></a></code></pre></div>
+<div id="getting-started" class="section level2">
+<h2 class="hasAnchor">
+<a href="#getting-started" class="anchor"></a>Getting started</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(statnipokladna)</a></code></pre></div>
 <p>Get data from a particular part (file) of a dataset (“výkaz”):</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">local_finance &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_table.html">get_table</a></span>(<span class="dt">table_id =</span> <span class="st">"51100"</span>, <span class="co"># table ID, see `sp_tables`</span></a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">local_budgets &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_table.html">get_table</a></span>(<span class="dt">table_id =</span> <span class="st">"51100"</span>, <span class="co"># table ID, see `sp_tables`</span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">                           <span class="dt">year =</span> <span class="dv">2018</span>,</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">                           <span class="dt">month =</span> <span class="dv">12</span>)</a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; Building URL for dataset `finm`: FIN 2-12 M - Plnění rozpočtu MŘO</span></a>
 <a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; http://monitor.statnipokladna.cz/data/2018_12_Data_CSUIS_FINM.zip</span></a>
 <a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; Get the dataset documentation at http://monitor.statnipokladna.cz/data/struktura/finm.xlsx</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; Using ',' as decimal and '.' as grouping mark. Use read_delim() for more control.</span></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; Warning: The following named parsers don't match the column names:</span></a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; ZU_ROZKZM:ZU_ROZKZM, ZU_KROZP:ZU_KROZP, 0FM_AREA:0FM_AREA</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm</span></a></code></pre></div>
 <p>It is a rather raw-looking data frame…</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(local_finance)</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(local_budgets)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; # A tibble: 6 x 15</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;   vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polvyk</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt; </span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; 1 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 3412     6341  </span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 2 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5011  </span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; 3 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5021  </span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; 4 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5024  </span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; 5 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5031  </span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 6 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5032  </span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;   vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;  </span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; 1 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 3412     6341   </span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 2 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5011   </span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; 3 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5021   </span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; 4 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5024   </span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; 5 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5031   </span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 6 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5032   </span></a>
 <a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; # … with 4 more variables: ZU_ROZSCH &lt;dbl&gt;, ZU_ROZPZM &lt;dbl&gt;, ZU_ROZKZ &lt;dbl&gt;,</span></a>
 <a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; #   period_vykaz &lt;date&gt;</span></a></code></pre></div>
 <p>…but it has been cleaned up, and can be enriched with any of the metadata codelists:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">functional_breakdown &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_codelist.html">get_codelist</a></span>(<span class="st">"paragraf"</span>)</a>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">functional_categories &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_codelist.html">get_codelist</a></span>(<span class="st">"paragraf"</span>)</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; Building URL for codelist paragraf - Paragraf</span></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; Downloading codelist data</span></a>
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; Processing codelist data</span></a></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">functional_breakdown</a>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">functional_categories</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; # A tibble: 550 x 9</span></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt;    paragraf skupina oddil pododdil nazev kr_nazev str_nazev start_date</span></a>
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;date&gt;    </span></a>
@@ -202,17 +189,18 @@
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; Building URL for dataset `finm`: FIN 2-12 M - Plnění rozpočtu MŘO</span></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; http://monitor.statnipokladna.cz/data/2018_12_Data_CSUIS_FINM.zip</span></a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; Get the dataset documentation at http://monitor.statnipokladna.cz/data/struktura/finm.xlsx</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; Files already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm, not downloading. Set `force_redownload` to TRUE if needed.</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm/FINM201_2018012.csv"</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm/FINM202_2018012.csv"</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm/FINM203_2018012.csv"</span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm/FINM204_2018012.csv"</span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm/FINM205_2018012.csv"</span></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm/FINM207_2018012.csv"</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; Files already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm, not downloading. Set `force_redownload` to TRUE if needed.</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm/FINM201_2018012.csv"</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm/FINM202_2018012.csv"</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm/FINM203_2018012.csv"</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm/FINM204_2018012.csv"</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm/FINM205_2018012.csv"</span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplxacUE/statnipokladna/finm/FINM207_2018012.csv"</span></a></code></pre></div>
 <p>and look at its documentation:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">statnipokladna<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/statnipokladna/man/get_dataset_doc.html">get_dataset_doc</a></span>(<span class="st">"finm"</span>)</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; Getting dataset documentation from http://monitor.statnipokladna.cz/data/struktura/finm.xlsx</span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; File downloaded to ./finm.xlsx.</span></a></code></pre></div>
+</div>
 </div>
 <div id="background-information" class="section level1">
 <h1 class="hasAnchor">
