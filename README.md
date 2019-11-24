@@ -98,24 +98,10 @@ local_finance <- get_table(table_id = "51100", # table ID, see `sp_tables`
 #> Building URL for dataset `finm`: FIN 2-12 M - Plnění rozpočtu MŘO
 #> http://monitor.statnipokladna.cz/data/2018_12_Data_CSUIS_FINM.zip
 #> Get the dataset documentation at http://monitor.statnipokladna.cz/data/struktura/finm.xlsx
-#> Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpMH2eQZ/statnipokladna/finm
+#> Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm
 #> Using ',' as decimal and '.' as grouping mark. Use read_delim() for more control.
 #> Warning: The following named parsers don't match the column names:
 #> ZU_ROZKZM:ZU_ROZKZM, ZU_KROZP:ZU_KROZP, 0FM_AREA:0FM_AREA
-#> # A tibble: 6 x 13
-#>   `ZC_VYKAZ:ZC_VY… `ZC_VTAB:ZC_VTA… `0FISCPER:0FISC… `ZC_UCJED:ZC_UC…
-#>   <chr>            <chr>            <chr>            <chr>           
-#> 1 051              000200           2018012          1000007889      
-#> 2 051              000200           2018012          1000007889      
-#> 3 051              000200           2018012          1000007889      
-#> 4 051              000200           2018012          1000007889      
-#> 5 051              000200           2018012          1000007889      
-#> 6 051              000200           2018012          1000007889      
-#> # … with 9 more variables: `ZC_ICO:ZC_ICO` <chr>, `ZC_KRAJ:ZC_KRAJ` <chr>,
-#> #   `ZC_NUTS:ZC_NUTS` <chr>, `0CI_TYPE:0CI_TYPE` <dbl>,
-#> #   `0FUNC_AREA:0FUNC_AREA` <chr>, `ZCMMT_ITM:ZCMMT_ITM` <chr>,
-#> #   `ZU_ROZSCH:ZU_ROZSCH` <chr>, `ZU_ROZPZM:ZU_ROZPZM` <chr>,
-#> #   `ZU_ROZKZ:ZU_ROZKZ` <chr>
 ```
 
 It is a rather raw-looking data frame…
@@ -173,13 +159,13 @@ get_dataset("finm") # dataset ID, see `sp_datasets`
 #> Building URL for dataset `finm`: FIN 2-12 M - Plnění rozpočtu MŘO
 #> http://monitor.statnipokladna.cz/data/2018_12_Data_CSUIS_FINM.zip
 #> Get the dataset documentation at http://monitor.statnipokladna.cz/data/struktura/finm.xlsx
-#> Files already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpMH2eQZ/statnipokladna/finm, not downloading. Set `force_redownload` to TRUE if needed.
-#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpMH2eQZ/statnipokladna/finm/FINM201_2018012.csv"
-#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpMH2eQZ/statnipokladna/finm/FINM202_2018012.csv"
-#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpMH2eQZ/statnipokladna/finm/FINM203_2018012.csv"
-#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpMH2eQZ/statnipokladna/finm/FINM204_2018012.csv"
-#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpMH2eQZ/statnipokladna/finm/FINM205_2018012.csv"
-#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpMH2eQZ/statnipokladna/finm/FINM207_2018012.csv"
+#> Files already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm, not downloading. Set `force_redownload` to TRUE if needed.
+#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm/FINM201_2018012.csv"
+#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm/FINM202_2018012.csv"
+#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm/FINM203_2018012.csv"
+#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm/FINM204_2018012.csv"
+#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm/FINM205_2018012.csv"
+#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmprCr9hA/statnipokladna/finm/FINM207_2018012.csv"
 ```
 
 and look at its documentation:
