@@ -1,3 +1,5 @@
+# statnipokladna 0.2.1
+
 # statnipokladna 0.2.0
 
 * new `get_dataset()` function for retrieving files 
