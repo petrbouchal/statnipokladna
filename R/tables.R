@@ -48,17 +48,18 @@ get_table <- function(table_id, year = 2018, month = 12, force_redownload = FALS
   table_stub <- paste0(sp_tables_i$file_stub[sp_tables_i$id == table_id], "_")
   dslist <- get_dataset(dataset_id, year = year, month = month, force_redownload = force_redownload)
   table_file <- dslist[stringr::str_detect(dslist, table_stub)]
-  dt <- readr::read_csv2(table_file, col_types = readr::cols(`ZC_ICO:ZC_ICO` = "c",
-                                                             `0FISCPER:0FISCPER` = "c",
-                                                             `ZC_UCJED:ZC_UCJED` = "c",
-                                                             `ZU_ROZKZM:ZU_ROZKZM` = 'c',
-                                                             `ZU_ROZPZM:ZU_ROZPZM` = 'c',
-                                                             `ZU_ROZKZ:ZU_ROZKZ` = 'c',
-                                                             `ZU_ROZSCH:ZU_ROZSCH` = 'c',
-                                                             `ZU_KROZP:ZU_KROZP` = 'c',
-                                                             `ZC_UCJED:ZC_UCJED` = "c",
-                                                             `0FM_AREA:0FM_AREA` = 'c',
-                                                             `ZCMMT_ITM:ZCMMT_ITM` = "c"))
+  suppressWarnings(suppressMessages(
+    dt <- readr::read_csv2(table_file, col_types = readr::cols(`ZC_ICO:ZC_ICO` = "c",
+                                                               `0FISCPER:0FISCPER` = "c",
+                                                               `ZC_UCJED:ZC_UCJED` = "c",
+                                                               `ZU_ROZKZM:ZU_ROZKZM` = 'c',
+                                                               `ZU_ROZPZM:ZU_ROZPZM` = 'c',
+                                                               `ZU_ROZKZ:ZU_ROZKZ` = 'c',
+                                                               `ZU_ROZSCH:ZU_ROZSCH` = 'c',
+                                                               `ZU_KROZP:ZU_KROZP` = 'c',
+                                                               `ZC_UCJED:ZC_UCJED` = "c",
+                                                               `0FM_AREA:0FM_AREA` = 'c',
+                                                               `ZCMMT_ITM:ZCMMT_ITM` = "c"))))
   # print(head(dt))
   dt <- dt %>%
     magrittr::set_names(stringr::str_remove(names(.), "^[A-Z_0-9/]*:")) %>%
