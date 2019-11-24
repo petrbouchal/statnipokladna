@@ -136,12 +136,12 @@
 <a href="#soustava-prvk%C5%AF-dostupn%C3%BDch-ze-st%C3%A1tn%C3%AD-pokladny" class="anchor"></a>Soustava prvků dostupných ze státní pokladny</h2>
 <ul>
 <li><a href="http://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky">číselníky</a></li>
-<li>výkazy (publikovány jako “transakční data”) bez téměř jakýkcholi lidsky čitelných identifikátorů - k tomu je potřeba napojit číselníky</li>
+<li>výkazy (publikovány jako <a href="http://monitor.statnipokladna.cz/2019/zdrojova-data/transakcni-data">“transakční data”</a>) bez téměř jakýkcholi lidsky čitelných identifikátorů - k tomu je potřeba napojit číselníky</li>
 <li>části výkazu (tabulky - v datech označeny v daném sloupci)</li>
 </ul>
-<p>Prakticky to vypadá tak, že jeden balík s výkazem obsahuje více CSV souborů, kdy jednotlivé soubory obsahují jeden nebo víc tabulek daného výkazu.</p>
-<p>Číselníky jsou v XML, ale dají se i prohlížet (<a href="http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/vykaz?date=7.11.2019">příklad</a> a tamtéž stáhnout)</p>
-<p>Pozor: číselníky jsou časově determinované a pokud neodfiltrujete položky nerelevantní pro dané časové období, můžou při napojování JOINem vzniknout nechtěné duplicity…</p>
+<p>Prakticky to vypadá tak, že jeden balík s výkazem obsahuje více CSV souborů, kdy jednotlivé soubory obsahují jednu nebo víc tabulek daného výkazu.</p>
+<p>Číselníky jsou v XML, ale dají se i prohlížet (<a href="http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/vykaz?date=7.11.2019">příklad</a>) a tamtéž stáhnout v CSV.</p>
+<p>Pozor: číselníky jsou časově determinované a pokud neodfiltrujete položky nerelevantní pro dané časové období, můžou při napojování JOINem vzniknout chyby nebo nechtěné duplicity…</p>
 <div id="typy-výkazů" class="section level3">
 <h3 class="hasAnchor">
 <a href="#typy-v%C3%BDkaz%C5%AF" class="anchor"></a>Typy výkazů</h3>
@@ -155,14 +155,19 @@
 <li>přehled o změnách vlastního kapitálu</li>
 </ul>
 </li>
-<li>rozpočty: drží se rozpočtářské logiky</li>
-<li>specifické výkazy: transfery přijaté územními organizacemi, transfery poskytnuté ústedními organizacemi územním, specifické ukazatele, účelové třídění/programové financování</li>
+<li>rozpočty: drží se rozpočtářské logiky
+<ul>
+<li>standardní rozpočty v rozpočtové skladbě za jednotlivé organizace</li>
+<li>specifické výkazy: transfery přijaté územními organizacemi, transfery poskytnuté ústředními organizacemi územním, specifické ukazatele, účelové třídění/programové financování</li>
+</ul>
+</li>
+<li>další specifické výkazy: ukazatele účetní jednotky (vypočtené)</li>
 </ul>
 <div id="jak-se-to-odráží-v-datech" class="section level4">
 <h4 class="hasAnchor">
 <a href="#jak-se-to-odr%C3%A1%C5%BE%C3%AD-v-datech" class="anchor"></a>Jak se to odráží v datech?</h4>
 <ul>
-<li>pokud to správně cháp, tak sloupce začínající ZU_ jsou údaje, sloupce začínající ZC_ slouží k napojení na číselník identifikovaný zbytkem názvu</li>
+<li>pokud to správně chápu, tak sloupce začínající ZU_ jsou údaje, sloupce začínající ZC_ slouží k napojení na číselník identifikovaný zbytkem názvu</li>
 <li>někdy jsou atributy daných řádků vidět až v číselnících: například se může stát, že v datech je nějaký řádek označen jako program X a není tam sloupec označující zdroj peněz, ale informaci o zdroji obsahuje až číselník programů, který je potřeba napojit.</li>
 </ul>
 </div>
@@ -172,7 +177,7 @@
 <h2 class="hasAnchor">
 <a href="#p%C5%99%C3%ADjmy-v%C3%BDdaje-financov%C3%A1n%C3%AD" class="anchor"></a>Příjmy, výdaje, financování</h2>
 <ul>
-<li>jedna praktická poznámka: veřejné rozpočty se formálně skládají z příjmů, výdajů a financování, přičemž financování znamená hrubě řečeno půjčky.</li>
+<li>jedna praktická poznámka: veřejné rozpočty se formálně skládají z <strong>příjmů, výdajů a financování</strong>, přičemž financování znamená hrubě řečeno půjčky.</li>
 </ul>
 </div>
 <div id="rozpočtová-skladba" class="section level2">
@@ -182,11 +187,11 @@
 <p>Týká se to jen rozpočtových reportů.</p>
 <ul>
 <li>podle <strong>druhu</strong>: např. kapitálové x běžné</li>
-<li>podle funkce: např. obrana, zdravotnictví,…</li>
-<li>podle kapitol: MPSV, MMR…</li>
-<li>podle zdroje: národní x evropské</li>
-<li>podle typu řízení organizace: místní x centrální</li>
-<li>podle fáze rozpočtového cyklu: schválený rozpočet, rozpočet po změnách, konečný rozpočet, skutečnost</li>
+<li>podle <strong>funkce</strong>: např. obrana, zdravotnictví,…</li>
+<li>podle <strong>kapitol</strong>: MPSV, MMR…</li>
+<li>podle <strong>zdroje</strong>: národní x evropské</li>
+<li>podle <strong>typu řízení</strong> organizace: místní x centrální</li>
+<li>podle <strong>fáze</strong> rozpočtového cyklu: schválený rozpočet, rozpočet po změnách, konečný rozpočet, skutečnost</li>
 </ul>
 <p>Každý typ třídění má typicky několik úrovní, např.</p>
 <ul>
@@ -199,6 +204,8 @@
 <a href="#jak-se-to-odr%C3%A1%C5%BE%C3%AD-v-datech-1" class="anchor"></a>Jak se to odráží v datech</h3>
 <p>Rozpočtová data si lze představit jako tabulku v “dlouhém formátu”, kde každá koruna má svůj řádek a pro každý typ členění má tabulka sloupec, který danou korunu zařazuje do nejjemnějšího rozpadu daného členění. (Třeba paragraf 1234, který spadá do skupiny 12, podskupiny 123 atd. - tyto kódy a hierarchie lze rozklíčovat napojením číselníku.) Plus tabulka obsahuje organizaci, pro kterou je tato koruna rozpočtována nebo účtována. (V praxi nejde o jednotlivé koruny, ale o kyblíky všech korun, které odpovídají dané kombinaci atributů/členění).</p>
 <p>Jinými slovy, je to rozdrobené na nejmenší známé průniky všech použitých členění.</p>
+<p>Třídění podle fází se odráží v numerických proměnných.</p>
+<p>Organizace jsou naskládané pod v jednom souboru, čili jeden soubor obsahuje celou množinu reportujících organizací (organizace, které jsou součástí státu, nebo naopak všechny místně řízení). Není to tedy tak, že bychom pro každou organizaci museli stahovat extra soubor.</p>
 <p>Tím pádem veškeré výdaje podle členění X získáme tak, že sečteme všechna čísla ve skupinách podle členění X a ignorujeme ostatní členění; členění jde taky kombinovat - typicky nás můžou zajímat výdaje na jednotlivé sektory dál dělené na kapitálové a běžné.</p>
 <p>Toto platí pro běžné rozpočtové výkazy (datasety). Všechna členění jsou v jedné tabulce. Některé výkazy ale obsahují součty a mezisoučty nebo ukazatele, které jsou součty jiných řádků, takže na to pozor, nejde to sčítat - je zkrátka dobré se na data přece jen občas podívat očima. V takových případech ale číselník obsahuje atribut pořadí řádku, aby šel výkaz číst. Pokud vím, týká se to přinejmenším</p>
 <ul>
@@ -262,23 +269,26 @@
 <li>v některých souborech jsou záporná čísla zapsaná tak, že minus je na konci, takže většina parserů sloupec načte jako text a převod na číslo běžným způsobem nefunguje</li>
 <li><del>některé CSV soubory jsou oddělované čárkou (a obsahují desetinnou tečku), jiné středníkem (s desetinnou čárkou)</del></li>
 <li>u číselníků je třeba myslet na to, že můžou obsahovat duplicitní položky (např. stejný kód, jiný název), z nichž každá platí v jiném časovém období - pokud se to neodfiltruje, můžou při napojení JOINem vznikat duplicity.</li>
+<li>sloupce označující fáze rozpočtového cyklu (ZU_ROZ*) se liší mezi obcemi (výkaz FINM) a státem (výkaz FINU)</li>
 </ul>
 </div>
 <div id="co-v-datech-není-nebo-jsem-to-nenašel" class="section level2">
 <h2 class="hasAnchor">
 <a href="#co-v-datech-nen%C3%AD-nebo-jsem-to-nena%C5%A1el" class="anchor"></a>Co v datech není nebo jsem to nenašel</h2>
 <ul>
-<li>zdrojové třídění u rozpočtů samospráv - jen indidentálně jako součást reportu účelového financování</li>
+<li>zdrojové třídění u rozpočtů samospráv - jen incidentálně jako součást reportu účelového financování</li>
 <li>údaje o regulaci zaměstnanosti ve veřejném sektoru neboli rozpočtované a skutečné počty zaměstnanců a průměrné platy, ač se sledují a částečně zveřejňují ve státním závěrečném účtu, viz <a href="https://petrbouchal.github.io/urednici2019/">petrbouchal/urednici2019</a>
 </li>
-<li>informace o tom, na jakém místě se peníze utratily (pokud vím, plošně se nedleduje, něco je v CEDRu a docela se to ví u eurofondů)</li>
+<li>informace o tom, na jakém místě se peníze utratily (pokud vím, plošně se nesleduje, něco je v CEDRu a docela se to ví u eurofondů)</li>
 </ul>
 </div>
 <div id="známe-neznámé" class="section level2">
 <h2 class="hasAnchor">
 <a href="#zn%C3%A1me-nezn%C3%A1m%C3%A9" class="anchor"></a>Známe neznámé:</h2>
 <ul>
-<li><del>nevím, co je finanční místo</del></li>
+<li>
+<del>nevím, co je finanční místo</del> : je to kapitola nebo organizační složka státu</li>
+<li>nevím, kdy můžu sčítat účetní výkazy (např. můžu sečíst výnosy z prodeje několika obcí nebo obce a nadřazeného kraje, aniž by bez konsolidace hrozilo, že některou korunu budu mít v součtu dvakrát?)</li>
 <li>nevím přesně, co je PVS a “strukturní třídění”</li>
 <li>ne zcela rozumím položkám ke konsolidaci (fungují v praxi, ale…), navíc jsem je zkoušel jen u příjmů a výdajů rozpočtů</li>
 <li>některé součty při práci s obecními daty mi vycházely malinko jinak oproti reportům z analytické části monitoru (o desetiny procenta)</li>
