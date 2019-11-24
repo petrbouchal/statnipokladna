@@ -68,10 +68,10 @@ get_table <- function(table_id, year = 2018, month = 12, force_redownload = FALS
     dplyr::mutate(period_vykaz = lubridate::make_date(per_yr, per_m),
                   period_vykaz = lubridate::make_date(per_yr, per_m,
                                                       lubridate::days_in_month(period_vykaz))) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::starts_with("kon_")), as.logical) %>%
+    # dplyr::mutate_at(dplyr::vars(dplyr::starts_with("kon_")), as.logical) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), lubridate::dmy) %>%
     dplyr::rename_all(dplyr::recode,
-                      ZCMMT_ITM = "polvyk",
+                      ZCMMT_ITM = "polozka",
                       ZC_VYKAZ = "vykaz",
                       ZC_VTAB = "vtab",
                       ZC_UCJED = "ucjed",
