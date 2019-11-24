@@ -55,6 +55,7 @@ get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists
 #' @return RETURN_DESCRIPTION
 #' @family Helpers
 #' @examples
+#' @export
 #' # ADD_EXAMPLES_HERE
 get_dataset_doc <- function(dataset_id, destdir = ".", download = T) {
   doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")

@@ -19,7 +19,4 @@ RETURN_DESCRIPTION
 \description{
 Downloads XLS file with dataset documentation, or opens link to this file in browser.
 }
-\examples{
-# ADD_EXAMPLES_HERE
-}
 \concept{Helpers}
