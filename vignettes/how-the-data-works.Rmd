@@ -148,7 +148,7 @@ Technicky se netýká konsolidace, ale souvisí to: na příjmové straně je t�
 ## Známé datové zádrhele
 
 - v některých souborech jsou záporná čísla zapsaná tak, že minus je na konci, takže většina parserů sloupec načte jako text a převod na číslo běžným způsobem nefunguje
-- některé CSV soubory jsou oddělované čárkou (a obsahují desetinnou tečku), jiné středníkem (s desetinnou čárkou)
+- ~~některé CSV soubory jsou oddělované čárkou (a obsahují desetinnou tečku), jiné středníkem (s desetinnou čárkou)~~
 - u číselníků je třeba myslet na to, že můžou obsahovat duplicitní položky (např. stejný kód, jiný název), z nichž každá platí v jiném časovém období - pokud se to neodfiltruje, můžou při napojení JOINem vznikat duplicity.
 
 ## Co v datech není nebo jsem to nenašel
@@ -159,10 +159,11 @@ Technicky se netýká konsolidace, ale souvisí to: na příjmové straně je t�
 
 ## Známe neznámé:
 
-- nevím, co je finanční místo
-- ne zcela rozumím položkám ke konsolidaci (fungují v praxi, ale...), navíc jsem je zkoušel jen u příjmů a výdajů rozpočtůx
-- některé součty při práci s obecími daty mi vycházely malinko jinak oproti reportům z analytické části monitoru (o desetiny procent)
-- nerozumím programovému financování
+- ~~nevím, co je finanční místo~~
+- nevím přesně, co je PVS a "strukturní třídění"
+- ne zcela rozumím položkám ke konsolidaci (fungují v praxi, ale...), navíc jsem je zkoušel jen u příjmů a výdajů rozpočtů
+- některé součty při práci s obecními daty mi vycházely malinko jinak oproti reportům z analytické části monitoru (o desetiny procenta)
+- nerozumím programovému financování (EDS/SMVS)
 - nevím, jaký je rozdíl mezi číselník položek a směrnou účetní osnovou
 - neměl jsem v ruce výkazy stavů na účtech, rozvah a programového financování
 - neměl jsem v ruce pre-2015 reporty
