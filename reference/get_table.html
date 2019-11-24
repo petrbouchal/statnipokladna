@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List of available codelists — sp_codelists • statnipokladna</title>
+<title>Get a statnipokladna table — get_table • statnipokladna</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,10 +42,8 @@
 
 
 
-<meta property="og:title" content="List of available codelists — sp_codelists" />
-<meta property="og:description" content="Contains IDs and names of all available codelists that can be retrieved by get_codelist.
-See https://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky for a more detailed
-descriptions and a GUI for exploring the lists." />
+<meta property="og:title" content="Get a statnipokladna table — get_table" />
+<meta property="og:description" content="Cleans and loads a table. If needed, a dataset containing the table is downloaded." />
 <meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -130,37 +128,62 @@ descriptions and a GUI for exploring the lists." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List of available codelists</h1>
-    <small class="dont-index">Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/R/codelists.R'><code>R/codelists.R</code></a></small>
-    <div class="hidden name"><code>sp_codelists.Rd</code></div>
+    <h1>Get a statnipokladna table</h1>
+    <small class="dont-index">Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/R/tables.R'><code>R/tables.R</code></a></small>
+    <div class="hidden name"><code>get_table.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Contains IDs and names of all available codelists that can be retrieved by get_codelist.
-See <a href='https://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky'>https://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky</a> for a more detailed
-descriptions and a GUI for exploring the lists.</p>
+    <p>Cleans and loads a table. If needed, a dataset containing the table is downloaded.</p>
     </div>
 
-    <pre class="usage"><span class='no'>sp_codelists</span></pre>
+    <pre class="usage"><span class='fu'>get_table</span>(
+  <span class='no'>table_id</span>,
+  <span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>2018</span>,
+  <span class='kw'>month</span> <span class='kw'>=</span> <span class='fl'>12</span>,
+  <span class='kw'>force_redownload</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>ico</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>table_id</th>
+      <td><p>A table ID. See <code>id</code> column in <code>sp_tables</code> for a list of available codelists.</p></td>
+    </tr>
+    <tr>
+      <th>year</th>
+      <td><p>year, numeric, 2015-2018 for some datasets, 2010-2018 for others.</p></td>
+    </tr>
+    <tr>
+      <th>month</th>
+      <td><p>month, numeric. Must be 3, 6, 9 or 12.</p></td>
+    </tr>
+    <tr>
+      <th>force_redownload</th>
+      <td><p>Redownload even if recent file present? Defaults to FALSE.</p></td>
+    </tr>
+    <tr>
+      <th>ico</th>
+      <td><p>ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See <a href='http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/ucjed'>http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/ucjed</a> to look up ID of any org in the dataset.</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with 27 rows and 2 variables:</p><dl class='dl-horizontal'>
-<dt><code>id</code></dt><dd><p>character. ID, used as <code>codelist_id</code> argument in <code>get_codelist</code>.</p></dd>
-<dt><code>name</code></dt><dd><p>character. Short name, mostly corresponds to title used on statnipokladna.cz.</p></dd>
+    <p>a tibble</p>
 
-</dl>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The <code>id</code> is to be used as the <code>codelist_id</code> parameter in <code>get_codelist</code>.</p>
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'># ADD_EXAMPLES_HERE
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#format">Format</a></li>
-      <li><a href="#details">Details</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

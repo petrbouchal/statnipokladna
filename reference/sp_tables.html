@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>List of available codelists — sp_codelists • statnipokladna</title>
+<title>List of available tables — sp_tables • statnipokladna</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,10 +42,10 @@
 
 
 
-<meta property="og:title" content="List of available codelists — sp_codelists" />
-<meta property="og:description" content="Contains IDs and names of all available codelists that can be retrieved by get_codelist.
-See https://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky for a more detailed
-descriptions and a GUI for exploring the lists." />
+<meta property="og:title" content="List of available tables — sp_tables" />
+<meta property="og:description" content="Contains IDs and names of all available tables that can be
+retrieved by get_table. Look inside the XLS documentation for each dataset at https://monitor.statnipokladna.cz/2019/zdrojova-data/transakcni-data
+to see more detailed descriptions. Note that tables do not correspond to the tabulka/vtab attribute of the tables, they represent files inside datasets." />
 <meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -130,37 +130,35 @@ descriptions and a GUI for exploring the lists." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>List of available codelists</h1>
-    <small class="dont-index">Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/R/codelists.R'><code>R/codelists.R</code></a></small>
-    <div class="hidden name"><code>sp_codelists.Rd</code></div>
+    <h1>List of available tables</h1>
+    <small class="dont-index">Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/R/tables.R'><code>R/tables.R</code></a></small>
+    <div class="hidden name"><code>sp_tables.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Contains IDs and names of all available codelists that can be retrieved by get_codelist.
-See <a href='https://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky'>https://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky</a> for a more detailed
-descriptions and a GUI for exploring the lists.</p>
+    <p>Contains IDs and names of all available tables that can be
+retrieved by get_table. Look inside the XLS documentation for each dataset at <a href='https://monitor.statnipokladna.cz/2019/zdrojova-data/transakcni-data'>https://monitor.statnipokladna.cz/2019/zdrojova-data/transakcni-data</a>
+to see more detailed descriptions. Note that tables do not correspond to the tabulka/<code>vtab</code> attribute of the tables, they represent files inside datasets.</p>
     </div>
 
-    <pre class="usage"><span class='no'>sp_codelists</span></pre>
+    <pre class="usage"><span class='no'>sp_tables</span></pre>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A data frame with 27 rows and 2 variables:</p><dl class='dl-horizontal'>
-<dt><code>id</code></dt><dd><p>character. ID, used as <code>codelist_id</code> argument in <code>get_codelist</code>.</p></dd>
-<dt><code>name</code></dt><dd><p>character. Short name, mostly corresponds to title used on statnipokladna.cz.</p></dd>
+    <p>A data frame with 2 rows and 4 variables:</p><dl class='dl-horizontal'>
+<dt><code>id</code></dt><dd><p>integer Table id, used as <code>id</code> argument to <code>get_table</code>. Comprises report number and table number.</p></dd>
+<dt><code>table_code</code></dt><dd><p>character. Table code, should be human readable.</p></dd>
+<dt><code>table_num</code></dt><dd><p>integer Table number.</p></dd>
+<dt><code>report_num</code></dt><dd><p>integer Number of report (vykaz) containing the table.</p></dd>
 
 </dl>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>The <code>id</code> is to be used as the <code>codelist_id</code> parameter in <code>get_codelist</code>.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#format">Format</a></li>
-      <li><a href="#details">Details</a></li>
     </ul>
 
   </div>

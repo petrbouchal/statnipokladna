@@ -43,7 +43,7 @@
 
 
 <meta property="og:title" content="Get codelist — get_codelist" />
-<meta property="og:description" content="Downloads and processes codelist identified by codelist. See sp_codelists for a list of
+<meta property="og:description" content="Downloads and processes codelist identified by codelist_id. See sp_codelists for a list of
 of available codelists with their IDs and names." />
 <meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -78,7 +78,7 @@ of available codelists with their IDs and names." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -135,17 +135,17 @@ of available codelists with their IDs and names." />
     </div>
 
     <div class="ref-description">
-    <p>Downloads and processes codelist identified by <code>codelist</code>. See <code>sp_codelists</code> for a list of
+    <p>Downloads and processes codelist identified by <code>codelist_id</code>. See <code>sp_codelists</code> for a list of
 of available codelists with their IDs and names.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_codelist</span>(<span class='no'>codelist</span>)</pre>
+    <pre class="usage"><span class='fu'>get_codelist</span>(<span class='no'>codelist_id</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>codelist</th>
+      <th>codelist_id</th>
       <td><p>A codelist ID. See <code>id</code> column in <code>sp_codelists</code> for a list of available codelists.</p></td>
     </tr>
     </table>

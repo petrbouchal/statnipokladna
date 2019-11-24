@@ -7,10 +7,25 @@
     <loc>https://petrbouchal.github.io/statnipokladna/reference/get_codelist.html</loc>
   </url>
   <url>
+    <loc>https://petrbouchal.github.io/statnipokladna/reference/get_dataset.html</loc>
+  </url>
+  <url>
+    <loc>https://petrbouchal.github.io/statnipokladna/reference/get_dataset_doc.html</loc>
+  </url>
+  <url>
+    <loc>https://petrbouchal.github.io/statnipokladna/reference/get_table.html</loc>
+  </url>
+  <url>
     <loc>https://petrbouchal.github.io/statnipokladna/reference/pipe.html</loc>
   </url>
   <url>
     <loc>https://petrbouchal.github.io/statnipokladna/reference/sp_codelists.html</loc>
+  </url>
+  <url>
+    <loc>https://petrbouchal.github.io/statnipokladna/reference/sp_datasets.html</loc>
+  </url>
+  <url>
+    <loc>https://petrbouchal.github.io/statnipokladna/reference/sp_tables.html</loc>
   </url>
   <url>
     <loc>https://petrbouchal.github.io/statnipokladna/reference/statnipokladna-package.html</loc>
