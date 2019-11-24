@@ -7,14 +7,14 @@
 get_dataset_doc(dataset_id, destdir = ".", download = T)
 }
 \arguments{
-\item{dataset_id}{DESCRIPTION.}
+\item{dataset_id}{dataset ID. See \code{sp_datasets}.}
 
 \item{destdir}{character. Where the file should be written. Defaults to working directory.}
 
 \item{download}{Whether to download (the default) or open link in browser.}
 }
 \value{
-RETURN_DESCRIPTION
+character (link) if download = TRUE, nothing otherwise.
 }
 \description{
 Downloads XLS file with dataset documentation, or opens link to this file in browser.

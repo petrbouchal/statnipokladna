@@ -16,7 +16,7 @@ get_dataset(dataset_id, year = 2018, month = 12, force_redownload = F)
 \item{force_redownload}{Redownload even if recent file present? Defaults to FALSE.}
 }
 \value{
-character string with complete paths to downloaded paths
+character string with complete paths to downloaded files.
 }
 \description{
 Downloads and unzips files for a given dataset.

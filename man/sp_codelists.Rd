@@ -14,11 +14,11 @@ sp_codelists
 }
 \description{
 Contains IDs and names of all available codelists that can be retrieved by get_codelist.
-See \url{https://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky} for a more detailed
-descriptions and a GUI for exploring the lists.
 }
 \details{
 The \code{id} is to be used as the \code{codelist_id} parameter in \code{get_codelist}.
+See \url{https://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky} for a more detailed
+descriptions and a GUI for exploring the lists.
 }
 \seealso{
 Other Lists of available entities: 

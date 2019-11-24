@@ -16,6 +16,7 @@ sp_datasets_i <- tibble::tribble(~id, ~name, ~implemented,
 #' List of available datasets
 #'
 #' Contains IDs and names of all available datasets that can be retrieved by get_dataset.
+#'
 #' See <https://monitor.statnipokladna.cz/2019/zdrojova-data/transakcni-data> for a more detailed descriptions
 #' of the datasets.
 #'
@@ -48,11 +49,11 @@ get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists
 #'
 #' Downloads XLS file with dataset documentation, or opens link to this file in browser.
 #'
-#' @param dataset_id DESCRIPTION.
+#' @param dataset_id dataset ID. See `sp_datasets`.
 #' @param destdir character. Where the file should be written. Defaults to working directory.
 #' @param download Whether to download (the default) or open link in browser.
 #'
-#' @return RETURN_DESCRIPTION
+#' @return character (link) if download = TRUE, nothing otherwise.
 #' @family Helpers
 #' @examples
 #' # ADD_EXAMPLES_HERE
@@ -80,7 +81,7 @@ get_dataset_doc <- function(dataset_id, destdir = ".", download = T) {
 #' @param month month, numeric. Must be 3, 6, 9 or 12.
 #' @param force_redownload Redownload even if recent file present? Defaults to FALSE.
 #'
-#' @return character string with complete paths to downloaded paths
+#' @return character string with complete paths to downloaded files.
 #' @examples
 #' # ADD_EXAMPLES_HERE
 #' @family Core workflow

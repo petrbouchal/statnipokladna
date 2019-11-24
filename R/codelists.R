@@ -2,10 +2,10 @@
 #' List of available codelists
 #'
 #' Contains IDs and names of all available codelists that can be retrieved by get_codelist.
-#' See <https://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky> for a more detailed
-#' descriptions and a GUI for exploring the lists.
 #'
 #' The `id` is to be used as the `codelist_id` parameter in `get_codelist`.
+#' See <https://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky> for a more detailed
+#' descriptions and a GUI for exploring the lists.
 #'
 #' @format A data frame with 27 rows and 2 variables:
 #' \describe{
