@@ -1,3 +1,9 @@
+# statnipokladna 0.2.2
+
+* bug fix in get_table and get_codelist: corrected logic around druhove trideni (polozka codelist)
+* clearer README
+* correction in vignette regarding consolidation
+
 # statnipokladna 0.2.1
 
 * improved documentation
