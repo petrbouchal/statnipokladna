@@ -23,6 +23,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id, ~table_code, ~datas
 #'   \item{\code{table_num}}{integer Table number.}
 #'   \item{\code{report_num}}{integer Number of report (vykaz) containing the table.}
 #' }
+#' @family Lists of available entities
 "sp_tables" <- sp_tables_i %>% dplyr::select(id, table_code, table_num, report_num)
 # usethis::use_data(sp_tables, overwrite = T)
 
@@ -40,6 +41,8 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id, ~table_code, ~datas
 #' @examples
 #' # ADD_EXAMPLES_HERE
 #' @export
+#' @family Core workflow
+#'
 get_table <- function(table_id, year = 2018, month = 12, force_redownload = FALSE, ico = NULL) {
   dataset_id <- sp_tables_i$dataset_id[sp_tables_i$id == table_id]
   table_stub <- paste0(sp_tables_i$file_stub[sp_tables_i$id == table_id], "_")

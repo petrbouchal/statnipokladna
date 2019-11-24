@@ -12,7 +12,7 @@
 #'   \item{\code{id}}{character. ID, used as `codelist_id` argument in `get_codelist`.}
 #'   \item{\code{name}}{character. Short name, mostly corresponds to title used on statnipokladna.cz.}
 #' }
-#'
+#' @family Lists of available entities
 sp_codelists <- tibble::tribble(~id, ~name,
                                 "aktorg", "Aktivn\\u00ed organizace",
                                 "cofog", "Klasifikace funkc\\u00ed vl\\u00e1dn\\u00edch instituc\\u00ed COFOG",
@@ -57,6 +57,8 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #' @examples
 #' # ADD_EXAMPLES_HERE
 #' @export
+#' @family Core workflow
+
 get_codelist <- function(codelist_id) {
   url <- get_codelist_url(codelist_id)
   message("Downloading codelist data")

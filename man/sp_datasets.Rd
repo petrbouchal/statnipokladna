@@ -17,4 +17,10 @@ Contains IDs and names of all available datasets that can be retrieved by get_da
 See \url{https://monitor.statnipokladna.cz/2019/zdrojova-data/transakcni-data} for a more detailed descriptions
 of the datasets.
 }
+\seealso{
+Other Lists of available entities: 
+\code{\link{sp_codelists}},
+\code{\link{sp_tables}}
+}
+\concept{Lists of available entities}
 \keyword{datasets}

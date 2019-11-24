@@ -19,3 +19,9 @@ of available codelists with their IDs and names.
 \examples{
 # ADD_EXAMPLES_HERE
 }
+\seealso{
+Other Core workflow: 
+\code{\link{get_dataset}()},
+\code{\link{get_table}()}
+}
+\concept{Core workflow}

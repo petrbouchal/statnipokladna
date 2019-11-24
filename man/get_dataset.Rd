@@ -24,3 +24,9 @@ Downloads and unzips files for a given dataset.
 \examples{
 # ADD_EXAMPLES_HERE
 }
+\seealso{
+Other Core workflow: 
+\code{\link{get_codelist}()},
+\code{\link{get_table}()}
+}
+\concept{Core workflow}

@@ -19,4 +19,10 @@ Contains IDs and names of all available tables that can be
 retrieved by get_table. Look inside the XLS documentation for each dataset at \url{https://monitor.statnipokladna.cz/2019/zdrojova-data/transakcni-data}
 to see more detailed descriptions. Note that tables do not correspond to the tabulka/\code{vtab} attribute of the tables, they represent files inside datasets.
 }
+\seealso{
+Other Lists of available entities: 
+\code{\link{sp_codelists}},
+\code{\link{sp_datasets}}
+}
+\concept{Lists of available entities}
 \keyword{datasets}

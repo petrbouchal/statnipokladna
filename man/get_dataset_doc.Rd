@@ -22,3 +22,4 @@ Downloads XLS file with dataset documentation, or opens link to this file in bro
 \examples{
 # ADD_EXAMPLES_HERE
 }
+\concept{Helpers}

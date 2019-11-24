@@ -32,3 +32,9 @@ Cleans and loads a table. If needed, a dataset containing the table is downloade
 \examples{
 # ADD_EXAMPLES_HERE
 }
+\seealso{
+Other Core workflow: 
+\code{\link{get_codelist}()},
+\code{\link{get_dataset}()}
+}
+\concept{Core workflow}

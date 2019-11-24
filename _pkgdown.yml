@@ -1,2 +1,15 @@
 destination: docs
 url: https://petrbouchal.github.io/statnipokladna
+reference:
+- title: Core workflow
+  desc:  Functions for executing the core workflow.
+  contents:
+  - has_concept("Core workflow")
+- title: Helpers
+  desc:  Utilities for working with the public budget database and this package.
+  contents:
+  - has_concept("Helpers")
+- title: Lists of available entities
+  desc:  Data frames containing IDs and other info on the things (files, data tables) you can fetch via statnipokladna.
+  contents:
+  - has_concept("Lists of available entities")

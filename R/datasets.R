@@ -24,6 +24,7 @@ sp_datasets_i <- tibble::tribble(~id, ~name, ~implemented,
 #'   \item{\code{id}}{character. Dataset ID, used as `id` argument to `get_dataset`.}
 #'   \item{\code{name}}{character. Dataset name, mostly corresponds to title on the statnipokladna GUI.}
 #' }
+#' @family Lists of available entities
 sp_datasets <- sp_datasets_i %>% dplyr::select(id, name)
 # usethis::use_data(sp_datasets, overwrite = T)
 
@@ -52,6 +53,7 @@ get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists
 #' @param download Whether to download (the default) or open link in browser.
 #'
 #' @return RETURN_DESCRIPTION
+#' @family Helpers
 #' @examples
 #' # ADD_EXAMPLES_HERE
 get_dataset_doc <- function(dataset_id, destdir = ".", download = T) {
@@ -80,6 +82,7 @@ get_dataset_doc <- function(dataset_id, destdir = ".", download = T) {
 #' @return character string with complete paths to downloaded paths
 #' @examples
 #' # ADD_EXAMPLES_HERE
+#' @family Core workflow
 #' @export
 get_dataset <- function(dataset_id, year = 2018, month = 12, force_redownload = F) {
   if(!(month %in% c(3, 6, 9, 12))) stop("`Month` must be 3, 6, 9, or 12")

@@ -20,4 +20,10 @@ descriptions and a GUI for exploring the lists.
 \details{
 The \code{id} is to be used as the \code{codelist_id} parameter in \code{get_codelist}.
 }
+\seealso{
+Other Lists of available entities: 
+\code{\link{sp_datasets}},
+\code{\link{sp_tables}}
+}
+\concept{Lists of available entities}
 \keyword{datasets}
