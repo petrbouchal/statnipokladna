@@ -78,7 +78,8 @@ get_codelist <- function(codelist_id) {
       as.character() %>%
       t() %>% tibble::as_tibble()}) %>%
     purrr::set_names(nms) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), lubridate::dmy)
+    dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), lubridate::dmy) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::starts_with("kon_")), as.logical)
   return(xvals)
 }
 
