@@ -1,5 +1,7 @@
 # statnipokladna 0.2.3
 
+* handle transformation of consolidation columns in `get_codelist()`
+
 # statnipokladna 0.2.2
 
 * bug fix in get_table and get_codelist: corrected logic around druhove trideni (polozka codelist)
