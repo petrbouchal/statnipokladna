@@ -112,8 +112,7 @@ and look at its documentation:
 statnipokladna::get_dataset_doc("finm")
 ```
 
-
-# Background information
+## Background information
 
 Note that while the package provides a bridge from complicated data dumps to a clean data structure, you still need quite a bit of domain knowledge to be able analyse the data safely.
 
