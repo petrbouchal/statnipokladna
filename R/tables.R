@@ -35,7 +35,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id, ~table_code, ~datas
 #' @param year year, numeric, 2015-2018 for some datasets, 2010-2018 for others.
 #' @param month month, numeric. Must be 3, 6, 9 or 12.
 #' @param force_redownload Redownload even if recent file present? Defaults to FALSE.
-#' @param ico **Not implemented** ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See <http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/ucjed> to look up ID of any org in the dataset.
+#' @param ico ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See <http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/ucjed> to look up ID of any org in the dataset.
 #'
 #' @return a tibble
 #' @examples
@@ -44,6 +44,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id, ~table_code, ~datas
 #' @family Core workflow
 #'
 get_table <- function(table_id, year = 2018, month = 12, force_redownload = FALSE, ico = NULL) {
+  stopifnot(is.character(ico))
   dataset_id <- sp_tables_i$dataset_id[sp_tables_i$id == table_id]
   table_stub <- paste0(sp_tables_i$file_stub[sp_tables_i$id == table_id], "_")
   dslist <- get_dataset(dataset_id, year = year, month = month, force_redownload = force_redownload)

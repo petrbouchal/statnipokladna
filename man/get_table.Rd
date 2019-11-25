@@ -21,7 +21,7 @@ get_table(
 
 \item{force_redownload}{Redownload even if recent file present? Defaults to FALSE.}
 
-\item{ico}{\strong{Not implemented} ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See \url{http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/ucjed} to look up ID of any org in the dataset.}
+\item{ico}{ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See \url{http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/ucjed} to look up ID of any org in the dataset.}
 }
 \value{
 a tibble
