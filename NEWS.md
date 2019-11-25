@@ -1,3 +1,7 @@
+# statnipokladna (development version)
+
+* filtering using `ico` parameter in `get_table()` now works
+
 # statnipokladna 0.2.3
 
 * handle transformation of consolidation columns in `get_codelist()`
