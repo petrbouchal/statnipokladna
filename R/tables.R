@@ -1,10 +1,10 @@
 sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id, ~table_code, ~dataset_id, ~file_stub, ~implemented,
-                             100,         51,         51100, "finm_budget", "finm", "FINM201", F,
-                             100,         51,         51101, "finm_budget2", "finm", "FINM207", F,
-                             0,         0,         1, "misris_zu", "misris", "MIS-RIS-ZU", F,
-                             0,         0,         3, "vykzz", "vykzz", "VYKZZ", F,
-                             0,         0,         4, "rozvaha", "rozv", "VYKZZ", F,
-                             0,         0,         2, "misris", "misris", "MIS-RIS", F) %>%
+                               100,         51,         51100, "finm_budget", "finm", "FINM201", F,
+                               100,         51,         51900, "finm_ucel", "finm", "FINM207", F,
+                               0,           0,          1, "misris_zu", "misris", "MIS-RIS-ZU", F,
+                               0,           0,          3, "vykzz", "vykzz", "VYKZZ", F,
+                               0,           0,          4, "rozvaha", "rozv", "VYKZZ", F,
+                               0,           0,          2, "misris", "misris", "MIS-RIS", F) %>%
   dplyr::mutate_if(is.double, as.integer) %>%
   dplyr::arrange(id)
 # stringi::stri_escape_unicode("xxx")
