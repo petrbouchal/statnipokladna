@@ -44,7 +44,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id, ~table_code, ~datas
 #' @family Core workflow
 #'
 get_table <- function(table_id, year = 2018, month = 12, force_redownload = FALSE, ico = NULL) {
-  stopifnot(is.character(ico))
+  stopifnot(is.character(ico) | is.null(ico))
   dataset_id <- sp_tables_i$dataset_id[sp_tables_i$id == table_id]
   table_stub <- paste0(sp_tables_i$file_stub[sp_tables_i$id == table_id], "_")
   dslist <- get_dataset(dataset_id, year = year, month = month, force_redownload = force_redownload)
