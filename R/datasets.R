@@ -32,7 +32,7 @@ sp_datasets <- sp_datasets_i %>% dplyr::select(id, name)
 get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists = T) {
   if(!(dataset_id %in% sp_datasets_i$id)) stop("Not a valid dataset ID")
   dataset_name <- sp_datasets_i[sp_datasets_i$id == dataset_id, "name"]
-  message(stringr::str_glue("Building URL for dataset `{dataset_id}`: {dataset_name}"))
+  message(stringr::str_glue("Building URL for dataset `{dataset_id}`: {dataset_name}, {year}-{month}"))
   x <- stringr::str_glue("{sp_base_url}/data/{year}_{month}_Data_CSUIS_{toupper(dataset_id)}.zip")
   print(x)
   if(check_if_exists) {
