@@ -270,6 +270,8 @@
 <li><del>některé CSV soubory jsou oddělované čárkou (a obsahují desetinnou tečku), jiné středníkem (s desetinnou čárkou)</del></li>
 <li>u číselníků je třeba myslet na to, že můžou obsahovat duplicitní položky (např. stejný kód, jiný název), z nichž každá platí v jiném časovém období - pokud se to neodfiltruje, můžou při napojení JOINem vznikat duplicity.</li>
 <li>sloupce označující fáze rozpočtového cyklu (ZU_ROZ*) se liší mezi obcemi (výkaz FINM) a státem (výkaz FINU)</li>
+<li>v číselnících jsou občas dvě stejné položky platné v jeden moment, tj. i po profiltrování přes datum (příklad položka 1381 v číselníku položek) - možná je to metodicky správně, ale rozhodně neintuitivní</li>
+<li>URL prohlížeče číselníku ne vždy odpovídá jeho názvu/URL jeho XML souboru (příklad <a href="https://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/smeruc?date=28.11.2019">prohlizec-ciselniku/smeruc</a> x <a href="https://monitor.statnipokladna.cz/data/uctosnova.xml">/uctosnova.xml</a>)</li>
 </ul>
 </div>
 <div id="co-v-datech-není-nebo-jsem-to-nenašel" class="section level2">
