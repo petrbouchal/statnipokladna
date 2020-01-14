@@ -102,6 +102,6 @@ get_dataset <- function(dataset_id, year = 2018, month = 12, force_redownload = 
     utils::download.file(dataset_url, tf, headers = c('User-Agent' = usr))
     utils::unzip(tf, exdir = td)
   }
-  paste0(td, "/", list.files(td, pattern = paste0("*_", year, "0", month, ".csv")))
+  paste0(td, "/", list.files(td, pattern = paste0("*_", year, "0", month, ".", "csv|CSV")))
 }
 
