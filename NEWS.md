@@ -1,6 +1,7 @@
 # statnipokladna (development version)
 
 * filtering using `ico` parameter in `get_table()` now works
+* updated table of tables (now covers all key tables)
 
 # statnipokladna 0.2.3
 
