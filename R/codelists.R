@@ -63,19 +63,15 @@ sp_codelists <- tibble::tribble(~id, ~name,
 get_codelist <- function(codelist_id) {
   url <- get_codelist_url(codelist_id)
   message("Downloading codelist data")
-  vy <- httr::with_config(config = httr::config(useragent = usr),
-                          xml2::read_xml(url)) %>% xml2::xml_children()
+  vx <- httr::with_config(config = httr::config(useragent = usr),
+                          xml2::read_xml(url))
   message("Processing codelist data")
   if(codelist_id %in% c("ucjed")) message("Large codelist: this will take a while...")
-  xnames <- purrr::map(vy, function(x) x %>% xml2::xml_children() %>% xml2::xml_name())
-  if(length(unique(xnames)) == 1)
-  {nms <- xnames[[1]]}
-  else
-    stop("No single set of names")
-
+  vy <- vx %>% xml2::xml_children()
+  nms <- xml2::xml_child(vx) %>% xml2::xml_children() %>% xml2::xml_name()
   xvals <- purrr::map_df(vy, function(x) {x %>% xml2::xml_children() %>%
       xml2::xml_text() %>%
-      as.character() %>%
+      # as.character() %>%
       t() %>% tibble::as_tibble()}) %>%
     purrr::set_names(nms) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), lubridate::dmy) %>%
