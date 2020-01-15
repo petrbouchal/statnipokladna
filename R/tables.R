@@ -3,6 +3,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
                                100,         51,         51900, "finm_ucel",   "finm",      "FINM207",    F,
                                0,           0,          1,     "misris_zu",   "misris",    "MIS-RIS-ZU", F,
                                0,           0,          3,     "vykzz",       "vykzz",     "VYKZZ",      F,
+                               0,           0,          9,     "vykzzmc",       "vykzz",     "VYKZZMC",      F,
                                0,           0,          4,     "rozvaha1",    "rozv",      "ROZV1",      F,
                                0,           0,          5,     "rozvaha2",    "rozv",      "ROZV2",      F,
                                0,           0,          6,     "rozvaha1mc",  "rozv",      "ROZV1MC",    F,
