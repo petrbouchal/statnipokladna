@@ -53,6 +53,7 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #' of available codelists with their IDs and names.
 #'
 #' @param codelist_id A codelist ID. See `id` column in `sp_codelists` for a list of available codelists.
+#' @param n Number of rows to return. Default (NULL) means all. Useful for quickly inspecting a codelist.
 #'
 #' @return A tibble
 #' @examples
@@ -60,16 +61,17 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #' @export
 #' @family Core workflow
 
-get_codelist <- function(codelist_id) {
+get_codelist <- function(codelist_id, n = NULL) {
   url <- get_codelist_url(codelist_id)
   message("Downloading codelist data")
-  vx <- httr::with_config(config = httr::config(useragent = usr),
+  xml_all <- httr::with_config(config = httr::config(useragent = usr),
                           xml2::read_xml(url))
   message("Processing codelist data")
   if(codelist_id %in% c("ucjed")) message("Large codelist: this will take a while...")
-  vy <- vx %>% xml2::xml_children()
-  nms <- xml2::xml_child(vx) %>% xml2::xml_children() %>% xml2::xml_name()
-  xvals <- purrr::map_df(vy, function(x) {x %>% xml2::xml_children() %>%
+  xml_children_all <- xml_all %>% xml2::xml_children()
+  xml_children <- if(is.null(n)) xml_children_all else xml_children_all[1:n]
+  nms <- xml2::xml_child(xml_all) %>% xml2::xml_children() %>% xml2::xml_name()
+  xvals <- purrr::map_df(xml_children, function(x) {x %>% xml2::xml_children() %>%
       xml2::xml_text() %>%
       # as.character() %>%
       t() %>% tibble::as_tibble()}) %>%

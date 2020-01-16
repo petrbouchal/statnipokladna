@@ -4,10 +4,12 @@
 \alias{get_codelist}
 \title{Get codelist}
 \usage{
-get_codelist(codelist_id)
+get_codelist(codelist_id, n = NULL)
 }
 \arguments{
 \item{codelist_id}{A codelist ID. See \code{id} column in \code{sp_codelists} for a list of available codelists.}
+
+\item{n}{Number of rows to return. Default (NULL) means all. Useful for quickly inspecting a codelist.}
 }
 \value{
 A tibble
