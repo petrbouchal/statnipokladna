@@ -66,7 +66,7 @@ get_dataset_doc <- function(dataset_id, destdir = ".", download = T) {
     } else {
     file_path <- stringr::str_glue("{destdir}/{dataset_id}.xlsx")
     message(stringr::str_glue("Getting dataset documentation from {doc_url}"))
-    download.file(doc_url, file_path)
+    download.file(doc_url, file_path, headers = c('User-Agent' = usr))
     return(stringr::str_glue("File downloaded to {file_path}."))
   }
 }
