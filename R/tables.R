@@ -25,6 +25,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #'   \item{\code{id}}{character Table id, used as `id` argument to `get_table`.}
 #'   \item{\code{table_code}}{character. Table code, should be human readable.}
 #'   \item{\code{table_num}}{integer Table number.}
+#'   \item{\code{report_num}}{integer Dataset (report/vykaz) number.}
 #'   \item{\code{czech_name}}{character Czech name of the table.}
 #'   \item{\code{note}}{character Note.}
 #' }
