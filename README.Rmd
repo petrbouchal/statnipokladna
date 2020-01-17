@@ -75,7 +75,7 @@ library(statnipokladna)
 Get data from a particular part (file) of a dataset ("výkaz"):
 
 ```{r}
-local_budgets <- get_table(table_id = "51100", # table ID, see `sp_tables`
+local_budgets <- get_table(table_id = "budget-local", # table ID, see `sp_tables`
                            year = 2018,
                            month = 12)
 ```
@@ -98,7 +98,18 @@ functional_categories <- get_codelist("paragraf")
 functional_categories
 ```
 
-(The functions to safely join these two together is not yet there, so be careful if doing this manually.)
+This contains all codes for this codelist, some of which are not valid for the time period of our core data. The function `add_codelist()` resolves this automatically.
+
+As you can see below, you can 
+
+- add multiple codelists in one pipe
+- add a codelist without downloading it first - just pass its ID to the function instead of an object.
+
+```{r}
+local_budgets %>% 
+  add_codelist(functional_categories) %>% 
+  add_codelist("polozka")
+```
 
 Download a whole "výkaz" (dataset):
 
