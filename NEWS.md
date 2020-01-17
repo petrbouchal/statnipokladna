@@ -14,7 +14,7 @@
 
 ## Improvements
 
-* updated table of tables (now covers all key tables)
+* updated table of tables (now covers all key tables, includes notes)
 * `get_codelist()` now returns a codelist df ready to join to core data
 
 # statnipokladna 0.2.3

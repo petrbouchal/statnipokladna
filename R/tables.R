@@ -1,20 +1,20 @@
-sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~dataset_id, ~file_stub,   ~implemented,
-                               100,         51,         "budget-local", "finm_budget", "finm",      "FINM201",    F,
-                               100,         51,         "budget-local_purpose", "finm_ucel",   "finm",      "FINM207",    F,
-                               0,           0,          "budget-indicators",     "misris_zu",   "misris",    "MIS-RIS-ZU", F,
-                               0,           0,          "profit-and-loss",     "vykzz",       "vykzz",     "VYKZZ",      F,
-                               0,           0,          "profit-and-loss-city-districts",     "vykzzmc",       "vykzz",     "VYKZZMC",      F,
-                               0,           0,          "balance-sheet",     "rozvaha1",    "rozv",      "ROZV1",      F,
-                               0,           0,          "balance-sheet-2",     "rozvaha2",    "rozv",      "ROZV2",      F,
-                               0,           0,          "balance-sheet-city-districts",     "rozvaha1mc",  "rozv",      "ROZV1MC",    F,
-                               0,           0,          "balance-sheet-city-districts-2",     "rozvaha2mc",  "rozv",      "ROZVMC2",    F,
-                               0,           0,          "budget_central",     "misris",      "misris",    "MIS-RIS",    F) %>%
+sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~dataset_id, ~file_stub,   ~implemented, ~czech_name, ~note,
+                               100,         51,         "budget-local", "finm_budget", "finm",      "FINM201",    F, NA, NA,
+                               100,         51,         "budget-local-purpose-grants", "finm_ucel",   "finm",      "FINM207",    F, NA, NA,
+                               0,           0,          "budget-indicators",     "misris_zu",   "misris",    "MIS-RIS-ZU", F, NA, "only central orgs",
+                               0,           0,          "profit-and-loss",     "vykzz",       "vykzz",     "VYKZZ",      F, NA, NA,
+                               0,           0,          "profit-and-loss-city-districts",     "vykzzmc",       "vykzz",     "VYKZZMC",      F, NA, "only for 2018; in other years city districts are incorporated in balance sheet",
+                               0,           0,          "balance-sheet",     "rozvaha1",    "rozv",      "ROZV1",      F, NA, NA,
+                               0,           0,          "balance-sheet-2",     "rozvaha2",    "rozv",      "ROZV2",      F, NA, NA,
+                               0,           0,          "balance-sheet-city-districts",     "rozvaha1mc",  "rozv",      "ROZV1MC",    F, NA, "only for 2018; in other years city districts are incorporated in balance sheet",
+                               0,           0,          "balance-sheet-city-districts-2",     "rozvaha2mc",  "rozv",      "ROZVMC2",    F, NA, "only for 2018; in other years city districts are incorporated in balance sheet",
+                               0,           0,          "budget_central",     "misris",      "misris",    "MIS-RIS",    F, NA, "only post-2015") %>%
   dplyr::mutate_if(is.double, as.integer) %>%
   dplyr::arrange(id)
 # stringi::stri_escape_unicode("xxx")
 
 
-#' List of available tables (PARTIAL AND MESSY RIGHT NOW)
+#' List of available tables (PARTIAL)
 #'
 #' Contains IDs and names of all available tables that can be
 #' retrieved by get_table. Look inside the XLS documentation for each dataset at <https://monitor.statnipokladna.cz/2019/zdrojova-data/transakcni-data>
@@ -22,13 +22,15 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #'
 #' @format A data frame with 2 rows and 4 variables:
 #' \describe{
-#'   \item{\code{id}}{integer Table id, used as `id` argument to `get_table`. Comprises report number and table number.}
+#'   \item{\code{id}}{character Table id, used as `id` argument to `get_table`.}
 #'   \item{\code{table_code}}{character. Table code, should be human readable.}
 #'   \item{\code{table_num}}{integer Table number.}
-#'   \item{\code{report_num}}{integer Number of report (vykaz) containing the table.}
+#'   \item{\code{czech_name}}{character Czech name of the table.}
+#'   \item{\code{note}}{character Note.}
 #' }
 #' @family Lists of available entities
-"sp_tables" <- sp_tables_i %>% dplyr::select(id, table_code, table_num, report_num)
+"sp_tables" <- sp_tables_i %>% dplyr::select(id, table_code, table_num, report_num,
+                                             czech_name, note)
 # usethis::use_data(sp_tables, overwrite = T)
 
 #' Get a statnipokladna table

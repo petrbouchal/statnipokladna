@@ -3,13 +3,14 @@
 \docType{data}
 \name{sp_tables}
 \alias{sp_tables}
-\title{List of available tables (PARTIAL AND MESSY RIGHT NOW)}
+\title{List of available tables (PARTIAL)}
 \format{A data frame with 2 rows and 4 variables:
 \describe{
-\item{\code{id}}{integer Table id, used as \code{id} argument to \code{get_table}. Comprises report number and table number.}
+\item{\code{id}}{character Table id, used as \code{id} argument to \code{get_table}.}
 \item{\code{table_code}}{character. Table code, should be human readable.}
 \item{\code{table_num}}{integer Table number.}
-\item{\code{report_num}}{integer Number of report (vykaz) containing the table.}
+\item{\code{czech_name}}{character Czech name of the table.}
+\item{\code{note}}{character Note.}
 }}
 \usage{
 sp_tables
