@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -141,8 +141,8 @@
   <span class='no'>table_id</span>,
   <span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>2018</span>,
   <span class='kw'>month</span> <span class='kw'>=</span> <span class='fl'>12</span>,
-  <span class='kw'>force_redownload</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>ico</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  <span class='kw'>ico</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>force_redownload</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -161,12 +161,12 @@
       <td><p>month, numeric. Must be 3, 6, 9 or 12. Can be a vector of length &gt; 1 (see details).</p></td>
     </tr>
     <tr>
-      <th>force_redownload</th>
-      <td><p>Redownload even if recent file present? Defaults to FALSE.</p></td>
-    </tr>
-    <tr>
       <th>ico</th>
       <td><p>ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See <a href='http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/ucjed'>http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/ucjed</a> to look up ID of any org in the dataset.</p></td>
+    </tr>
+    <tr>
+      <th>force_redownload</th>
+      <td><p>Redownload even if recent file present? Defaults to FALSE.</p></td>
     </tr>
     </table>
 

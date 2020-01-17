@@ -76,7 +76,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -131,14 +131,38 @@
       <small>Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="statnipokladna-development-version" class="section level1">
+    <div id="statnipokladna-0-3-0" class="section level1">
 <h1 class="page-header">
-<a href="#statnipokladna-development-version" class="anchor"></a>statnipokladna (development version)</h1>
+<a href="#statnipokladna-0-3-0" class="anchor"></a>statnipokladna 0.3.0</h1>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
 <ul>
-<li>get_codelist() gains <code>n</code> parameter, allowing only a limited number of rows of a codelist to be retrieved (to save time)</li>
-<li>filtering using <code>ico</code> parameter in <code><a href="../reference/get_table.html">get_table()</a></code> now works</li>
-<li>updated table of tables (now covers all key tables)</li>
+<li>the <code>ico</code> parameter in <code><a href="../reference/get_table.html">get_table()</a></code> now directly follows the key parameters; this will break cases where the function was called with unnamed parameters but will make use more straighforward.</li>
+<li>the <code>table_id</code> parameter in <code><a href="../reference/get_table.html">get_table()</a></code> is now a human-readable alphanumeric code, not a meaningless number. This will break all uses of get_table but make future use more sensible.</li>
 </ul>
+</div>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li>new <code><a href="../reference/add_codelist.html">add_codelist()</a></code> function for joining codelists to core financial data</li>
+<li>
+<code><a href="../reference/get_codelist.html">get_codelist()</a></code> gains <code>n</code> parameter, allowing only a limited number of rows of a codelist to be retrieved (to save time)</li>
+<li>
+<code><a href="../reference/get_codelist.html">get_codelist()</a></code> has a new paramater which opens the online codelist viewer</li>
+<li>filtering using <code>ico</code> parameter in <code><a href="../reference/get_table.html">get_table()</a></code> now works</li>
+</ul>
+</div>
+<div id="improvements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#improvements" class="anchor"></a>Improvements</h2>
+<ul>
+<li>updated table of tables (now covers all key tables, includes notes)</li>
+<li>
+<code><a href="../reference/get_codelist.html">get_codelist()</a></code> now returns a codelist df ready to join to core data</li>
+</ul>
+</div>
 </div>
     <div id="statnipokladna-0-2-3" class="section level1">
 <h1 class="page-header">
@@ -207,7 +231,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#statnipokladna-development-version">development version</a></li>
+        <li><a href="#statnipokladna-0-3-0">0.3.0</a></li>
         <li><a href="#statnipokladna-0-2-3">0.2.3</a></li>
         <li><a href="#statnipokladna-0-2-2">0.2.2</a></li>
         <li><a href="#statnipokladna-0-2-1">0.2.1</a></li>
