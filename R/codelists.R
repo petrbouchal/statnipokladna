@@ -77,7 +77,13 @@ get_codelist <- function(codelist_id, n = NULL) {
       t() %>% tibble::as_tibble()}) %>%
     purrr::set_names(nms) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), lubridate::dmy) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::starts_with("kon_")), as.logical)
+    dplyr::mutate_at(dplyr::vars(dplyr::starts_with("kon_")), as.logical) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::matches("^vtab$")),
+                     ~stringr::str_pad(., 6, "left", "0")) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::matches("^vykaz$")),
+                     ~stringr::str_pad(., 3, "left", "0")) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::matches("^polvyk_order$")), as.numeric)
+
   return(xvals)
 }
 
