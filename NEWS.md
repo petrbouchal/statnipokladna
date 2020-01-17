@@ -1,11 +1,19 @@
 # statnipokladna (development version)
 
-* get_codelist() gains `n` parameter, allowing only a limited number of rows of a codelist to be retrieved (to save time)
 ## Breaking changes
 
 * the `ico` parameter in `get_table()` now directly follows the key parameters; this will break cases where the function was called with unnamed parameters but will make use more straighforward.
+## New features
+
+* new `add_codelist()` function for joining codelists to core financial data
+* `get_codelist()` gains `n` parameter, allowing only a limited number of rows of a codelist to be retrieved (to save time)
+* `get_codelist()` has a new paramater which opens the online codelist viewer
 * filtering using `ico` parameter in `get_table()` now works
+
+## Improvements
+
 * updated table of tables (now covers all key tables)
+* `get_codelist()` now returns a codelist df ready to join to core data
 
 # statnipokladna 0.2.3
 
