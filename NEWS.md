@@ -3,6 +3,8 @@
 ## Breaking changes
 
 * the `ico` parameter in `get_table()` now directly follows the key parameters; this will break cases where the function was called with unnamed parameters but will make use more straighforward.
+* the `table_id` parameter in `get_table()` is now a human-readable alphanumeric code, not a meaningless number. This will break all uses of get_table but make future use more sensible.
+
 ## New features
 
 * new `add_codelist()` function for joining codelists to core financial data

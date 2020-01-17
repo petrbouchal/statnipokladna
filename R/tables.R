@@ -1,14 +1,14 @@
 sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~dataset_id, ~file_stub,   ~implemented,
-                               100,         51,         51100, "finm_budget", "finm",      "FINM201",    F,
-                               100,         51,         51900, "finm_ucel",   "finm",      "FINM207",    F,
-                               0,           0,          1,     "misris_zu",   "misris",    "MIS-RIS-ZU", F,
-                               0,           0,          3,     "vykzz",       "vykzz",     "VYKZZ",      F,
-                               0,           0,          9,     "vykzzmc",       "vykzz",     "VYKZZMC",      F,
-                               0,           0,          4,     "rozvaha1",    "rozv",      "ROZV1",      F,
-                               0,           0,          5,     "rozvaha2",    "rozv",      "ROZV2",      F,
-                               0,           0,          6,     "rozvaha1mc",  "rozv",      "ROZV1MC",    F,
-                               0,           0,          7,     "rozvaha2mc",  "rozv",      "ROZVMC2",    F,
-                               0,           0,          8,     "misris",      "misris",    "MIS-RIS",    F) %>%
+                               100,         51,         "budget-local", "finm_budget", "finm",      "FINM201",    F,
+                               100,         51,         "budget-local_purpose", "finm_ucel",   "finm",      "FINM207",    F,
+                               0,           0,          "budget-indicators",     "misris_zu",   "misris",    "MIS-RIS-ZU", F,
+                               0,           0,          "profit-and-loss",     "vykzz",       "vykzz",     "VYKZZ",      F,
+                               0,           0,          "profit-and-loss-city-districts",     "vykzzmc",       "vykzz",     "VYKZZMC",      F,
+                               0,           0,          "balance-sheet",     "rozvaha1",    "rozv",      "ROZV1",      F,
+                               0,           0,          "balance-sheet-2",     "rozvaha2",    "rozv",      "ROZV2",      F,
+                               0,           0,          "balance-sheet-city-districts",     "rozvaha1mc",  "rozv",      "ROZV1MC",    F,
+                               0,           0,          "balance-sheet-city-districts-2",     "rozvaha2mc",  "rozv",      "ROZVMC2",    F,
+                               0,           0,          "budget_central",     "misris",      "misris",    "MIS-RIS",    F) %>%
   dplyr::mutate_if(is.double, as.integer) %>%
   dplyr::arrange(id)
 # stringi::stri_escape_unicode("xxx")
