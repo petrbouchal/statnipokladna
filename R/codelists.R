@@ -129,7 +129,6 @@ switch_minus <- function(string) {
 #'
 #' @return A data frame of same length as `data`, with added columns from `codelist`. See Details.
 #' @export
-#' @details
 #' @examples
 #' # ADD_EXAMPLES_HERE
 add_codelist <- function(data, codelist = NULL, period_column = period_vykaz) {
