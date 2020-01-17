@@ -148,7 +148,7 @@ add_codelist <- function(data, codelist = NULL, period_column = period_vykaz) {
     # print(.x)
     # print(.y)
     nrows_start <- nrow(.x)
-    this_period <- dplyr:::pull(.y, {{period_column}})
+    this_period <- dplyr::pull(.y, {{period_column}})
     # print(this_period)
     codelist_filtered <- cl_data %>%
       dplyr::filter(end_date > this_period & start_date <= this_period) %>%
