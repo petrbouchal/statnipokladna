@@ -118,32 +118,62 @@ switch_minus <- function(string) {
   return(rslt)
 }
 
-join_codelist <- function(data, codelist_id = NULL, codelist_df = NULL, period_column) {
-  if(is.null(codelist_id) & is.null(codelist_df)) {
-    stop("At least one of codelist_id and codelist_df must be specified.")
+
+#' Add codelist data to downloaded data
+#'
+#' FUNCTION_DESCRIPTION
+#'
+#' @param data a data frame returned by `get_table()`.
+#' @param codelist The codelist to add. Either a character vector of length one (see `sp_tables` for possible values), or a data frame returned by `get_codelist()`.
+#' @param period_column Unquoted column name of column identifying the data period in `data`. Leave to default if you have not changed the `data` object returned by `get_table()`.
+#'
+#' @return A data frame of same length as `data`, with added columns from `codelist`. See Details.
+#' @export
+#' @details
+#' @examples
+#' # ADD_EXAMPLES_HERE
+add_codelist <- function(data, codelist = NULL, period_column = period_vykaz) {
+  if(is.null(codelist)) stop("Please supply a codelist")
+  # print(rlang::as_label({{period_column}}))
+  stopifnot("data.frame" %in% class(data),
+            "data.frame" %in% class(codelist) | is.character(codelist))
+  if(is.character(codelist)) stopifnot(length(codelist) == 1)
+  if(is.character(codelist)) {
+    cl_data <- get_codelist(codelist)
+    codelist_name <- codelist
+  } else {
+    cl_data <- codelist
+    codelist_name <- deparse(substitute(codelist))
   }
-  if(is.null(codelist_df) & is.character(codelist_id)) {
-    ciselnik <- get_codelist(codelist_id)
-  } else if (is.data.frame(codelist_df) & !is.null(codelist_id)) {
-    stop("Both `codelist_df` and `codelist_id` supplied. Please supply only one")
-  } else if (is.data.frame(codelist_df) & is.null(codelist_id)) {
-    if(!(c("end_date", "start_date") %in% names(codelist_df)) & length(codelist_df) > 2) {
-      stop("Wrong column specification of `codelist_df`. It must contain columns named
-           `start_date`, `end_date` and at least one more column")
-    }
-    ciselnik <- codelist_df
+  slepit <- function(.x, .y) {
+    # print(.x)
+    # print(.y)
+    nrows_start <- nrow(.x)
+    this_period <- dplyr:::pull(.y, {{period_column}})
+    # print(this_period)
+    codelist_filtered <- cl_data %>%
+      dplyr::filter(end_date > this_period & start_date <= this_period) %>%
+      dplyr::rename_at(dplyr::vars(dplyr::ends_with("_date")), ~paste0(codelist_name, "_", .)) %>%
+      dplyr::rename_at(dplyr::vars(dplyr::ends_with("nazev")), ~paste0(codelist_name, "_", .))
+    # print(codelist_filtered)
+    slp <- dplyr::left_join(.x, codelist_filtered)
+    if(nrow(slp) != nrows_start) {
+      errmsg <- stringr::str_glue(
+        "Something went wrong with matching the codelist to the data for period {this_period}.
+        Please inspect the dates on the codelist to make sure there are no duplicate
+        items valid for one given date.\nYou may want to filter/edit the codelist manually
+        and pass it to the add_codelist function as an object."
+      )
+      stop(errmsg)
+      }
+    return(slp)
   }
 
-  stopifnot(period_column %in% names(data),
-            "data.frame" %in% class(data),
-            "data.frame" %in% class(ciselnik))
-  perd = unique(data[{{ period_column }}])
-  stopifnot(length(unique(data [{{ period_column }}])) == 1)
-  ciselnik_filtered <- ciselnik %>%
-    dplyr::filter({{ end_date }} >= perd)
-
-  slepeno <- dplyr::left_join(data, ciselnik_filtered)
-
+  slepeno <- data %>%
+    dplyr::ungroup() %>%
+    dplyr::group_by({{period_column}}) %>%
+    dplyr::group_map(slepit, keep = T) %>%
+    dplyr::bind_rows()
   return(slepeno)
 }
 
