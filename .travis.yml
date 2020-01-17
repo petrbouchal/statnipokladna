@@ -1,6 +1,11 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: R
+
+before_install:
+# https://github.com/r-lib/roxygen2/issues/680
+  - tlmgr install index
+
 cache: packages
 
 before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
