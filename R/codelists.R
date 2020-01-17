@@ -87,6 +87,26 @@ get_codelist <- function(codelist_id, n = NULL) {
   return(xvals)
 }
 
+
+#' Get/open URL of codelist viewer
+#'
+#' Returns a URL for the online codelist browser in monitor.statnipokladna.cz and opens it in browser if open = TRUE.
+#'
+#' @param codelist_id A codelist ID. See `id` column in `sp_codelists` for a list of available codelists.
+#' @param open Whether to open URL in browser. Defaults to TRUE.
+#'
+#' @return a URL, character vector of length one.
+#' @examples
+#' # ADD_EXAMPLES_HERE
+get_codelist_viewer <- function(codelist_id, open = TRUE) {
+  if(!(codelist_id %in% sp_codelists$id)) stop("Not a valid codelist ID")
+  codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
+  message(stringr::str_glue("Building URL for codelist {codelist_id} - {codelist_name}"))
+  x <- stringr::str_glue("{sp_base_url}/2019/zdrojova-data/prohlizec-ciselniku/{codelist_id}")
+  if(open) utils::browseURL(x)
+  return(x)
+}
+
 switch_minus <- function(string) {
   swtch <- function(strg) {
     r0 <- strg %>%
