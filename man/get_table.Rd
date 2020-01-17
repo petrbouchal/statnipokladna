@@ -8,8 +8,8 @@ get_table(
   table_id,
   year = 2018,
   month = 12,
-  force_redownload = FALSE,
-  ico = NULL
+  ico = NULL,
+  force_redownload = FALSE
 )
 }
 \arguments{
@@ -19,9 +19,9 @@ get_table(
 
 \item{month}{month, numeric. Must be 3, 6, 9 or 12. Can be a vector of length > 1 (see details).}
 
-\item{force_redownload}{Redownload even if recent file present? Defaults to FALSE.}
-
 \item{ico}{ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See \url{http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/ucjed} to look up ID of any org in the dataset.}
+
+\item{force_redownload}{Redownload even if recent file present? Defaults to FALSE.}
 }
 \value{
 a tibble

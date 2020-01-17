@@ -1,6 +1,9 @@
 # statnipokladna (development version)
 
 * get_codelist() gains `n` parameter, allowing only a limited number of rows of a codelist to be retrieved (to save time)
+## Breaking changes
+
+* the `ico` parameter in `get_table()` now directly follows the key parameters; this will break cases where the function was called with unnamed parameters but will make use more straighforward.
 * filtering using `ico` parameter in `get_table()` now works
 * updated table of tables (now covers all key tables)
 
