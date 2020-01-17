@@ -15,9 +15,9 @@ get_table(
 \arguments{
 \item{table_id}{A table ID. See \code{id} column in \code{sp_tables} for a list of available codelists.}
 
-\item{year}{year, numeric, 2015-2018 for some datasets, 2010-2018 for others.}
+\item{year}{year, numeric, 2015-2018 for some datasets, 2010-2018 for others. Can be a vector of length > 1 (see details).}
 
-\item{month}{month, numeric. Must be 3, 6, 9 or 12.}
+\item{month}{month, numeric. Must be 3, 6, 9 or 12. Can be a vector of length > 1 (see details).}
 
 \item{force_redownload}{Redownload even if recent file present? Defaults to FALSE.}
 
