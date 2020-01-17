@@ -61,12 +61,12 @@ get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists
 get_dataset_doc <- function(dataset_id, destdir = ".", download = T) {
   doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
   if(!download) {
-    browseURL(doc_url)
+    utils::browseURL(doc_url)
     return(stringr::str_glue("Link to file opened in browser."))
     } else {
     file_path <- stringr::str_glue("{destdir}/{dataset_id}.xlsx")
     message(stringr::str_glue("Getting dataset documentation from {doc_url}"))
-    download.file(doc_url, file_path, headers = c('User-Agent' = usr))
+    utils::download.file(doc_url, file_path, headers = c('User-Agent' = usr))
     return(stringr::str_glue("File downloaded to {file_path}."))
   }
 }
