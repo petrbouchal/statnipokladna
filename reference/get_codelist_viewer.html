@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get a statnipokladna table — get_table • statnipokladna</title>
+<title>Get/open URL of codelist viewer — get_codelist_viewer • statnipokladna</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,8 @@
 
 
 
-<meta property="og:title" content="Get a statnipokladna table — get_table" />
-<meta property="og:description" content="Cleans and loads a table. If needed, a dataset containing the table is downloaded." />
+<meta property="og:title" content="Get/open URL of codelist viewer — get_codelist_viewer" />
+<meta property="og:description" content="Returns a URL for the online codelist browser in monitor.statnipokladna.cz and opens it in browser if open = TRUE." />
 <meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -128,56 +128,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get a statnipokladna table</h1>
-    <small class="dont-index">Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/R/tables.R'><code>R/tables.R</code></a></small>
-    <div class="hidden name"><code>get_table.Rd</code></div>
+    <h1>Get/open URL of codelist viewer</h1>
+    <small class="dont-index">Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/R/codelists.R'><code>R/codelists.R</code></a></small>
+    <div class="hidden name"><code>get_codelist_viewer.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Cleans and loads a table. If needed, a dataset containing the table is downloaded.</p>
+    <p>Returns a URL for the online codelist browser in monitor.statnipokladna.cz and opens it in browser if open = TRUE.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_table</span>(
-  <span class='no'>table_id</span>,
-  <span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>2018</span>,
-  <span class='kw'>month</span> <span class='kw'>=</span> <span class='fl'>12</span>,
-  <span class='kw'>force_redownload</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>ico</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>get_codelist_viewer</span>(<span class='no'>codelist_id</span>, <span class='kw'>open</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>table_id</th>
-      <td><p>A table ID. See <code>id</code> column in <code>sp_tables</code> for a list of available codelists.</p></td>
+      <th>codelist_id</th>
+      <td><p>A codelist ID. See <code>id</code> column in <code>sp_codelists</code> for a list of available codelists.</p></td>
     </tr>
     <tr>
-      <th>year</th>
-      <td><p>year, numeric, 2015-2018 for some datasets, 2010-2018 for others. Can be a vector of length &gt; 1 (see details).</p></td>
-    </tr>
-    <tr>
-      <th>month</th>
-      <td><p>month, numeric. Must be 3, 6, 9 or 12. Can be a vector of length &gt; 1 (see details).</p></td>
-    </tr>
-    <tr>
-      <th>force_redownload</th>
-      <td><p>Redownload even if recent file present? Defaults to FALSE.</p></td>
-    </tr>
-    <tr>
-      <th>ico</th>
-      <td><p>ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See <a href='http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/ucjed'>http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/ucjed</a> to look up ID of any org in the dataset.</p></td>
+      <th>open</th>
+      <td><p>Whether to open URL in browser. Defaults to TRUE.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a tibble</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other Core workflow: 
-<code><a href='get_codelist.html'>get_codelist</a>()</code>,
-<code><a href='get_dataset.html'>get_dataset</a>()</code></p></div>
+    <p>a URL, character vector of length one.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'># ADD_EXAMPLES_HERE
@@ -188,7 +165,6 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

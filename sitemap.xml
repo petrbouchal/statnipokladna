@@ -4,7 +4,13 @@
     <loc>https://petrbouchal.github.io/statnipokladna/index.html</loc>
   </url>
   <url>
+    <loc>https://petrbouchal.github.io/statnipokladna/reference/add_codelist.html</loc>
+  </url>
+  <url>
     <loc>https://petrbouchal.github.io/statnipokladna/reference/get_codelist.html</loc>
+  </url>
+  <url>
+    <loc>https://petrbouchal.github.io/statnipokladna/reference/get_codelist_viewer.html</loc>
   </url>
   <url>
     <loc>https://petrbouchal.github.io/statnipokladna/reference/get_dataset.html</loc>
