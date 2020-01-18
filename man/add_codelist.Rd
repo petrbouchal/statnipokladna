@@ -4,7 +4,12 @@
 \alias{add_codelist}
 \title{Add codelist data to downloaded data}
 \usage{
-add_codelist(data, codelist = NULL, period_column = period_vykaz)
+add_codelist(
+  data,
+  codelist = NULL,
+  period_column = period_vykaz,
+  force_redownload = F
+)
 }
 \arguments{
 \item{data}{a data frame returned by \code{get_table()}.}
@@ -12,6 +17,8 @@ add_codelist(data, codelist = NULL, period_column = period_vykaz)
 \item{codelist}{The codelist to add. Either a character vector of length one (see \code{sp_tables} for possible values), or a data frame returned by \code{get_codelist()}.}
 
 \item{period_column}{Unquoted column name of column identifying the data period in \code{data}. Leave to default if you have not changed the \code{data} object returned by \code{get_table()}.}
+
+\item{force_redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
 }
 \value{
 A data frame of same length as \code{data}, with added columns from \code{codelist}. See Details.

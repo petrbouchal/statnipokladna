@@ -133,19 +133,20 @@ switch_minus <- function(string) {
 #' @param data a data frame returned by `get_table()`.
 #' @param codelist The codelist to add. Either a character vector of length one (see `sp_tables` for possible values), or a data frame returned by `get_codelist()`.
 #' @param period_column Unquoted column name of column identifying the data period in `data`. Leave to default if you have not changed the `data` object returned by `get_table()`.
-#'
+#' @param force_redownload Redownload even if file has already been downloaded? Defaults to FALSE.
 #' @return A data frame of same length as `data`, with added columns from `codelist`. See Details.
 #' @export
 #' @examples
 #' # ADD_EXAMPLES_HERE
-add_codelist <- function(data, codelist = NULL, period_column = period_vykaz) {
+add_codelist <- function(data, codelist = NULL, period_column = period_vykaz,
+                         force_redownload = F) {
   if(is.null(codelist)) stop("Please supply a codelist")
   # print(rlang::as_label({{period_column}}))
   stopifnot("data.frame" %in% class(data),
             "data.frame" %in% class(codelist) | is.character(codelist))
   if(is.character(codelist)) stopifnot(length(codelist) == 1)
   if(is.character(codelist)) {
-    cl_data <- get_codelist(codelist)
+    cl_data <- get_codelist(codelist, force_redownload = force_redownload)
     codelist_name <- codelist
   } else {
     cl_data <- codelist
