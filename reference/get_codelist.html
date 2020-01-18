@@ -139,7 +139,7 @@ of available codelists with their IDs and names." />
 of available codelists with their IDs and names.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_codelist</span>(<span class='no'>codelist_id</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>get_codelist</span>(<span class='no'>codelist_id</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>force_redownload</span> <span class='kw'>=</span> <span class='no'>F</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -151,6 +151,10 @@ of available codelists with their IDs and names.</p>
     <tr>
       <th>n</th>
       <td><p>Number of rows to return. Default (NULL) means all. Useful for quickly inspecting a codelist.</p></td>
+    </tr>
+    <tr>
+      <th>force_redownload</th>
+      <td><p>Redownload even if file has already been downloaded? Defaults to FALSE.</p></td>
     </tr>
     </table>
 
