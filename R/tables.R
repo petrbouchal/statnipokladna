@@ -58,20 +58,10 @@ get_table <- function(table_id, year = 2018, month = 12, ico = NULL, force_redow
     dslist <- get_dataset(dataset_id, year = year, month = month, force_redownload = force_redownload)
     table_file <- dslist[stringr::str_detect(dslist, table_stub)]
     suppressWarnings(suppressMessages(
-      dt <- readr::read_csv2(table_file, col_types = readr::cols(`ZC_ICO:ZC_ICO` = "c",
-                                                                 `0FISCPER:0FISCPER` = "c",
-                                                                 `ZC_UCJED:ZC_UCJED` = "c",
-                                                                 `ZU_ROZKZM:ZU_ROZKZM` = 'c',
-                                                                 `ZU_ROZPZM:ZU_ROZPZM` = 'c',
-                                                                 `ZU_ROZKZ:ZU_ROZKZ` = 'c',
-                                                                 `ZU_ROZSCH:ZU_ROZSCH` = 'c',
-                                                                 `ZU_KROZP:ZU_KROZP` = 'c',
-                                                                 `ZC_UCJED:ZC_UCJED` = "c",
-                                                                 `0FM_AREA:0FM_AREA` = 'c',
-                                                                 `ZCMMT_ITM:ZCMMT_ITM` = "c"))))
+      dt <- readr::read_csv2(table_file, col_types = readr::cols(.default = readr::col_character()))))
     # print(head(dt))
     dt <- dt %>%
-      magrittr::set_names(stringr::str_remove(names(.), "^[A-Z_0-9/]*:")) %>%
+      purrr::set_names(stringr::str_remove(names(.), "^[A-Z_0-9/]*:")) %>%
       dplyr::mutate_at(dplyr::vars(dplyr::starts_with("ZU_")), ~switch_minus(.) %>% as.numeric(.)) %>%
       tidyr::extract(`0FISCPER`, c("per_yr", "per_m"), "([0-9]{4})0([0-9]{2})") %>%
       dplyr::mutate(period_vykaz = lubridate::make_date(per_yr, per_m),
