@@ -54,6 +54,7 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #'
 #' @param codelist_id A codelist ID. See `id` column in `sp_codelists` for a list of available codelists.
 #' @param n Number of rows to return. Default (NULL) means all. Useful for quickly inspecting a codelist.
+#' @param force_redownload Redownload even if file has already been downloaded? Defaults to FALSE.
 #'
 #' @return A tibble
 #' @examples
@@ -61,11 +62,17 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #' @export
 #' @family Core workflow
 
-get_codelist <- function(codelist_id, n = NULL) {
-  url <- get_codelist_url(codelist_id)
-  message("Downloading codelist data")
-  xml_all <- httr::with_config(config = httr::config(useragent = usr),
-                          xml2::read_xml(url))
+get_codelist <- function(codelist_id, n = NULL, force_redownload = F) {
+  td <- paste0(tempdir(), "/statnipokladna/")
+  tf <- paste0(td, codelist_id, ".xml")
+  if(file.exists(tf) & !force_redownload) {
+    message(stringr::str_glue("Codelist file already in {td}, not downloading. Set `force_redownload` to TRUE if needed."))
+  } else {
+    url <- get_codelist_url(codelist_id)
+    message(stringr::str_glue("Storing codelist in {td}"))
+    utils::download.file(url, tf, headers = c('User-Agent' = usr))
+  }
+  xml_all <- xml2::read_xml(tf)
   message("Processing codelist data")
   if(codelist_id %in% c("ucjed")) message("Large codelist: this will take a while...")
   xml_children_all <- xml_all %>% xml2::xml_children()
