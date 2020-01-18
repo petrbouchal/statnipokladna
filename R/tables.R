@@ -60,6 +60,7 @@ get_table <- function(table_id, year = 2018, month = 12, ico = NULL, force_redow
     suppressWarnings(suppressMessages(
       dt <- readr::read_csv2(table_file, col_types = readr::cols(.default = readr::col_character()))))
     # print(head(dt))
+    if(!is.null(ico)) dt <- dt[dt$`ZC_ICO:ZC_ICO` %in% ico,]
     dt <- dt %>%
       purrr::set_names(stringr::str_remove(names(.), "^[A-Z_0-9/]*:")) %>%
       dplyr::mutate_at(dplyr::vars(dplyr::starts_with("ZU_")), ~switch_minus(.) %>% as.numeric(.)) %>%
@@ -82,7 +83,6 @@ get_table <- function(table_id, year = 2018, month = 12, ico = NULL, force_redow
                         ZC_NUTS = "nuts",
                         FUNC0AREA = "paragraf",
                         `0FUNC_AREA` = "paragraf")
-    if(!is.null(ico)) dt <- dt[dt$ico %in% ico,]
     return(dt)
   }
   years_months <- expand.grid(y = year, m = month)
