@@ -88,6 +88,7 @@ get_dataset_doc <- function(dataset_id, destdir = ".", download = T) {
 #' @export
 get_dataset <- function(dataset_id, year = 2018, month = 12, force_redownload = F) {
   if(!(month %in% c(3, 6, 9, 12))) stop("`Month` must be 3, 6, 9, or 12")
+  if(!(year %in% c(2010:lubridate::year(lubridate::today())))) stop("`Year` must be between 2010 and now.")
   month <- formatC(month, width = 2, format = "d", flag = "0")
   dataset_url <- get_dataset_url(dataset_id = dataset_id, year = year, month = month)
   td <- tempdir()
