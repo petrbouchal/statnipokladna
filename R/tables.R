@@ -53,10 +53,10 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 get_table <- function(table_id, year = 2018, month = 12, ico = NULL, force_redownload = FALSE) {
   stopifnot(is.character(ico) | is.null(ico))
   dataset_id <- sp_tables_i$dataset_id[sp_tables_i$id == table_id]
-  table_stub <- paste0(sp_tables_i$file_stub[sp_tables_i$id == table_id], "_")
+  table_stub <- paste0(sp_tables_i$file_stub[sp_tables_i$id == table_id])
   get_one_table <- function(dataset_id, year = year, month = month, force_redownload = force_redownload) {
     dslist <- get_dataset(dataset_id, year = year, month = month, force_redownload = force_redownload)
-    table_file <- dslist[stringr::str_detect(dslist, table_stub)]
+    table_file <- dslist[stringr::str_detect(dslist, paste0(table_stub, "(_|[0-9]|\\.(csv|CSV))"))]
     suppressWarnings(suppressMessages(
       dt <- readr::read_csv2(table_file, col_types = readr::cols(.default = readr::col_character()))))
     # print(head(dt))

@@ -91,10 +91,8 @@ get_dataset <- function(dataset_id, year = 2018, month = 12, force_redownload = 
   if(!(year %in% c(2010:lubridate::year(lubridate::today())))) stop("`Year` must be between 2010 and now.")
   month <- formatC(month, width = 2, format = "d", flag = "0")
   dataset_url <- get_dataset_url(dataset_id = dataset_id, year = year, month = month)
-  td <- tempdir()
-  dir.create(paste0(td, "/statnipokladna"), showWarnings = F)
-  dir.create(paste0(td, "/statnipokladna/", dataset_id), showWarnings = F)
-  td <- paste0(td, "/statnipokladna/", dataset_id)
+  td <- paste(tempdir(), "statnipokladna", dataset_id, year, month, sep = "/")
+  dir.create(td, showWarnings = F, recursive = T)
   tf <- paste0(td, "/", dataset_id, year, month, ".zip")
   if(file.exists(tf) & !force_redownload) {
     message(stringr::str_glue("Files already in {td}, not downloading. Set `force_redownload` to TRUE if needed."))
@@ -103,6 +101,7 @@ get_dataset <- function(dataset_id, year = 2018, month = 12, force_redownload = 
     utils::download.file(dataset_url, tf, headers = c('User-Agent' = usr))
     utils::unzip(tf, exdir = td)
   }
-  paste0(td, "/", list.files(td, pattern = paste0("(*_", year, "0", month, ".", ")(csv|CSV)")))
+  file_list <- paste0(td, "/", list.files(td, pattern = "(csv|CSV)$"))
+  return(file_list)
 }
 

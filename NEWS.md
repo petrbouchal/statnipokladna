@@ -1,5 +1,8 @@
 # statnipokladna (development version)
 
+* updated README
+* fixed issue so package now also handles pre-2014 data
+
 # statnipokladna 0.3.0
 
 ## Breaking changes
