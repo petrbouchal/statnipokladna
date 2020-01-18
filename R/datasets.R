@@ -90,13 +90,13 @@ get_dataset <- function(dataset_id, year = 2018, month = 12, force_redownload = 
   if(!(month %in% c(3, 6, 9, 12))) stop("`Month` must be 3, 6, 9, or 12")
   if(!(year %in% c(2010:lubridate::year(lubridate::today())))) stop("`Year` must be between 2010 and now.")
   month <- formatC(month, width = 2, format = "d", flag = "0")
-  dataset_url <- get_dataset_url(dataset_id = dataset_id, year = year, month = month)
   td <- paste(tempdir(), "statnipokladna", dataset_id, year, month, sep = "/")
   dir.create(td, showWarnings = F, recursive = T)
   tf <- paste0(td, "/", dataset_id, year, month, ".zip")
   if(file.exists(tf) & !force_redownload) {
     message(stringr::str_glue("Files already in {td}, not downloading. Set `force_redownload` to TRUE if needed."))
   } else {
+    dataset_url <- get_dataset_url(dataset_id = dataset_id, year = year, month = month)
     message(stringr::str_glue("Storing downloaded archive in and extracting to {td}"))
     utils::download.file(dataset_url, tf, headers = c('User-Agent' = usr))
     utils::unzip(tf, exdir = td)
