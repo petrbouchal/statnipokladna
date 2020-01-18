@@ -8,7 +8,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
                                0,           0,          "balance-sheet-2",     "rozvaha2",    "rozv",      "ROZV2",      F, NA, NA,
                                0,           0,          "balance-sheet-city-districts",     "rozvaha1mc",  "rozv",      "ROZV1MC",    F, NA, "only for 2018; in other years city districts are incorporated in balance sheet",
                                0,           0,          "balance-sheet-city-districts-2",     "rozvaha2mc",  "rozv",      "ROZVMC2",    F, NA, "only for 2018; in other years city districts are incorporated in balance sheet",
-                               0,           0,          "budget_central",     "misris",      "misris",    "MIS-RIS",    F, NA, "only post-2015") %>%
+                               0,           0,          "budget-central",     "misris",      "misris",    "MIS-RIS",    F, NA, "only post-2015") %>%
   dplyr::mutate_if(is.double, as.integer) %>%
   dplyr::arrange(id)
 # stringi::stri_escape_unicode("xxx")
