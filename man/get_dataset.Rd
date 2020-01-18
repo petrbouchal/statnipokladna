@@ -13,7 +13,7 @@ get_dataset(dataset_id, year = 2018, month = 12, force_redownload = F)
 
 \item{month}{month, numeric. Must be 3, 6, 9 or 12.}
 
-\item{force_redownload}{Redownload even if recent file present? Defaults to FALSE.}
+\item{force_redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
 }
 \value{
 character string with complete paths to downloaded files.

@@ -79,7 +79,7 @@ get_dataset_doc <- function(dataset_id, destdir = ".", download = T) {
 #' @param dataset_id A dataset ID. See `id` column in `sp_datasets` for a list of available codelists.
 #' @param year year, numeric, 2015-2018 for some datasets, 2010-2018 for others.
 #' @param month month, numeric. Must be 3, 6, 9 or 12.
-#' @param force_redownload Redownload even if recent file present? Defaults to FALSE.
+#' @param force_redownload Redownload even if file has already been downloaded? Defaults to FALSE.
 #'
 #' @return character string with complete paths to downloaded files.
 #' @examples
