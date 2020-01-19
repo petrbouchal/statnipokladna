@@ -159,9 +159,10 @@ add_codelist <- function(data, codelist = NULL, period_column = period_vykaz,
     this_period <- dplyr::pull(.y, {{period_column}})
     # print(this_period)
     codelist_filtered <- cl_data %>%
-      dplyr::filter(end_date > this_period & start_date <= this_period) %>%
+      dplyr::filter(end_date >= this_period & start_date <= this_period) %>%
       dplyr::rename_at(dplyr::vars(dplyr::ends_with("_date")), ~paste0(codelist_name, "_", .)) %>%
       dplyr::rename_at(dplyr::vars(dplyr::ends_with("nazev")), ~paste0(codelist_name, "_", .))
+
     # print(codelist_filtered)
     slp <- dplyr::left_join(.x, codelist_filtered)
     if(nrow(slp) != nrows_start) {
