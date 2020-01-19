@@ -1,8 +1,16 @@
 # statnipokladna 0.3.1
 
-# Breaking changes
+## Breaking changes
 
 * value columns (previously starting with ZU_) now renamed to human-readable English names
+
+## New features
+
+* all key tables, except state funds (FINSF) now included in sp_tables and thus available in `get_table()`
+
+## Improvements
+
+* improved documentation - added details to explain what each function assumes and does
 * updated README
 * fixed issue so package now also handles pre-2014 data
 * minor improvement to messages
