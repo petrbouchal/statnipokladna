@@ -9,7 +9,7 @@ reference:
   desc:  Data frames containing IDs and other info on the things (files, data tables) you can fetch via statnipokladna.
   contents:
   - has_concept("Lists of available entities")
-- title: Helpers
-  desc:  Utilities for working with the public budget database and this package.
+- title: Utilities
+  desc:  Tools for working with the public budget database and this package.
   contents:
-  - has_concept("Helpers")
+  - has_concept("Utilities")
