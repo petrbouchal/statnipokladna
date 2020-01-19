@@ -1,14 +1,17 @@
-sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~dataset_id, ~file_regex,   ~implemented, ~czech_name, ~note,
-                               100,         51,         "budget-local", "finm_budget", "finm",      "FINM201",    F, NA, NA,
-                               100,         51,         "budget-local-purpose-grants", "finm_ucel",   "finm",      "FINM207",    F, NA, NA,
-                               0,           0,          "budget-indicators",     "misris_zu",   "misris",    "MIS-RIS-ZU", F, NA, "only central orgs",
-                               0,           0,          "profit-and-loss",     "vykzz",       "vykzz",     "VYKZZ",      F, NA, NA,
-                               0,           0,          "profit-and-loss-city-districts",     "vykzzmc",       "vykzz",     "VYKZZMC",      F, NA, "only for 2018; in other years city districts are incorporated in balance sheet",
-                               0,           0,          "balance-sheet",     "rozvaha1",    "rozv",      "ROZV[1]?",      F, NA, NA,
-                               0,           0,          "balance-sheet-2",     "rozvaha2",    "rozv",      "ROZV2",      F, NA, NA,
-                               0,           0,          "balance-sheet-city-districts",     "rozvaha1mc",  "rozv",      "ROZV1MC",    F, NA, "only for 2018; in other years city districts are incorporated in balance sheet",
-                               0,           0,          "balance-sheet-city-districts-2",     "rozvaha2mc",  "rozv",      "ROZVMC2",    F, NA, "only for 2018; in other years city districts are incorporated in balance sheet",
-                               0,           0,          "budget-central",     "misris",      "misris",    "MIS-RIS",    F, NA, "only post-2015") %>%
+sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~dataset_id, ~file_regex, ~czech_name, ~note,
+                               100,         51,         "budget-local", "finm_budget", "finm",      "FINM201",    "Pln\\u011bn\\u00ed rozpo\\u010dtu m\\u00edstn\\u011b \\u0159\\u00edzen\\u00fdch organizac\\u00ed" , NA,
+                               100,         51,         "budget-local-purpose-grants", "finm_ucel",   "finm",      "FINM207",    "\\u00da\\u010delov\\u00e9 financov\\u00e1n\\u00ed m\\u00edstn\\u011b \\u0159\\u00edzen\\u00fdch organizac\\u00ed", NA,
+                               0,           0,          "budget-indicators",     "misris_zu",   "misris",    "MIS-RIS-ZU", "Z\\u00e1vazn\\u00e9 ukazatele st\\u00e1tn\\u00edho rozpo\\u010dtu", "only central orgs",
+                               0,           0,          "profit-and-loss",     "vykzz",       "vykzz",     "VYKZZ",      "V\\u00fdkaz zisk\\u016f a ztr\\u00e1t" , NA,
+                               0,           0,          "profit-and-loss-city-districts",     "vykzzmc",       "vykzz",     "VYKZZMC",      "V\\u00fdkaz zisk\\u016f a ztr\\u00e1t - m\\u011bstsk\\u00e9 \\u010d\\u00e1sti", "only for 2018; in other years city districts are incorporated in balance sheet",
+                               0,           0,          "balance-sheet",     "rozvaha1",    "rozv",      "ROZV[1]?",      "Rozvaha - prvn\\u00ed \\u010d\\u00e1st", NA,
+                               0,           0,          "balance-sheet-2",     "rozvaha2",    "rozv",      "ROZV2",      "Rozvaha - druh\\u00e1 \\u010d\\u00e1st", NA,
+                               0,           0,          "balance-sheet-city-districts",     "rozvaha1mc",  "rozv",      "ROZV1MC",    "Rozvaha m\\u011bstsk\\u00fdch \\u010d\\u00e1st\\u00ed - prvn\\u00ed \\u010d\\u00e1st", "only for 2018; in other years city districts are incorporated in balance sheet",
+                               0,           0,          "balance-sheet-city-districts-2",     "rozvaha2mc",  "rozv",      "ROZVMC2",    "Rozvaha m\\u011bstsk\\u00fdch \\u010d\\u00e1st\\u00ed - druh\\u00e1 \\u010d\\u00e1st", "only for 2018; in other years city districts are incorporated in balance sheet",
+                               0,           0,          "budget-central-old",     "finu_budget",  "finu",      "FINU101",    "Pln\\u011bn\\u00ed rozpo\\u010dtu \\u00fast\\u0159edn\\u011b \\u0159\\u00edzen\\u00fdch organizac\\u00ed do 2014", "pre-2015 only",
+                               0,           0,          "budget-central-old-purpose-grants",     "finu_ucel",  "finu",      "FINU107",   "\\u00da\\u010delov\\u00e9 financov\\u00e1n\\u00ed - poskytnut\\u00e9 prost\\u0159edky", "pre-2015 only",
+                               0,           0,          "budget-central-old-subsidies",     "finu_dotace",  "finu",      "FINU108",    "Dota\\u010dn\\u00ed financov\\u00e1n\\u00ed - poskytnut\\u00e9 prost\\u0159edky", "pre-2015 only",
+                               0,           0,          "budget-central",     "misris",      "misris",    "MIS-RIS",    "Pln\\u011bn\\u00ed rozpo\\u010dtu \\u00fast\\u0159edn\\u011b \\u0159\\u00edzen\\u00fdch organizac\\u00ed od 2015", "post-2015 only") %>%
   dplyr::mutate_if(is.double, as.integer) %>%
   dplyr::arrange(id)
 # stringi::stri_escape_unicode("xxx")
