@@ -1,5 +1,8 @@
 destination: docs
 url: https://petrbouchal.github.io/statnipokladna
+template:
+  params:
+    ganalytics: UA-156460113-1
 reference:
 - title: Core workflow
   desc:  Functions for executing the core workflow.
