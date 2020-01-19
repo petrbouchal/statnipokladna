@@ -1,10 +1,10 @@
-sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~dataset_id, ~file_stub,   ~implemented, ~czech_name, ~note,
+sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~dataset_id, ~file_regex,   ~implemented, ~czech_name, ~note,
                                100,         51,         "budget-local", "finm_budget", "finm",      "FINM201",    F, NA, NA,
                                100,         51,         "budget-local-purpose-grants", "finm_ucel",   "finm",      "FINM207",    F, NA, NA,
                                0,           0,          "budget-indicators",     "misris_zu",   "misris",    "MIS-RIS-ZU", F, NA, "only central orgs",
                                0,           0,          "profit-and-loss",     "vykzz",       "vykzz",     "VYKZZ",      F, NA, NA,
                                0,           0,          "profit-and-loss-city-districts",     "vykzzmc",       "vykzz",     "VYKZZMC",      F, NA, "only for 2018; in other years city districts are incorporated in balance sheet",
-                               0,           0,          "balance-sheet",     "rozvaha1",    "rozv",      "ROZV1",      F, NA, NA,
+                               0,           0,          "balance-sheet",     "rozvaha1",    "rozv",      "ROZV[1]?",      F, NA, NA,
                                0,           0,          "balance-sheet-2",     "rozvaha2",    "rozv",      "ROZV2",      F, NA, NA,
                                0,           0,          "balance-sheet-city-districts",     "rozvaha1mc",  "rozv",      "ROZV1MC",    F, NA, "only for 2018; in other years city districts are incorporated in balance sheet",
                                0,           0,          "balance-sheet-city-districts-2",     "rozvaha2mc",  "rozv",      "ROZVMC2",    F, NA, "only for 2018; in other years city districts are incorporated in balance sheet",
@@ -53,13 +53,20 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 get_table <- function(table_id, year = 2018, month = 12, ico = NULL, force_redownload = FALSE) {
   stopifnot(is.character(ico) | is.null(ico))
   dataset_id <- sp_tables_i$dataset_id[sp_tables_i$id == table_id]
-  table_stub <- paste0(sp_tables_i$file_stub[sp_tables_i$id == table_id])
+  table_regex <- paste0(sp_tables_i$file_regex[sp_tables_i$id == table_id])
   get_one_table <- function(dataset_id, year = year, month = month, force_redownload = force_redownload) {
     dslist <- get_dataset(dataset_id, year = year, month = month, force_redownload = force_redownload)
-    table_file <- dslist[stringr::str_detect(dslist, paste0(table_stub, "(_|[0-9]|\\.(csv|CSV))"))]
+    table_file <- dslist[stringr::str_detect(dslist,
+                                             paste0(table_regex, "(_[0-9]*)?\\.(csv|CSV)"))]
+    stopifnot(length(table_file) == 1)
+    message("Reading data...")
     suppressWarnings(suppressMessages(
       dt <- readr::read_csv2(table_file, col_types = readr::cols(.default = readr::col_character()))))
     # print(head(dt))
+    message("Transforming data...")
+    if(max(stringr::str_length(dt$`ZC_ICO:ZC_ICO`), na.rm = T) == 10) {
+      dt <- dplyr::mutate(dt, `ZC_ICO:ZC_ICO` = stringr::str_sub(`ZC_ICO:ZC_ICO`, 3, 10))
+    }
     if(!is.null(ico)) dt <- dt[dt$`ZC_ICO:ZC_ICO` %in% ico,]
     dt <- dt %>%
       purrr::set_names(stringr::str_remove(names(.), "^[A-Z_0-9/]*:")) %>%
