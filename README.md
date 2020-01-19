@@ -91,7 +91,7 @@ local_budgets <- get_table(table_id = "budget-local", # table ID, see `sp_tables
 #> Building URL for dataset `finm`: FIN 2-12 M - Plnění rozpočtu MŘO, 2019-09
 #> http://monitor.statnipokladna.cz/data/2019_09_Data_CSUIS_FINM.zip
 #> Get the dataset documentation at http://monitor.statnipokladna.cz/data/struktura/finm.xlsx
-#> Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2019/09
+#> Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2019/09
 #> Reading data...
 #> Transforming data...
 ```
@@ -105,15 +105,15 @@ It is a rather raw-looking data frame…
 ``` r
 head(local_budgets)
 #> # A tibble: 6 x 15
-#>   vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka ZU_ROZSCH ZU_ROZPZM
-#>   <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr> <chr>      <chr>    <chr>       <dbl>     <dbl>
-#> 1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364      0.        1.57e 5
-#> 2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909      0.        1.83e 6
-#> 3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111      1.51e10   1.51e10
-#> 4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112      3.10e 8   3.10e 8
-#> 5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113      1.04e 9   1.04e 9
-#> 6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121      1.21e10   1.21e10
-#> # … with 2 more variables: ZU_ROZKZ <dbl>, period_vykaz <date>
+#>   vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka budget_adopted
+#>   <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr> <chr>      <chr>    <chr>            <dbl>
+#> 1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364                 0
+#> 2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909                 0
+#> 3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111       15085000000
+#> 4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112         310000000
+#> 5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113        1045000000
+#> 6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121       12070000000
+#> # … with 3 more variables: budget_amended <dbl>, budget_spending <dbl>, period_vykaz <date>
 ```
 
 …but it has been cleaned up, and can be enriched with any of the
@@ -121,7 +121,8 @@ metadata codelists:
 
 ``` r
 functional_categories <- get_codelist("paragraf")
-#> Codelist file already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/, not downloading. Set `force_redownload` to TRUE if needed.
+#> Building URL for codelist paragraf - Paragraf
+#> Storing codelist in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/
 #> Processing codelist data
 ```
 
@@ -159,42 +160,44 @@ As you can see below, you can
 local_budgets %>% 
   add_codelist(functional_categories) %>% 
   add_codelist("polozka")
-#> Joining, by = "paragraf"Joining, by = "paragraf"Codelist file already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/, not downloading. Set `force_redownload` to TRUE if needed.
+#> Joining, by = "paragraf"Joining, by = "paragraf"Building URL for codelist polozka - Rozpočtová položka
+#> Storing codelist in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/
 #> Processing codelist data
 #> Joining, by = "polozka"Joining, by = "polozka"
 #> # A tibble: 1,189,627 x 36
-#>    vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka ZU_ROZSCH ZU_ROZPZM
-#>    <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr> <chr>      <chr>    <chr>       <dbl>     <dbl>
-#>  1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364      0.        1.57e 5
-#>  2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909      0.        1.83e 6
-#>  3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111      1.51e10   1.51e10
-#>  4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112      3.10e 8   3.10e 8
-#>  5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113      1.04e 9   1.04e 9
-#>  6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121      1.21e10   1.21e10
-#>  7 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1122      4.00e 8   1.48e 9
-#>  8 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1211      2.80e10   2.80e10
-#>  9 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1332      4.55e 4   4.55e 4
-#> 10 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1333      0.        0.     
-#> # … with 1,189,617 more rows, and 23 more variables: ZU_ROZKZ <dbl>, period_vykaz <date>,
-#> #   skupina <chr>, oddil <chr>, pododdil <chr>, functional_categories_nazev <chr>,
-#> #   functional_categories_kr_nazev <chr>, functional_categories_str_nazev <chr>,
-#> #   functional_categories_start_date <date>, functional_categories_end_date <date>,
-#> #   polozka_start_date <date>, polozka_end_date <date>, druh <chr>, trida <chr>, seskupeni <chr>,
-#> #   podseskupeni <chr>, polozka_nazev <chr>, polozka_kr_nazev <chr>, polozka_str_nazev <chr>,
-#> #   kon_pol <lgl>, kon_okr <lgl>, kon_kraj <lgl>, kon_rep <lgl>
+#>    vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka budget_adopted
+#>    <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr> <chr>      <chr>    <chr>            <dbl>
+#>  1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364                 0
+#>  2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909                 0
+#>  3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111       15085000000
+#>  4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112         310000000
+#>  5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113        1045000000
+#>  6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121       12070000000
+#>  7 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1122         400000000
+#>  8 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1211       28000000000
+#>  9 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1332             45500
+#> 10 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1333                 0
+#> # … with 1,189,617 more rows, and 24 more variables: budget_amended <dbl>, budget_spending <dbl>,
+#> #   period_vykaz <date>, skupina <chr>, oddil <chr>, pododdil <chr>,
+#> #   functional_categories_nazev <chr>, functional_categories_kr_nazev <chr>,
+#> #   functional_categories_str_nazev <chr>, functional_categories_start_date <date>,
+#> #   functional_categories_end_date <date>, polozka_start_date <date>, polozka_end_date <date>,
+#> #   druh <chr>, trida <chr>, seskupeni <chr>, podseskupeni <chr>, polozka_nazev <chr>,
+#> #   polozka_kr_nazev <chr>, polozka_str_nazev <chr>, kon_pol <lgl>, kon_okr <lgl>, kon_kraj <lgl>,
+#> #   kon_rep <lgl>
 ```
 
 Download a whole “výkaz” (dataset):
 
 ``` r
 get_dataset("finm") # dataset ID, see `sp_datasets`
-#> Files already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12, not downloading. Set `force_redownload` to TRUE if needed.
-#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12/FINM201_2018012.csv"
-#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12/FINM202_2018012.csv"
-#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12/FINM203_2018012.csv"
-#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12/FINM204_2018012.csv"
-#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12/FINM205_2018012.csv"
-#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12/FINM207_2018012.csv"
+#> Files already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12, not downloading. Set `force_redownload` to TRUE if needed.
+#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12/FINM201_2018012.csv"
+#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12/FINM202_2018012.csv"
+#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12/FINM203_2018012.csv"
+#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12/FINM204_2018012.csv"
+#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12/FINM205_2018012.csv"
+#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12/FINM207_2018012.csv"
 ```
 
 and look at its documentation:
