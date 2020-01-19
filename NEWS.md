@@ -1,5 +1,8 @@
 # statnipokladna 0.3.1
 
+# Breaking changes
+
+* value columns (previously starting with ZU_) now renamed to human-readable English names
 * updated README
 * fixed issue so package now also handles pre-2014 data
 * minor improvement to messages

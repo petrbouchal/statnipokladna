@@ -38,7 +38,7 @@ Data is processed in the following way:
 \item all columns are given names that are human-readable and facilitato add codelists
 \item ICO (org. IDs) are normalised as in some datasets they are padded with leading zeros
 \item a period, per_yr and per_m columns are created to identify the time period
-\item value columns (named "ZU_") are transformed into numerics
+\item value columns are transformed into numeric
 \item other columns are left as character to avoid losing information
 }
 }

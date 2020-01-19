@@ -47,7 +47,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #' - all columns are given names that are human-readable and facilitato add codelists
 #' - ICO (org. IDs) are normalised as in some datasets they are padded with leading zeros
 #' - a period, per_yr and per_m columns are created to identify the time period
-#' - value columns (named "ZU_") are transformed into numerics
+#' - value columns are transformed into numeric
 #' - other columns are left as character to avoid losing information
 #'
 #' @param table_id A table ID. See `id` column in `sp_tables` for a list of available codelists.
@@ -100,7 +100,18 @@ get_table <- function(table_id, year = 2018, month = 12, ico = NULL, force_redow
                         ZC_ICO = "ico",
                         ZC_KRAJ = "kraj",
                         ZC_NUTS = "nuts",
+                        ZU_MONET = "previous_net",
+                        ZU_AOBTTO = "current_gross",
+                        ZU_AONET = "current_net",
+                        ZU_HLCIN = "previous_core",
+                        ZU_HOSCIN = "previous_economic",
+                        ZU_HLCIBO = "current_core",
+                        ZU_HCINBO = "current_economic",
                         FUNC0AREA = "paragraf",
+                        ZU_ROZSCH = "budget_adopted",
+                        ZU_ROZPZM = "budget_amended",
+                        ZU_KROZP = "budget_final",
+                        ZU_ROZKZ = "budget_spending",
                         `0FUNC_AREA` = "paragraf")
     return(dt)
   }
