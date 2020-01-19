@@ -22,7 +22,7 @@ sp_datasets_i <- tibble::tribble(~id, ~name, ~implemented,
 #'
 #' @format A data frame with 9 rows and 3 variables:
 #' \describe{
-#'   \item{\code{id}}{character. Dataset ID, used as `id` argument to `get_dataset`.}
+#'   \item{\code{id}}{character. Dataset ID, used as `dataset_id` argument to `get_dataset`.}
 #'   \item{\code{name}}{character. Dataset name, mostly corresponds to title on the statnipokladna GUI.}
 #' }
 #' @family Lists of available entities
