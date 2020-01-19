@@ -39,6 +39,17 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #'
 #' Cleans and loads a table. If needed, a dataset containing the table is downloaded.
 #'
+#' The data is loaded from files downloaded automatically by `get_dataset()`;
+#' files persist in a temporary directory per session.
+#'
+#' Data is processed in the following way:
+#'
+#' - all columns are given names that are human-readable and facilitato add codelists
+#' - ICO (org. IDs) are normalised as in some datasets they are padded with leading zeros
+#' - a period, per_yr and per_m columns are created to identify the time period
+#' - value columns (named "ZU_") are transformed into numerics
+#' - other columns are left as character to avoid losing information
+#'
 #' @param table_id A table ID. See `id` column in `sp_tables` for a list of available codelists.
 #' @param year year, numeric, 2015-2018 for some datasets, 2010-2018 for others. Can be a vector of length > 1 (see details).
 #' @param month month, numeric. Must be 3, 6, 9 or 12. Can be a vector of length > 1 (see details).

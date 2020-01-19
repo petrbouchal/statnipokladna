@@ -9,9 +9,9 @@ get_dataset(dataset_id, year = 2018, month = 12, force_redownload = F)
 \arguments{
 \item{dataset_id}{A dataset ID. See \code{id} column in \code{sp_datasets} for a list of available codelists.}
 
-\item{year}{year, numeric, 2015-2018 for some datasets, 2010-2018 for others.}
+\item{year}{year, numeric, 2015-2018 for some datasets, 2010-2018 for others. Defaults to 2018.}
 
-\item{month}{month, numeric. Must be 3, 6, 9 or 12.}
+\item{month}{month, numeric. Must be 3, 6, 9 or 12. Defaults to 12.}
 
 \item{force_redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
 }
@@ -21,11 +21,16 @@ character string with complete paths to downloaded files.
 \description{
 Downloads and unzips files for a given dataset.
 }
+\details{
+Files are stored in a temp folder as determined by \code{tempdir()} and further sorted into
+subdirectories by dataset, year and month. They persist per session to avoid redownloads.
+}
 \examples{
 # ADD_EXAMPLES_HERE
 }
 \seealso{
 Other Core workflow: 
+\code{\link{add_codelist}()},
 \code{\link{get_codelist}()},
 \code{\link{get_table}()}
 }

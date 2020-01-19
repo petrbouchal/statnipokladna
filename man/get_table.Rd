@@ -29,11 +29,25 @@ a tibble
 \description{
 Cleans and loads a table. If needed, a dataset containing the table is downloaded.
 }
+\details{
+The data is loaded from files downloaded automatically by \code{get_dataset()};
+files persist in a temporary directory per session.
+
+Data is processed in the following way:
+\itemize{
+\item all columns are given names that are human-readable and facilitato add codelists
+\item ICO (org. IDs) are normalised as in some datasets they are padded with leading zeros
+\item a period, per_yr and per_m columns are created to identify the time period
+\item value columns (named "ZU_") are transformed into numerics
+\item other columns are left as character to avoid losing information
+}
+}
 \examples{
 # ADD_EXAMPLES_HERE
 }
 \seealso{
 Other Core workflow: 
+\code{\link{add_codelist}()},
 \code{\link{get_codelist}()},
 \code{\link{get_dataset}()}
 }

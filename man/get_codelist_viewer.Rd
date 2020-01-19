@@ -20,3 +20,8 @@ Returns a URL for the online codelist browser in monitor.statnipokladna.cz and o
 \examples{
 # ADD_EXAMPLES_HERE
 }
+\seealso{
+Other Utilities: 
+\code{\link{get_dataset_doc}()}
+}
+\concept{Utilities}

@@ -52,6 +52,16 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #' Downloads and processes codelist identified by `codelist_id`. See `sp_codelists` for a list of
 #' of available codelists with their IDs and names.
 #'
+#' You can usually tell which codelist you need from the name of the column whose code you
+#' are looking to expand, e.g. the codes in column paragraf can be expanded by codelist paragraf.
+#'
+#' The processing ensures that the resulting codelist can be correcly joined to
+#' the data, autamatically using `add_codelist()` or manually.
+#' The entire codelist is downlaoded and not filtered for any particular date.
+#'
+#' Codelists XML files are stored in a temporary directory as determined by `tempdir()`
+#' and persist per session to avoid redownloads.
+#'
 #' @param codelist_id A codelist ID. See `id` column in `sp_codelists` for a list of available codelists.
 #' @param n Number of rows to return. Default (NULL) means all. Useful for quickly inspecting a codelist.
 #' @param force_redownload Redownload even if file has already been downloaded? Defaults to FALSE.
@@ -103,6 +113,7 @@ get_codelist <- function(codelist_id, n = NULL, force_redownload = F) {
 #' @param open Whether to open URL in browser. Defaults to TRUE.
 #'
 #' @return a URL, character vector of length one.
+#' @family Utilities
 #' @examples
 #' # ADD_EXAMPLES_HERE
 get_codelist_viewer <- function(codelist_id, open = TRUE) {
@@ -128,13 +139,30 @@ switch_minus <- function(string) {
 
 #' Add codelist data to downloaded data
 #'
-#' FUNCTION_DESCRIPTION
+#' Joins a provided codelist, or downloads and processes one if necessary, and adds it to the data.
+#'
+#' The `data` argument should be a data frame produced by `get_table()` If this is true, the `period_column` argument is not needed.
+#' The `codelist` argument, if a data frame, should be a data frame produced by
+#' `get_codelist()`. Specifically, it assumes it contains the following columns:
+#'
+#' - start_date, a date
+#' - end_date, a date
+#' - column with the code, character usually named the same as the codelist
+#'
+#' #' You can usually tell which codelist you need from the name of the column whose code you
+#' are looking to expand, e.g. the codes in column paragraf can be expanded by codelist paragraf.
+#'
+#' The function filters the codelist to obtain a set of entries relevant to the time period of `data`.
+#' If `data` contains tables for multiple periods, this is handled appropriately.
+#' Codelist-originating columns in the resulting data frame are renamed so they do not interfere with
+#' joining additional codelists, perhaps in a single pipe call.
 #'
 #' @param data a data frame returned by `get_table()`.
 #' @param codelist The codelist to add. Either a character vector of length one (see `sp_tables` for possible values), or a data frame returned by `get_codelist()`.
 #' @param period_column Unquoted column name of column identifying the data period in `data`. Leave to default if you have not changed the `data` object returned by `get_table()`.
 #' @param force_redownload Redownload even if file has already been downloaded? Defaults to FALSE.
 #' @return A data frame of same length as `data`, with added columns from `codelist`. See Details.
+#' @family Core workflow
 #' @export
 #' @examples
 #' # ADD_EXAMPLES_HERE

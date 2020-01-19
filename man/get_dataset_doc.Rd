@@ -22,4 +22,8 @@ Downloads XLS file with dataset documentation, or opens link to this file in bro
 \examples{
 # ADD_EXAMPLES_HERE
 }
-\concept{Helpers}
+\seealso{
+Other Utilities: 
+\code{\link{get_codelist_viewer}()}
+}
+\concept{Utilities}

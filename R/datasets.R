@@ -54,7 +54,7 @@ get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists
 #' @param download Whether to download (the default) or open link in browser.
 #'
 #' @return character (link) if download = TRUE, nothing otherwise.
-#' @family Helpers
+#' @family Utilities
 #' @examples
 #' # ADD_EXAMPLES_HERE
 #' @export
@@ -76,9 +76,12 @@ get_dataset_doc <- function(dataset_id, destdir = ".", download = T) {
 #'
 #' Downloads and unzips files for a given dataset.
 #'
+#' Files are stored in a temp folder as determined by `tempdir()` and further sorted into
+#' subdirectories by dataset, year and month. They persist per session to avoid redownloads.
+#'
 #' @param dataset_id A dataset ID. See `id` column in `sp_datasets` for a list of available codelists.
-#' @param year year, numeric, 2015-2018 for some datasets, 2010-2018 for others.
-#' @param month month, numeric. Must be 3, 6, 9 or 12.
+#' @param year year, numeric, 2015-2018 for some datasets, 2010-2018 for others. Defaults to 2018.
+#' @param month month, numeric. Must be 3, 6, 9 or 12. Defaults to 12.
 #' @param force_redownload Redownload even if file has already been downloaded? Defaults to FALSE.
 #'
 #' @return character string with complete paths to downloaded files.
