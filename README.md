@@ -86,12 +86,14 @@ Get data from a particular part (file) of a dataset (“výkaz”):
 
 ``` r
 local_budgets <- get_table(table_id = "budget-local", # table ID, see `sp_tables`
-                           year = 2018,
-                           month = 12)
-#> Building URL for dataset `finm`: FIN 2-12 M - Plnění rozpočtu MŘO, 2018-12
-#> http://monitor.statnipokladna.cz/data/2018_12_Data_CSUIS_FINM.zip
+                           year = 2019,
+                           month = 9)
+#> Building URL for dataset `finm`: FIN 2-12 M - Plnění rozpočtu MŘO, 2019-09
+#> http://monitor.statnipokladna.cz/data/2019_09_Data_CSUIS_FINM.zip
 #> Get the dataset documentation at http://monitor.statnipokladna.cz/data/struktura/finm.xlsx
-#> Files already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp2h9tls/statnipokladna/finm, not downloading. Set `force_redownload` to TRUE if needed.
+#> Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2019/09
+#> Reading data...
+#> Transforming data...
 ```
 
 The data is automatically downloaded to a cache directory, so it will be
@@ -104,13 +106,13 @@ It is a rather raw-looking data frame…
 head(local_budgets)
 #> # A tibble: 6 x 15
 #>   vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka ZU_ROZSCH ZU_ROZPZM
-#>   <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr>      <dbl> <chr>    <chr>       <dbl>     <dbl>
-#> 1 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 3412     6341            0 25313145.
-#> 2 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5011     13012000 14252023 
-#> 3 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5021        90000    90000 
-#> 4 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5024      3288000  2140497 
-#> 5 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5031      3253000  3535818 
-#> 6 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5032      1172000  1283013 
+#>   <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr> <chr>      <chr>    <chr>       <dbl>     <dbl>
+#> 1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364      0.        1.57e 5
+#> 2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909      0.        1.83e 6
+#> 3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111      1.51e10   1.51e10
+#> 4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112      3.10e 8   3.10e 8
+#> 5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113      1.04e 9   1.04e 9
+#> 6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121      1.21e10   1.21e10
 #> # … with 2 more variables: ZU_ROZKZ <dbl>, period_vykaz <date>
 ```
 
@@ -119,8 +121,7 @@ metadata codelists:
 
 ``` r
 functional_categories <- get_codelist("paragraf")
-#> Building URL for codelist paragraf - Paragraf
-#> Downloading codelist data
+#> Codelist file already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/, not downloading. Set `force_redownload` to TRUE if needed.
 #> Processing codelist data
 ```
 
@@ -158,24 +159,23 @@ As you can see below, you can
 local_budgets %>% 
   add_codelist(functional_categories) %>% 
   add_codelist("polozka")
-#> Joining, by = "paragraf"Joining, by = "paragraf"Building URL for codelist polozka - Rozpočtová položka
-#> Downloading codelist data
+#> Joining, by = "paragraf"Joining, by = "paragraf"Codelist file already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/, not downloading. Set `force_redownload` to TRUE if needed.
 #> Processing codelist data
 #> Joining, by = "polozka"Joining, by = "polozka"
-#> # A tibble: 1,245,418 x 36
+#> # A tibble: 1,189,627 x 36
 #>    vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka ZU_ROZSCH ZU_ROZPZM
-#>    <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr>      <dbl> <chr>    <chr>       <dbl>     <dbl>
-#>  1 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 3412     6341            0 25313145.
-#>  2 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5011     13012000 14252023 
-#>  3 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5021        90000    90000 
-#>  4 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5024      3288000  2140497 
-#>  5 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5031      3253000  3535818 
-#>  6 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5032      1172000  1283013 
-#>  7 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5038        56000    60542.
-#>  8 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5042            0    46580.
-#>  9 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5133         1000     1000 
-#> 10 051   0002… 2018   12    1000… 7508… CZ04  CZ04           3 6174     5136        14000    14000 
-#> # … with 1,245,408 more rows, and 23 more variables: ZU_ROZKZ <dbl>, period_vykaz <date>,
+#>    <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr> <chr>      <chr>    <chr>       <dbl>     <dbl>
+#>  1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364      0.        1.57e 5
+#>  2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909      0.        1.83e 6
+#>  3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111      1.51e10   1.51e10
+#>  4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112      3.10e 8   3.10e 8
+#>  5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113      1.04e 9   1.04e 9
+#>  6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121      1.21e10   1.21e10
+#>  7 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1122      4.00e 8   1.48e 9
+#>  8 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1211      2.80e10   2.80e10
+#>  9 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1332      4.55e 4   4.55e 4
+#> 10 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1333      0.        0.     
+#> # … with 1,189,617 more rows, and 23 more variables: ZU_ROZKZ <dbl>, period_vykaz <date>,
 #> #   skupina <chr>, oddil <chr>, pododdil <chr>, functional_categories_nazev <chr>,
 #> #   functional_categories_kr_nazev <chr>, functional_categories_str_nazev <chr>,
 #> #   functional_categories_start_date <date>, functional_categories_end_date <date>,
@@ -188,16 +188,13 @@ Download a whole “výkaz” (dataset):
 
 ``` r
 get_dataset("finm") # dataset ID, see `sp_datasets`
-#> Building URL for dataset `finm`: FIN 2-12 M - Plnění rozpočtu MŘO, 2018-12
-#> http://monitor.statnipokladna.cz/data/2018_12_Data_CSUIS_FINM.zip
-#> Get the dataset documentation at http://monitor.statnipokladna.cz/data/struktura/finm.xlsx
-#> Files already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp2h9tls/statnipokladna/finm, not downloading. Set `force_redownload` to TRUE if needed.
-#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp2h9tls/statnipokladna/finm/FINM201_2018012.csv"
-#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp2h9tls/statnipokladna/finm/FINM202_2018012.csv"
-#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp2h9tls/statnipokladna/finm/FINM203_2018012.csv"
-#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp2h9tls/statnipokladna/finm/FINM204_2018012.csv"
-#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp2h9tls/statnipokladna/finm/FINM205_2018012.csv"
-#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp2h9tls/statnipokladna/finm/FINM207_2018012.csv"
+#> Files already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12, not downloading. Set `force_redownload` to TRUE if needed.
+#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12/FINM201_2018012.csv"
+#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12/FINM202_2018012.csv"
+#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12/FINM203_2018012.csv"
+#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12/FINM204_2018012.csv"
+#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12/FINM205_2018012.csv"
+#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12/FINM207_2018012.csv"
 ```
 
 and look at its documentation:

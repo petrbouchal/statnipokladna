@@ -75,8 +75,8 @@ Get data from a particular part (file) of a dataset ("výkaz"):
 
 ```{r}
 local_budgets <- get_table(table_id = "budget-local", # table ID, see `sp_tables`
-                           year = 2018,
-                           month = 12)
+                           year = 2019,
+                           month = 9)
 ```
 
 The data is automatically downloaded to a cache directory, so it will be reused by future calls to `get_table()` made in the same session, unless you set `force_redownload = T`. 
