@@ -77,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -173,9 +173,22 @@
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a tibble</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The data is loaded from files downloaded automatically by <code><a href='get_dataset.html'>get_dataset()</a></code>;
+files persist in a temporary directory per session.</p>
+<p>Data is processed in the following way:</p><ul>
+<li><p>all columns are given names that are human-readable and facilitato add codelists</p></li>
+<li><p>ICO (org. IDs) are normalised as in some datasets they are padded with leading zeros</p></li>
+<li><p>a period, per_yr and per_m columns are created to identify the time period</p></li>
+<li><p>value columns are transformed into numeric</p></li>
+<li><p>other columns are left as character to avoid losing information</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other Core workflow: 
+<code><a href='add_codelist.html'>add_codelist</a>()</code>,
 <code><a href='get_codelist.html'>get_codelist</a>()</code>,
 <code><a href='get_dataset.html'>get_dataset</a>()</code></p></div>
 
@@ -188,6 +201,7 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
       <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>

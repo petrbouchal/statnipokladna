@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -150,26 +150,27 @@
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; Building URL for dataset `finm`: FIN 2-12 M - Plnění rozpočtu MŘO, 2019-09</span></a>
 <a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; http://monitor.statnipokladna.cz/data/2019_09_Data_CSUIS_FINM.zip</span></a>
 <a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; Get the dataset documentation at http://monitor.statnipokladna.cz/data/struktura/finm.xlsx</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2019/09</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2019/09</span></a>
 <a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; Reading data...</span></a>
 <a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; Transforming data...</span></a></code></pre></div>
 <p>The data is automatically downloaded to a cache directory, so it will be reused by future calls to <code><a href="reference/get_table.html">get_table()</a></code> made in the same session, unless you set <code>force_redownload = T</code>.</p>
 <p>It is a rather raw-looking data frame…</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(local_budgets)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; # A tibble: 6 x 15</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;   vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka ZU_ROZSCH ZU_ROZPZM</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; 1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364      0.        1.57e 5</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909      0.        1.83e 6</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; 3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111      1.51e10   1.51e10</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; 4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112      3.10e 8   3.10e 8</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; 5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113      1.04e 9   1.04e 9</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121      1.21e10   1.21e10</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; # … with 2 more variables: ZU_ROZKZ &lt;dbl&gt;, period_vykaz &lt;date&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;   vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka budget_adopted</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;            &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; 1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364                 0</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909                 0</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; 3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111       15085000000</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; 4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112         310000000</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; 5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113        1045000000</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121       12070000000</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; # … with 3 more variables: budget_amended &lt;dbl&gt;, budget_spending &lt;dbl&gt;, period_vykaz &lt;date&gt;</span></a></code></pre></div>
 <p>…but it has been cleaned up, and can be enriched with any of the metadata codelists:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">functional_categories &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_codelist.html">get_codelist</a></span>(<span class="st">"paragraf"</span>)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; Codelist file already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/, not downloading. Set `force_redownload` to TRUE if needed.</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; Processing codelist data</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; Building URL for codelist paragraf - Paragraf</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; Storing codelist in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; Processing codelist data</span></a></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">functional_categories</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; # A tibble: 550 x 9</span></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt;    paragraf skupina    oddil    pododdil      nazev       kr_nazev  str_nazev   start_date end_date  </span></a>
@@ -194,38 +195,40 @@
 <!-- end list --><div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">local_budgets <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/add_codelist.html">add_codelist</a></span>(functional_categories) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="reference/add_codelist.html">add_codelist</a></span>(<span class="st">"polozka"</span>)</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; Joining, by = "paragraf"Joining, by = "paragraf"Codelist file already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/, not downloading. Set `force_redownload` to TRUE if needed.</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; Processing codelist data</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; Joining, by = "polozka"Joining, by = "polozka"</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; # A tibble: 1,189,627 x 36</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;    vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka ZU_ROZSCH ZU_ROZPZM</span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt;  1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364      0.        1.57e 5</span></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt;  2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909      0.        1.83e 6</span></a>
-<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt;  3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111      1.51e10   1.51e10</span></a>
-<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt;  4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112      3.10e 8   3.10e 8</span></a>
-<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt;  5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113      1.04e 9   1.04e 9</span></a>
-<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt;  6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121      1.21e10   1.21e10</span></a>
-<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt;  7 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1122      4.00e 8   1.48e 9</span></a>
-<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt;  8 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1211      2.80e10   2.80e10</span></a>
-<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt;  9 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1332      4.55e 4   4.55e 4</span></a>
-<a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt; 10 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1333      0.        0.     </span></a>
-<a class="sourceLine" id="cb8-20" data-line-number="20"><span class="co">#&gt; # … with 1,189,617 more rows, and 23 more variables: ZU_ROZKZ &lt;dbl&gt;, period_vykaz &lt;date&gt;,</span></a>
-<a class="sourceLine" id="cb8-21" data-line-number="21"><span class="co">#&gt; #   skupina &lt;chr&gt;, oddil &lt;chr&gt;, pododdil &lt;chr&gt;, functional_categories_nazev &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb8-22" data-line-number="22"><span class="co">#&gt; #   functional_categories_kr_nazev &lt;chr&gt;, functional_categories_str_nazev &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb8-23" data-line-number="23"><span class="co">#&gt; #   functional_categories_start_date &lt;date&gt;, functional_categories_end_date &lt;date&gt;,</span></a>
-<a class="sourceLine" id="cb8-24" data-line-number="24"><span class="co">#&gt; #   polozka_start_date &lt;date&gt;, polozka_end_date &lt;date&gt;, druh &lt;chr&gt;, trida &lt;chr&gt;, seskupeni &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb8-25" data-line-number="25"><span class="co">#&gt; #   podseskupeni &lt;chr&gt;, polozka_nazev &lt;chr&gt;, polozka_kr_nazev &lt;chr&gt;, polozka_str_nazev &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb8-26" data-line-number="26"><span class="co">#&gt; #   kon_pol &lt;lgl&gt;, kon_okr &lt;lgl&gt;, kon_kraj &lt;lgl&gt;, kon_rep &lt;lgl&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; Joining, by = "paragraf"Joining, by = "paragraf"Building URL for codelist polozka - Rozpočtová položka</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; Storing codelist in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; Processing codelist data</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; Joining, by = "polozka"Joining, by = "polozka"</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; # A tibble: 1,189,627 x 36</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt;    vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka budget_adopted</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;            &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt;  1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364                 0</span></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt;  2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909                 0</span></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt;  3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111       15085000000</span></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt;  4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112         310000000</span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt;  5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113        1045000000</span></a>
+<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt;  6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121       12070000000</span></a>
+<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt;  7 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1122         400000000</span></a>
+<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt;  8 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1211       28000000000</span></a>
+<a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt;  9 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1332             45500</span></a>
+<a class="sourceLine" id="cb8-20" data-line-number="20"><span class="co">#&gt; 10 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1333                 0</span></a>
+<a class="sourceLine" id="cb8-21" data-line-number="21"><span class="co">#&gt; # … with 1,189,617 more rows, and 24 more variables: budget_amended &lt;dbl&gt;, budget_spending &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb8-22" data-line-number="22"><span class="co">#&gt; #   period_vykaz &lt;date&gt;, skupina &lt;chr&gt;, oddil &lt;chr&gt;, pododdil &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb8-23" data-line-number="23"><span class="co">#&gt; #   functional_categories_nazev &lt;chr&gt;, functional_categories_kr_nazev &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb8-24" data-line-number="24"><span class="co">#&gt; #   functional_categories_str_nazev &lt;chr&gt;, functional_categories_start_date &lt;date&gt;,</span></a>
+<a class="sourceLine" id="cb8-25" data-line-number="25"><span class="co">#&gt; #   functional_categories_end_date &lt;date&gt;, polozka_start_date &lt;date&gt;, polozka_end_date &lt;date&gt;,</span></a>
+<a class="sourceLine" id="cb8-26" data-line-number="26"><span class="co">#&gt; #   druh &lt;chr&gt;, trida &lt;chr&gt;, seskupeni &lt;chr&gt;, podseskupeni &lt;chr&gt;, polozka_nazev &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb8-27" data-line-number="27"><span class="co">#&gt; #   polozka_kr_nazev &lt;chr&gt;, polozka_str_nazev &lt;chr&gt;, kon_pol &lt;lgl&gt;, kon_okr &lt;lgl&gt;, kon_kraj &lt;lgl&gt;,</span></a>
+<a class="sourceLine" id="cb8-28" data-line-number="28"><span class="co">#&gt; #   kon_rep &lt;lgl&gt;</span></a></code></pre></div>
 <p>Download a whole “výkaz” (dataset):</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="reference/get_dataset.html">get_dataset</a></span>(<span class="st">"finm"</span>) <span class="co"># dataset ID, see `sp_datasets`</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; Files already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12, not downloading. Set `force_redownload` to TRUE if needed.</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12/FINM201_2018012.csv"</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12/FINM202_2018012.csv"</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12/FINM203_2018012.csv"</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12/FINM204_2018012.csv"</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12/FINM205_2018012.csv"</span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpLrwx4P/statnipokladna/finm/2018/12/FINM207_2018012.csv"</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; Files already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12, not downloading. Set `force_redownload` to TRUE if needed.</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12/FINM201_2018012.csv"</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12/FINM202_2018012.csv"</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12/FINM203_2018012.csv"</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12/FINM204_2018012.csv"</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12/FINM205_2018012.csv"</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12/FINM207_2018012.csv"</span></a></code></pre></div>
 <p>and look at its documentation:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">statnipokladna<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/statnipokladna/man/get_dataset_doc.html">get_dataset_doc</a></span>(<span class="st">"finm"</span>)</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; Getting dataset documentation from http://monitor.statnipokladna.cz/data/struktura/finm.xlsx</span></a>
