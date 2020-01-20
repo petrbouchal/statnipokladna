@@ -268,9 +268,9 @@
 <p>Technicky se netýká konsolidace, ale souvisí to: na příjmové straně je třeba myslet na to, že kvůli zákonu o rozpočtovém určení daní jde část centrálně vybraných daní alokuje rovnou obcím a v rozpočtu se vůbec neobjeví, tj. ve výkazu centrálních institucí je v některých daňových příjmech zaneseno jen cca 70 % toho, co se zkutečně vybere. (Týká se to daní z příjmu a DPH.) K analýze daňových příjmů je lepší použít data Finanční správy.</p>
 </div>
 </div>
-<div id="známé-datové-zádrhele" class="section level2">
+<div id="známé-datové-zádrhele-a-nekonzistence" class="section level2">
 <h2 class="hasAnchor">
-<a href="#zn%C3%A1m%C3%A9-datov%C3%A9-z%C3%A1drhele" class="anchor"></a>Známé datové zádrhele</h2>
+<a href="#zn%C3%A1m%C3%A9-datov%C3%A9-z%C3%A1drhele-a-nekonzistence" class="anchor"></a>Známé datové zádrhele a nekonzistence</h2>
 <ul>
 <li>v některých souborech jsou záporná čísla zapsaná tak, že minus je na konci, takže většina parserů sloupec načte jako text a převod na číslo běžným způsobem nefunguje</li>
 <li><del>některé CSV soubory jsou oddělované čárkou (a obsahují desetinnou tečku), jiné středníkem (s desetinnou čárkou)</del></li>
@@ -292,6 +292,15 @@
 <li>čistě rozpočtářský poznatek: jsou v Česku obce - mj. Praha - které své příjmy z vlastní činnosti, prodeje majetku a podobných věcí nerozpočtují, ale považují je za část své hospodářské činnosti; v Praze je to dáno statutem. Tyto příjmy se pak do rozpočtu dostávají jako transfer v položce 4131 “Převody z vlastních fondů hospodářské (podnikatelské) činnosti”. Není tedy rozumné srovnávat příjmy z vlastní činnosti aj. nebo z transferů mezi obcemi, pokud nevíme, jak to která obec rozpočtově a účetně vykazuje; srovnání může jít líp před výkaz zisků a ztrát než přes rozpočet, je to ale v mnohém hrubší.</li>
 </ul>
 </div>
+<div id="doplněno-20--1--2019" class="section level3">
+<h3 class="hasAnchor">
+<a href="#dopln%C4%9Bno-20--1--2019" class="anchor"></a>Doplněno 20. 1. 2019</h3>
+<ul>
+<li>CSV soubory jsou pojmenované jinak v letech 2010-12 (bez datumu v názvu)</li>
+<li>IČO v souborech 2010-12 je “obohaceno” o dvě nuly na začátku</li>
+<li>v některých letech jsou stejná data rozdělená do víc souborů (napříklady rozvahy a výkazy zisků a ztrát 2018, kde jsou MČ zvlášť)</li>
+</ul>
+</div>
 </div>
 <div id="co-v-datech-není-nebo-jsem-to-nenašel" class="section level2">
 <h2 class="hasAnchor">
@@ -307,7 +316,7 @@
 <h2 class="hasAnchor">
 <a href="#kde-by-bylo-fajn-m%C3%ADt-lep%C5%A1%C3%AD-dokumentaci" class="anchor"></a>Kde by bylo fajn mít lepší dokumentaci</h2>
 <ul>
-<li>v balíku ROZVAHA nejsou zdokumentované jednotlivé soubory: v excelové dokumentaci je jen ROZV.csv, v balíku ale ROZV[MC]?[1-2].csv; u …MC… jde asi o městské části Prahy, ale není to zjevné.</li>
+<li>v balíku ROZVAHA nejsou zdokumentované jednotlivé soubory: v excelové dokumentaci je jen ROZV.csv, v balíku ale ROZV[MC]?[1-2].csv; u …MC… jde asi o městské části Prahy, ale není to zjevné (toto se týká jen roku 2018).</li>
 </ul>
 </div>
 <div id="známe-neznámé" class="section level2">
@@ -326,6 +335,7 @@
 <li>neměl jsem v ruce pre-2015 reporty</li>
 <li>nemám moc osahané finanční výkazy (oproti rozpočtovým)</li>
 <li>netuším co je v přílohách a nezkoušel jsem pracovat s ukazateli účetní jednotky</li>
+<li>nerozumím všem částem balíku FINSF (rozpočty státních fondů)</li>
 </ul>
 </div>
   </div>
@@ -343,7 +353,7 @@
       <li><a href="#rozpo%C4%8Dtov%C3%A1-skladba">Rozpočtová skladba</a></li>
       <li><a href="#jednotky-anal%C3%BDzy-o-kom-a-%C4%8Dem-se-vykazuje">Jednotky analýzy: o kom a čem se vykazuje</a></li>
       <li><a href="#konsolidace-co-s%C4%8D%C3%ADtat-a-co-ne">Konsolidace: co sčítat a co ne</a></li>
-      <li><a href="#zn%C3%A1m%C3%A9-datov%C3%A9-z%C3%A1drhele">Známé datové zádrhele</a></li>
+      <li><a href="#zn%C3%A1m%C3%A9-datov%C3%A9-z%C3%A1drhele-a-nekonzistence">Známé datové zádrhele a nekonzistence</a></li>
       <li><a href="#co-v-datech-nen%C3%AD-nebo-jsem-to-nena%C5%A1el">Co v datech není nebo jsem to nenašel</a></li>
       <li><a href="#kde-by-bylo-fajn-m%C3%ADt-lep%C5%A1%C3%AD-dokumentaci">Kde by bylo fajn mít lepší dokumentaci</a></li>
       <li><a href="#zn%C3%A1me-nezn%C3%A1m%C3%A9">Známe neznámé:</a></li>
