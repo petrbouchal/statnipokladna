@@ -151,7 +151,7 @@ Pokud chci zajistit, že se mi nedublují výdaje kraje a obcí (např. dotace k
 
 Technicky se netýká konsolidace, ale souvisí to: na příjmové straně je třeba myslet na to, že kvůli zákonu o rozpočtovém určení daní jde část centrálně vybraných daní alokuje rovnou obcím a v rozpočtu se vůbec neobjeví, tj. ve výkazu centrálních institucí je v některých daňových příjmech zaneseno jen cca 70 % toho, co se zkutečně vybere. (Týká se to daní z příjmu a DPH.) K analýze daňových příjmů je lepší použít data Finanční správy.
 
-## Známé datové zádrhele
+## Známé datové zádrhele a nekonzistence
 
 - v některých souborech jsou záporná čísla zapsaná tak, že minus je na konci, takže většina parserů sloupec načte jako text a převod na číslo běžným způsobem nefunguje
 - ~~některé CSV soubory jsou oddělované čárkou (a obsahují desetinnou tečku), jiné středníkem (s desetinnou čárkou)~~
@@ -167,6 +167,12 @@ Technicky se netýká konsolidace, ale souvisí to: na příjmové straně je t�
 
 - čistě rozpočtářský poznatek: jsou v Česku obce - mj. Praha - které své příjmy z vlastní činnosti, prodeje majetku a podobných věcí nerozpočtují, ale považují je za část své hospodářské činnosti; v Praze je to dáno statutem. Tyto příjmy se pak do rozpočtu dostávají jako transfer v položce 4131 "Převody z vlastních fondů hospodářské (podnikatelské) činnosti". Není tedy rozumné srovnávat příjmy z vlastní činnosti aj. nebo z transferů mezi obcemi, pokud nevíme, jak to která obec rozpočtově a účetně vykazuje; srovnání může jít líp před výkaz zisků a ztrát než přes rozpočet, je to ale v mnohém hrubší.
 
+### Doplněno 20. 1. 2019
+
+- CSV soubory jsou pojmenované jinak v letech 2010-12 (bez datumu v názvu)
+- IČO v souborech 2010-12 je "obohaceno" o dvě nuly na začátku
+- v některých letech jsou stejná data rozdělená do víc souborů (napříklady rozvahy a výkazy zisků a ztrát 2018, kde jsou MČ zvlášť)
+
 ## Co v datech není nebo jsem to nenašel
 
 - zdrojové třídění u rozpočtů samospráv - jen incidentálně jako součást reportu účelového financování
@@ -175,7 +181,7 @@ Technicky se netýká konsolidace, ale souvisí to: na příjmové straně je t�
 
 ## Kde by bylo fajn mít lepší dokumentaci
 
-- v balíku ROZVAHA nejsou zdokumentované jednotlivé soubory: v excelové dokumentaci je jen ROZV.csv, v balíku ale ROZV[MC]?[1-2].csv; u ...MC... jde asi o městské části Prahy, ale není to zjevné.
+- v balíku ROZVAHA nejsou zdokumentované jednotlivé soubory: v excelové dokumentaci je jen ROZV.csv, v balíku ale ROZV[MC]?[1-2].csv; u ...MC... jde asi o městské části Prahy, ale není to zjevné (toto se týká jen roku 2018).
 
 ## Známe neznámé:
 
@@ -190,3 +196,4 @@ Technicky se netýká konsolidace, ale souvisí to: na příjmové straně je t�
 - neměl jsem v ruce pre-2015 reporty
 - nemám moc osahané finanční výkazy (oproti rozpočtovým)
 - netuším co je v přílohách a nezkoušel jsem pracovat s ukazateli účetní jednotky
+- nerozumím všem částem balíku FINSF (rozpočty státních fondů)
