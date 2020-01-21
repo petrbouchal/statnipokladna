@@ -103,6 +103,7 @@ get_table <- function(table_id, year = 2018, month = 12, ico = NULL, force_redow
                         ZU_MONET = "previous_net",
                         ZU_AOBTTO = "current_gross",
                         ZU_AONET = "current_net",
+                        ZU_AOKORR = "current_correction",
                         ZU_HLCIN = "previous_core",
                         ZU_HOSCIN = "previous_economic",
                         ZU_HLCIBO = "current_core",
