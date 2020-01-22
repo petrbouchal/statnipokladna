@@ -88,10 +88,7 @@ Get data from a particular part (file) of a dataset (“výkaz”):
 local_budgets <- get_table(table_id = "budget-local", # table ID, see `sp_tables`
                            year = 2019,
                            month = 9)
-#> Building URL for dataset `finm`: FIN 2-12 M - Plnění rozpočtu MŘO, 2019-09
-#> http://monitor.statnipokladna.cz/data/2019_09_Data_CSUIS_FINM.zip
-#> Get the dataset documentation at http://monitor.statnipokladna.cz/data/struktura/finm.xlsx
-#> Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2019/09
+#> Files already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/finm/2019/09, not downloading. Set `force_redownload` to TRUE if needed.
 #> Reading data...
 #> Transforming data...
 ```
@@ -122,7 +119,7 @@ metadata codelists:
 ``` r
 functional_categories <- get_codelist("paragraf")
 #> Building URL for codelist paragraf - Paragraf
-#> Storing codelist in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/
+#> Storing codelist in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/
 #> Processing codelist data
 ```
 
@@ -161,7 +158,7 @@ local_budgets %>%
   add_codelist(functional_categories) %>% 
   add_codelist("polozka")
 #> Joining, by = "paragraf"Joining, by = "paragraf"Building URL for codelist polozka - Rozpočtová položka
-#> Storing codelist in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/
+#> Storing codelist in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/
 #> Processing codelist data
 #> Joining, by = "polozka"Joining, by = "polozka"
 #> # A tibble: 1,189,627 x 36
@@ -191,13 +188,16 @@ Download a whole “výkaz” (dataset):
 
 ``` r
 get_dataset("finm") # dataset ID, see `sp_datasets`
-#> Files already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12, not downloading. Set `force_redownload` to TRUE if needed.
-#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12/FINM201_2018012.csv"
-#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12/FINM202_2018012.csv"
-#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12/FINM203_2018012.csv"
-#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12/FINM204_2018012.csv"
-#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12/FINM205_2018012.csv"
-#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpzMyjZw/statnipokladna/finm/2018/12/FINM207_2018012.csv"
+#> Building URL for dataset `finm`: FIN 2-12 M - Plnění rozpočtu MŘO, 2018-12
+#> http://monitor.statnipokladna.cz/data/2018_12_Data_CSUIS_FINM.zip
+#> Get the dataset documentation at http://monitor.statnipokladna.cz/data/struktura/finm.xlsx
+#> Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/finm/2018/12
+#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/finm/2018/12/FINM201_2018012.csv"
+#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/finm/2018/12/FINM202_2018012.csv"
+#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/finm/2018/12/FINM203_2018012.csv"
+#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/finm/2018/12/FINM204_2018012.csv"
+#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/finm/2018/12/FINM205_2018012.csv"
+#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/finm/2018/12/FINM207_2018012.csv"
 ```
 
 and look at its documentation:
@@ -222,3 +222,11 @@ This also contains some notes useful for interpreting the data.
 
 A basic glossary of some of the terms used in the data sets is at
 <http://monitor.statnipokladna.cz/2019/metodika/>.
+
+## Contributing
+
+See CONTRIBUTING.md for a guide on how to contribute to the project.
+
+Please note that the ‘statnipokladna’ project is released with a
+[Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to
+this project, you agree to abide by its terms.
