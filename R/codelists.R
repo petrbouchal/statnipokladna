@@ -74,6 +74,7 @@ sp_codelists <- tibble::tribble(~id, ~name,
 
 get_codelist <- function(codelist_id, n = NULL, force_redownload = F) {
   td <- paste0(tempdir(), "/statnipokladna/")
+  dir.create(td, showWarnings = F, recursive = T)
   tf <- paste0(td, codelist_id, ".xml")
   if(file.exists(tf) & !force_redownload) {
     message(stringr::str_glue("Codelist file already in {td}, not downloading. Set `force_redownload` to TRUE if needed."))

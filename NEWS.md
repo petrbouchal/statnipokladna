@@ -1,5 +1,7 @@
 # statnipokladna (development version)
 
+* fixed bug where `get_codelist()` did not create the right temp directory
+
 # statnipokladna 0.4.0
 
 ## Breaking changes
