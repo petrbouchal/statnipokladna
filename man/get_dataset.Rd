@@ -26,7 +26,13 @@ Files are stored in a temp folder as determined by \code{tempdir()} and further 
 subdirectories by dataset, year and month. They persist per session to avoid redownloads.
 }
 \examples{
-# ADD_EXAMPLES_HERE
+\dontrun{
+budget_latest <- get_dataset("finu")
+budget_2018 <- get_dataset("finu", 2018)
+budget_mid2018 <- get_dataset("finu", 2018, 6)
+budget_multiyear <- get_dataset("finu", 2012:2018, 9)
+budget_multihalfyears <- get_dataset("finu", 2012:2018, c(6, 12))
+}
 }
 \seealso{
 Other Core workflow: 

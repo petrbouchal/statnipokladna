@@ -56,7 +56,9 @@ get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists
 #' @return character (link) if download = TRUE, nothing otherwise.
 #' @family Utilities
 #' @examples
-#' # ADD_EXAMPLES_HERE
+#' \dontrun{
+#' get_dataset_doc("paragraf")
+#' }
 #' @export
 get_dataset_doc <- function(dataset_id, destdir = ".", download = T) {
   doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
@@ -86,7 +88,13 @@ get_dataset_doc <- function(dataset_id, destdir = ".", download = T) {
 #'
 #' @return character string with complete paths to downloaded files.
 #' @examples
-#' # ADD_EXAMPLES_HERE
+#' \dontrun{
+#' budget_latest <- get_dataset("finu")
+#' budget_2018 <- get_dataset("finu", 2018)
+#' budget_mid2018 <- get_dataset("finu", 2018, 6)
+#' budget_multiyear <- get_dataset("finu", 2012:2018, 9)
+#' budget_multihalfyears <- get_dataset("finu", 2012:2018, c(6, 12))
+#' }
 #' @family Core workflow
 #' @export
 get_dataset <- function(dataset_id, year = 2018, month = 12, force_redownload = F) {

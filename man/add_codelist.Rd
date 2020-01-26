@@ -45,7 +45,18 @@ Codelist-originating columns in the resulting data frame are renamed so they do 
 joining additional codelists, perhaps in a single pipe call.
 }
 \examples{
-# ADD_EXAMPLES_HERE
+\dontrun{
+get_table("budget") \%>\%
+  add_codelist("polozka") \%>\%
+  add_codelist("paragraf")
+
+pol <- get_codelist("paragraf")
+par <- get_codelist("polozka")
+
+get_table("budget") \%>\%
+  add_codelist(pol) \%>\%
+  add_codelist(par)
+}
 }
 \seealso{
 Other Core workflow: 

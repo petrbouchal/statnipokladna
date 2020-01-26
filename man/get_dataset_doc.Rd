@@ -20,7 +20,9 @@ character (link) if download = TRUE, nothing otherwise.
 Downloads XLS file with dataset documentation, or opens link to this file in browser.
 }
 \examples{
-# ADD_EXAMPLES_HERE
+\dontrun{
+get_dataset_doc("paragraf")
+}
 }
 \seealso{
 Other Utilities: 

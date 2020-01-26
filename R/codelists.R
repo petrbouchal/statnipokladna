@@ -68,7 +68,9 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #'
 #' @return A tibble
 #' @examples
-#' # ADD_EXAMPLES_HERE
+#' \dontrun{
+#' get_codelist("paragraf")
+#' }
 #' @export
 #' @family Core workflow
 
@@ -116,7 +118,9 @@ get_codelist <- function(codelist_id, n = NULL, force_redownload = F) {
 #' @return a URL, character vector of length one.
 #' @family Utilities
 #' @examples
-#' # ADD_EXAMPLES_HERE
+#' \dontrun{
+#' get_codelist_viewer("paragraf")
+#' }
 get_codelist_viewer <- function(codelist_id, open = TRUE) {
   if(!(codelist_id %in% sp_codelists$id)) stop("Not a valid codelist ID")
   codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
@@ -166,7 +170,18 @@ switch_minus <- function(string) {
 #' @family Core workflow
 #' @export
 #' @examples
-#' # ADD_EXAMPLES_HERE
+#' \dontrun{
+#' get_table("budget") \%>\%
+#'   add_codelist("polozka") \%>\%
+#'   add_codelist("paragraf")
+#'
+#' pol <- get_codelist("paragraf")
+#' par <- get_codelist("polozka")
+#'
+#' get_table("budget") \%>\%
+#'   add_codelist(pol) \%>\%
+#'   add_codelist(par)
+#' }
 add_codelist <- function(data, codelist = NULL, period_column = period_vykaz,
                          force_redownload = F) {
   if(is.null(codelist)) stop("Please supply a codelist")

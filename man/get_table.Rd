@@ -43,7 +43,13 @@ Data is processed in the following way:
 }
 }
 \examples{
-# ADD_EXAMPLES_HERE
+\dontrun{
+allorgs_latest <- get_table("budget-local")
+allorgs_2018 <- get_table("budget-local", 2018)
+allorgs_mid2018 <- get_table("budget-local", 2018, 6)
+oneorg_multiyear <- get_table("budget-local", 2012:2018, 9, ico = "00064581")
+oneorg_multihalfyears <- get_table("budget-local", 2012:2018, c(6, 12), ico = "00064581")
+}
 }
 \seealso{
 Other Core workflow: 

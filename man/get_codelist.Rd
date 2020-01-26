@@ -32,7 +32,9 @@ Codelists XML files are stored in a temporary directory as determined by \code{t
 and persist per session to avoid redownloads.
 }
 \examples{
-# ADD_EXAMPLES_HERE
+\dontrun{
+get_codelist("paragraf")
+}
 }
 \seealso{
 Other Core workflow: 
