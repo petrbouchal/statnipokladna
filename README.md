@@ -88,7 +88,10 @@ Get data from a particular part (file) of a dataset (“výkaz”):
 local_budgets <- get_table(table_id = "budget-local", # table ID, see `sp_tables`
                            year = 2019,
                            month = 9)
-#> Files already in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/finm/2019/09, not downloading. Set `force_redownload` to TRUE if needed.
+#> Building URL for dataset `finm`: FIN 2-12 M - Plnění rozpočtu MŘO, 2019-09
+#> http://monitor.statnipokladna.cz/data/2019_09_Data_CSUIS_FINM.zip
+#> Get the dataset documentation at http://monitor.statnipokladna.cz/data/struktura/finm.xlsx
+#> Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/finm/2019/09
 #> Reading data...
 #> Transforming data...
 ```
@@ -102,15 +105,16 @@ It is a rather raw-looking data frame…
 ``` r
 head(local_budgets)
 #> # A tibble: 6 x 15
-#>   vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka budget_adopted
-#>   <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr> <chr>      <chr>    <chr>            <dbl>
-#> 1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364                 0
-#> 2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909                 0
-#> 3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111       15085000000
-#> 4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112         310000000
-#> 5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113        1045000000
-#> 6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121       12070000000
-#> # … with 3 more variables: budget_amended <dbl>, budget_spending <dbl>, period_vykaz <date>
+#>   vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka
+#>   <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr> <chr>      <chr>    <chr>  
+#> 1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364   
+#> 2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909   
+#> 3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111   
+#> 4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112   
+#> 5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113   
+#> 6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121   
+#> # … with 4 more variables: budget_adopted <dbl>, budget_amended <dbl>,
+#> #   budget_spending <dbl>, period_vykaz <date>
 ```
 
 …but it has been cleaned up, and can be enriched with any of the
@@ -119,26 +123,26 @@ metadata codelists:
 ``` r
 functional_categories <- get_codelist("paragraf")
 #> Building URL for codelist paragraf - Paragraf
-#> Storing codelist in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/
+#> Storing codelist in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/
 #> Processing codelist data
 ```
 
 ``` r
 functional_categories
 #> # A tibble: 550 x 9
-#>    paragraf skupina    oddil    pododdil      nazev       kr_nazev  str_nazev   start_date end_date  
-#>    <chr>    <chr>      <chr>    <chr>         <chr>       <chr>     <chr>       <date>     <date>    
-#>  1 0000     Příjmy     Příjmy   Příjmy        Pro příjmy… "Pro pří… "Pro příjm… 1900-01-01 9999-12-31
-#>  2 1011     Zemědělst… Zeměděl… Zemědělská a… Udržování … ""        ""          1900-01-01 9999-12-31
-#>  3 1012     Zemědělst… Zeměděl… Zemědělská a… Podnikání … "Podn.,r… "Podnikání… 1900-01-01 9999-12-31
-#>  4 1013     Zemědělst… Zeměděl… Zemědělská a… Genetický … "Genet.p… "Genetický… 1900-01-01 9999-12-31
-#>  5 1014     Zemědělst… Zeměděl… Zemědělská a… Ozdravován… "Ozdrav.… "Ozdrav.ho… 1900-01-01 9999-12-31
-#>  6 1019     Zemědělst… Zeměděl… Zemědělská a… Ostatní ze… "Ost.zem… "Ostatní z… 1900-01-01 9999-12-31
-#>  7 1021     Zemědělst… Zeměděl… Regulace zem… Organizace… "Regul.t… "Regulace … 1900-01-01 9999-12-31
-#>  8 1022     Zemědělst… Zeměděl… Regulace zem… Organizace… "Regul.t… "Reg.trhu … 1900-01-01 9999-12-31
-#>  9 1023     Zemědělst… Zeměděl… Regulace zem… Organizace… "Regul.t… "Organizac… 1900-01-01 9999-12-31
-#> 10 1024     Zemědělst… Zeměděl… Regulace zem… Organizace… "Regul.t… "Reg.trhu … 1900-01-01 9999-12-31
-#> # … with 540 more rows
+#>    paragraf skupina oddil pododdil nazev kr_nazev str_nazev start_date
+#>    <chr>    <chr>   <chr> <chr>    <chr> <chr>    <chr>     <date>    
+#>  1 0000     Příjmy  Příj… Příjmy   Pro … "Pro př… "Pro pří… 1900-01-01
+#>  2 1011     Zemědě… Země… Zeměděl… Udrž… ""       ""        1900-01-01
+#>  3 1012     Zemědě… Země… Zeměděl… Podn… "Podn.,… "Podniká… 1900-01-01
+#>  4 1013     Zemědě… Země… Zeměděl… Gene… "Genet.… "Genetic… 1900-01-01
+#>  5 1014     Zemědě… Země… Zeměděl… Ozdr… "Ozdrav… "Ozdrav.… 1900-01-01
+#>  6 1019     Zemědě… Země… Zeměděl… Osta… "Ost.ze… "Ostatní… 1900-01-01
+#>  7 1021     Zemědě… Země… Regulac… Orga… "Regul.… "Regulac… 1900-01-01
+#>  8 1022     Zemědě… Země… Regulac… Orga… "Regul.… "Reg.trh… 1900-01-01
+#>  9 1023     Zemědě… Země… Regulac… Orga… "Regul.… "Organiz… 1900-01-01
+#> 10 1024     Zemědě… Země… Regulac… Orga… "Regul.… "Reg.trh… 1900-01-01
+#> # … with 540 more rows, and 1 more variable: end_date <date>
 ```
 
 This contains all codes for this codelist, some of which are not valid
@@ -158,29 +162,32 @@ local_budgets %>%
   add_codelist(functional_categories) %>% 
   add_codelist("polozka")
 #> Joining, by = "paragraf"Joining, by = "paragraf"Building URL for codelist polozka - Rozpočtová položka
-#> Storing codelist in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/
+#> Storing codelist in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/
 #> Processing codelist data
 #> Joining, by = "polozka"Joining, by = "polozka"
 #> # A tibble: 1,189,627 x 36
-#>    vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka budget_adopted
-#>    <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr> <chr>      <chr>    <chr>            <dbl>
-#>  1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364                 0
-#>  2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909                 0
-#>  3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111       15085000000
-#>  4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112         310000000
-#>  5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113        1045000000
-#>  6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121       12070000000
-#>  7 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1122         400000000
-#>  8 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1211       28000000000
-#>  9 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1332             45500
-#> 10 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1333                 0
-#> # … with 1,189,617 more rows, and 24 more variables: budget_amended <dbl>, budget_spending <dbl>,
-#> #   period_vykaz <date>, skupina <chr>, oddil <chr>, pododdil <chr>,
+#>    vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka
+#>    <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr> <chr>      <chr>    <chr>  
+#>  1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364   
+#>  2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909   
+#>  3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111   
+#>  4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112   
+#>  5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113   
+#>  6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121   
+#>  7 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1122   
+#>  8 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1211   
+#>  9 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1332   
+#> 10 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1333   
+#> # … with 1,189,617 more rows, and 25 more variables: budget_adopted <dbl>,
+#> #   budget_amended <dbl>, budget_spending <dbl>, period_vykaz <date>,
+#> #   skupina <chr>, oddil <chr>, pododdil <chr>,
 #> #   functional_categories_nazev <chr>, functional_categories_kr_nazev <chr>,
-#> #   functional_categories_str_nazev <chr>, functional_categories_start_date <date>,
-#> #   functional_categories_end_date <date>, polozka_start_date <date>, polozka_end_date <date>,
-#> #   druh <chr>, trida <chr>, seskupeni <chr>, podseskupeni <chr>, polozka_nazev <chr>,
-#> #   polozka_kr_nazev <chr>, polozka_str_nazev <chr>, kon_pol <lgl>, kon_okr <lgl>, kon_kraj <lgl>,
+#> #   functional_categories_str_nazev <chr>,
+#> #   functional_categories_start_date <date>,
+#> #   functional_categories_end_date <date>, polozka_start_date <date>,
+#> #   polozka_end_date <date>, druh <chr>, trida <chr>, seskupeni <chr>,
+#> #   podseskupeni <chr>, polozka_nazev <chr>, polozka_kr_nazev <chr>,
+#> #   polozka_str_nazev <chr>, kon_pol <lgl>, kon_okr <lgl>, kon_kraj <lgl>,
 #> #   kon_rep <lgl>
 ```
 
@@ -191,13 +198,13 @@ get_dataset("finm") # dataset ID, see `sp_datasets`
 #> Building URL for dataset `finm`: FIN 2-12 M - Plnění rozpočtu MŘO, 2018-12
 #> http://monitor.statnipokladna.cz/data/2018_12_Data_CSUIS_FINM.zip
 #> Get the dataset documentation at http://monitor.statnipokladna.cz/data/struktura/finm.xlsx
-#> Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/finm/2018/12
-#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/finm/2018/12/FINM201_2018012.csv"
-#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/finm/2018/12/FINM202_2018012.csv"
-#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/finm/2018/12/FINM203_2018012.csv"
-#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/finm/2018/12/FINM204_2018012.csv"
-#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/finm/2018/12/FINM205_2018012.csv"
-#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpuGnxid/statnipokladna/finm/2018/12/FINM207_2018012.csv"
+#> Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/finm/2018/12
+#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/finm/2018/12/FINM201_2018012.csv"
+#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/finm/2018/12/FINM202_2018012.csv"
+#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/finm/2018/12/FINM203_2018012.csv"
+#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/finm/2018/12/FINM204_2018012.csv"
+#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/finm/2018/12/FINM205_2018012.csv"
+#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/finm/2018/12/FINM207_2018012.csv"
 ```
 
 and look at its documentation:
@@ -222,6 +229,12 @@ This also contains some notes useful for interpreting the data.
 
 A basic glossary of some of the terms used in the data sets is at
 <http://monitor.statnipokladna.cz/2019/metodika/>.
+
+### Note
+
+Not created or endorsed by the Czech Ministry of Finance, who produce
+the data - but they definitely deserve credit for releasing the data and
+maintaining the application.
 
 ## Contributing
 

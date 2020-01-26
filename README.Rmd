@@ -130,6 +130,10 @@ See the ["How the data works"](https://petrbouchal.github.io/statnipokladna/arti
 
 A basic glossary of some of the terms used in the data sets is at <http://monitor.statnipokladna.cz/2019/metodika/>.
 
+### Note
+
+Not created or endorsed by the Czech Ministry of Finance, who produce the data - but they definitely deserve credit for releasing the data and maintaining the application.
+
 ## Contributing
 
 See CONTRIBUTING.md for a guide on how to contribute to the project.
