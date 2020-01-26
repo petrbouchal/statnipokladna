@@ -8,8 +8,8 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-This package provides programmatic access to data from the
-    Czech public budgeting and accounting database, Státní pokladna.
+Get programmatic access to data from the Czech public
+    budgeting and accounting database, Státní pokladna.
 }
 \seealso{
 Useful links:
