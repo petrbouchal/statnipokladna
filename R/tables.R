@@ -50,13 +50,62 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #' - value columns are transformed into numeric
 #' - other columns are left as character to avoid losing information
 #'
+#' ## Correspondence between input and output columns
+#'
+#' **Shared**
+#'
+#'| Original | Output | English | Czech | Note |
+#'  | --- | --- | --- | --- | --- |
+#'  | ZC_VTAB | vtab | table number | tabulka | - |
+#'  | ZC_UCJED | ucjed | accounting unit | účetní jednotka | NB: ucjed != ico; the two codes are different; ICO is universal, ucjed is specific to SP, and both denote an organisation. |
+#'  | ZC_VYKAZ | vykaz | report number | výkaz  |  - |
+#'  | ZFUNDS_CT | finmisto | accounting centre | finanční místo |  either kapitola or "organizační složka státu" (core state org) |
+#'  | ZC_ICO | ico | org ID | IČO |  see ucjed |
+#'  | ZC_FUND | zdroj | funding source | zdroj |  - |
+#'  | ZC_KRAJ | kraj | region | kraj |  - |
+#'  | ZC_NUTS | nuts | NUTS code | NUTS kód |  - |
+#'
+#'  **Tables `budget-*`**
+#'
+#'  | Original | Output | English | Czech | Note |
+#'  | --- | --- | --- | --- | --- |
+#'  | ZCMMT_ITM | polozka |  item/line |  položka (druhové členění) | NB: polozka != polvyk |
+#'  | 0FM_AREA | kapitola | chapter  |  kapitola | - |
+#'  | FUNC0AREA | paragraf |  sector line | paragraf (odvětvové členění)  |  - |
+#'  | 0FUNC_AREA | paragraf |  sector line | paragraf (odvětvové členění)  |  - |
+#'  | ZU_ROZSCH | budget_adopted |  budget as originally adopted | schválený rozpočet  |  - |
+#'  | ZU_ROZPZM | budget_amended |  budget as amended throughout the year | rozpočet po změnách  |  - |
+#'  | ZU_KROZP | budget_final |  final budget |  konečný rozpočet | - |
+#'  | ZU_ROZKZ | budget_spending |  actual spending | skutečnost  |  - |
+#'
+#'  **Tables `balance-sheet*`**
+#'
+#'  | Original | Output | English | Czech | Note |
+#'  | --- | --- | --- | --- | --- |
+#'  | ZC_POLVYK | polvyk | item/line  | položka výkazu  | -  |
+#'  | ZU_MONET | previous_net | net, previous period  | netto minulé období | - |
+#'  | ZU_AOBTTO | current_gross | gross, current period   | brutto běžné období   | - |
+#'  | ZU_AONET | current_net | net, current period  | netto běžné období  | - |
+#'  | ZU_AOKORR | current_correction | correction, current period |  korekce běžné období | - |
+#'
+#'  **Tables `profit-and-loss-*`**
+#'
+#'  | Original | Output | English | Czech | Note |
+#'  | --- | --- | --- | --- | --- |
+#'  | ZU_HLCIN | previous_core | core activity, previous period |  hlavní činnost, minulé období |  - |
+#'  | ZU_HOSCIN | previous_economic | economic activity, previous period  | hospodářská činnost, minulé období  | - |
+#'  | ZU_HLCIBO | current_core | core activity, current period |  hlavní činnost, běžné období |  - |
+#'  | ZU_HCINBO | current_economic | economic activity, current period |  hospodářská činnost, běžné období |  - |
+
+#'
 #' @param table_id A table ID. See `id` column in `sp_tables` for a list of available codelists.
 #' @param year year, numeric, 2015-2018 for some datasets, 2010-2018 for others. Can be a vector of length > 1 (see details).
 #' @param month month, numeric. Must be 3, 6, 9 or 12. Can be a vector of length > 1 (see details).
 #' @param ico ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See <http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/ucjed> to look up ID of any org in the dataset.
 #' @param force_redownload Redownload even if recent file present? Defaults to FALSE.
 #'
-#' @return a tibble
+#' @return a tibble; see Details for key to the columns
+#' @encoding UTF-8
 #' @examples
 #' \dontrun{
 #' allorgs_latest <- get_table("budget-local")

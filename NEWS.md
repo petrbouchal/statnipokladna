@@ -1,6 +1,7 @@
 # statnipokladna (development version)
 
 * added examples to documentation
+* `get_table()` now fully documents the columns in its output, see `help("get_table")`
 
 # statnipokladna 0.4.1
 
