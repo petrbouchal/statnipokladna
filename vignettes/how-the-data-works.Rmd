@@ -128,7 +128,7 @@ Toto platí pro běžné rozpočtové výkazy (datasety). Všechna členění js
   - může spadat do nějaké kapitoly (neplatí pro kraje, obce aj.)
   - spadá pod nějaký region NUTS3, popř. i jemnější jednotku
 - organizace = účetní jednotka (?)
-- finanční místo: netuším
+- finanční místo: kapitola nebo organizační složka státu
 - kapitola = jednotka, za kterou se rozpočtuje a skládají účty v rámci státního rozpočtu, tj. "centrální" úrovně státu. Každá kapitola zahrnuje jednu nebo víc organizací (snad s výjimkou pokladní správy), popř. za ni je nějaká organizace odpovědná - buď ministerstvo nebo někdo jiný (takže kapitola nerovná se ministerstvo ani sektor/funkce).
 
 ## Konsolidace: co sčítat a co ne
