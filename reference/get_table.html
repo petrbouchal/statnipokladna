@@ -87,7 +87,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
       </span>
     </div>
 
@@ -182,7 +182,7 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a tibble</p>
+    <p>a tibble; see Details for key to the columns</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The data is loaded from files downloaded automatically by <code><a href='get_dataset.html'>get_dataset()</a></code>;
@@ -194,6 +194,58 @@ files persist in a temporary directory per session.</p>
 <li><p>value columns are transformed into numeric</p></li>
 <li><p>other columns are left as character to avoid losing information</p></li>
 </ul>
+<h3>Correspondence between input and output columns</h3>
+
+
+<p><strong>Shared</strong></p><table class='table'>
+<tr><td>Original</td><td>Output</td><td>English</td><td>Czech</td><td>Note</td></tr>
+<tr><td>ZC_VTAB</td><td>vtab</td><td>table number</td><td>tabulka</td><td>-</td></tr>
+<tr><td>ZC_UCJED</td><td>ucjed</td><td>accounting unit</td><td>účetní jednotka</td><td>NB: ucjed != ico; the two codes are different; ICO is universal, ucjed is specific to SP, and both denote an organisation.</td></tr>
+<tr><td>ZC_VYKAZ</td><td>vykaz</td><td>report number</td><td>výkaz</td><td>-</td></tr>
+<tr><td>ZFUNDS_CT</td><td>finmisto</td><td>accounting centre</td><td>finanční místo</td><td>either kapitola or "organizační složka státu" (core state org)</td></tr>
+<tr><td>ZC_ICO</td><td>ico</td><td>org ID</td><td>IČO</td><td>see ucjed</td></tr>
+<tr><td>ZC_FUND</td><td>zdroj</td><td>funding source</td><td>zdroj</td><td>-</td></tr>
+<tr><td>ZC_KRAJ</td><td>kraj</td><td>region</td><td>kraj</td><td>-</td></tr>
+<tr><td>ZC_NUTS</td><td>nuts</td><td>NUTS code</td><td>NUTS kód</td><td>-</td></tr>
+</table>
+
+
+
+<p><strong>Tables <code>budget-*</code></strong></p><table class='table'>
+<tr><td>Original</td><td>Output</td><td>English</td><td>Czech</td><td>Note</td></tr>
+<tr><td>ZCMMT_ITM</td><td>polozka</td><td>item/line</td><td>položka (druhové členění)</td><td>NB: polozka != polvyk</td></tr>
+<tr><td>0FM_AREA</td><td>kapitola</td><td>chapter</td><td>kapitola</td><td>-</td></tr>
+<tr><td>FUNC0AREA</td><td>paragraf</td><td>sector line</td><td>paragraf (odvětvové členění)</td><td>-</td></tr>
+<tr><td>0FUNC_AREA</td><td>paragraf</td><td>sector line</td><td>paragraf (odvětvové členění)</td><td>-</td></tr>
+<tr><td>ZU_ROZSCH</td><td>budget_adopted</td><td>budget as originally adopted</td><td>schválený rozpočet</td><td>-</td></tr>
+<tr><td>ZU_ROZPZM</td><td>budget_amended</td><td>budget as amended throughout the year</td><td>rozpočet po změnách</td><td>-</td></tr>
+<tr><td>ZU_KROZP</td><td>budget_final</td><td>final budget</td><td>konečný rozpočet</td><td>-</td></tr>
+<tr><td>ZU_ROZKZ</td><td>budget_spending</td><td>actual spending</td><td>skutečnost</td><td>-</td></tr>
+</table>
+
+
+
+<p><strong>Tables <code>balance-sheet*</code></strong></p><table class='table'>
+<tr><td>Original</td><td>Output</td><td>English</td><td>Czech</td><td>Note</td></tr>
+<tr><td>ZC_POLVYK</td><td>polvyk</td><td>item/line</td><td>položka výkazu</td><td>-</td></tr>
+<tr><td>ZU_MONET</td><td>previous_net</td><td>net, previous period</td><td>netto minulé období</td><td>-</td></tr>
+<tr><td>ZU_AOBTTO</td><td>current_gross</td><td>gross, current period</td><td>brutto běžné období</td><td>-</td></tr>
+<tr><td>ZU_AONET</td><td>current_net</td><td>net, current period</td><td>netto běžné období</td><td>-</td></tr>
+<tr><td>ZU_AOKORR</td><td>current_correction</td><td>correction, current period</td><td>korekce běžné období</td><td>-</td></tr>
+</table>
+
+
+
+<p><strong>Tables <code>profit-and-loss-*</code></strong></p><table class='table'>
+<tr><td>Original</td><td>Output</td><td>English</td><td>Czech</td><td>Note</td></tr>
+<tr><td>ZU_HLCIN</td><td>previous_core</td><td>core activity, previous period</td><td>hlavní činnost, minulé období</td><td>-</td></tr>
+<tr><td>ZU_HOSCIN</td><td>previous_economic</td><td>economic activity, previous period</td><td>hospodářská činnost, minulé období</td><td>-</td></tr>
+<tr><td>ZU_HLCIBO</td><td>current_core</td><td>core activity, current period</td><td>hlavní činnost, běžné období</td><td>-</td></tr>
+<tr><td>ZU_HCINBO</td><td>current_economic</td><td>economic activity, current period</td><td>hospodářská činnost, běžné období</td><td>-</td></tr>
+</table>
+
+
+
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -203,8 +255,13 @@ files persist in a temporary directory per session.</p>
 <code><a href='get_dataset.html'>get_dataset</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'># ADD_EXAMPLES_HERE
-</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>allorgs_latest</span> <span class='kw'>&lt;-</span> <span class='fu'>get_table</span>(<span class='st'>"budget-local"</span>)
+<span class='no'>allorgs_2018</span> <span class='kw'>&lt;-</span> <span class='fu'>get_table</span>(<span class='st'>"budget-local"</span>, <span class='fl'>2018</span>)
+<span class='no'>allorgs_mid2018</span> <span class='kw'>&lt;-</span> <span class='fu'>get_table</span>(<span class='st'>"budget-local"</span>, <span class='fl'>2018</span>, <span class='fl'>6</span>)
+<span class='no'>oneorg_multiyear</span> <span class='kw'>&lt;-</span> <span class='fu'>get_table</span>(<span class='st'>"budget-local"</span>, <span class='fl'>2012</span>:<span class='fl'>2018</span>, <span class='fl'>9</span>, <span class='kw'>ico</span> <span class='kw'>=</span> <span class='st'>"00064581"</span>)
+<span class='no'>oneorg_multihalfyears</span> <span class='kw'>&lt;-</span> <span class='fu'>get_table</span>(<span class='st'>"budget-local"</span>, <span class='fl'>2012</span>:<span class='fl'>2018</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>6</span>, <span class='fl'>12</span>), <span class='kw'>ico</span> <span class='kw'>=</span> <span class='st'>"00064581"</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

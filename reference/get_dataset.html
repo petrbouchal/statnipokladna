@@ -87,7 +87,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
       </span>
     </div>
 
@@ -185,8 +185,13 @@ subdirectories by dataset, year and month. They persist per session to avoid red
 <code><a href='get_table.html'>get_table</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'># ADD_EXAMPLES_HERE
-</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='no'>budget_latest</span> <span class='kw'>&lt;-</span> <span class='fu'>get_dataset</span>(<span class='st'>"finu"</span>)
+<span class='no'>budget_2018</span> <span class='kw'>&lt;-</span> <span class='fu'>get_dataset</span>(<span class='st'>"finu"</span>, <span class='fl'>2018</span>)
+<span class='no'>budget_mid2018</span> <span class='kw'>&lt;-</span> <span class='fu'>get_dataset</span>(<span class='st'>"finu"</span>, <span class='fl'>2018</span>, <span class='fl'>6</span>)
+<span class='no'>budget_multiyear</span> <span class='kw'>&lt;-</span> <span class='fu'>get_dataset</span>(<span class='st'>"finu"</span>, <span class='fl'>2012</span>:<span class='fl'>2018</span>, <span class='fl'>9</span>)
+<span class='no'>budget_multihalfyears</span> <span class='kw'>&lt;-</span> <span class='fu'>get_dataset</span>(<span class='st'>"finu"</span>, <span class='fl'>2012</span>:<span class='fl'>2018</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>6</span>, <span class='fl'>12</span>))
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
