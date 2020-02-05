@@ -114,20 +114,20 @@
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"petrbouchal/statnipokladna"</span>,</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">                         <span class="dt">build_vignettes =</span> T)</a></code></pre></div>
 </div>
-<div id="what-this-package-aims-to-enable-you-to-do" class="section level2">
+<div id="what-this-package-enables-you-to-do" class="section level2">
 <h2 class="hasAnchor">
-<a href="#what-this-package-aims-to-enable-you-to-do" class="anchor"></a>What this package aims to enable you to do:</h2>
+<a href="#what-this-package-enables-you-to-do" class="anchor"></a>What this package enables you to do:</h2>
 <ul>
 <li>get cleaned-up, ready to analyse data frames based on open data dumps from the public finance database
 <ul>
-<li>the package draws on the online data and returns a clean data frame (<em>done</em>)</li>
-<li>the resulting data is ready to merge into time series (<em>done</em>)</li>
-<li>time series is built based on user input (<em>done</em>)</li>
+<li>the package draws on the online data and returns a clean data frame</li>
+<li>the resulting data is ready to merge into time series</li>
+<li>time series is built based on user input</li>
 </ul>
 </li>
-<li>do this through a consistent API which supplements some of the documentation that is missing from the official endpoints (<em>partly available</em>)</li>
-<li>access registers published alongside the data (e.g. lists of public organisations with their identifiers and metadata), some of which can be useful in other contexts (<em>done</em>)</li>
-<li>augment the core data with the desired type of register (<em>done</em>)</li>
+<li>do this through a consistent API which supplements some of the documentation that is missing from the official endpoints (<em>still subject to some chainge</em>)</li>
+<li>access registers published alongside the data (e.g. lists of public organisations with their identifiers and metadata), some of which can be useful in other contexts</li>
+<li>augment the core data with the desired type of register</li>
 </ul>
 </div>
 <div id="how-does-this-compare-to-the-official-analytical-interface" class="section level2">
@@ -138,7 +138,7 @@
 <li>no limits on the number of organisations, unlike the official interface which forces you to use a filter on some tables</li>
 <li>different reports (local gov, central gov…) in one place in consistent form</li>
 <li>much faster for analysis (the current version of the online interface takes long to render)</li>
-<li>reproducible!!! The online interface has no facility to save an analysis, so even a browser reload (a) kills your work and (b) kills an trace of how a table was produced</li>
+<li>reproducible!!! While the online interface provides a permanent link to your analysis, this must be copied manually and does not necessarily provide an easily legible overview of how the analysis was produced (filters, columns etc.)</li>
 <li>no need for the web =&gt; excel =&gt; R dance</li>
 <li>drawback: for some reports, the data is published in different forms for different time periods (pre- and post-2015)</li>
 <li>drawback: consolidation must be done manually</li>
