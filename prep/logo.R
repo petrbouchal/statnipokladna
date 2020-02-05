@@ -22,8 +22,8 @@ hex_canvas <- image_canvas_hex(border_color = "grey", border_size = 5, fill_colo
 hex_canvas
 
 icon <- fontawesome::fa("cash-register")
-write_lines(icon, "x.svg")
-icon <- image_read_svg("x.svg", width = 400) %>%
+write_lines(icon, here::here("prep/icon.svg"))
+icon <- image_read_svg(here::here("prep/icon.svg"), width = 400) %>%
   image_colorize(100, "white")
 icon
 
@@ -52,6 +52,11 @@ img_hex %>%
 img_hex %>%
   image_scale("1200x1200") %>%
   image_write(here::here("prep", "logo_hex_large.png"), density = 600)
+
+img_hex %>%
+  image_convert(format = "rgb", colorspace = "cmyk", matte = T) %>%
+  image_scale("1200x1200") %>%
+  image_write(here::here("prep", "logo_hex_print.png"), density = 1200, format = "png")
 
 img_hex %>%
   image_scale("200x200") %>%
