@@ -65,9 +65,10 @@ remotes::install_github("petrbouchal/statnipokladna",
     consistent form
   - much faster for analysis (the current version of the online
     interface takes long to render)
-  - reproducible\!\!\! The online interface has no facility to save an
-    analysis, so even a browser reload (a) kills your work and (b) kills
-    an trace of how a table was produced
+  - reproducible\!\!\! While the online interface provides a permanent
+    link to your analysis, this must be copied manually and does not
+    necessarily provide an easily legible overview of how the analysis
+    was produced (filters, columns etc.)
   - no need for the web =\> excel =\> R dance
   - drawback: for some reports, the data is published in different forms
     for different time periods (pre- and post-2015)
