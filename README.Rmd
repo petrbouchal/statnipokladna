@@ -42,15 +42,15 @@ remotes::install_github("petrbouchal/statnipokladna",
                          build_vignettes = T)
 ```
 
-## What this package aims to enable you to do:
+## What this package enables you to do:
 
 - get cleaned-up, ready to analyse data frames based on open data dumps from the public finance database 
-  - the package draws on the online data and returns a clean data frame (*done*)
-  - the resulting data is ready to merge into time series (*done*)
-  - time series is built based on user input (*done*)
-- do this through a consistent API which supplements some of the documentation that is missing from the official endpoints (*partly available*)
-- access registers published alongside the data (e.g. lists of public organisations with their identifiers and metadata), some of which can be useful in other contexts (*done*)
-- augment the core data with the desired type of register (*done*)
+  - the package draws on the online data and returns a clean data frame
+  - the resulting data is ready to merge into time series
+  - time series is built based on user input
+- do this through a consistent API which supplements some of the documentation that is missing from the official endpoints (*still subject to some chainge*)
+- access registers published alongside the data (e.g. lists of public organisations with their identifiers and metadata), some of which can be useful in other contexts
+- augment the core data with the desired type of register
 
 ## How does this compare to the [official analytical interface](http://monitor.statnipokladna.cz/)?
 
