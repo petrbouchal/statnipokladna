@@ -8,6 +8,8 @@ library(emojifont)
 library(fontawesome)
 library(svglite)
 
+mfblue <- rgb(10, 115, 189, maxColorValue = 255)
+
 cz <- ne_countries(scale = "medium", returnclass = "sf") %>%
   filter(adm0_a3 == "CZE") %>%
   select()
@@ -24,37 +26,40 @@ hex_canvas
 icon <- fontawesome::fa("cash-register")
 write_lines(icon, here::here("prep/icon.svg"))
 icon <- image_read_svg(here::here("prep/icon.svg"), width = 400) %>%
-  image_colorize(100, "white")
+  image_colorize(100, "white") %>%
+  image_convert(colorspace = "sRGB")
 icon
 
 ggplot() +
-  geom_sf(data = cz, colour = NA, fill = '#0a73bd') +
+  geom_sf(data = cz, colour = NA, fill = mfblue) +
   theme_void()
-ggsave("prep/cz_for_hex.png",width = 12, height = 10, units = "cm",
+ggsave("prep/cz_for_hex.svg", width = 12, height = 10, units = "cm",
        bg = "transparent")
 
-cz_for_hex <- image_read("prep/cz_for_hex.png")
+cz_for_hex <- image_read_svg("prep/cz_for_hex.svg", width = 1400) %>%
+  image_convert(colorspace = "sRGB")
 cz_for_hex
 img_hex <- hex_canvas %>%
   bunny::image_compose(cz_for_hex, gravity = "north", offset = "+0+220") %>%
   bunny::image_compose(icon, gravity = "north", offset = "+0+600") %>%
   image_annotate("statnipokladna", size = 250, gravity = "south", location = "+0+520",
-                 font = "Teuton Normal", color = "#0a73bd") %>%
+                 font = "Teuton Normal", color = mfblue) %>%
   bunny::image_compose(hex_border, gravity = "center", operator = "Over")
 img_hex
 
 img_hex %>%
-  image_convert("png") %>%
+  image_convert("png", colorspace = "sRGB") %>%
   image_write("prep/logo.png")
 img_hex %>%
   image_scale("300x300")
 
 img_hex %>%
+  image_convert("png", colorspace = "sRGB") %>%
   image_scale("1200x1200") %>%
   image_write(here::here("prep", "logo_hex_large.png"), density = 600)
 
 img_hex %>%
-  image_convert(format = "rgb", colorspace = "cmyk", matte = T) %>%
+  image_convert(format = "png", colorspace = "cmyk", matte = T) %>%
   image_scale("1200x1200") %>%
   image_write(here::here("prep", "logo_hex_print.png"), density = 1200, format = "png")
 
