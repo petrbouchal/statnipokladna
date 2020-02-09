@@ -18,7 +18,7 @@ addons:
       - libjq-dev
       - libmagick++-dev
 
-before_cache: Rscript -e 'remotes::install_cran(c("pkgdown","devtools"))'
+before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
 
 cache:
   directories:
@@ -34,5 +34,5 @@ install:
 
 deploy:
   provider: script
-  script: Rscript -e 'install.packages("devtools"); devtools::install(); pkgdown::deploy_site_github()'
+  script: Rscript -e 'pkgdown::deploy_site_github()'
   skip_cleanup: true
