@@ -2,13 +2,36 @@
 
 language: R
 
-before_install:
-# https://github.com/r-lib/roxygen2/issues/680
-  - tlmgr install index
-
-cache: packages
+addons:
+  apt:
+    update: true
+    sources:
+      - sourceline: 'ppa:opencpu/imagemagick'
+    packages:
+      - libudunits2-dev
+      - libgdal-dev
+      - libgeos-dev
+      - libproj-dev
+      - libv8-dev
+      - libprotobuf-dev
+      - protobuf-compiler
+      - libjq-dev
+      - libmagick++-dev
 
 before_cache: Rscript -e 'remotes::install_cran("pkgdown")'
+
+cache:
+  directories:
+  - $HOME/.local/share/renv
+  - $TRAVIS_BUILD_DIR/renv/library
+
+install:
+  - Rscript -e "renv::restore()"
+
+# script:
+# - R CMD build .
+# - R CMD check *tar.gz
+
 deploy:
   provider: script
   script: Rscript -e 'pkgdown::deploy_site_github()'
