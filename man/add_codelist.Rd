@@ -46,15 +46,15 @@ joining additional codelists, perhaps in a single pipe call.
 }
 \examples{
 \dontrun{
-get_table("budget") \%>\%
-  add_codelist("polozka") \%>\%
+get_table("budget") \\%>\\%
+  add_codelist("polozka") \\%>\\%
   add_codelist("paragraf")
 
 pol <- get_codelist("paragraf")
 par <- get_codelist("polozka")
 
-get_table("budget") \%>\%
-  add_codelist(pol) \%>\%
+get_table("budget") \\%>\\%
+  add_codelist(pol) \\%>\\%
   add_codelist(par)
 }
 }
