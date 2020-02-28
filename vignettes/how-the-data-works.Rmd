@@ -161,7 +161,13 @@ Technicky se netýká konsolidace, ale souvisí to: na příjmové straně je t�
 
 - v číselnících mohou být dvě stejné položky platné v jeden moment, tj. i po profiltrování přes datum (příklad položka 1381 v číselníku položek) - možná je to metodicky správně, ale rozhodně neintuitivní a je potřeba to ošetřit při napojování číselníků
 - URL prohlížeče číselníku ne vždy odpovídá jeho názvu/URL jeho XML souboru (příklad [prohlizec-ciselniku/smeruc](https://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/smeruc?date=28.11.2019) x [/uctosnova.xml](https://monitor.statnipokladna.cz/data/uctosnova.xml))
-- sloupce označující fáze rozpočtového cyklu (ZU_ROZ*) se liší mezi obcemi (výkaz FINM) a státem (výkaz FINU) - není to chyba, ale je to třeba vědět
+- názvy sloupců označující fáze rozpočtového cyklu (ZU_ROZ*) se liší mezi obcemi (výkaz FINM) a státem (výkaz FINU) - není to chyba, ale je to třeba vědět
+
+### Doplněno 28. 2. 2020:
+
+- v číselníku účelových znaků je položka 27983, což je část OP Doprava pro Prahu v roce 2015/16, označena platností začínající po roce 2200.
+- v datech obcí se v roce 2015 vyskytují příjmy s účelovými znaky norských fondů 95028/95528, ačkoli tato položka číselníku platí až od roku 2016.
+- ID položky v datech FINM_2017 doplnění na délku 5 o leading zero, která v XML číselníku není
 
 ### Doplněno 13. 12. 2019:
 
