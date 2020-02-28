@@ -171,15 +171,15 @@ switch_minus <- function(string) {
 #' @export
 #' @examples
 #' \dontrun{
-#' get_table("budget") \%>\%
-#'   add_codelist("polozka") \%>\%
+#' get_table("budget") %>%
+#'   add_codelist("polozka") %>%
 #'   add_codelist("paragraf")
 #'
 #' pol <- get_codelist("paragraf")
 #' par <- get_codelist("polozka")
 #'
-#' get_table("budget") \%>\%
-#'   add_codelist(pol) \%>\%
+#' get_table("budget") %>%
+#'   add_codelist(pol) %>%
 #'   add_codelist(par)
 #' }
 add_codelist <- function(data, codelist = NULL, period_column = period_vykaz,
