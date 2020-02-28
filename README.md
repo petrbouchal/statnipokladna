@@ -92,7 +92,7 @@ local_budgets <- get_table(table_id = "budget-local", # table ID, see `sp_tables
 #> Building URL for dataset `finm`: FIN 2-12 M - Plnění rozpočtu MŘO, 2019-09
 #> http://monitor.statnipokladna.cz/data/2019_09_Data_CSUIS_FINM.zip
 #> Get the dataset documentation at http://monitor.statnipokladna.cz/data/struktura/finm.xlsx
-#> Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/finm/2019/09
+#> Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpqvJn5O/statnipokladna/finm/2019/09
 #> Reading data...
 #> Transforming data...
 ```
@@ -124,7 +124,7 @@ metadata codelists:
 ``` r
 functional_categories <- get_codelist("paragraf")
 #> Building URL for codelist paragraf - Paragraf
-#> Storing codelist in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/
+#> Storing codelist in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpqvJn5O/statnipokladna/
 #> Processing codelist data
 ```
 
@@ -162,10 +162,13 @@ As you can see below, you can
 local_budgets %>% 
   add_codelist(functional_categories) %>% 
   add_codelist("polozka")
-#> Joining, by = "paragraf"Joining, by = "paragraf"Building URL for codelist polozka - Rozpočtová položka
-#> Storing codelist in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/
+#> Joining, by = "paragraf"
+#> Joining, by = "paragraf"
+#> Building URL for codelist polozka - Rozpočtová položka
+#> Storing codelist in /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpqvJn5O/statnipokladna/
 #> Processing codelist data
-#> Joining, by = "polozka"Joining, by = "polozka"
+#> Joining, by = "polozka"
+#> Joining, by = "polozka"
 #> # A tibble: 1,189,627 x 36
 #>    vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka
 #>    <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr> <chr>      <chr>    <chr>  
@@ -199,13 +202,13 @@ get_dataset("finm") # dataset ID, see `sp_datasets`
 #> Building URL for dataset `finm`: FIN 2-12 M - Plnění rozpočtu MŘO, 2018-12
 #> http://monitor.statnipokladna.cz/data/2018_12_Data_CSUIS_FINM.zip
 #> Get the dataset documentation at http://monitor.statnipokladna.cz/data/struktura/finm.xlsx
-#> Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/finm/2018/12
-#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/finm/2018/12/FINM201_2018012.csv"
-#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/finm/2018/12/FINM202_2018012.csv"
-#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/finm/2018/12/FINM203_2018012.csv"
-#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/finm/2018/12/FINM204_2018012.csv"
-#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/finm/2018/12/FINM205_2018012.csv"
-#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0pxe7V/statnipokladna/finm/2018/12/FINM207_2018012.csv"
+#> Storing downloaded archive in and extracting to /var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpqvJn5O/statnipokladna/finm/2018/12
+#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpqvJn5O/statnipokladna/finm/2018/12/FINM201_2018012.csv"
+#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpqvJn5O/statnipokladna/finm/2018/12/FINM202_2018012.csv"
+#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpqvJn5O/statnipokladna/finm/2018/12/FINM203_2018012.csv"
+#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpqvJn5O/statnipokladna/finm/2018/12/FINM204_2018012.csv"
+#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpqvJn5O/statnipokladna/finm/2018/12/FINM205_2018012.csv"
+#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpqvJn5O/statnipokladna/finm/2018/12/FINM207_2018012.csv"
 ```
 
 and look at its documentation:
@@ -236,6 +239,37 @@ A basic glossary of some of the terms used in the data sets is at
 Not created or endorsed by the Czech Ministry of Finance, who produce
 the data - but they definitely deserve credit for releasing the data and
 maintaining the application.
+
+## See also
+
+### R Packages
+
+  - [CzechData](https://github.com/JanCaha/CzechData) by @JanCaha for
+    (mainly) geospatial data and data about
+  - [czso](https://github.com/petrbouchal/czso) for access to Czech
+    statistical open data
+  - [eurostat](https://cran.r-project.org/package=eurostat) for access
+    to Eurostat data
+  - [OECD](https://cran.r-project.org/package=OECD) for access to OECD
+    data, incl. a large amount of financial and economic data
+
+### Other Czech public data
+
+  - [National Open Data Catalogue](https://data.gov.cz)
+  - [KNOD](https://github.com/kokes/knod) by Ondřej Kokeš for an
+    overview of public data
+  - [Hlídač státu](https://hlidacstatu.cz/) by @michalblaha for easy
+    (web and API) access to a large suite of transparency-focused
+    datasets and their integration (public disclosures of contracts,
+    tenders, political contributions…)
+  - [CEDR](cedr.mfcr.cz/) for a database of public subsidies, incl. to
+    public bodies
+
+## Acknowledgments
+
+Thanks to @smallhillcz and the Státní pokladna/Monitor developers and
+maintainers for responding to queries and generally keeping the thing
+running.
 
 ## Contributing
 

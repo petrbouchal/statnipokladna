@@ -134,6 +134,27 @@ A basic glossary of some of the terms used in the data sets is at <http://monito
 
 Not created or endorsed by the Czech Ministry of Finance, who produce the data - but they definitely deserve credit for releasing the data and maintaining the application.
 
+## See also
+
+### R Packages
+
+- [CzechData](https://github.com/JanCaha/CzechData) by @JanCaha for (mainly) geospatial data and data about 
+- [czso](https://github.com/petrbouchal/czso) for access to Czech statistical open data
+- [eurostat](https://cran.r-project.org/package=eurostat) for access to Eurostat data
+- [OECD](https://cran.r-project.org/package=OECD) for access to OECD data, incl. a large amount of financial and economic data
+
+
+### Other Czech public data
+
+- [National Open Data Catalogue](https://data.gov.cz)
+- [KNOD](https://github.com/kokes/knod) by Ondřej Kokeš for an overview of public data
+- [Hlídač státu](https://hlidacstatu.cz/) by @michalblaha for easy (web and API) access to a large suite of transparency-focused datasets and their integration (public disclosures of contracts, tenders, political contributions...)
+- [CEDR](cedr.mfcr.cz/) for a database of public subsidies, incl. to public bodies
+
+## Acknowledgments
+
+Thanks to @smallhillcz and the Státní pokladna/Monitor developers and maintainers for responding to queries and generally keeping the thing running.
+
 ## Contributing
 
 See CONTRIBUTING.md for a guide on how to contribute to the project.
