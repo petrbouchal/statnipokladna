@@ -1,3 +1,5 @@
+# statnipokladna (development version)
+
 # statnipokladna 0.4.2
 
 * added examples to documentation
