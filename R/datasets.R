@@ -107,7 +107,7 @@ get_dataset <- function(dataset_id, year = 2019, month = 12,
   dir.create(td, showWarnings = F, recursive = T)
   tf <- paste0(td, "/", dataset_id, year, month, ".zip")
   if(file.exists(tf) & !redownload) {
-    message(stringr::str_glue("Files already in {td}, not downloading. Set {usethis::ui_code(redownload = T)} if needed."))
+    usethis::ui_info("Files already in {td}, not downloading. Set {usethis::ui_code('redownload = TRUE')} if needed.")
   } else {
     dataset_url <- get_dataset_url(dataset_id = dataset_id, year = year, month = month)
     message(stringr::str_glue("Storing downloaded archive in and extracting to {td}"))
