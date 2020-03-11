@@ -64,8 +64,8 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #'
 #' @param codelist_id A codelist ID. See `id` column in `sp_codelists` for a list of available codelists.
 #' @param n Number of rows to return. Default (NULL) means all. Useful for quickly inspecting a codelist.
-#' @param force_redownload Redownload even if file has already been downloaded? Defaults to FALSE.
 #' @param dest_dir character. Directory in which downloaded files will be stored. Defaults to `tempdir()`.
+#' @param redownload Redownload even if file has already been downloaded? Defaults to FALSE.
 #'
 #' @return A tibble
 #' @examples
@@ -79,8 +79,8 @@ get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload
   td <- paste0(dest_dir, "/statnipokladna/")
   dir.create(td, showWarnings = F, recursive = T)
   tf <- paste0(td, codelist_id, ".xml")
-  if(file.exists(tf) & !force_redownload) {
-    message(stringr::str_glue("Codelist file already in {td}, not downloading. Set `force_redownload` to TRUE if needed."))
+  if(file.exists(tf) & !redownload) {
+    message(stringr::str_glue("Codelist file already in {td}, not downloading. Set `redownload` to TRUE if needed."))
   } else {
     url <- get_codelist_url(codelist_id)
     message(stringr::str_glue("Storing codelist in {td}"))
@@ -165,8 +165,9 @@ switch_minus <- function(string) {
 #'
 #' @param data a data frame returned by `get_table()`.
 #' @param codelist The codelist to add. Either a character vector of length one (see `sp_tables` for possible values), or a data frame returned by `get_codelist()`.
+#' @param dest_dir character. Directory in which downloaded files will be stored. Defaults to `tempdir()`.
 #' @param period_column Unquoted column name of column identifying the data period in `data`. Leave to default if you have not changed the `data` object returned by `get_table()`.
-#' @param force_redownload Redownload even if file has already been downloaded? Defaults to FALSE.
+#' @param redownload Redownload even if file has already been downloaded? Defaults to FALSE.
 #' @return A data frame of same length as `data`, with added columns from `codelist`. See Details.
 #' @family Core workflow
 #' @export
@@ -184,14 +185,16 @@ switch_minus <- function(string) {
 #'   add_codelist(par)
 #' }
 add_codelist <- function(data, codelist = NULL, period_column = period_vykaz,
-                         force_redownload = F) {
+                         redownload = F,
+                         dest_dir = tempdir()) {
   if(is.null(codelist)) stop("Please supply a codelist")
   # print(rlang::as_label({{period_column}}))
   stopifnot("data.frame" %in% class(data),
             "data.frame" %in% class(codelist) | is.character(codelist))
   if(is.character(codelist)) stopifnot(length(codelist) == 1)
   if(is.character(codelist)) {
-    cl_data <- get_codelist(codelist, force_redownload = force_redownload)
+    cl_data <- get_codelist(codelist, redownload = redownload,
+                            dest_dir = dest_dir)
     codelist_name <- codelist
   } else {
     cl_data <- codelist

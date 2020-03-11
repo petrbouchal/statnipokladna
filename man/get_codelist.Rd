@@ -11,8 +11,9 @@ get_codelist(codelist_id, n = NULL, dest_dir = tempdir(), redownload = F)
 
 \item{n}{Number of rows to return. Default (NULL) means all. Useful for quickly inspecting a codelist.}
 
-\item{force_redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
 \item{dest_dir}{character. Directory in which downloaded files will be stored. Defaults to \code{tempdir()}.}
+
+\item{redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
 }
 \value{
 A tibble

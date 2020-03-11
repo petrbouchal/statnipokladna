@@ -10,7 +10,7 @@ get_table(
   year = 2018,
   month = 12,
   ico = NULL,
-  force_redownload = FALSE
+  redownload = FALSE,
   dest_dir = tempdir()
 )
 }
@@ -23,7 +23,8 @@ get_table(
 
 \item{ico}{ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See \url{http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/ucjed} to look up ID of any org in the dataset.}
 
-\item{force_redownload}{Redownload even if recent file present? Defaults to FALSE.}
+\item{redownload}{Redownload even if recent file present? Defaults to FALSE.}
+
 \item{dest_dir}{character. Directory in which downloaded files will be stored. Defaults to \code{tempdir()}.}
 }
 \value{

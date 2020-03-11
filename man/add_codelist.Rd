@@ -8,7 +8,7 @@ add_codelist(
   data,
   codelist = NULL,
   period_column = period_vykaz,
-  force_redownload = F
+  redownload = F,
   dest_dir = tempdir()
 )
 }
@@ -19,7 +19,8 @@ add_codelist(
 
 \item{period_column}{Unquoted column name of column identifying the data period in \code{data}. Leave to default if you have not changed the \code{data} object returned by \code{get_table()}.}
 
-\item{force_redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
+\item{redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
+
 \item{dest_dir}{character. Directory in which downloaded files will be stored. Defaults to \code{tempdir()}.}
 }
 \value{

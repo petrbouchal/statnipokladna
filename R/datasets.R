@@ -50,23 +50,23 @@ get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists
 #' Downloads XLS file with dataset documentation, or opens link to this file in browser.
 #'
 #' @param dataset_id dataset ID. See `sp_datasets`.
-#' @param destdir character. Where the file should be written. Defaults to working directory.
+#' @param dest_dir character. Where the file should be written. Defaults to working directory.
 #' @param download Whether to download (the default) or open link in browser.
 #'
 #' @return character (link) if download = TRUE, nothing otherwise.
 #' @family Utilities
 #' @examples
 #' \dontrun{
-#' get_dataset_doc("paragraf")
+#' get_dataset_doc("finm")
 #' }
 #' @export
-get_dataset_doc <- function(dataset_id, destdir = ".", download = T) {
+get_dataset_doc <- function(dataset_id, dest_dir = ".", download = T) {
   doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
   if(!download) {
     utils::browseURL(doc_url)
     return(stringr::str_glue("Link to file opened in browser."))
     } else {
-    file_path <- stringr::str_glue("{destdir}/{dataset_id}.xlsx")
+    file_path <- stringr::str_glue("{dest_dir}/{dataset_id}.xlsx")
     message(stringr::str_glue("Getting dataset documentation from {doc_url}"))
     utils::download.file(doc_url, file_path, headers = c('User-Agent' = usr))
     return(stringr::str_glue("File downloaded to {file_path}."))
@@ -82,10 +82,10 @@ get_dataset_doc <- function(dataset_id, destdir = ".", download = T) {
 #' subdirectories by dataset, year and month. They persist per session to avoid redownloads.
 #'
 #' @param dataset_id A dataset ID. See `id` column in `sp_datasets` for a list of available codelists.
-#' @param year year, numeric, 2015-2018 for some datasets, 2010-2018 for others. Defaults to 2018.
-#' @param month month, numeric. Must be 3, 6, 9 or 12. Defaults to 12.
-#' @param force_redownload Redownload even if file has already been downloaded? Defaults to FALSE.
+#' @param year year, numeric, 2015-2018 for some datasets, 2010-2019 for others. Defaults to 2019.
+#' @param month month, numeric. Must be between 1 and 12. Defaults to 12.
 #' @param dest_dir character. Directory in which downloaded files will be stored. Defaults to `tempdir()`.
+#' @param redownload Redownload even if file has already been downloaded? Defaults to FALSE.
 #'
 #' @return character string with complete paths to downloaded files.
 #' @examples
@@ -98,15 +98,16 @@ get_dataset_doc <- function(dataset_id, destdir = ".", download = T) {
 #' }
 #' @family Core workflow
 #' @export
-get_dataset <- function(dataset_id, year = 2018, month = 12, force_redownload = F) {
-  if(!(month %in% c(3, 6, 9, 12))) stop("`Month` must be 3, 6, 9, or 12")
+get_dataset <- function(dataset_id, year = 2019, month = 12,
+                        dest_dir = tempdir(), redownload = F) {
+  if(!(month %in% c(1:12))) stop("`Month` must be an integer from 1 to 12.")
   if(!(year %in% c(2010:lubridate::year(lubridate::today())))) stop("`Year` must be between 2010 and now.")
   month <- formatC(month, width = 2, format = "d", flag = "0")
   td <- paste(dest_dir, "statnipokladna", dataset_id, year, month, sep = "/")
   dir.create(td, showWarnings = F, recursive = T)
   tf <- paste0(td, "/", dataset_id, year, month, ".zip")
-  if(file.exists(tf) & !force_redownload) {
-    message(stringr::str_glue("Files already in {td}, not downloading. Set `force_redownload` to TRUE if needed."))
+  if(file.exists(tf) & !redownload) {
+    message(stringr::str_glue("Files already in {td}, not downloading. Set {usethis::ui_code(redownload = T)} if needed."))
   } else {
     dataset_url <- get_dataset_url(dataset_id = dataset_id, year = year, month = month)
     message(stringr::str_glue("Storing downloaded archive in and extracting to {td}"))

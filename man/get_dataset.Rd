@@ -15,12 +15,13 @@ get_dataset(
 \arguments{
 \item{dataset_id}{A dataset ID. See \code{id} column in \code{sp_datasets} for a list of available codelists.}
 
-\item{year}{year, numeric, 2015-2018 for some datasets, 2010-2018 for others. Defaults to 2018.}
+\item{year}{year, numeric, 2015-2018 for some datasets, 2010-2019 for others. Defaults to 2019.}
 
-\item{month}{month, numeric. Must be 3, 6, 9 or 12. Defaults to 12.}
+\item{month}{month, numeric. Must be between 1 and 12. Defaults to 12.}
 
-\item{force_redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
 \item{dest_dir}{character. Directory in which downloaded files will be stored. Defaults to \code{tempdir()}.}
+
+\item{redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
 }
 \value{
 character string with complete paths to downloaded files.

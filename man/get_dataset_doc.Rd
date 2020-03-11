@@ -21,7 +21,7 @@ Downloads XLS file with dataset documentation, or opens link to this file in bro
 }
 \examples{
 \dontrun{
-get_dataset_doc("paragraf")
+get_dataset_doc("finm")
 }
 }
 \seealso{
