@@ -130,11 +130,11 @@ get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
     table_file <- dslist[stringr::str_detect(dslist,
                                              paste0(table_regex, "(_[0-9]*)?\\.(csv|CSV)"))]
     stopifnot(length(table_file) == 1)
-    message("Reading data...")
+    usethis::ui_info("Reading data...")
     suppressWarnings(suppressMessages(
       dt <- readr::read_csv2(table_file, col_types = readr::cols(.default = readr::col_character()))))
     # print(head(dt))
-    message("Transforming data...")
+    usethis::ui_info("Transforming data...")
     if(max(stringr::str_length(dt$`ZC_ICO:ZC_ICO`), na.rm = T) == 10) {
       dt <- dplyr::mutate(dt, `ZC_ICO:ZC_ICO` = stringr::str_sub(`ZC_ICO:ZC_ICO`, 3, 10))
     }

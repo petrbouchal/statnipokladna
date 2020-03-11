@@ -32,15 +32,15 @@ sp_datasets <- sp_datasets_i %>% dplyr::select(id, name)
 get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists = T) {
   if(!(dataset_id %in% sp_datasets_i$id)) stop("Not a valid dataset ID")
   dataset_name <- sp_datasets_i[sp_datasets_i$id == dataset_id, "name"]
-  message(stringr::str_glue("Building URL for dataset `{dataset_id}`: {dataset_name}, {year}-{month}"))
+  usethis::ui_info("Building URL for dataset {usethis::ui_value(dataset_id)}: {usethis::ui_value(dataset_name)}, {usethis::ui_value(stringr::str_c(year,'-',month))}")
   x <- stringr::str_glue("{sp_base_url}/data/{year}_{month}_Data_CSUIS_{toupper(dataset_id)}.zip")
-  print(x)
+  # print(x)
   if(check_if_exists) {
     iserror <- httr::http_error(x, httr::config(followlocation = 0L), USE.NAMES = FALSE)
-    if(iserror) stop("File does not exist for this dataset and period combination.")
+    if(iserror) ui_stop("File does not exist for this dataset and period combination.")
   }
   doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
-  message(stringr::str_glue("Get the dataset documentation at {doc_url}"))
+  usethis::ui_info("Get the dataset documentation at {usethis::ui_path(doc_url)}")
   return(x)
 }
 
@@ -110,7 +110,7 @@ get_dataset <- function(dataset_id, year = 2019, month = 12,
     usethis::ui_info("Files already in {td}, not downloading. Set {usethis::ui_code('redownload = TRUE')} if needed.")
   } else {
     dataset_url <- get_dataset_url(dataset_id = dataset_id, year = year, month = month)
-    message(stringr::str_glue("Storing downloaded archive in and extracting to {td}"))
+    usethis::ui_done("Storing downloaded archive in and extracting to {usethis::ui_path(td)}")
     utils::download.file(dataset_url, tf, headers = c('User-Agent' = usr))
     utils::unzip(tf, exdir = td)
   }

@@ -80,15 +80,15 @@ get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload
   dir.create(td, showWarnings = F, recursive = T)
   tf <- paste0(td, codelist_id, ".xml")
   if(file.exists(tf) & !redownload) {
-    message(stringr::str_glue("Codelist file already in {td}, not downloading. Set `redownload` to TRUE if needed."))
+    usethis::ui_info("Codelist file already in {usethis::ui_path(td), not downloading. Set {usethis::ui_code('redownload = TRUE')} if needed.")
   } else {
     url <- get_codelist_url(codelist_id)
-    message(stringr::str_glue("Storing codelist in {td}"))
+    usethis::ui_done("Storing codelist in {usethis::ui_path(td)}")
     utils::download.file(url, tf, headers = c('User-Agent' = usr))
   }
   xml_all <- xml2::read_xml(tf)
-  message("Processing codelist data")
-  if(codelist_id %in% c("ucjed")) message("Large codelist: this will take a while...")
+  usethis::ui_info("Processing codelist data")
+  if(codelist_id %in% c("ucjed")) usethis::ui_info("Large codelist: this will take a while...")
   xml_children_all <- xml_all %>% xml2::xml_children()
   xml_children <- if(is.null(n)) xml_children_all else xml_children_all[1:n]
   nms <- xml2::xml_child(xml_all) %>% xml2::xml_children() %>% xml2::xml_name()
@@ -125,7 +125,7 @@ get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload
 get_codelist_viewer <- function(codelist_id, open = TRUE) {
   if(!(codelist_id %in% sp_codelists$id)) stop("Not a valid codelist ID")
   codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
-  message(stringr::str_glue("Building URL for codelist {codelist_id} - {codelist_name}"))
+  usethis::ui_info("Building URL for codelist {usethis::ui_value(codelist_id)} - {usethis::ui_value(codelist_name)}")
   x <- stringr::str_glue("{sp_base_url}/2019/zdrojova-data/prohlizec-ciselniku/{codelist_id}")
   if(open) utils::browseURL(x)
   return(x)
@@ -234,13 +234,13 @@ add_codelist <- function(data, codelist = NULL, period_column = period_vykaz,
 }
 
 get_codelist_url <- function(codelist_id, check_if_exists = T) {
-  if(!(codelist_id %in% sp_codelists$id)) stop("Not a valid codelist ID")
+  if(!(codelist_id %in% sp_codelists$id)) usethis::ui_stop("Not a valid codelist ID")
   codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
-  message(stringr::str_glue("Building URL for codelist {codelist_id} - {codelist_name}"))
+  usethis::ui_info("Building URL for codelist {usethis::ui_value(codelist_id)} - {usethis::ui_value(codelist_name)}")
   x <- stringr::str_glue("{sp_base_url}/data/{codelist_id}.xml")
   if(check_if_exists) {
     iserror <- httr::http_error(x, httr::config(followlocation = 0L), USE.NAMES = FALSE)
-    if(iserror) stop("Codelist XML for a codelist with this ID does not exist")
+    if(iserror) usethi::ui_stop("Codelist XML for a codelist with this ID does not exist")
   }
   return(x)
 }
