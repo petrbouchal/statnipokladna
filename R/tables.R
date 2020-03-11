@@ -177,7 +177,7 @@ get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
   }
   years_months <- expand.grid(y = year, m = month)
   dt_fin <- purrr::map2_dfr(years_months$y, years_months$m,
-                            ~get_one_table(dataset_id, .x, .y,
+                            ~get_one_table(dataset_id, .x, .y, dest_dir = dest_dir,
                                            redownload = redownload))
   # onyr <- c(2018) %>% purrr::map_dfr(~ get_table(51101, year = ., month = 12))
 
