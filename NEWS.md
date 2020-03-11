@@ -1,5 +1,6 @@
 # statnipokladna (development version)
 
+* all functions downloading data now have `dest_dir` parameter which allows you to store the downloaded files anywhere, not just in temp dir; this in effect enables cross-session storage and avoids unnecessary redownloads
 # statnipokladna 0.4.2
 
 * added examples to documentation

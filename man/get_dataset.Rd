@@ -4,7 +4,13 @@
 \alias{get_dataset}
 \title{Retrieve dataset from statnipokladna}
 \usage{
-get_dataset(dataset_id, year = 2018, month = 12, force_redownload = F)
+get_dataset(
+  dataset_id,
+  year = 2019,
+  month = 12,
+  dest_dir = tempdir(),
+  redownload = F
+)
 }
 \arguments{
 \item{dataset_id}{A dataset ID. See \code{id} column in \code{sp_datasets} for a list of available codelists.}
@@ -14,6 +20,7 @@ get_dataset(dataset_id, year = 2018, month = 12, force_redownload = F)
 \item{month}{month, numeric. Must be 3, 6, 9 or 12. Defaults to 12.}
 
 \item{force_redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
+\item{dest_dir}{character. Directory in which downloaded files will be stored. Defaults to \code{tempdir()}.}
 }
 \value{
 character string with complete paths to downloaded files.

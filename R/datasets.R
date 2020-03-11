@@ -85,6 +85,7 @@ get_dataset_doc <- function(dataset_id, destdir = ".", download = T) {
 #' @param year year, numeric, 2015-2018 for some datasets, 2010-2018 for others. Defaults to 2018.
 #' @param month month, numeric. Must be 3, 6, 9 or 12. Defaults to 12.
 #' @param force_redownload Redownload even if file has already been downloaded? Defaults to FALSE.
+#' @param dest_dir character. Directory in which downloaded files will be stored. Defaults to `tempdir()`.
 #'
 #' @return character string with complete paths to downloaded files.
 #' @examples
@@ -101,7 +102,7 @@ get_dataset <- function(dataset_id, year = 2018, month = 12, force_redownload = 
   if(!(month %in% c(3, 6, 9, 12))) stop("`Month` must be 3, 6, 9, or 12")
   if(!(year %in% c(2010:lubridate::year(lubridate::today())))) stop("`Year` must be between 2010 and now.")
   month <- formatC(month, width = 2, format = "d", flag = "0")
-  td <- paste(tempdir(), "statnipokladna", dataset_id, year, month, sep = "/")
+  td <- paste(dest_dir, "statnipokladna", dataset_id, year, month, sep = "/")
   dir.create(td, showWarnings = F, recursive = T)
   tf <- paste0(td, "/", dataset_id, year, month, ".zip")
   if(file.exists(tf) & !force_redownload) {

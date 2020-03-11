@@ -4,7 +4,7 @@
 \alias{get_codelist}
 \title{Get codelist}
 \usage{
-get_codelist(codelist_id, n = NULL, force_redownload = F)
+get_codelist(codelist_id, n = NULL, dest_dir = tempdir(), redownload = F)
 }
 \arguments{
 \item{codelist_id}{A codelist ID. See \code{id} column in \code{sp_codelists} for a list of available codelists.}
@@ -12,6 +12,7 @@ get_codelist(codelist_id, n = NULL, force_redownload = F)
 \item{n}{Number of rows to return. Default (NULL) means all. Useful for quickly inspecting a codelist.}
 
 \item{force_redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
+\item{dest_dir}{character. Directory in which downloaded files will be stored. Defaults to \code{tempdir()}.}
 }
 \value{
 A tibble

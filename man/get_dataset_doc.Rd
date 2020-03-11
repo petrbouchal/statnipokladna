@@ -4,12 +4,12 @@
 \alias{get_dataset_doc}
 \title{Get dataset documentation}
 \usage{
-get_dataset_doc(dataset_id, destdir = ".", download = T)
+get_dataset_doc(dataset_id, dest_dir = ".", download = T)
 }
 \arguments{
 \item{dataset_id}{dataset ID. See \code{sp_datasets}.}
 
-\item{destdir}{character. Where the file should be written. Defaults to working directory.}
+\item{dest_dir}{character. Where the file should be written. Defaults to working directory.}
 
 \item{download}{Whether to download (the default) or open link in browser.}
 }

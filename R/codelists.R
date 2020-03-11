@@ -65,6 +65,7 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #' @param codelist_id A codelist ID. See `id` column in `sp_codelists` for a list of available codelists.
 #' @param n Number of rows to return. Default (NULL) means all. Useful for quickly inspecting a codelist.
 #' @param force_redownload Redownload even if file has already been downloaded? Defaults to FALSE.
+#' @param dest_dir character. Directory in which downloaded files will be stored. Defaults to `tempdir()`.
 #'
 #' @return A tibble
 #' @examples
@@ -74,8 +75,8 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #' @export
 #' @family Core workflow
 
-get_codelist <- function(codelist_id, n = NULL, force_redownload = F) {
-  td <- paste0(tempdir(), "/statnipokladna/")
+get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload = F) {
+  td <- paste0(dest_dir, "/statnipokladna/")
   dir.create(td, showWarnings = F, recursive = T)
   tf <- paste0(td, codelist_id, ".xml")
   if(file.exists(tf) & !force_redownload) {

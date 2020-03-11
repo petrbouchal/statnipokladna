@@ -11,6 +11,7 @@ get_table(
   month = 12,
   ico = NULL,
   force_redownload = FALSE
+  dest_dir = tempdir()
 )
 }
 \arguments{
@@ -23,6 +24,7 @@ get_table(
 \item{ico}{ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See \url{http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/ucjed} to look up ID of any org in the dataset.}
 
 \item{force_redownload}{Redownload even if recent file present? Defaults to FALSE.}
+\item{dest_dir}{character. Directory in which downloaded files will be stored. Defaults to \code{tempdir()}.}
 }
 \value{
 a tibble; see Details for key to the columns
