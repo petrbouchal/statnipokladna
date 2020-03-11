@@ -102,7 +102,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #' @param year year, numeric, 2015-2018 for some datasets, 2010-2018 for others. Can be a vector of length > 1 (see details).
 #' @param month month, numeric. Must be 3, 6, 9 or 12. Can be a vector of length > 1 (see details).
 #' @param ico ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See <http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/ucjed> to look up ID of any org in the dataset.
-#' @param dest_dir character. Directory in which downloaded files will be stored. Defaults to `tempdir()`.
+#' @param dest_dir character. Directory in which downloaded files will be stored. Defaults to `tempdir()`. Will be created if it does not exist.
 #' @param redownload Redownload even if recent file present? Defaults to FALSE.
 #'
 #' @return a tibble; see Details for key to the columns

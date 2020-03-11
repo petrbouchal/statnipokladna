@@ -84,7 +84,7 @@ get_dataset_doc <- function(dataset_id, dest_dir = ".", download = T) {
 #' @param dataset_id A dataset ID. See `id` column in `sp_datasets` for a list of available codelists.
 #' @param year year, numeric, 2015-2018 for some datasets, 2010-2019 for others. Defaults to 2019.
 #' @param month month, numeric. Must be between 1 and 12. Defaults to 12.
-#' @param dest_dir character. Directory in which downloaded files will be stored. Defaults to `tempdir()`.
+#' @param dest_dir character. Directory in which downloaded files will be stored. Defaults to `tempdir()`. Will be created if it does not exist.
 #' @param redownload Redownload even if file has already been downloaded? Defaults to FALSE.
 #'
 #' @return character string with complete paths to downloaded files.

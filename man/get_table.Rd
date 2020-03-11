@@ -25,7 +25,7 @@ get_table(
 
 \item{redownload}{Redownload even if recent file present? Defaults to FALSE.}
 
-\item{dest_dir}{character. Directory in which downloaded files will be stored. Defaults to \code{tempdir()}.}
+\item{dest_dir}{character. Directory in which downloaded files will be stored. Defaults to \code{tempdir()}. Will be created if it does not exist.}
 }
 \value{
 a tibble; see Details for key to the columns

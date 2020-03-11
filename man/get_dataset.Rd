@@ -19,7 +19,7 @@ get_dataset(
 
 \item{month}{month, numeric. Must be between 1 and 12. Defaults to 12.}
 
-\item{dest_dir}{character. Directory in which downloaded files will be stored. Defaults to \code{tempdir()}.}
+\item{dest_dir}{character. Directory in which downloaded files will be stored. Defaults to \code{tempdir()}. Will be created if it does not exist.}
 
 \item{redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
 }
