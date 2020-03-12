@@ -26,7 +26,8 @@ sp_datasets_i <- tibble::tribble(~id, ~name, ~implemented,
 #'   \item{\code{name}}{character. Dataset name, mostly corresponds to title on the statnipokladna GUI.}
 #' }
 #' @family Lists of available entities
-sp_datasets <- sp_datasets_i %>% dplyr::select(id, name)
+sp_datasets <- sp_datasets_i %>% dplyr::select(id, name) %>%
+  dplyr::mutate_if(is.character, stringi::stri_unescape_unicode)
 # usethis::use_data(sp_datasets, overwrite = T)
 
 get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists = T) {
