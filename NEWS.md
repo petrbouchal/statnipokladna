@@ -1,8 +1,14 @@
 # statnipokladna 0.5.0
 
+## New features
+
 * all functions downloading data now have `dest_dir` parameter which allows you to store the downloaded files anywhere, not just in temp dir; this in effect enables cross-session storage and avoids unnecessary redownloads
+
+## Improvements
+
 * adapt month parameter check to upgrade in the published data which now contains monthly releases for some reports
 * argument `force_redownload` in `get_[table|dataset|codelist]()` renamed to `redownload`
+* improved UI: messaging and guidance
 
 # statnipokladna 0.4.2
 
