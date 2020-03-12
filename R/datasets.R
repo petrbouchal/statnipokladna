@@ -100,6 +100,12 @@ get_dataset_doc <- function(dataset_id, dest_dir = ".", download = T) {
 #' @export
 get_dataset <- function(dataset_id, year = 2019, month = 12,
                         dest_dir = tempdir(), redownload = F) {
+  if(interactive() == FALSE & (missing(year) | missing(month))) {
+    usethis::ui_warn("Either {usethis::ui_field('year')} or {usethis::ui_field('month')} not set.
+                     Using defaults of {usethis::ui_value(year)} and {usethis::ui_value(month)}.
+                     Set these values explicitly for reproducibility as the defaults may change in the future
+                     to provide access to the latest data by default.")
+  }
   if(!(month %in% c(1:12))) stop("`Month` must be an integer from 1 to 12.")
   if(!(year %in% c(2010:lubridate::year(lubridate::today())))) stop("`Year` must be between 2010 and now.")
   month <- formatC(month, width = 2, format = "d", flag = "0")

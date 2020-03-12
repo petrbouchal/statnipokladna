@@ -121,6 +121,11 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
                       redownload = FALSE, dest_dir = tempdir()) {
   stopifnot(is.character(ico) | is.null(ico))
+  if(interactive() == FALSE & (missing(year) | missing(month))) {
+    usethis::ui_warn("Either {usethis::ui_field('year')} or {usethis::ui_field('month')} not set.
+                     Using defaults of {usethis::ui_value(year)} and {usethis::ui_value(month)}.
+                     Set these values explicitly for reproducibility as the defaults may change in the future
+                     to provide access to the latest data by default.") }
   if(!(table_id %in% sp_tables_i$id)) usethis::ui_stop("Not a valid table id. Consult {ui_code('sp_tables')}.")
   dataset_id <- sp_tables_i$dataset_id[sp_tables_i$id == table_id]
   table_regex <- paste0(sp_tables_i$file_regex[sp_tables_i$id == table_id])
