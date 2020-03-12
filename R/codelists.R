@@ -241,7 +241,7 @@ get_codelist_url <- function(codelist_id, check_if_exists = T) {
   x <- stringr::str_glue("{sp_base_url}/data/{codelist_id}.xml")
   if(check_if_exists) {
     iserror <- httr::http_error(x, httr::config(followlocation = 0L), USE.NAMES = FALSE)
-    if(iserror) usethi::ui_stop("Codelist XML for a codelist with this ID does not exist")
+    if(iserror) usethis::ui_stop("Codelist XML for a codelist with this ID does not exist")
   }
   return(x)
 }
