@@ -38,7 +38,7 @@ get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists
   # print(x)
   if(check_if_exists) {
     iserror <- httr::http_error(x, httr::config(followlocation = 0L), USE.NAMES = FALSE)
-    if(iserror) ui_stop("File does not exist for this dataset and period combination.")
+    if(iserror) usethis::ui_stop("File does not exist for this dataset and period combination.")
   }
   doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
   usethis::ui_info("Get the dataset documentation at {usethis::ui_path(doc_url)}")
@@ -118,6 +118,7 @@ get_dataset <- function(dataset_id, year = 2019, month = 12,
   } else {
     dataset_url <- get_dataset_url(dataset_id = dataset_id, year = year, month = month)
     usethis::ui_done("Storing downloaded archive in and extracting to {usethis::ui_path(td)}")
+    if(dest_dir == tempdir()) usethis::ui_info("Set {usethis::ui_field('dest_dir')} for more control over downloaded files.")
     utils::download.file(dataset_url, tf, headers = c('User-Agent' = usr))
     utils::unzip(tf, exdir = td)
   }

@@ -84,6 +84,7 @@ get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload
   } else {
     url <- get_codelist_url(codelist_id)
     usethis::ui_done("Storing codelist in {usethis::ui_path(td)}")
+    if(dest_dir == tempdir()) usethis::ui_info("Set {usethis::ui_field('dest_dir')} for more control over downloaded files.")
     utils::download.file(url, tf, headers = c('User-Agent' = usr))
   }
   xml_all <- xml2::read_xml(tf)
