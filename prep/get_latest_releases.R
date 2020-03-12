@@ -1,5 +1,7 @@
 library(jsonlite)
 library(httr)
+library(dplyr)
+library(tidyr)
 
 
 td <- GET("https://monitor.statnipokladna.cz/api/transakcni-data?aktivni=true",accept_json()) %>%
@@ -10,5 +12,7 @@ xx <- td %>%
   unnest(dataExtracts, .name_repair = "universal")
 
 xx %>%
-  filter(year == 2019) %>%
-  View()
+  group_by(titleCS) %>%
+  filter(!deleted, year == max(year)) %>%
+  filter(month == max(month)) %>%
+  select(titleCS, year, month, filenamePeriod)
