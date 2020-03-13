@@ -88,7 +88,7 @@ of available codelists with their IDs and names." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -149,7 +149,7 @@ of available codelists with their IDs and names." />
 of available codelists with their IDs and names.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_codelist</span>(<span class='no'>codelist_id</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>force_redownload</span> <span class='kw'>=</span> <span class='no'>F</span>)</pre>
+    <pre class="usage"><span class='fu'>get_codelist</span>(<span class='no'>codelist_id</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dest_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(), <span class='kw'>redownload</span> <span class='kw'>=</span> <span class='no'>F</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,7 +163,11 @@ of available codelists with their IDs and names.</p>
       <td><p>Number of rows to return. Default (NULL) means all. Useful for quickly inspecting a codelist.</p></td>
     </tr>
     <tr>
-      <th>force_redownload</th>
+      <th>dest_dir</th>
+      <td><p>character. Directory in which downloaded files will be stored. Defaults to <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>redownload</th>
       <td><p>Redownload even if file has already been downloaded? Defaults to FALSE.</p></td>
     </tr>
     </table>

@@ -87,7 +87,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -151,7 +151,8 @@
   <span class='no'>data</span>,
   <span class='kw'>codelist</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>period_column</span> <span class='kw'>=</span> <span class='no'>period_vykaz</span>,
-  <span class='kw'>force_redownload</span> <span class='kw'>=</span> <span class='no'>F</span>
+  <span class='kw'>redownload</span> <span class='kw'>=</span> <span class='no'>F</span>,
+  <span class='kw'>dest_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -170,8 +171,12 @@
       <td><p>Unquoted column name of column identifying the data period in <code>data</code>. Leave to default if you have not changed the <code>data</code> object returned by <code><a href='get_table.html'>get_table()</a></code>.</p></td>
     </tr>
     <tr>
-      <th>force_redownload</th>
+      <th>redownload</th>
       <td><p>Redownload even if file has already been downloaded? Defaults to FALSE.</p></td>
+    </tr>
+    <tr>
+      <th>dest_dir</th>
+      <td><p>character. Directory in which downloaded files will be stored. Defaults to <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code>.</p></td>
     </tr>
     </table>
 

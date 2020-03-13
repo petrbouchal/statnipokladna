@@ -87,7 +87,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
       </span>
     </div>
 
@@ -152,7 +152,8 @@
   <span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>2018</span>,
   <span class='kw'>month</span> <span class='kw'>=</span> <span class='fl'>12</span>,
   <span class='kw'>ico</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>force_redownload</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  <span class='kw'>redownload</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>dest_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -175,8 +176,12 @@
       <td><p>ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See <a href='http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/ucjed'>http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/ucjed</a> to look up ID of any org in the dataset.</p></td>
     </tr>
     <tr>
-      <th>force_redownload</th>
+      <th>redownload</th>
       <td><p>Redownload even if recent file present? Defaults to FALSE.</p></td>
+    </tr>
+    <tr>
+      <th>dest_dir</th>
+      <td><p>character. Directory in which downloaded files will be stored. Defaults to <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code>. Will be created if it does not exist.</p></td>
     </tr>
     </table>
 
