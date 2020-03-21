@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add codelist data to downloaded data — add_codelist • statnipokladna</title>
+<title>Deprecated: Add codelist data to downloaded data — add_codelist • statnipokladna</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,8 @@
 
 
 
-<meta property="og:title" content="Add codelist data to downloaded data — add_codelist" />
-<meta property="og:description" content="Joins a provided codelist, or downloads and processes one if necessary, and adds it to the data." />
+<meta property="og:title" content="Deprecated: Add codelist data to downloaded data — add_codelist" />
+<meta property="og:description" content="Deprecated, use sp_add_codelist() instead." />
 <meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -87,7 +87,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
       </span>
     </div>
 
@@ -138,13 +138,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add codelist data to downloaded data</h1>
+    <h1>Deprecated: Add codelist data to downloaded data</h1>
     <small class="dont-index">Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/R/codelists.R'><code>R/codelists.R</code></a></small>
     <div class="hidden name"><code>add_codelist.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Joins a provided codelist, or downloads and processes one if necessary, and adds it to the data.</p>
+    <p>Deprecated, use <code><a href='sp_add_codelist.html'>sp_add_codelist()</a></code> instead.</p>
     </div>
 
     <pre class="usage"><span class='fu'>add_codelist</span>(
@@ -185,40 +185,16 @@
     <p>A data frame of same length as <code>data</code>, with added columns from <code>codelist</code>. See Details.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The <code>data</code> argument should be a data frame produced by <code><a href='get_table.html'>get_table()</a></code> If this is true, the <code>period_column</code> argument is not needed.
-The <code>codelist</code> argument, if a data frame, should be a data frame produced by
-<code><a href='get_codelist.html'>get_codelist()</a></code>. Specifically, it assumes it contains the following columns:</p><ul>
-<li><p>start_date, a date</p></li>
-<li><p>end_date, a date</p></li>
-<li><p>column with the code, character usually named the same as the codelist</p></li>
-</ul>
-
-<p>#' You can usually tell which codelist you need from the name of the column whose code you
-are looking to expand, e.g. the codes in column paragraf can be expanded by codelist paragraf.</p>
-<p>The function filters the codelist to obtain a set of entries relevant to the time period of <code>data</code>.
-If <code>data</code> contains tables for multiple periods, this is handled appropriately.
-Codelist-originating columns in the resulting data frame are renamed so they do not interfere with
-joining additional codelists, perhaps in a single pipe call.</p>
+    <p><img src='figures/lifecycle-soft-deprecated.svg' alt='Soft-deprecated lifecycle' /></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other Core workflow: 
 <code><a href='get_codelist.html'>get_codelist</a>()</code>,
-<code><a href='get_dataset.html'>get_dataset</a>()</code>,
-<code><a href='get_table.html'>get_table</a>()</code></p></div>
+<code><a href='sp_add_codelist.html'>sp_add_codelist</a>()</code>,
+<code><a href='sp_get_codelist.html'>sp_get_codelist</a>()</code>,
+<code><a href='sp_get_dataset.html'>sp_get_dataset</a>()</code>,
+<code><a href='sp_get_table.html'>sp_get_table</a>()</code></p></div>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='get_table.html'>get_table</a></span>(<span class='st'>"budget"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>add_codelist</span>(<span class='st'>"polozka"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>add_codelist</span>(<span class='st'>"paragraf"</span>)
-
-<span class='no'>pol</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_codelist.html'>get_codelist</a></span>(<span class='st'>"paragraf"</span>)
-<span class='no'>par</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_codelist.html'>get_codelist</a></span>(<span class='st'>"polozka"</span>)
-
-<span class='fu'><a href='get_table.html'>get_table</a></span>(<span class='st'>"budget"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>add_codelist</span>(<span class='no'>pol</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>add_codelist</span>(<span class='no'>par</span>)
-}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -227,7 +203,6 @@ joining additional codelists, perhaps in a single pipe call.</p>
       <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
       <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

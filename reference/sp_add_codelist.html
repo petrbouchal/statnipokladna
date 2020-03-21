@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Deprecated: Retrieve and read dataset from statnipokladna — get_dataset • statnipokladna</title>
+<title>Add codelist data to downloaded data — sp_add_codelist • statnipokladna</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,8 @@
 
 
 
-<meta property="og:title" content="Deprecated: Retrieve and read dataset from statnipokladna — get_dataset" />
-<meta property="og:description" content="Deprecated, use sp_get_dataset() instead." />
+<meta property="og:title" content="Add codelist data to downloaded data — sp_add_codelist" />
+<meta property="og:description" content="Joins a provided codelist, or downloads and processes one if necessary, and adds it to the data." />
 <meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -138,60 +138,89 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Deprecated: Retrieve and read dataset from statnipokladna</h1>
-    <small class="dont-index">Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/R/datasets.R'><code>R/datasets.R</code></a></small>
-    <div class="hidden name"><code>get_dataset.Rd</code></div>
+    <h1>Add codelist data to downloaded data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/R/codelists.R'><code>R/codelists.R</code></a></small>
+    <div class="hidden name"><code>sp_add_codelist.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Deprecated, use <code><a href='sp_get_dataset.html'>sp_get_dataset()</a></code> instead.</p>
+    <p>Joins a provided codelist, or downloads and processes one if necessary, and adds it to the data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_dataset</span>(
-  <span class='no'>dataset_id</span>,
-  <span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>2019</span>,
-  <span class='kw'>month</span> <span class='kw'>=</span> <span class='fl'>12</span>,
-  <span class='kw'>dest_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(),
-  <span class='kw'>redownload</span> <span class='kw'>=</span> <span class='no'>F</span>
+    <pre class="usage"><span class='fu'>sp_add_codelist</span>(
+  <span class='no'>data</span>,
+  <span class='kw'>codelist</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>period_column</span> <span class='kw'>=</span> <span class='no'>period_vykaz</span>,
+  <span class='kw'>redownload</span> <span class='kw'>=</span> <span class='no'>F</span>,
+  <span class='kw'>dest_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>dataset_id</th>
-      <td><p>A dataset ID. See <code>id</code> column in <code>sp_datasets</code> for a list of available codelists.</p></td>
+      <th>data</th>
+      <td><p>a data frame returned by <code><a href='get_table.html'>get_table()</a></code>.</p></td>
     </tr>
     <tr>
-      <th>year</th>
-      <td><p>year, numeric, 2015-2018 for some datasets, 2010-2019 for others. Defaults to 2019.</p></td>
+      <th>codelist</th>
+      <td><p>The codelist to add. Either a character vector of length one (see <code>sp_tables</code> for possible values), or a data frame returned by <code><a href='get_codelist.html'>get_codelist()</a></code>.</p></td>
     </tr>
     <tr>
-      <th>month</th>
-      <td><p>month, numeric. Must be between 1 and 12. Defaults to 12.</p></td>
-    </tr>
-    <tr>
-      <th>dest_dir</th>
-      <td><p>character. Directory in which downloaded files will be stored. Defaults to <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code>. Will be created if it does not exist.</p></td>
+      <th>period_column</th>
+      <td><p>Unquoted column name of column identifying the data period in <code>data</code>. Leave to default if you have not changed the <code>data</code> object returned by <code><a href='get_table.html'>get_table()</a></code>.</p></td>
     </tr>
     <tr>
       <th>redownload</th>
       <td><p>Redownload even if file has already been downloaded? Defaults to FALSE.</p></td>
     </tr>
+    <tr>
+      <th>dest_dir</th>
+      <td><p>character. Directory in which downloaded files will be stored. Defaults to <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code>.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>character (link) if download = TRUE, nothing otherwise.</p>
+    <p>A data frame of same length as <code>data</code>, with added columns from <code>codelist</code>. See Details.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><img src='figures/lifecycle-soft-deprecated.svg' alt='Soft-deprecated lifecycle' /></p>
+    <p>The <code>data</code> argument should be a data frame produced by <code><a href='get_table.html'>get_table()</a></code> If this is true, the <code>period_column</code> argument is not needed.
+The <code>codelist</code> argument, if a data frame, should be a data frame produced by
+<code><a href='get_codelist.html'>get_codelist()</a></code>. Specifically, it assumes it contains the following columns:</p><ul>
+<li><p>start_date, a date</p></li>
+<li><p>end_date, a date</p></li>
+<li><p>column with the code, character usually named the same as the codelist</p></li>
+</ul>
+
+<p>#' You can usually tell which codelist you need from the name of the column whose code you
+are looking to expand, e.g. the codes in column paragraf can be expanded by codelist paragraf.</p>
+<p>The function filters the codelist to obtain a set of entries relevant to the time period of <code>data</code>.
+If <code>data</code> contains tables for multiple periods, this is handled appropriately.
+Codelist-originating columns in the resulting data frame are renamed so they do not interfere with
+joining additional codelists, perhaps in a single pipe call.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other Utilities: 
-<code><a href='sp_get_codelist_viewer.html'>sp_get_codelist_viewer</a>()</code>,
-<code><a href='sp_get_dataset_doc.html'>sp_get_dataset_doc</a>()</code></p></div>
+    <div class='dont-index'><p>Other Core workflow: 
+<code><a href='add_codelist.html'>add_codelist</a>()</code>,
+<code><a href='get_codelist.html'>get_codelist</a>()</code>,
+<code><a href='sp_get_codelist.html'>sp_get_codelist</a>()</code>,
+<code><a href='sp_get_dataset.html'>sp_get_dataset</a>()</code>,
+<code><a href='sp_get_table.html'>sp_get_table</a>()</code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='sp_get_table.html'>sp_get_table</a></span>(<span class='st'>"budget"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>sp_add_codelist</span>(<span class='st'>"polozka"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>sp_add_codelist</span>(<span class='st'>"paragraf"</span>)
+
+<span class='no'>pol</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sp_get_codelist.html'>sp_get_codelist</a></span>(<span class='st'>"paragraf"</span>)
+<span class='no'>par</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sp_get_codelist.html'>sp_get_codelist</a></span>(<span class='st'>"polozka"</span>)
+
+<span class='fu'><a href='sp_get_table.html'>sp_get_table</a></span>(<span class='st'>"budget"</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>sp_add_codelist</span>(<span class='no'>pol</span>) <span class='kw'>%&gt;%</span>
+  <span class='fu'>sp_add_codelist</span>(<span class='no'>par</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -200,6 +229,7 @@
       <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
       <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
