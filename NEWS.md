@@ -1,5 +1,9 @@
 # statnipokladna (development version)
 
+## Improvements
+
+* `get_table()` now provides access to changes-in-equity data (přehled o změnách vlastního kapitálu)
+
 # statnipokladna 0.5.0
 
 ## New features

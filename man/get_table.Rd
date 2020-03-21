@@ -91,6 +91,15 @@ Data is processed in the following way:
    ZU_HCINBO \tab current_economic \tab economic activity, current period \tab hospodářská činnost, běžné období \tab - \cr
 }
 
+
+\strong{Tables \verb{changes-in-equity}}\tabular{lllll}{
+   Original \tab Output \tab English \tab Czech \tab Note \cr
+   ZU_STAVP \tab before \tab previous period \tab stav minulé období \tab - \cr
+   ZU_STAVPO \tab after \tab current period \tab stav běžné období \tab - \cr
+   ZU_ZVYS \tab increase \tab increase \tab zvýšení stavu \tab - \cr
+   ZU_SNIZ \tab decrease \tab decrease \tab snížení stavu \tab - \cr
+}
+
 }
 }
 \examples{
