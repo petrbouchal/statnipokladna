@@ -18,6 +18,7 @@ Imports:
     dplyr (>= 0.8.3),
     httr (>= 1.4.1),
     jsonlite,
+    lifecycle,
     lubridate (>= 1.7.4),
     magrittr,
     purrr (>= 0.3.2),
@@ -36,6 +37,8 @@ Suggests:
     testthat (>= 2.1.0)
 VignetteBuilder: 
     knitr
+RdMacros: 
+    lifecycle
 Encoding: UTF-8
 Language: en
 LazyData: true
