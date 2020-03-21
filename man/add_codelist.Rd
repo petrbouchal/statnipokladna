@@ -2,7 +2,7 @@
 % Please edit documentation in R/codelists.R
 \name{add_codelist}
 \alias{add_codelist}
-\title{Add codelist data to downloaded data}
+\title{Deprecated: Add codelist data to downloaded data}
 \usage{
 add_codelist(
   data,
@@ -27,44 +27,17 @@ add_codelist(
 A data frame of same length as \code{data}, with added columns from \code{codelist}. See Details.
 }
 \description{
-Joins a provided codelist, or downloads and processes one if necessary, and adds it to the data.
+Deprecated, use \code{sp_add_codelist()} instead.
 }
 \details{
-The \code{data} argument should be a data frame produced by \code{get_table()} If this is true, the \code{period_column} argument is not needed.
-The \code{codelist} argument, if a data frame, should be a data frame produced by
-\code{get_codelist()}. Specifically, it assumes it contains the following columns:
-\itemize{
-\item start_date, a date
-\item end_date, a date
-\item column with the code, character usually named the same as the codelist
-}
-
-#' You can usually tell which codelist you need from the name of the column whose code you
-are looking to expand, e.g. the codes in column paragraf can be expanded by codelist paragraf.
-
-The function filters the codelist to obtain a set of entries relevant to the time period of \code{data}.
-If \code{data} contains tables for multiple periods, this is handled appropriately.
-Codelist-originating columns in the resulting data frame are renamed so they do not interfere with
-joining additional codelists, perhaps in a single pipe call.
-}
-\examples{
-\dontrun{
-get_table("budget") \%>\%
-  add_codelist("polozka") \%>\%
-  add_codelist("paragraf")
-
-pol <- get_codelist("paragraf")
-par <- get_codelist("polozka")
-
-get_table("budget") \%>\%
-  add_codelist(pol) \%>\%
-  add_codelist(par)
-}
+\lifecycle{soft-deprecated}
 }
 \seealso{
 Other Core workflow: 
 \code{\link{get_codelist}()},
-\code{\link{get_dataset}()},
-\code{\link{get_table}()}
+\code{\link{sp_add_codelist}()},
+\code{\link{sp_get_codelist}()},
+\code{\link{sp_get_dataset}()},
+\code{\link{sp_get_table}()}
 }
 \concept{Core workflow}

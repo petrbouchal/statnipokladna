@@ -2,7 +2,7 @@
 % Please edit documentation in R/codelists.R
 \name{get_codelist}
 \alias{get_codelist}
-\title{Get codelist}
+\title{Deprecated: Get codelist}
 \usage{
 get_codelist(codelist_id, n = NULL, dest_dir = tempdir(), redownload = F)
 }
@@ -19,29 +19,14 @@ get_codelist(codelist_id, n = NULL, dest_dir = tempdir(), redownload = F)
 A tibble
 }
 \description{
-Downloads and processes codelist identified by \code{codelist_id}. See \code{sp_codelists} for a list of
-of available codelists with their IDs and names.
-}
-\details{
-You can usually tell which codelist you need from the name of the column whose code you
-are looking to expand, e.g. the codes in column paragraf can be expanded by codelist paragraf.
-
-The processing ensures that the resulting codelist can be correcly joined to
-the data, autamatically using \code{add_codelist()} or manually.
-The entire codelist is downlaoded and not filtered for any particular date.
-
-Codelists XML files are stored in a temporary directory as determined by \code{tempdir()}
-and persist per session to avoid redownloads.
-}
-\examples{
-\dontrun{
-get_codelist("paragraf")
-}
+Deprecated: use \code{sp_get_codelist()}
 }
 \seealso{
 Other Core workflow: 
 \code{\link{add_codelist}()},
-\code{\link{get_dataset}()},
-\code{\link{get_table}()}
+\code{\link{sp_add_codelist}()},
+\code{\link{sp_get_codelist}()},
+\code{\link{sp_get_dataset}()},
+\code{\link{sp_get_table}()}
 }
 \concept{Core workflow}

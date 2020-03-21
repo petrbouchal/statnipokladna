@@ -58,10 +58,10 @@ get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists
 #' @family Utilities
 #' @examples
 #' \dontrun{
-#' get_dataset_doc("finm")
+#' sp_get_dataset_doc("finm")
 #' }
 #' @export
-get_dataset_doc <- function(dataset_id, dest_dir = ".", download = T) {
+sp_get_dataset_doc <- function(dataset_id, dest_dir = ".", download = T) {
   doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
   if(!download) {
     utils::browseURL(doc_url)
@@ -72,6 +72,21 @@ get_dataset_doc <- function(dataset_id, dest_dir = ".", download = T) {
     utils::download.file(doc_url, file_path, headers = c('User-Agent' = usr))
     return(stringr::str_glue("File downloaded to {file_path}."))
   }
+}
+
+#' Deprecated: Get dataset documentation
+#'
+#' Deprecated, use `sp_get_dataset_doc()` instead.
+#'
+#' \lifecycle{soft-deprecated}
+#'
+#' @inheritParams sp_get_dataset_doc
+#'
+#' @return a tibble
+#' @export
+get_dataset_doc <- function(dataset_id, dest_dir = ".", download = T) {
+  lifecycle::deprecate_soft("0.5.2", "get_dataset_doc()", "sp_get_dataset_doc()")
+  sp_get_dataset_doc(dataset_id = dataset_id, dest_dir = dest_dir, download = download)
 }
 
 
@@ -99,7 +114,7 @@ get_dataset_doc <- function(dataset_id, dest_dir = ".", download = T) {
 #' }
 #' @family Core workflow
 #' @export
-get_dataset <- function(dataset_id, year = 2019, month = 12,
+sp_get_dataset <- function(dataset_id, year = 2019, month = 12,
                         dest_dir = tempdir(), redownload = F) {
   if(interactive() == FALSE & (missing(year) | missing(month))) {
     usethis::ui_warn("Either {usethis::ui_field('year')} or {usethis::ui_field('month')} not set.
@@ -126,3 +141,20 @@ get_dataset <- function(dataset_id, year = 2019, month = 12,
   return(file_list)
 }
 
+#' Deprecated: Retrieve and read dataset from statnipokladna
+#'
+#' Deprecated, use `sp_get_dataset()` instead.
+#'
+#' \lifecycle{soft-deprecated}
+#'
+#' @inheritParams sp_get_dataset
+#'
+#' @return character (link) if download = TRUE, nothing otherwise.
+#' @family Utilities
+#' @export
+get_dataset <- function(dataset_id, year = 2019, month = 12,
+                        dest_dir = tempdir(), redownload = F) {
+  lifecycle::deprecate_soft("0.5.2", "get_dataset()", "sp_get_dataset()")
+  sp_get_dataset(dataset_id = dataset_id, year = year, month = month,
+                 dest_dir = dest_dir, redownload = redownload)
+}

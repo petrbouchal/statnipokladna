@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets.R
 \name{get_dataset_doc}
 \alias{get_dataset_doc}
-\title{Get dataset documentation}
+\title{Deprecated: Get dataset documentation}
 \usage{
 get_dataset_doc(dataset_id, dest_dir = ".", download = T)
 }
@@ -14,18 +14,11 @@ get_dataset_doc(dataset_id, dest_dir = ".", download = T)
 \item{download}{Whether to download (the default) or open link in browser.}
 }
 \value{
-character (link) if download = TRUE, nothing otherwise.
+a tibble
 }
 \description{
-Downloads XLS file with dataset documentation, or opens link to this file in browser.
+Deprecated, use \code{sp_get_dataset_doc()} instead.
 }
-\examples{
-\dontrun{
-get_dataset_doc("finm")
+\details{
+\lifecycle{soft-deprecated}
 }
-}
-\seealso{
-Other Utilities: 
-\code{\link{get_codelist_viewer}()}
-}
-\concept{Utilities}

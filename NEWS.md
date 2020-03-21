@@ -8,6 +8,8 @@
 
 # statnipokladna 0.5.0
 
+* all exported functions renamed to `sp_*` to avoid conflicts with other packages and for better discoverability via autocomplete; original functions soft-deprecated.
+
 ## New features
 
 * all functions downloading data now have `dest_dir` parameter which allows you to store the downloaded files anywhere, not just in temp dir; this in effect enables cross-session storage and avoids unnecessary redownloads

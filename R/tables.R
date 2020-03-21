@@ -136,7 +136,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #' @export
 #' @family Core workflow
 #'
-get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
+sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
                       redownload = FALSE, dest_dir = tempdir()) {
   stopifnot(is.character(ico) | is.null(ico))
   if(interactive() == FALSE & (missing(year) | missing(month))) {
@@ -215,3 +215,18 @@ get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
   }
 # onyr <- c(2018) %>% purrr::map_dfr(~ get_table(2, year = ., month = 12))
 # onyr <- c(2018) %>% purrr::map_dfr(~ get_table(1, year = ., month = 12))
+
+#' Deprecated: Get a statnipokladna table
+#'
+#' Deprecated, use `sp_get_table()` instead.
+#'
+#' \lifecycle{soft-deprecated}
+#'
+#' @inheritParams sp_get_table
+#'
+#' @return a tibble
+#' @export
+get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
+                      redownload = FALSE, dest_dir = tempdir()) {
+  lifecycle::deprecate_soft("0.5.2", "get_table()", "sp_get_table()")
+}

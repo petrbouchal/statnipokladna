@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets.R
 \name{get_dataset}
 \alias{get_dataset}
-\title{Retrieve dataset from statnipokladna}
+\title{Deprecated: Retrieve and read dataset from statnipokladna}
 \usage{
 get_dataset(
   dataset_id,
@@ -24,28 +24,17 @@ get_dataset(
 \item{redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
 }
 \value{
-character string with complete paths to downloaded files.
+character (link) if download = TRUE, nothing otherwise.
 }
 \description{
-Downloads and unzips files for a given dataset.
+Deprecated, use \code{sp_get_dataset()} instead.
 }
 \details{
-Files are stored in a temp folder as determined by \code{tempdir()} and further sorted into
-subdirectories by dataset, year and month. They persist per session to avoid redownloads.
-}
-\examples{
-\dontrun{
-budget_latest <- get_dataset("finu")
-budget_2018 <- get_dataset("finu", 2018)
-budget_mid2018 <- get_dataset("finu", 2018, 6)
-budget_multiyear <- get_dataset("finu", 2012:2018, 9)
-budget_multihalfyears <- get_dataset("finu", 2012:2018, c(6, 12))
-}
+\lifecycle{soft-deprecated}
 }
 \seealso{
-Other Core workflow: 
-\code{\link{add_codelist}()},
-\code{\link{get_codelist}()},
-\code{\link{get_table}()}
+Other Utilities: 
+\code{\link{sp_get_codelist_viewer}()},
+\code{\link{sp_get_dataset_doc}()}
 }
-\concept{Core workflow}
+\concept{Utilities}

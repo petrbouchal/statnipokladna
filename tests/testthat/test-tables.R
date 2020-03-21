@@ -7,5 +7,5 @@ test_that("List of tables make sense", {
 })
 
 test_that("get_table works", {
-  expect_error(get_table("blah"))
+  expect_error(sp_get_table("blah"))
 })

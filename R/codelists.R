@@ -70,12 +70,12 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #' @return A tibble
 #' @examples
 #' \dontrun{
-#' get_codelist("paragraf")
+#' sp_get_codelist("paragraf")
 #' }
 #' @export
 #' @family Core workflow
 
-get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload = F) {
+sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload = F) {
   td <- paste0(dest_dir, "/statnipokladna/")
   dir.create(td, showWarnings = F, recursive = T)
   tf <- paste0(td, codelist_id, ".xml")
@@ -109,6 +109,21 @@ get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload
   return(xvals)
 }
 
+#' Deprecated: Get codelist
+#'
+#' Deprecated: use `sp_get_codelist()`
+#'
+#' @inheritParams sp_get_codelist
+#'
+#' @return A tibble
+#' @export
+#' @family Core workflow
+
+get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload = F) {
+  lifecycle::deprecate_soft("0.5.2", "get_codelist()", "sp_get_codelist()")
+  sp_get_codelist(codelist_id = codelist_id, n = n, dest_dir = dest_dir, redownload = redownload)
+}
+
 
 #' Get/open URL of codelist viewer
 #'
@@ -121,9 +136,9 @@ get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload
 #' @family Utilities
 #' @examples
 #' \dontrun{
-#' get_codelist_viewer("paragraf")
+#' sp_get_codelist_viewer("paragraf")
 #' }
-get_codelist_viewer <- function(codelist_id, open = TRUE) {
+sp_get_codelist_viewer <- function(codelist_id, open = TRUE) {
   if(!(codelist_id %in% sp_codelists$id)) stop("Not a valid codelist ID")
   codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
   usethis::ui_info("Building URL for codelist {usethis::ui_value(codelist_id)} - {usethis::ui_value(codelist_name)}")
@@ -174,18 +189,18 @@ switch_minus <- function(string) {
 #' @export
 #' @examples
 #' \dontrun{
-#' get_table("budget") %>%
-#'   add_codelist("polozka") %>%
-#'   add_codelist("paragraf")
+#' sp_get_table("budget") %>%
+#'   sp_add_codelist("polozka") %>%
+#'   sp_add_codelist("paragraf")
 #'
-#' pol <- get_codelist("paragraf")
-#' par <- get_codelist("polozka")
+#' pol <- sp_get_codelist("paragraf")
+#' par <- sp_get_codelist("polozka")
 #'
-#' get_table("budget") %>%
-#'   add_codelist(pol) %>%
-#'   add_codelist(par)
+#' sp_get_table("budget") %>%
+#'   sp_add_codelist(pol) %>%
+#'   sp_add_codelist(par)
 #' }
-add_codelist <- function(data, codelist = NULL, period_column = period_vykaz,
+sp_add_codelist <- function(data, codelist = NULL, period_column = period_vykaz,
                          redownload = F,
                          dest_dir = tempdir()) {
   if(is.null(codelist)) stop("Please supply a codelist")
@@ -244,4 +259,23 @@ get_codelist_url <- function(codelist_id, check_if_exists = T) {
     if(iserror) usethis::ui_stop("Codelist XML for a codelist with this ID does not exist")
   }
   return(x)
+}
+
+#' Deprecated: Add codelist data to downloaded data
+#'
+#' Deprecated, use `sp_add_codelist()` instead.
+#'
+#' \lifecycle{soft-deprecated}
+#'
+#' @inheritParams sp_add_codelist
+#'
+#' @return A data frame of same length as `data`, with added columns from `codelist`. See Details.
+#' @family Core workflow
+#' @export
+add_codelist <- function(data, codelist = NULL, period_column = period_vykaz,
+                            redownload = F,
+                            dest_dir = tempdir()) {
+  lifecycle::deprecate_soft("0.5.2", "add_codelist()", "sp_add_codelist()")
+  sp_add_codelist(data = data, codelist = codelist, period_column = period_column,
+                  redownload = redownload, dest_dir = dest_dir)
 }
