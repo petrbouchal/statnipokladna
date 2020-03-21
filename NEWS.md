@@ -1,5 +1,7 @@
 # statnipokladna 0.5.2
 
+* all exported functions renamed to `sp_*` to avoid conflicts with other packages and for better discoverability via autocomplete; original functions are soft-deprecated.
+
 # statnipokladna 0.5.1
 
 ## Improvements
@@ -7,8 +9,6 @@
 * `get_table()` now provides access to changes-in-equity data (přehled o změnách vlastního kapitálu, use `"changes-in-equity"` table id) and cash flow statements (přehled o peněžních tocích, use `"cash-flow"` id)
 
 # statnipokladna 0.5.0
-
-* all exported functions renamed to `sp_*` to avoid conflicts with other packages and for better discoverability via autocomplete; original functions soft-deprecated.f
 
 ## New features
 
