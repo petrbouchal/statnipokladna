@@ -74,7 +74,7 @@ library(statnipokladna)
 Get data from a particular part (file) of a dataset ("výkaz"):
 
 ```{r}
-local_budgets <- get_table(table_id = "budget-local", # table ID, see `sp_tables`
+local_budgets <- sp_get_table(table_id = "budget-local", # table ID, see `sp_tables`
                            year = 2019,
                            month = 9)
 ```
@@ -90,7 +90,7 @@ head(local_budgets)
 ...but it has been cleaned up, and can be enriched with any of the metadata codelists:
 
 ```{r}
-functional_categories <- get_codelist("paragraf")
+functional_categories <- sp_get_codelist("paragraf")
 ```
 
 ```{r}
@@ -106,8 +106,8 @@ As you can see below, you can
 
 ```{r}
 local_budgets %>% 
-  add_codelist(functional_categories) %>% 
-  add_codelist("polozka")
+  sp_add_codelist(functional_categories) %>% 
+  sp_add_codelist("polozka")
 ```
 
 Download a whole "výkaz" (dataset):
@@ -119,7 +119,7 @@ get_dataset("finm") # dataset ID, see `sp_datasets`
 and look at its documentation:
 
 ```{r}
-statnipokladna::get_dataset_doc("finm")
+statnipokladna::sp_get_dataset_doc("finm")
 ```
 
 ## Background information
