@@ -1,4 +1,4 @@
-# statnipokladna (development version)
+# statnipokladna 0.5.2
 
 # statnipokladna 0.5.1
 
@@ -8,7 +8,7 @@
 
 # statnipokladna 0.5.0
 
-* all exported functions renamed to `sp_*` to avoid conflicts with other packages and for better discoverability via autocomplete; original functions soft-deprecated.
+* all exported functions renamed to `sp_*` to avoid conflicts with other packages and for better discoverability via autocomplete; original functions soft-deprecated.f
 
 ## New features
 
