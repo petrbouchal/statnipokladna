@@ -2,7 +2,7 @@
 
 ## Improvements
 
-* `get_table()` now provides access to changes-in-equity data (přehled o změnách vlastního kapitálu, use `changes-in-equity` table id) and cash flow statements (přehled o peněžních tocích, use `cash-flow` id)
+* `get_table()` now provides access to changes-in-equity data (přehled o změnách vlastního kapitálu, use `"changes-in-equity"` table id) and cash flow statements (přehled o peněžních tocích, use `"cash-flow"` id)
 
 # statnipokladna 0.5.0
 
