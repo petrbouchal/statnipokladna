@@ -74,8 +74,18 @@ remotes::install_github("petrbouchal/statnipokladna",
     for different time periods (pre- and post-2015)
   - drawback: consolidation must be done manually
 
-Note the official analysis GUI is due to be [overhauled in
-November 2018](https://twitter.com/otevrenadatamf/status/1190329092916289536).
+### Future development
+
+the official system has been partially overhauled in February 2020 and I
+am trying to find out about which parts of its new API will remain
+stable and can be used externally. Depending on the result, some
+functionality in this package can be streamlined and some can be added -
+e.g. 
+
+  - listing of available releases
+  - checking against existing releases and data sets
+  - retrieving some previously unpublished data e.g. calculated
+    indicators and budget responsibility monitoring
 
 ## Getting started
 
