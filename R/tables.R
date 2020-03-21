@@ -99,7 +99,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #'  | ZU_HLCIBO | current_core | core activity, current period |  hlavní činnost, běžné období |  - |
 #'  | ZU_HCINBO | current_economic | economic activity, current period |  hospodářská činnost, běžné období |  - |
 #'
-#'  **Tables `changes-in-equity`**
+#'  **Table `changes-in-equity`**
 #'
 #'  | Original | Output | English | Czech | Note |
 #'  | --- | --- | --- | --- | --- |

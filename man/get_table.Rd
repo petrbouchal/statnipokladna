@@ -92,7 +92,7 @@ Data is processed in the following way:
 }
 
 
-\strong{Tables \verb{changes-in-equity}}\tabular{lllll}{
+\strong{Table \verb{changes-in-equity}}\tabular{lllll}{
    Original \tab Output \tab English \tab Czech \tab Note \cr
    ZU_STAVP \tab before \tab previous period \tab stav minulé období \tab - \cr
    ZU_STAVPO \tab after \tab current period \tab stav běžné období \tab - \cr
