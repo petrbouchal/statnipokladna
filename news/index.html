@@ -86,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.1</span>
       </span>
     </div>
 
@@ -141,6 +141,18 @@
       <small>Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="statnipokladna-0-5-1" class="section level1">
+<h1 class="page-header">
+<a href="#statnipokladna-0-5-1" class="anchor"></a>statnipokladna 0.5.1</h1>
+<div id="improvements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#improvements" class="anchor"></a>Improvements</h2>
+<ul>
+<li>
+<code><a href="../reference/get_table.html">get_table()</a></code> now provides access to changes-in-equity data (přehled o změnách vlastního kapitálu, use <code>changes-in-equity</code> table id) and cash flow statements (přehled o peněžních tocích, use <code>cash-flow</code> id)</li>
+</ul>
+</div>
+</div>
     <div id="statnipokladna-0-5-0" class="section level1">
 <h1 class="page-header">
 <a href="#statnipokladna-0-5-0" class="anchor"></a>statnipokladna 0.5.0</h1>
@@ -151,9 +163,9 @@
 <li>all functions downloading data now have <code>dest_dir</code> parameter which allows you to store the downloaded files anywhere, not just in temp dir; this in effect enables cross-session storage and avoids unnecessary redownloads</li>
 </ul>
 </div>
-<div id="improvements" class="section level2">
+<div id="improvements-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#improvements" class="anchor"></a>Improvements</h2>
+<a href="#improvements-1" class="anchor"></a>Improvements</h2>
 <ul>
 <li>adapt month parameter check to upgrade in the published data which now contains monthly releases for some reports</li>
 <li>argument <code>force_redownload</code> in <code>get_[table|dataset|codelist]()</code> renamed to <code>redownload</code>
@@ -197,9 +209,9 @@
 </li>
 </ul>
 </div>
-<div id="improvements-1" class="section level2">
+<div id="improvements-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#improvements-1" class="anchor"></a>Improvements</h2>
+<a href="#improvements-2" class="anchor"></a>Improvements</h2>
 <ul>
 <li>improved documentation - added details to explain what each function assumes and does</li>
 <li>updated README</li>
@@ -233,9 +245,9 @@
 <li>filtering using <code>ico</code> parameter in <code><a href="../reference/get_table.html">get_table()</a></code> now works</li>
 </ul>
 </div>
-<div id="improvements-2" class="section level2">
+<div id="improvements-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#improvements-2" class="anchor"></a>Improvements</h2>
+<a href="#improvements-3" class="anchor"></a>Improvements</h2>
 <ul>
 <li>updated table of tables (now covers all key tables, includes notes)</li>
 <li>
@@ -310,6 +322,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#statnipokladna-0-5-1">0.5.1</a></li>
         <li><a href="#statnipokladna-0-5-0">0.5.0</a></li>
         <li><a href="#statnipokladna-0-4-2">0.4.2</a></li>
         <li><a href="#statnipokladna-0-4-1">0.4.1</a></li>
