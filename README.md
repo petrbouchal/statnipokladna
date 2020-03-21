@@ -40,6 +40,10 @@ remotes::install_github("petrbouchal/statnipokladna",
                          build_vignettes = T)
 ```
 
+I also keep binaries in a `drat` repo, which you can access by
+
+    install.packages("statnipokladna", repos = "https://petrbouchal.github.io/drat")
+
 ## What this package enables you to do:
 
   - get cleaned-up, ready to analyse data frames based on open data
@@ -101,7 +105,7 @@ local_budgets <- sp_get_table(table_id = "budget-local", # table ID, see `sp_tab
                            month = 9)
 #> ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2019-09'
 #> ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'
-#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmpdt9pSE/statnipokladna/finm/2019/09/'
+#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpmuXkZg/statnipokladna/finm/2019/09/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Reading data...
 #> ℹ Transforming data...
@@ -134,7 +138,7 @@ metadata codelists:
 ``` r
 functional_categories <- sp_get_codelist("paragraf")
 #> ℹ Building URL for codelist 'paragraf' - Paragraf
-#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmpdt9pSE/statnipokladna/'
+#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpmuXkZg/statnipokladna/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Processing codelist data
 ```
@@ -176,7 +180,7 @@ local_budgets %>%
 #> Joining, by = "paragraf"
 #> Joining, by = "paragraf"
 #> ℹ Building URL for codelist 'polozka' - Rozpočtová položka
-#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmpdt9pSE/statnipokladna/'
+#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpmuXkZg/statnipokladna/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Processing codelist data
 #> Joining, by = "polozka"
@@ -217,14 +221,14 @@ get_dataset("finm") # dataset ID, see `sp_datasets`
 #> Call `lifecycle::last_warnings()` to see where this warning was generated.
 #> ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2019-12'
 #> ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'
-#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmpdt9pSE/statnipokladna/finm/2019/12/'
+#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpmuXkZg/statnipokladna/finm/2019/12/'
 #> ℹ Set dest_dir for more control over downloaded files.
-#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmpdt9pSE/statnipokladna/finm/2019/12/FINM201_2019012.csv"
-#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmpdt9pSE/statnipokladna/finm/2019/12/FINM202_2019012.csv"
-#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmpdt9pSE/statnipokladna/finm/2019/12/FINM203_2019012.csv"
-#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmpdt9pSE/statnipokladna/finm/2019/12/FINM204_2019012.csv"
-#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmpdt9pSE/statnipokladna/finm/2019/12/FINM205_2019012.csv"
-#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmpdt9pSE/statnipokladna/finm/2019/12/FINM207_2019012.csv"
+#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpmuXkZg/statnipokladna/finm/2019/12/FINM201_2019012.csv"
+#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpmuXkZg/statnipokladna/finm/2019/12/FINM202_2019012.csv"
+#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpmuXkZg/statnipokladna/finm/2019/12/FINM203_2019012.csv"
+#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpmuXkZg/statnipokladna/finm/2019/12/FINM204_2019012.csv"
+#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpmuXkZg/statnipokladna/finm/2019/12/FINM205_2019012.csv"
+#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpmuXkZg/statnipokladna/finm/2019/12/FINM207_2019012.csv"
 ```
 
 and look at its documentation:
