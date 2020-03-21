@@ -5,6 +5,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
                                0,           0,          "profit-and-loss",     "vykzz",       "vykzz",     "VYKZZ",      "V\\u00fdkaz zisk\\u016f a ztr\\u00e1t" , NA,
                                0,           0,          "profit-and-loss-city-districts",     "vykzzmc",       "vykzz",     "VYKZZMC",      "V\\u00fdkaz zisk\\u016f a ztr\\u00e1t - m\\u011bstsk\\u00e9 \\u010d\\u00e1sti", "only for 2018; in other years city districts are incorporated in balance sheet",
                                0,           0,          "changes-in-equity",  "pozvk", "pozvk", "POZVK", "P\\u0159ehled o zm\\u011bn\\u00e1ch vlastn\\u00edho kapit\\u00e1lu", NA,
+                               0,           0,          "cash-flow",  "ppt", "ppt", "PPT", "P\\u0159ehled pen\\u011b\\u017en\\u00edch tok\\u016f", NA,
                                0,           0,          "balance-sheet",     "rozvaha1",    "rozv",      "ROZV[1]?",      "Rozvaha - prvn\\u00ed \\u010d\\u00e1st", NA,
                                0,           0,          "balance-sheet-2",     "rozvaha2",    "rozv",      "ROZV2",      "Rozvaha - druh\\u00e1 \\u010d\\u00e1st", NA,
                                0,           0,          "balance-sheet-city-districts",     "rozvaha1mc",  "rozv",      "ROZV1MC",    "Rozvaha m\\u011bstsk\\u00fdch \\u010d\\u00e1st\\u00ed - prvn\\u00ed \\u010d\\u00e1st", "only for 2018; in other years city districts are incorporated in balance sheet",
@@ -108,6 +109,12 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #'  | ZU_ZVYS | increase | increase |  zvýšení stavu |  - |
 #'  | ZU_SNIZ | decrease | decrease |  snížení stavu |  - |
 #'
+#'  **Table `cash-flow`**
+#'
+#'  | Original | Output | English | Czech | Note |
+#'  | --- | --- | --- | --- | --- |
+#'  | ZU_BEZUO | current | current period |  běžné účetní období |  - |
+#'
 #'
 #' @param table_id A table ID. See `id` column in `sp_tables` for a list of available codelists.
 #' @param year year, numeric, 2015-2018 for some datasets, 2010-2018 for others. Can be a vector of length > 1 (see details).
@@ -195,6 +202,7 @@ get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
                         ZU_STAVPO = "after",
                         ZU_ZVYS = "increase",
                         ZU_SNIZ = "decrease",
+                        ZU_BEZUO = "current",
                         `0FUNC_AREA` = "paragraf")
     return(dt)
   }

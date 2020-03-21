@@ -100,6 +100,12 @@ Data is processed in the following way:
    ZU_SNIZ \tab decrease \tab decrease \tab snížení stavu \tab - \cr
 }
 
+
+\strong{Table \code{cash-flow}}\tabular{lllll}{
+   Original \tab Output \tab English \tab Czech \tab Note \cr
+   ZU_BEZUO \tab current \tab current period \tab běžné účetní období \tab - \cr
+}
+
 }
 }
 \examples{
