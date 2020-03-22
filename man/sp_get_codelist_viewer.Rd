@@ -28,3 +28,4 @@ Other Utilities:
 \code{\link{sp_get_dataset_doc}()}
 }
 \concept{Utilities}
+\keyword{internal}

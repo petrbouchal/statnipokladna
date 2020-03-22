@@ -134,6 +134,7 @@ get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload
 #'
 #' @return a URL, character vector of length one.
 #' @family Utilities
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' sp_get_codelist_viewer("paragraf")
