@@ -1,18 +1,17 @@
+library(magrittr)
 library(rnaturalearth)
 library(rnaturalearthdata)
-library(tidyverse)
 # pak::pkg_install("dmi3kno/bunny")
 library(bunny)
 library(magick)
 library(emojifont)
 library(fontawesome)
 library(svglite)
+library(ggplot2)
 
 mfblue <- rgb(10, 115, 189, maxColorValue = 255)
 
-cz <- ne_countries(scale = "medium", returnclass = "sf") %>%
-  filter(adm0_a3 == "CZE") %>%
-  select()
+cz <- ne_countries(scale = "medium", returnclass = "sf", country = "Czech Republic")
 plot(cz, max.plot = 1)
 
 # https://pkgdown.r-lib.org/reference/build_favicon.html
@@ -24,7 +23,7 @@ hex_canvas <- image_canvas_hex(border_color = "grey", border_size = 5, fill_colo
 hex_canvas
 
 icon <- fontawesome::fa("cash-register")
-write_lines(icon, here::here("prep/icon.svg"))
+writeLines(icon, here::here("prep/icon.svg"))
 icon <- image_read_svg(here::here("prep/icon.svg"), width = 400) %>%
   image_colorize(100, "white") %>%
   image_convert(colorspace = "sRGB")
@@ -44,7 +43,9 @@ img_hex <- hex_canvas %>%
   bunny::image_compose(icon, gravity = "north", offset = "+0+600") %>%
   image_annotate("statnipokladna", size = 250, gravity = "south", location = "+0+520",
                  font = "Teuton Normal", color = mfblue) %>%
-  bunny::image_compose(hex_border, gravity = "center", operator = "Over")
+  image_annotate("petrbouchal.gihub.io/statnipokladna", size = 50, gravity = "south",
+                 location = "+350+270",
+                 degrees = 330, font = "sans", color = "grey")
 img_hex
 
 img_hex %>%
@@ -56,7 +57,7 @@ img_hex %>%
 img_hex %>%
   image_convert("png", colorspace = "sRGB") %>%
   image_scale("1200x1200") %>%
-  image_write(here::here("prep", "logo_hex_large.png"), density = 600)
+  image_write(here::here("prep", "logo_hex_print.png"), density = 600)
 
 img_hex %>%
   image_convert(format = "png", colorspace = "cmyk", matte = T) %>%
