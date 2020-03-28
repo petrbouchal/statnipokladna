@@ -7,7 +7,7 @@
 add_codelist(
   data,
   codelist = NULL,
-  period_column = period_vykaz,
+  period_column = .data$period_vykaz,
   redownload = F,
   dest_dir = tempdir()
 )

@@ -9,8 +9,8 @@ sp_datasets_i <- tibble::tribble(~id, ~name, ~implemented,
                                "pozvk", "P\\u0159ehled o zm\\u011bn\\u00e1ch vlastn\\u00edho kapit\\u00e1lu", F,
                                "pril", "P\\u0159\\u00edloha", F,
                                "vykzz", "V\\u00fdkaz zisk\\u016f a ztr\\u00e1t", F) %>%
-  dplyr::mutate(name = stringi::stri_unescape_unicode(name)) %>%
-  dplyr::arrange(id)
+  dplyr::mutate(name = stringi::stri_unescape_unicode(.data$name)) %>%
+  dplyr::arrange(.data$id)
 # stringi::stri_escape_unicode("xxx")
 
 #' List of available datasets
@@ -26,7 +26,7 @@ sp_datasets_i <- tibble::tribble(~id, ~name, ~implemented,
 #'   \item{\code{name}}{character. Dataset name, mostly corresponds to title on the statnipokladna GUI.}
 #' }
 #' @family Lists of available entities
-sp_datasets <- sp_datasets_i %>% dplyr::select(id, name) %>%
+sp_datasets <- sp_datasets_i %>% dplyr::select(.data$id, .data$name) %>%
   dplyr::mutate_if(is.character, stringi::stri_unescape_unicode)
 # usethis::use_data(sp_datasets, overwrite = T)
 

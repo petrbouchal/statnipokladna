@@ -42,8 +42,8 @@ sp_codelists <- tibble::tribble(~id, ~name,
                                 "zdrojfin", "Zdroj financov\\u00e1n\\u00ed organizac\\u00ed",
                                 "zpodm", "Zp\\u016fsob odm\\u011b\\u0148ov\\u00e1n\\u00ed",
                                 "zuj", "Z\\u00e1kladn\\u00ed \\u00fazemn\\u00ed jednotka") %>%
-  dplyr::mutate(name = stringi::stri_unescape_unicode(name)) %>%
-  dplyr::arrange(id)
+  dplyr::mutate(name = stringi::stri_unescape_unicode(.data$name)) %>%
+  dplyr::arrange(.data$id)
 # stringi::stri_escape_unicode("xxx")
 # usethis::use_data(sp_codelists, overwrite = T)
 
@@ -201,7 +201,7 @@ switch_minus <- function(string) {
 #'   sp_add_codelist(pol) %>%
 #'   sp_add_codelist(par)
 #' }
-sp_add_codelist <- function(data, codelist = NULL, period_column = period_vykaz,
+sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_vykaz,
                          redownload = F,
                          dest_dir = tempdir()) {
   if(is.null(codelist)) stop("Please supply a codelist")
@@ -224,9 +224,9 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = period_vykaz,
     this_period <- dplyr::pull(.y, {{period_column}})
     # print(this_period)
     codelist_filtered <- cl_data %>%
-      dplyr::filter(end_date >= this_period & start_date <= this_period) %>%
-      dplyr::rename_at(dplyr::vars(dplyr::ends_with("_date")), ~paste0(codelist_name, "_", .)) %>%
-      dplyr::rename_at(dplyr::vars(dplyr::ends_with("nazev")), ~paste0(codelist_name, "_", .))
+      dplyr::filter(.data$end_date >= .data$this_period & .data$start_date <= .data$this_period) %>%
+      dplyr::rename_at(dplyr::vars(dplyr::ends_with("_date")), ~paste0(.data$codelist_name, "_", .)) %>%
+      dplyr::rename_at(dplyr::vars(dplyr::ends_with("nazev")), ~paste0(.data$codelist_name, "_", .))
 
     # print(codelist_filtered)
     slp <- dplyr::left_join(.x, codelist_filtered)
@@ -273,7 +273,7 @@ get_codelist_url <- function(codelist_id, check_if_exists = T) {
 #' @return A data frame of same length as `data`, with added columns from `codelist`. See Details.
 #' @family Core workflow
 #' @export
-add_codelist <- function(data, codelist = NULL, period_column = period_vykaz,
+add_codelist <- function(data, codelist = NULL, period_column = .data$period_vykaz,
                             redownload = F,
                             dest_dir = tempdir()) {
   lifecycle::deprecate_soft("0.5.2", "add_codelist()", "sp_add_codelist()")

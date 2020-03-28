@@ -15,7 +15,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
                                0,           0,          "budget-central-old-subsidies",     "finu_dotace",  "finu",      "FINU108",    "Dota\\u010dn\\u00ed financov\\u00e1n\\u00ed - poskytnut\\u00e9 prost\\u0159edky", "pre-2015 only",
                                0,           0,          "budget-central",     "misris",      "misris",    "MIS-RIS",    "Pln\\u011bn\\u00ed rozpo\\u010dtu \\u00fast\\u0159edn\\u011b \\u0159\\u00edzen\\u00fdch organizac\\u00ed od 2015", "post-2015 only") %>%
   dplyr::mutate_if(is.double, as.integer) %>%
-  dplyr::arrange(id)
+  dplyr::arrange(.data$id)
 # stringi::stri_escape_unicode("xxx")
 
 
@@ -33,8 +33,8 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #'   \item{\code{note}}{character Note.}
 #' }
 #' @family Lists of available entities
-"sp_tables" <- sp_tables_i %>% dplyr::select(id, dataset_id,
-                                             czech_name, note) %>%
+"sp_tables" <- sp_tables_i %>% dplyr::select(.data$id, .data$dataset_id,
+                                             .data$czech_name, .data$note) %>%
   dplyr::mutate_if(is.character, stringi::stri_unescape_unicode)
 # usethis::use_data(sp_tables, overwrite = T)
 
@@ -162,16 +162,16 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
     # print(head(dt))
     usethis::ui_info("Transforming data...")
     if(max(stringr::str_length(dt$`ZC_ICO:ZC_ICO`), na.rm = T) == 10) {
-      dt <- dplyr::mutate(dt, `ZC_ICO:ZC_ICO` = stringr::str_sub(`ZC_ICO:ZC_ICO`, 3, 10))
+      dt <- dplyr::mutate(dt, `ZC_ICO:ZC_ICO` = stringr::str_sub(.data$`ZC_ICO:ZC_ICO`, 3, 10))
     }
     if(!is.null(ico)) dt <- dt[dt$`ZC_ICO:ZC_ICO` %in% ico,]
     dt <- dt %>%
-      purrr::set_names(stringr::str_remove(names(.), "^[A-Z_0-9/]*:")) %>%
+      purrr::set_names(stringr::str_remove(names(dt), "^[A-Z_0-9/]*:")) %>%
       dplyr::mutate_at(dplyr::vars(dplyr::starts_with("ZU_")), ~switch_minus(.) %>% as.numeric(.)) %>%
-      tidyr::extract(`0FISCPER`, c("per_yr", "per_m"), "([0-9]{4})0([0-9]{2})") %>%
-      dplyr::mutate(period_vykaz = lubridate::make_date(per_yr, per_m),
-                    period_vykaz = lubridate::make_date(per_yr, per_m,
-                                                        lubridate::days_in_month(period_vykaz))) %>%
+      tidyr::extract(.data$`0FISCPER`, c("per_yr", "per_m"), "([0-9]{4})0([0-9]{2})") %>%
+      dplyr::mutate(period_vykaz = lubridate::make_date(.data$per_yr, .data$per_m),
+                    period_vykaz = lubridate::make_date(.data$per_yr, .data$per_m,
+                                                        lubridate::days_in_month(.data$period_vykaz))) %>%
       dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), lubridate::dmy) %>%
       dplyr::rename_all(dplyr::recode,
                         ZCMMT_ITM = "polozka",
