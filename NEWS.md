@@ -67,7 +67,7 @@
 * fixed issue so package now also handles pre-2014 data
 * minor improvement to messages
 * speed improvement to data processing by `get_table()` when `ico` is set
-* codelists downlaoded by `*_codelist()` are now stored in tempdir
+* codelists downloaded by `*_codelist()` are now stored in tempdir
 
 # statnipokladna 0.3.0
 

@@ -59,7 +59,7 @@ Please report bugs at https://github.com/petrbouchal/statnipokladna/issues.
   - the package draws on the online data and returns a clean data frame
   - the resulting data is ready to merge into time series
   - time series is built based on user input
-- do this through a consistent API which supplements some of the documentation that is missing from the official endpoints (*still subject to some chainge*)
+- do this through a consistent API which supplements some of the documentation that is missing from the official endpoints (*still subject to some change*)
 - access registers published alongside the data (e.g. lists of public organisations with their identifiers and metadata), some of which can be useful in other contexts
 - augment the core data with the desired type of register
 

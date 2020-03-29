@@ -26,9 +26,9 @@ of available codelists with their IDs and names.
 You can usually tell which codelist you need from the name of the column whose code you
 are looking to expand, e.g. the codes in column paragraf can be expanded by codelist paragraf.
 
-The processing ensures that the resulting codelist can be correcly joined to
+The processing ensures that the resulting codelist can be correctly joined to
 the data, autamatically using \code{add_codelist()} or manually.
-The entire codelist is downlaoded and not filtered for any particular date.
+The entire codelist is downloaded and not filtered for any particular date.
 
 Codelists XML files are stored in a temporary directory as determined by \code{tempdir()}
 and persist per session to avoid redownloads.

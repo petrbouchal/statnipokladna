@@ -66,8 +66,8 @@ Please report bugs at
       - time series is built based on user input
   - do this through a consistent API which supplements some of the
     documentation that is missing from the official endpoints (*still
-    subject to some chainge*)
-  - access registers published alongside the data (e.g. lists of public
+    subject to some change*)
+  - access registers published alongside the data (e.g. lists of public
     organisations with their identifiers and metadata), some of which
     can be useful in other contexts
   - augment the core data with the desired type of register
