@@ -1,0 +1,53 @@
+---
+title: "Známé datové zádrhele"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{data-issue-cz}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Známé datové zádrhele a nekonzistence
+
+- v některých souborech jsou záporná čísla zapsaná tak, že minus je na konci, takže většina parserů sloupec načte jako text a převod na číslo běžným způsobem nefunguje
+- ~~některé CSV soubory jsou oddělované čárkou (a obsahují desetinnou tečku), jiné středníkem (s desetinnou čárkou)~~
+- u číselníků je třeba myslet na to, že můžou obsahovat duplicitní položky (např. stejný kód, jiný název), z nichž každá platí v jiném časovém období - pokud se to neodfiltruje, můžou při napojení JOINem vznikat duplicity.
+
+### Doplněno 28. 11. 2019:
+
+- v číselnících mohou být dvě stejné položky platné v jeden moment, tj. i po profiltrování přes datum (příklad položka 1381 v číselníku položek) - možná je to metodicky správně, ale rozhodně neintuitivní a je potřeba to ošetřit při napojování číselníků
+- URL prohlížeče číselníku ne vždy odpovídá jeho názvu/URL jeho XML souboru (příklad [prohlizec-ciselniku/smeruc](https://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/smeruc?date=28.11.2019) x [/uctosnova.xml](https://monitor.statnipokladna.cz/data/uctosnova.xml))
+- názvy sloupců označující fáze rozpočtového cyklu (ZU_ROZ*) se liší mezi obcemi (výkaz FINM) a státem (výkaz FINU) - není to chyba, ale je to třeba vědět
+
+### Doplněno 28. 2. 2020:
+
+- v číselníku účelových znaků je položka 27983, což je část OP Doprava pro Prahu v roce 2015/16, označena platností začínající po roce 2200.
+- v datech obcí se v roce 2015 vyskytují příjmy s účelovými znaky norských fondů 95028/95528, ačkoli tato položka číselníku platí až od roku 2016.
+- ID položky v datech FINM_2017 doplnění na délku 5 o leading zero, která v XML číselníku není
+
+### Doplněno 13. 12. 2019:
+
+- čistě rozpočtářský poznatek: jsou v Česku obce - mj. Praha - které své příjmy z vlastní činnosti, prodeje majetku a podobných věcí nerozpočtují, ale považují je za část své hospodářské činnosti; v Praze je to dáno statutem. Tyto příjmy se pak do rozpočtu dostávají jako transfer v položce 4131 "Převody z vlastních fondů hospodářské (podnikatelské) činnosti". Není tedy rozumné srovnávat příjmy z vlastní činnosti aj. nebo z transferů mezi obcemi, pokud nevíme, jak to která obec rozpočtově a účetně vykazuje; srovnání může jít líp před výkaz zisků a ztrát než přes rozpočet, je to ale v mnohém hrubší.
+
+### Doplněno 20. 1. 2019
+
+- CSV soubory jsou pojmenované jinak v letech 2010-12 (bez datumu v názvu)
+- IČO v souborech 2010-12 je "obohaceno" o dvě nuly na začátku
+- v některých letech jsou stejná data rozdělená do víc souborů (napříklady rozvahy a výkazy zisků a ztrát 2018, kde jsou MČ zvlášť)
+
+## Co v datech není nebo jsem to nenašel
+
+- zdrojové třídění u rozpočtů samospráv - jen incidentálně jako součást reportu účelového financování
+- údaje o regulaci zaměstnanosti ve veřejném sektoru neboli rozpočtované a skutečné počty zaměstnanců a průměrné platy, ač se sledují a částečně zveřejňují ve státním závěrečném účtu, viz [petrbouchal/urednici2019](https://petrbouchal.github.io/urednici2019/) 
+- informace o tom, na jakém místě se peníze utratily (pokud vím, plošně se nesleduje, něco je v CEDRu a docela se to ví u eurofondů)
+
+## Kde by bylo fajn mít lepší dokumentaci
+
+- v balíku ROZVAHA nejsou zdokumentované jednotlivé soubory: v excelové dokumentaci je jen ROZV.csv, v balíku ale ROZV[MC]?[1-2].csv; u ...MC... jde asi o městské části Prahy, ale není to zjevné (toto se týká jen roku 2018).

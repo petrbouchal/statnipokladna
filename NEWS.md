@@ -1,5 +1,10 @@
 # statnipokladna (development version)
 
+## Changes in documentation
+
+- There is now a basic Get Started vignette, which is complementary to the README and contains basic background to the data
+- the original Czech data vignette was renamed to "how-the-data-works-cz.Rmd/html" and the data gotchas part was hived off into "data-issues-cz.Rmd/html"
+
 ## Bug fixes and minor improvements
 
 * deprecation warnings now show correct package name

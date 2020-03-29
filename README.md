@@ -22,7 +22,7 @@ open data from that system available at
 
 ## Installation
 
-The package is not on CRAN.
+The package is not yet on CRAN.
 
 You can install the current released version of statnipokladna from
 [GitHub](https://github.com/petrbouchal/statnipokladna) with:
@@ -59,6 +59,11 @@ I also keep binaries in a `drat` repo, which you can access by
     organisations with their identifiers and metadata), some of which
     can be useful in other contexts
   - augment the core data with the desired type of register
+
+See the [Get started](statnipokladna.html) vignette for background on
+the underlying data.
+
+See also [Background information](#background-information) below.
 
 ## How does this compare to the [official analytical interface](http://monitor.statnipokladna.cz/)?
 
@@ -105,7 +110,7 @@ local_budgets <- sp_get_table(table_id = "budget-local", # table ID, see `sp_tab
                            month = 9)
 #> ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2019-09'
 #> ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'
-#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmplC7wAB/statnipokladna/finm/2019/09/'
+#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpfsWnZT/statnipokladna/finm/2019/09/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Reading data...
 #> ℹ Transforming data...
@@ -141,7 +146,7 @@ metadata codelists:
 ``` r
 functional_categories <- sp_get_codelist("paragraf")
 #> ℹ Building URL for codelist 'paragraf' - Paragraf
-#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmplC7wAB/statnipokladna/'
+#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpfsWnZT/statnipokladna/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Processing codelist data
 ```
@@ -184,7 +189,7 @@ local_budgets %>%
 #> Joining, by = "paragraf"
 #> Joining, by = "paragraf"
 #> ℹ Building URL for codelist 'polozka' - Rozpočtová položka
-#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmplC7wAB/statnipokladna/'
+#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpfsWnZT/statnipokladna/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Processing codelist data
 #> Joining, by = c("polozka", "_nazev", "_kr_nazev", "_str_nazev", "_start_date", "_end_date")
@@ -221,14 +226,14 @@ get_dataset("finm") # dataset ID, see `sp_datasets`
 #> Call `lifecycle::last_warnings()` to see where this warning was generated.
 #> ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2019-12'
 #> ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'
-#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmplC7wAB/statnipokladna/finm/2019/12/'
+#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpfsWnZT/statnipokladna/finm/2019/12/'
 #> ℹ Set dest_dir for more control over downloaded files.
-#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplC7wAB/statnipokladna/finm/2019/12/FINM201_2019012.csv"
-#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplC7wAB/statnipokladna/finm/2019/12/FINM202_2019012.csv"
-#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplC7wAB/statnipokladna/finm/2019/12/FINM203_2019012.csv"
-#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplC7wAB/statnipokladna/finm/2019/12/FINM204_2019012.csv"
-#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplC7wAB/statnipokladna/finm/2019/12/FINM205_2019012.csv"
-#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmplC7wAB/statnipokladna/finm/2019/12/FINM207_2019012.csv"
+#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpfsWnZT/statnipokladna/finm/2019/12/FINM201_2019012.csv"
+#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpfsWnZT/statnipokladna/finm/2019/12/FINM202_2019012.csv"
+#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpfsWnZT/statnipokladna/finm/2019/12/FINM203_2019012.csv"
+#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpfsWnZT/statnipokladna/finm/2019/12/FINM204_2019012.csv"
+#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpfsWnZT/statnipokladna/finm/2019/12/FINM205_2019012.csv"
+#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpfsWnZT/statnipokladna/finm/2019/12/FINM207_2019012.csv"
 ```
 
 This will put the files in a temp directory.
@@ -251,10 +256,16 @@ dumps to a clean data structure, you still need quite a bit of domain
 knowledge to be able analyse the data safely.
 
 See the [“How the data
-works”](https://petrbouchal.github.io/statnipokladna/articles/how-the-data-works.html)
+works”](https://petrbouchal.github.io/statnipokladna/articles/how-the-data-works-cz.html)
 vignette (in Czech only, the terminology is impossible to translate) for
 an overview of the structure of the data on which this package draws.
 This also contains some notes useful for interpreting the data.
+
+A subset of this information is in the [Get
+started](statnipokladna.html) vignette.
+
+There is also a log of various data gotchas I discovered, also in Czech
+only, stored in the [data issues vignette](data-issues-cz.html).
 
 A basic glossary of some of the terms used in the data sets is at
 <http://monitor.statnipokladna.cz/2019/metodika/>.
