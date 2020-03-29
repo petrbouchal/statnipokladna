@@ -7,6 +7,13 @@
 * `sp_get_dataset_doc()` now checks that dataset exists before pointing/downloading.
 * updated README with a bit more detail
 
+## Prepare for CRAN release
+
+* fixed dplyr-related NOTE on unavailable objects
+* added CRAN notes
+* updated LICENSE to work for CRAN
+* added cran-comments.md
+
 # statnipokladna 0.5.2
 
 * all exported functions renamed to `sp_*` to avoid conflicts with other packages and for better discoverability via autocomplete; original functions are soft-deprecated.
