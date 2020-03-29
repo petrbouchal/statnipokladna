@@ -86,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9000</span>
       </span>
     </div>
 
@@ -99,6 +99,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/statnipokladna.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -109,7 +112,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/how-the-data-works.html">Jak fungují open data státní pokladny</a>
+      <a href="../articles/data-issue-cz.html">Známé datové zádrhele</a>
+    </li>
+    <li>
+      <a href="../articles/how-the-data-works-cz.html">Jak fungují open data státní pokladny</a>
+    </li>
+    <li>
+      <a href="../articles/how-the-data-works.html">How the data works</a>
     </li>
   </ul>
 </li>
@@ -141,6 +150,39 @@
       <small>Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="statnipokladna-development-version" class="section level1">
+<h1 class="page-header">
+<a href="#statnipokladna-development-version" class="anchor"></a>statnipokladna (development version)</h1>
+<div id="changes-in-documentation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes-in-documentation" class="anchor"></a>Changes in documentation</h2>
+<ul>
+<li>There is now a basic Get Started vignette, which is complementary to the README and contains basic background to the data</li>
+<li>the original Czech data vignette was renamed to “how-the-data-works-cz.Rmd/html” and the data gotchas part was hived off into “data-issues-cz.Rmd/html”</li>
+</ul>
+</div>
+<div id="bug-fixes-and-minor-improvements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes-and-minor-improvements" class="anchor"></a>Bug fixes and minor improvements</h2>
+<ul>
+<li>deprecation warnings now show correct package name</li>
+<li>added informative error messages when internet is unavailable</li>
+<li>
+<code><a href="../reference/sp_get_dataset_doc.html">sp_get_dataset_doc()</a></code> now checks that dataset exists before pointing/downloading.</li>
+<li>updated README with a bit more detail</li>
+</ul>
+</div>
+<div id="prepare-for-cran-release" class="section level2">
+<h2 class="hasAnchor">
+<a href="#prepare-for-cran-release" class="anchor"></a>Prepare for CRAN release</h2>
+<ul>
+<li>fixed dplyr-related NOTE on unavailable objects</li>
+<li>added CRAN notes</li>
+<li>updated LICENSE to work for CRAN</li>
+<li>added cran-comments.md</li>
+</ul>
+</div>
+</div>
     <div id="statnipokladna-0-5-2" class="section level1">
 <h1 class="page-header">
 <a href="#statnipokladna-0-5-2" class="anchor"></a>statnipokladna 0.5.2</h1>
@@ -329,6 +371,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#statnipokladna-development-version">development version</a></li>
         <li><a href="#statnipokladna-0-5-2">0.5.2</a></li>
         <li><a href="#statnipokladna-0-5-1">0.5.1</a></li>
         <li><a href="#statnipokladna-0-5-0">0.5.0</a></li>

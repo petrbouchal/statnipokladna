@@ -2,7 +2,10 @@ pandoc: '2.2'
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
+  data-issue-cz: data-issue-cz.html
+  how-the-data-works-cz: how-the-data-works-cz.html
   how-the-data-works: how-the-data-works.html
+  statnipokladna: statnipokladna.html
 urls:
   reference: https://petrbouchal.github.io/statnipokladna/reference
   article: https://petrbouchal.github.io/statnipokladna/articles

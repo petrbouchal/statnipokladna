@@ -87,7 +87,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9000</span>
       </span>
     </div>
 
@@ -100,6 +100,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/statnipokladna.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -110,7 +113,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/how-the-data-works.html">Jak fungují open data státní pokladny</a>
+      <a href="../articles/data-issue-cz.html">Známé datové zádrhele</a>
+    </li>
+    <li>
+      <a href="../articles/how-the-data-works-cz.html">Jak fungují open data státní pokladny</a>
+    </li>
+    <li>
+      <a href="../articles/how-the-data-works.html">How the data works</a>
     </li>
   </ul>
 </li>
@@ -150,7 +159,7 @@
     <pre class="usage"><span class='fu'>add_codelist</span>(
   <span class='no'>data</span>,
   <span class='kw'>codelist</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>period_column</span> <span class='kw'>=</span> <span class='no'>period_vykaz</span>,
+  <span class='kw'>period_column</span> <span class='kw'>=</span> <span class='no'>.data</span>$<span class='no'>period_vykaz</span>,
   <span class='kw'>redownload</span> <span class='kw'>=</span> <span class='no'>F</span>,
   <span class='kw'>dest_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
 )</pre>
