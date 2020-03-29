@@ -46,6 +46,11 @@ I also keep binaries in a `drat` repo, which you can access by
 install.packages("statnipokladna", repos = "https://petrbouchal.github.io/drat")
 ```
 
+## Bug reports
+
+Please report bugs at
+<https://github.com/petrbouchal/statnipokladna/issues>.
+
 ## What this package enables you to do:
 
   - get cleaned-up, ready to analyse data frames based on open data
