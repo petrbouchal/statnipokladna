@@ -1,4 +1,4 @@
-# statnipokladna (development version)
+# statnipokladna 0.5.3
 
 ## Changes in documentation
 
