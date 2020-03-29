@@ -157,7 +157,7 @@ Not created or endorsed by the Czech Ministry of Finance, who produce the data -
 ### R Packages
 
 - [CzechData](https://github.com/JanCaha/CzechData) by @JanCaha for (mainly) geospatial data and data about 
-- [RCzechia](https://cran.r-project.org/package=RCzechie) for another approach to Czech geospatial data and access to the official public geocoder and reverse geocoder
+- [RCzechia](https://cran.r-project.org/package=RCzechia) for another approach to Czech geospatial data and access to the official public geocoder and reverse geocoder
 - [czso](https://github.com/petrbouchal/czso) for access to Czech statistical open data
 - [eurostat](https://cran.r-project.org/package=eurostat) for access to Eurostat data
 - [OECD](https://cran.r-project.org/package=OECD) for access to OECD data, incl. a large amount of financial and economic data
