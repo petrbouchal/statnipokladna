@@ -2,7 +2,7 @@ pandoc: '2.2'
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
-  data-issue-cz: data-issue-cz.html
+  data-issues-cz: data-issues-cz.html
   how-the-data-works-cz: how-the-data-works-cz.html
   how-the-data-works: how-the-data-works.html
   statnipokladna: statnipokladna.html
