@@ -120,7 +120,7 @@ sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownl
 #' @family Core workflow
 
 get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload = F) {
-  lifecycle::deprecate_soft("0.5.2", "get_codelist()", "sp_get_codelist()")
+  lifecycle::deprecate_soft("0.5.2", "statnipokladna::get_codelist()", "sp_get_codelist()")
   sp_get_codelist(codelist_id = codelist_id, n = n, dest_dir = dest_dir, redownload = redownload)
 }
 
@@ -276,7 +276,7 @@ get_codelist_url <- function(codelist_id, check_if_exists = T) {
 add_codelist <- function(data, codelist = NULL, period_column = .data$period_vykaz,
                             redownload = F,
                             dest_dir = tempdir()) {
-  lifecycle::deprecate_soft("0.5.2", "add_codelist()", "sp_add_codelist()")
+  lifecycle::deprecate_soft("0.5.2", "statnipokladna::add_codelist()", "sp_add_codelist()")
   sp_add_codelist(data = data, codelist = codelist, period_column = period_column,
                   redownload = redownload, dest_dir = dest_dir)
 }

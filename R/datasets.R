@@ -31,7 +31,7 @@ sp_datasets <- sp_datasets_i %>% dplyr::select(.data$id, .data$name) %>%
 # usethis::use_data(sp_datasets, overwrite = T)
 
 get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists = T) {
-  if(!(dataset_id %in% sp_datasets_i$id)) stop("Not a valid dataset ID")
+  if(!(dataset_id %in% sp_datasets_i$id)) usethis::ui_stop("Not a valid dataset ID")
   dataset_name <- sp_datasets_i[sp_datasets_i$id == dataset_id, "name"]
   usethis::ui_info("Building URL for dataset {usethis::ui_value(dataset_id)}: {usethis::ui_value(dataset_name)}, {usethis::ui_value(stringr::str_c(year,'-',month))}")
   x <- stringr::str_glue("{sp_base_url}/data/{year}_{month}_Data_CSUIS_{toupper(dataset_id)}.zip")
@@ -85,7 +85,7 @@ sp_get_dataset_doc <- function(dataset_id, dest_dir = ".", download = T) {
 #' @return a tibble
 #' @export
 get_dataset_doc <- function(dataset_id, dest_dir = ".", download = T) {
-  lifecycle::deprecate_soft("0.5.2", "get_dataset_doc()", "sp_get_dataset_doc()")
+  lifecycle::deprecate_soft("0.5.2", "statnipokladna::get_dataset_doc()", "sp_get_dataset_doc()")
   sp_get_dataset_doc(dataset_id = dataset_id, dest_dir = dest_dir, download = download)
 }
 
@@ -154,7 +154,7 @@ sp_get_dataset <- function(dataset_id, year = 2019, month = 12,
 #' @export
 get_dataset <- function(dataset_id, year = 2019, month = 12,
                         dest_dir = tempdir(), redownload = F) {
-  lifecycle::deprecate_soft("0.5.2", "get_dataset()", "sp_get_dataset()")
+  lifecycle::deprecate_soft("0.5.2", "statnipokladna::get_dataset()", "sp_get_dataset()")
   sp_get_dataset(dataset_id = dataset_id, year = year, month = month,
                  dest_dir = dest_dir, redownload = redownload)
 }

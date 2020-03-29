@@ -228,5 +228,5 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
 #' @export
 get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
                       redownload = FALSE, dest_dir = tempdir()) {
-  lifecycle::deprecate_soft("0.5.2", "get_table()", "sp_get_table()")
+  lifecycle::deprecate_soft("0.5.2", "statnipokladna::get_table()", "sp_get_table()")
 }

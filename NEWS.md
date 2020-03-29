@@ -1,5 +1,8 @@
 # statnipokladna (development version)
 
+## Bug fixes and minor improvements
+
+* deprecation warnings now show correct package name
 # statnipokladna 0.5.2
 
 * all exported functions renamed to `sp_*` to avoid conflicts with other packages and for better discoverability via autocomplete; original functions are soft-deprecated.
