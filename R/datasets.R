@@ -36,6 +36,8 @@ get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists
   usethis::ui_info("Building URL for dataset {usethis::ui_value(dataset_id)}: {usethis::ui_value(dataset_name)}, {usethis::ui_value(stringr::str_c(year,'-',month))}")
   x <- stringr::str_glue("{sp_base_url}/data/{year}_{month}_Data_CSUIS_{toupper(dataset_id)}.zip")
   # print(x)
+  if(!curl::has_internet()) usethis::ui_stop(c("No internet connection. Cannot continue. Retry when connected.",
+                                               "If you need offline access to the data across R sessions, set the {ui_code('dest_dir')} parameter."))
   if(check_if_exists) {
     iserror <- httr::http_error(x, httr::config(followlocation = 0L), USE.NAMES = FALSE)
     if(iserror) usethis::ui_stop("File does not exist for this dataset and period combination.")
@@ -62,6 +64,7 @@ get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists
 #' }
 #' @export
 sp_get_dataset_doc <- function(dataset_id, dest_dir = ".", download = T) {
+  if(!curl::has_internet()) usethis::ui_stop(c("No internet connection. Cannot continue. Retry when connected."))
   doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
   if(!download) {
     utils::browseURL(doc_url)
