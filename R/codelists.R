@@ -254,7 +254,7 @@ get_codelist_url <- function(codelist_id, check_if_exists = T) {
   if(!(codelist_id %in% sp_codelists$id)) usethis::ui_stop("Not a valid codelist ID")
   codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
   if(!curl::has_internet()) usethis::ui_stop(c("No internet connection. Cannot continue. Retry when connected.",
-                                               "If you need offline access to the data across R sessions, set the {ui_code('dest_dir')} parameter."))
+                                               "If you need offline access to the data across R sessions, set the {ui_field('dest_dir')} parameter."))
   usethis::ui_info("Building URL for codelist {usethis::ui_value(codelist_id)} - {usethis::ui_value(codelist_name)}")
   x <- stringr::str_glue("{sp_base_url}/data/{codelist_id}.xml")
   if(check_if_exists) {
