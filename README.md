@@ -18,14 +18,14 @@ data from the Státní pokladna system. Státní pokladna is a comprehensive
 budgeting, reporting and accounting system for Czech public
 organisations. This package provides user-friendly ways to access the
 open data from that system available at
-<https://monitor.statnipokladna.cz>.  The vignettes in the package also provide an introduction to the underlying data.
-
+<https://monitor.statnipokladna.cz>. The vignettes in the package also
+provide an introduction to the underlying data.
 
 ## Installation
 
 The package is not yet on CRAN.
 
-You can install the current released version of statnipokladna from
+You can install the current development release of statnipokladna from
 [GitHub](https://github.com/petrbouchal/statnipokladna) with:
 
 ``` r
@@ -34,7 +34,7 @@ remotes::install_github("petrbouchal/statnipokladna",
                         ref = github_release())
 ```
 
-or the latest development version with
+or the latest in-development version with
 
 ``` r
 remotes::install_github("petrbouchal/statnipokladna",
@@ -63,7 +63,7 @@ Please report bugs at
   - do this through a consistent API which supplements some of the
     documentation that is missing from the official endpoints (*still
     subject to some change*)
-  - access registers published alongside the data (e.g. lists of public
+  - access registers published alongside the data (e.g. lists of public
     organisations with their identifiers and metadata), some of which
     can be useful in other contexts
   - augment the core data with the desired type of register
@@ -118,7 +118,7 @@ local_budgets <- sp_get_table(table_id = "budget-local", # table ID, see `sp_tab
                            month = 9)
 #> ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2019-09'
 #> ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'
-#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpXkouzm/statnipokladna/finm/2019/09/'
+#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmp0YMxQG/statnipokladna/finm/2019/09/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Reading data...
 #> ℹ Transforming data...
@@ -154,7 +154,7 @@ metadata codelists:
 ``` r
 functional_categories <- sp_get_codelist("paragraf")
 #> ℹ Building URL for codelist 'paragraf' - Paragraf
-#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpXkouzm/statnipokladna/'
+#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmp0YMxQG/statnipokladna/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Processing codelist data
 ```
@@ -197,7 +197,7 @@ local_budgets %>%
 #> Joining, by = "paragraf"
 #> Joining, by = "paragraf"
 #> ℹ Building URL for codelist 'polozka' - Rozpočtová položka
-#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpXkouzm/statnipokladna/'
+#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmp0YMxQG/statnipokladna/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Processing codelist data
 #> Joining, by = c("polozka", "_nazev", "_kr_nazev", "_str_nazev", "_start_date", "_end_date")
@@ -234,14 +234,14 @@ get_dataset("finm") # dataset ID, see `sp_datasets`
 #> Call `lifecycle::last_warnings()` to see where this warning was generated.
 #> ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2019-12'
 #> ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'
-#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpXkouzm/statnipokladna/finm/2019/12/'
+#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmp0YMxQG/statnipokladna/finm/2019/12/'
 #> ℹ Set dest_dir for more control over downloaded files.
-#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpXkouzm/statnipokladna/finm/2019/12/FINM201_2019012.csv"
-#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpXkouzm/statnipokladna/finm/2019/12/FINM202_2019012.csv"
-#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpXkouzm/statnipokladna/finm/2019/12/FINM203_2019012.csv"
-#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpXkouzm/statnipokladna/finm/2019/12/FINM204_2019012.csv"
-#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpXkouzm/statnipokladna/finm/2019/12/FINM205_2019012.csv"
-#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpXkouzm/statnipokladna/finm/2019/12/FINM207_2019012.csv"
+#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0YMxQG/statnipokladna/finm/2019/12/FINM201_2019012.csv"
+#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0YMxQG/statnipokladna/finm/2019/12/FINM202_2019012.csv"
+#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0YMxQG/statnipokladna/finm/2019/12/FINM203_2019012.csv"
+#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0YMxQG/statnipokladna/finm/2019/12/FINM204_2019012.csv"
+#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0YMxQG/statnipokladna/finm/2019/12/FINM205_2019012.csv"
+#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0YMxQG/statnipokladna/finm/2019/12/FINM207_2019012.csv"
 ```
 
 This will put the files in a temp directory.
