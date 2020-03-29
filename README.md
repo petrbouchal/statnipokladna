@@ -18,7 +18,8 @@ data from the Státní pokladna system. Státní pokladna is a comprehensive
 budgeting, reporting and accounting system for Czech public
 organisations. This package provides user-friendly ways to access the
 open data from that system available at
-<https://monitor.statnipokladna.cz>.
+<https://monitor.statnipokladna.cz>.  The vignettes in the package also provide an introduction to the underlying data.
+
 
 ## Installation
 
