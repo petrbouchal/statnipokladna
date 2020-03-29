@@ -4,6 +4,7 @@
 
 * deprecation warnings now show correct package name
 * added informative error messages when internet is unavailable
+* `sp_get_dataset_doc()` now checks that dataset exists before pointing/downloading.
 # statnipokladna 0.5.2
 
 * all exported functions renamed to `sp_*` to avoid conflicts with other packages and for better discoverability via autocomplete; original functions are soft-deprecated.

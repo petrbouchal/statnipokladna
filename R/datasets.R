@@ -65,6 +65,7 @@ get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists
 #' @export
 sp_get_dataset_doc <- function(dataset_id, dest_dir = ".", download = T) {
   if(!curl::has_internet()) usethis::ui_stop(c("No internet connection. Cannot continue. Retry when connected."))
+  if(!(dataset_id %in% sp_datasets_i$id)) usethis::ui_stop("Not a valid dataset ID")
   doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
   if(!download) {
     utils::browseURL(doc_url)
