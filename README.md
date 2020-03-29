@@ -23,13 +23,9 @@ open data from that system available at
 
 ## Installation
 
-You can install this package from CRAN:
+The package is not yet on CRAN.
 
-``` r
-install.packages("statnipokladna")
-```
-
-You can install the current development release of statnipokladna from
+You can install the current released version of statnipokladna from
 [GitHub](https://github.com/petrbouchal/statnipokladna) with:
 
 ``` r
@@ -38,7 +34,7 @@ remotes::install_github("petrbouchal/statnipokladna",
                         ref = github_release())
 ```
 
-or the latest in-development version with
+or the latest development version with
 
 ``` r
 remotes::install_github("petrbouchal/statnipokladna",
