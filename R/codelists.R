@@ -80,7 +80,7 @@ sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownl
   dir.create(td, showWarnings = F, recursive = T)
   tf <- paste0(td, codelist_id, ".xml")
   if(file.exists(tf) & !redownload) {
-    usethis::ui_info("Codelist file already in {usethis::ui_path(td), not downloading. Set {usethis::ui_code('redownload = TRUE')} if needed.")
+    usethis::ui_info("Codelist file already in {usethis::ui_path(td)}, not downloading. Set {usethis::ui_code('redownload = TRUE')} if needed.")
   } else {
     url <- get_codelist_url(codelist_id)
     usethis::ui_done("Storing codelist in {usethis::ui_path(td)}")
