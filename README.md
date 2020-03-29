@@ -105,15 +105,18 @@ local_budgets <- sp_get_table(table_id = "budget-local", # table ID, see `sp_tab
                            month = 9)
 #> ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2019-09'
 #> ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'
-#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpmuXkZg/statnipokladna/finm/2019/09/'
+#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmpyx12xn/statnipokladna/finm/2019/09/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Reading data...
 #> ℹ Transforming data...
 ```
 
-The data is automatically downloaded to a cache directory, so it will be
+The data is automatically downloaded to a temp directory, so it will be
 reused by future calls to `get_table()` made in the same session, unless
-you set `force_redownload = T`.
+you set `force_redownload = T`. You set the `dest_dir` parameter e.g. to
+`"."`, a directory will be created in your current working directory and
+the data will be downlaoded into it so that it can persist across
+sessions.
 
 It is a rather raw-looking data frame…
 
@@ -138,7 +141,7 @@ metadata codelists:
 ``` r
 functional_categories <- sp_get_codelist("paragraf")
 #> ℹ Building URL for codelist 'paragraf' - Paragraf
-#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpmuXkZg/statnipokladna/'
+#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmpyx12xn/statnipokladna/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Processing codelist data
 ```
@@ -169,9 +172,10 @@ As you can see below, you can
 
   - add multiple codelists in one pipe
   - add a codelist without downloading it first - just pass its ID to
-    the function instead of an object.
+    the function as a character instead of an object.
 
-<!-- end list -->
+Codelists are also cached, but you have one in your namespace, you can
+pass it as an object, provided that it has the right columns.
 
 ``` r
 local_budgets %>% 
@@ -180,12 +184,12 @@ local_budgets %>%
 #> Joining, by = "paragraf"
 #> Joining, by = "paragraf"
 #> ℹ Building URL for codelist 'polozka' - Rozpočtová položka
-#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpmuXkZg/statnipokladna/'
+#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmpyx12xn/statnipokladna/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Processing codelist data
-#> Joining, by = "polozka"
-#> Joining, by = "polozka"
-#> # A tibble: 1,189,627 x 36
+#> Joining, by = c("polozka", "_nazev", "_kr_nazev", "_str_nazev", "_start_date", "_end_date")
+#> Joining, by = c("polozka", "_nazev", "_kr_nazev", "_str_nazev", "_start_date", "_end_date")
+#> # A tibble: 1,189,627 x 31
 #>    vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka
 #>    <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr> <chr>      <chr>    <chr>  
 #>  1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364   
@@ -198,46 +202,47 @@ local_budgets %>%
 #>  8 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1211   
 #>  9 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1332   
 #> 10 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1333   
-#> # … with 1,189,617 more rows, and 25 more variables: budget_adopted <dbl>,
+#> # … with 1,189,617 more rows, and 20 more variables: budget_adopted <dbl>,
 #> #   budget_amended <dbl>, budget_spending <dbl>, period_vykaz <date>,
-#> #   skupina <chr>, oddil <chr>, pododdil <chr>,
-#> #   functional_categories_nazev <chr>, functional_categories_kr_nazev <chr>,
-#> #   functional_categories_str_nazev <chr>,
-#> #   functional_categories_start_date <date>,
-#> #   functional_categories_end_date <date>, polozka_start_date <date>,
-#> #   polozka_end_date <date>, druh <chr>, trida <chr>, seskupeni <chr>,
-#> #   podseskupeni <chr>, polozka_nazev <chr>, polozka_kr_nazev <chr>,
-#> #   polozka_str_nazev <chr>, kon_pol <lgl>, kon_okr <lgl>, kon_kraj <lgl>,
+#> #   skupina <chr>, oddil <chr>, pododdil <chr>, `_nazev` <chr>,
+#> #   `_kr_nazev` <chr>, `_str_nazev` <chr>, `_start_date` <date>,
+#> #   `_end_date` <date>, druh <chr>, trida <chr>, seskupeni <chr>,
+#> #   podseskupeni <chr>, kon_pol <lgl>, kon_okr <lgl>, kon_kraj <lgl>,
 #> #   kon_rep <lgl>
 ```
 
-Download a whole “výkaz” (dataset):
+Download a whole “výkaz” (dataset/data dump):
 
 ``` r
 get_dataset("finm") # dataset ID, see `sp_datasets`
-#> Warning: `get_dataset()` is deprecated as of lifecycle 0.5.2.
+#> Warning: `get_dataset()` is deprecated as of statnipokladna 0.5.2.
 #> Please use `sp_get_dataset()` instead.
 #> This warning is displayed once per session.
 #> Call `lifecycle::last_warnings()` to see where this warning was generated.
 #> ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2019-12'
 #> ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'
-#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpmuXkZg/statnipokladna/finm/2019/12/'
+#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmpyx12xn/statnipokladna/finm/2019/12/'
 #> ℹ Set dest_dir for more control over downloaded files.
-#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpmuXkZg/statnipokladna/finm/2019/12/FINM201_2019012.csv"
-#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpmuXkZg/statnipokladna/finm/2019/12/FINM202_2019012.csv"
-#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpmuXkZg/statnipokladna/finm/2019/12/FINM203_2019012.csv"
-#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpmuXkZg/statnipokladna/finm/2019/12/FINM204_2019012.csv"
-#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpmuXkZg/statnipokladna/finm/2019/12/FINM205_2019012.csv"
-#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpmuXkZg/statnipokladna/finm/2019/12/FINM207_2019012.csv"
+#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmpyx12xn/statnipokladna/finm/2019/12/FINM201_2019012.csv"
+#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmpyx12xn/statnipokladna/finm/2019/12/FINM202_2019012.csv"
+#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmpyx12xn/statnipokladna/finm/2019/12/FINM203_2019012.csv"
+#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmpyx12xn/statnipokladna/finm/2019/12/FINM204_2019012.csv"
+#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmpyx12xn/statnipokladna/finm/2019/12/FINM205_2019012.csv"
+#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmpyx12xn/statnipokladna/finm/2019/12/FINM207_2019012.csv"
 ```
 
-and look at its documentation:
+This will put the files in a temp directory.
+
+Then look at its documentation:
 
 ``` r
 statnipokladna::sp_get_dataset_doc("finm")
 #> Getting dataset documentation from http://monitor.statnipokladna.cz/data/struktura/finm.xlsx
 #> File downloaded to ./finm.xlsx.
 ```
+
+You can get details of all the available tables in the `sp_tables` data
+frame; for datasets, see `sp_datasets`.
 
 ## Background information
 
@@ -266,6 +271,9 @@ maintaining the application.
 
   - [CzechData](https://github.com/JanCaha/CzechData) by @JanCaha for
     (mainly) geospatial data and data about
+  - [RCzechia](https://cran.r-project.org/package=RCzechie) for another
+    approach to Czech geospatial data and access to the official public
+    geocoder and reverse geocoder
   - [czso](https://github.com/petrbouchal/czso) for access to Czech
     statistical open data
   - [eurostat](https://cran.r-project.org/package=eurostat) for access

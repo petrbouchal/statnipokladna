@@ -91,7 +91,7 @@ local_budgets <- sp_get_table(table_id = "budget-local", # table ID, see `sp_tab
                            month = 9)
 ```
 
-The data is automatically downloaded to a cache directory, so it will be reused by future calls to `get_table()` made in the same session, unless you set `force_redownload = T`. 
+The data is automatically downloaded to a temp directory, so it will be reused by future calls to `get_table()` made in the same session, unless you set `force_redownload = T`. You set the `dest_dir` parameter e.g. to `"."`, a directory will be created in your current working directory and the data will be downlaoded into it so that it can persist across sessions. 
 
 It is a rather raw-looking data frame...
 
@@ -114,7 +114,9 @@ This contains all codes for this codelist, some of which are not valid for the t
 As you can see below, you can 
 
 - add multiple codelists in one pipe
-- add a codelist without downloading it first - just pass its ID to the function instead of an object.
+- add a codelist without downloading it first - just pass its ID to the function as a character instead of an object.
+
+Codelists are also cached, but you have one in your namespace, you can pass it as an object, provided that it has the right columns.
 
 ```{r}
 local_budgets %>% 
@@ -122,17 +124,21 @@ local_budgets %>%
   sp_add_codelist("polozka")
 ```
 
-Download a whole "výkaz" (dataset):
+Download a whole "výkaz" (dataset/data dump):
 
 ```{r}
 get_dataset("finm") # dataset ID, see `sp_datasets`
 ```
 
-and look at its documentation:
+This will put the files in a temp directory.
+
+Then look at its documentation:
 
 ```{r}
 statnipokladna::sp_get_dataset_doc("finm")
 ```
+
+You can get details of all the available tables in the `sp_tables` data frame; for datasets, see `sp_datasets`.
 
 ## Background information
 
@@ -151,6 +157,7 @@ Not created or endorsed by the Czech Ministry of Finance, who produce the data -
 ### R Packages
 
 - [CzechData](https://github.com/JanCaha/CzechData) by @JanCaha for (mainly) geospatial data and data about 
+- [RCzechia](https://cran.r-project.org/package=RCzechie) for another approach to Czech geospatial data and access to the official public geocoder and reverse geocoder
 - [czso](https://github.com/petrbouchal/czso) for access to Czech statistical open data
 - [eurostat](https://cran.r-project.org/package=eurostat) for access to Eurostat data
 - [OECD](https://cran.r-project.org/package=OECD) for access to OECD data, incl. a large amount of financial and economic data
