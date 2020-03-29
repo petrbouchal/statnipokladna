@@ -224,7 +224,7 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
     this_period <- dplyr::pull(.y, {{period_column}})
     # print(this_period)
     codelist_filtered <- cl_data %>%
-      dplyr::filter(.data$end_date >= .data$this_period & .data$start_date <= .data$this_period) %>%
+      dplyr::filter(.data$end_date >= this_period & .data$start_date <= this_period) %>%
       dplyr::rename_at(dplyr::vars(dplyr::ends_with("_date")), ~paste0(.data$codelist_name, "_", .)) %>%
       dplyr::rename_at(dplyr::vars(dplyr::ends_with("nazev")), ~paste0(.data$codelist_name, "_", .))
 
