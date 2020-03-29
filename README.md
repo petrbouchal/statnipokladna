@@ -42,7 +42,9 @@ remotes::install_github("petrbouchal/statnipokladna",
 
 I also keep binaries in a `drat` repo, which you can access by
 
-    install.packages("statnipokladna", repos = "https://petrbouchal.github.io/drat")
+``` r
+install.packages("statnipokladna", repos = "https://petrbouchal.github.io/drat")
+```
 
 ## What this package enables you to do:
 
