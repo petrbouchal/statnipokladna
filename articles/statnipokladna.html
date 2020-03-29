@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>statnipokladna • statnipokladna</title>
+<title>Getting started with statnipokladna • statnipokladna</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -16,7 +16,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="statnipokladna">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Getting started with statnipokladna">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/logo.png">
 <meta name="twitter:card" content="summary">
@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.3</span>
       </span>
     </div>
 
@@ -104,7 +104,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>statnipokladna</h1>
+      <h1>Getting started with statnipokladna</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/petrbouchal/statnipokladna/blob/master/vignettes/statnipokladna.Rmd"><code>vignettes/statnipokladna.Rmd</code></a></small>
@@ -114,11 +114,134 @@
 
     
     
-
+<blockquote>
+<p>Note for Czech speakers: a previous note covering similar information, sometimes in more depth, is available in Czech <a href="how-the-data-works-cz.html">the Czech guide to the data</a>.</p>
+</blockquote>
+<p>This vignette provides background on the data that <code>statnipokladna</code> provides access to. Make sure you read the relevant parts before analysing the data: it can be quite complicated and it is easy to make mistakes and end up with wrong numbers.</p>
+<div id="the-nature-of-the-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#the-nature-of-the-data" class="anchor"></a>The nature of the data</h3>
+<p>The data published on <a href="https://monitor.statnipokladna.cz/datovy-katalog/" class="uri">https://monitor.statnipokladna.cz/datovy-katalog/</a> are exports from a much larger database used by Státní pokladna (SP), a comprehensive budgeting and financial/accounting reporting system for most Czech public organisations.</p>
+<p>In some ways the data is a secondary product not always dogfooded by the data maintainers, so sometimes (though not often) there are small inconsistencies on formats and content.</p>
+<p>Several datasets are not published in open data but are available in the <a href="https://monitor.statnipokladna.cz/analyza/#">analytical tool</a> (only in Czech) or the web-based overviews. This relates to data on budget preparation and budgetary responsibility, respectively.</p>
+</div>
+<div id="types-of-data" class="section level3">
+<h3 class="hasAnchor">
+<a href="#types-of-data" class="anchor"></a>Types of data</h3>
+<p>Zooming in on the data that is available from the open data dumps, there are two kinds:</p>
+<ul>
+<li>codelists (what the SP system calls “master data”)</li>
+<li>the actual report/return data (what the SP system calls “transaction data”)</li>
+</ul>
+<p><strong>Codelists</strong> are generally long lists of metadata items. These allow you to “translate” codes contained in return data. Codes identify individual lines, telling you which categories the value in that line belongs to, often across multiple categorisations (see <a href="#working-with-budget-data">Working with budget data</a>.)</p>
+<p>One thing to bear in mind is that codelist data contains all items in that codelist, regardless of the time periods for which the item is applicable. That means that for a given code ID in a codelist, there may be duplicates distinguishable only by their validity range.</p>
+<p>The <code><a href="../reference/sp_add_codelist.html">sp_add_codelist()</a></code> function tries to take care of this for you, but may not success if there are oddities in the data, e.g. one code with two items valid for the same date. In that case you get an informative error message; you should then resolve the duplicates manually using data returned by <code><a href="../reference/sp_get_codelist.html">sp_get_codelist()</a></code> and supply the edited data to <code><a href="../reference/sp_add_codelist.html">sp_add_codelist()</a></code> as an object.</p>
+<p>You can see the list of available codelists at <a href="https://monitor.statnipokladna.cz/datovy-katalog/ciselniky" class="uri">https://monitor.statnipokladna.cz/datovy-katalog/ciselniky</a>. When I refer to codelists below, I use the ID which you can supply as the <code>"codelist_id"</code> parameter to <code><a href="../reference/sp_add_codelist.html">sp_add_codelist()</a></code>.</p>
+<p>The codelist that you will generally want for comparing organisations is called “ucjed”; this contains metadata on all organisations covered by the data. It is huge so you will want to store it somewhere after you have retrieved (and processed and filtered if relevant.)</p>
+<p><strong>Return data</strong> come broadly in two kinds: budgetary and accounting - see below for how to work with each of them, as the logic differs markedly. Return data come in ZIP files, which can contain on or more files, each with a return (I call them tables for more generality, hence the <code><a href="../reference/sp_get_table.html">sp_get_table()</a></code> function.)</p>
+<p>You can see the list of returns which <code>statnipokladna</code> can process in the <code>sp_tables</code> data frame.</p>
+<p>While the <code><a href="../reference/sp_get_table.html">sp_get_table()</a></code> returns a data frame with column names understandable in English, codelists only exist in Czech.</p>
+</div>
+<div id="basic-structure-of-data-in-published-zip-files" class="section level3">
+<h3 class="hasAnchor">
+<a href="#basic-structure-of-data-in-published-zip-files" class="anchor"></a>Basic structure of data in published ZIP files</h3>
+<p>You should not have to worry about this if you use the <code><a href="../reference/sp_get_table.html">sp_get_table()</a></code> function, but it explains what you see when you use <code><a href="../reference/sp_get_dataset.html">sp_get_dataset()</a></code> directly.</p>
+<p>Generally, each CSV file will contain data for all organisations which provided the return; sometimes this will be split into two files, as in some accounting returns.</p>
+<p>The column named <code>ico</code> in the output of <code><a href="../reference/sp_get_table.html">sp_get_table()</a></code> is the unique identifier of an organisation.</p>
+<p>Often, there will be multiple returns in one dataset (ZIP file), each in a differently named CSV file. This is particularly the case for budget data.</p>
+<p>All CSV files contain some common columns, notably those identifying the organisation, its geography, and its place in the public sector. Note that the geography is derived from the seat of the organisation, not the location of the spending.</p>
+<p>You can see the list of datasets (ZIP files) which <code>statnipokladna</code> can process in the <code>sp_datasets</code> data frame.</p>
+</div>
+<div id="coverage" class="section level3">
+<h3 class="hasAnchor">
+<a href="#coverage" class="anchor"></a>Coverage</h3>
+<p>Put simply, the data covers organisations which report into the SP system, which broadly means all public organisations (I am sure there is a legal definition and I am sure there are exceptions, but I do not know the detail.) There are codelists “druhuj” (org type) and “poddruhuj” (subtype) which let you see what type an org belongs to, and “forma” will let you know about its legal form.</p>
+<p>This means the data covers both state (I call them “central” in <code>sp_tables</code>) and local organisations incl. all 6000+ municipalities; and both public organisations themselves and their related organisations (both “podřízené” and “příspěvkové”, i.e. subsidiary and contributory, the latter being more independent). Commercial entities owned by public organisations are included at least as codelists items and presumably at least their accounting returns will be included in the data, but I have not researched whether there are cutoffs as to what stake counts as ownership etc.</p>
+<p>State enterprises (a special legal form) are included. And Budvar, the Czech state brewery which also has a special legal form (national company) also makes an appearance in the codelist… NB: I am not sure which return data, if any, they are included in.</p>
+<p>State funds - a special kind of non-commercial public organisation which disburses money for specific purposes, such as transport infrastructure, are included.</p>
+<p>One special distinction to note is Chapters (kapitola) and OSS (organizační složky státu). Chapters are top-level budget lines, typically managed by a ministry but including many organisations. OSS are quasi-organisations, some are ministries, some not, and some of which manage chapters.</p>
+</div>
+<div id="periodicity" class="section level3">
+<h3 class="hasAnchor">
+<a href="#periodicity" class="anchor"></a>Periodicity</h3>
+<p>Report/return data is published in differing periodicities, depending on the kind of return and the kind of organisation.</p>
+<p>Generally:</p>
+<ul>
+<li>budget data is published quarterly for local organisations and until 2018 for central organisations; starting from 2018 central organisations budgetary data are published monthly.</li>
+<li>accounting data is published quarterly; for some organisations such as city districts this only happens annually at year end.</li>
+</ul>
+<p>See the list of currently available data releases at <a href="https://monitor.statnipokladna.cz/datovy-katalog/transakcni-data" class="uri">https://monitor.statnipokladna.cz/datovy-katalog/transakcni-data</a>.</p>
+<p>A ZIP file is published for each time period of each data dump. <code><a href="../reference/sp_get_table.html">sp_get_table()</a></code> handles this for you and returns one long data frame containing data for all time periods in the <code>year</code> or <code>month</code> parameters. In the resulting data frame, the <code>per*</code> columns mark the time period of the return.</p>
+<p>The data becomes available approx. 3 months after the end of each period; budget data seems to be available more quickly than accounting data.</p>
+</div>
+<div id="working-with-budget-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#working-with-budget-data" class="anchor"></a>Working with budget data</h2>
+<p>Budget data has a special form: the available data files provide all sorts of breakdowns in a single file, in long format, crossed between each other. This means that any individual value will make little sense - it will be e.g. money from a particular sector, from a particlar source, either capital or current. Each of these categorisations - of which there are a few more - have multiple levels of detail.</p>
+<p>What this means is that to get a meaningful number, you need to do a lot of summarising. It also means that if you are only interested in, say, the capital spend of an organisation, you will need to:</p>
+<ul>
+<li>filter for that org by <code>ico</code>
+</li>
+<li>
+<code><a href="../reference/sp_add_codelist.html">sp_add_codelist("polvyk")</a></code> for the “druhové členění”, roughly meaning the capital x current breakdown</li>
+<li>group at the right level of the <code>polvyk_</code> categorisation</li>
+<li>summarise</li>
+</ul>
+<p>Unless you are interested in further detail, you do not need to add any other codelists.</p>
+<p>The sectoral breakdown (“paragrafy”) is contained in codelist “paragraf” and the functional breakdown is in “polozka” (not to be confused with “polvyk”).</p>
+<p>The budget datasets contain columns with monetary values at each phase of the budgetary cycle: in the output of <code><a href="../reference/sp_get_table.html">sp_get_table()</a></code>, these are <code>budget_adopted</code> for the original budget, <code>budget_amended</code> for plan after amendments, <code>budget_final</code> (where available) and <code>budget_spending</code> for the final reported spend. The first of these does not change throughout the year.</p>
+<div id="consolidation" class="section level4">
+<h4 class="hasAnchor">
+<a href="#consolidation" class="anchor"></a>Consolidation</h4>
+<p>If you are summing data across multiple organisations, you will need to take care of consolidation. Typically this concerns relations between levels of government, e.g. a region gives grants to municipalities which then spend them, and consolidation ensures you only count the money once as it flows outside the public sector.</p>
+<p>The metadata allowing consolidation is contained in the “polozka” codelist in columns <code>kon_*</code>. These are TRUE/FALSE and you consolidate data by excluding certain levels (i.e. filtering out items for which that <code>kon_*</code> column is TRUE).</p>
+<p>This is necessary even for seemingly smaller entities, like some municipalities, if they have any organisations which they establish, like schools - because those report their own money. The correct way to get their budgetary figures is to filter for their geography, then summarise across all orgs included in that geography, and consolidate.</p>
+<p>Once done, double check your sum with the figure published on the Monitor if available.</p>
+</div>
+</div>
+<div id="working-with-accounting-returns" class="section level2">
+<h2 class="hasAnchor">
+<a href="#working-with-accounting-returns" class="anchor"></a>Working with accounting returns</h2>
+<p>Accounting data is a bit more straightforward as it follows generally known accounting practices, i.e. you will find balance sheets, profit-and-loss accounts, etc.</p>
+<p>The only specialised codelist that you will need specifically for accounting data is called to make sense of this data ‘polvyk’; it contains something akin to a chart of accounts.</p>
+</div>
+<div id="what-this-package-does-not-yet-provide-access-to" class="section level2">
+<h2 class="hasAnchor">
+<a href="#what-this-package-does-not-yet-provide-access-to" class="anchor"></a>What this package does not yet provide access to</h2>
+<p>As noted above, not all open data dumps from SP can currently be processed by <code>statnipokladna</code>. See <code>sp_datasets</code> for a list of those which can be.</p>
+</div>
+<div id="what-is-not-published-in-open-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#what-is-not-published-in-open-data" class="anchor"></a>What is not published in open data</h2>
+<p>As note above, some data available on the web presentation or analysis tool at <a href="https://monitor.statnipokladna.cz/" class="uri">https://monitor.statnipokladna.cz/</a> are not accessible in a documented way as open data:</p>
+<ul>
+<li>budget preparation - available in the analytical tool</li>
+<li>budget monitoring and budget responsibility indicators</li>
+<li>metadata on budgetary management available in the web presentation, e.g. when a budget was adopted</li>
+</ul>
+<p>In addition, there are some kinds of information which are held in other datasets:</p>
+<ul>
+<li>public employment and more detailed data on public organisations’ payroll costs; this is contained in a separate closed system and partially published in the State Accounts (Státní závěrečný účet).</li>
+<li>information on subsidies, held in the CEDR database</li>
+<li>data on European subsidies, held <a href="http://data.mmr.cz/dataset?license_id=odc-by&amp;tags=esif">in open data published by the Ministry of Regional Development</a>
+</li>
+</ul>
+<p>As far as I am aware, there is no consistent dataset on the geographical breakdown of public/state spending by place of actual spend.</p>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
 
+        <div id="tocnav">
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#working-with-budget-data">Working with budget data</a></li>
+      <li><a href="#working-with-accounting-returns">Working with accounting returns</a></li>
+      <li><a href="#what-this-package-does-not-yet-provide-access-to">What this package does not yet provide access to</a></li>
+      <li><a href="#what-is-not-published-in-open-data">What is not published in open data</a></li>
+      </ul>
+</div>
       </div>
 
 </div>
