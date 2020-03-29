@@ -1,5 +1,5 @@
 ---
-title: "statnipokladna"
+title: "Getting started with statnipokladna"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{statnipokladna}
@@ -14,4 +14,133 @@ knitr::opts_chunk$set(
 )
 ```
 
+> Note for Czech speakers: a previous note covering similar information, sometimes in more depth, is available in Czech [the Czech guide to the data](how-the-data-works-cz.html).
+
+This vignette provides background on the data that `statnipokladna` provides access to. Make sure you read the relevant parts before analysing the data: it can be quite complicated and it is easy to make mistakes and end up with wrong numbers.
+
+### The nature of the data
+
+The data published on <https://monitor.statnipokladna.cz/datovy-katalog/> are exports from a much larger database used by Státní pokladna (SP), a comprehensive budgeting and financial/accounting reporting system for most Czech public organisations.
+
+In some ways the data is a secondary product not always dogfooded by the data maintainers, so sometimes (though not often) there are small inconsistencies on formats and content.
+
+Several datasets are not published in open data but are available in the [analytical tool](https://monitor.statnipokladna.cz/analyza/#) (only in Czech) or the web-based overviews. This relates to data on budget preparation and budgetary responsibility, respectively.
+
+### Types of data
+
+Zooming in on the data that is available from the open data dumps, there are two kinds:
+
+- codelists (what the SP system calls "master data")
+- the actual report/return data (what the SP system calls "transaction data")
+
+**Codelists** are generally long lists of metadata items. These allow you to "translate" codes contained in return data. Codes identify individual lines, telling you which categories the value in that line belongs to, often across multiple categorisations (see [Working with budget data].)
+
+One thing to bear in mind is that codelist data contains all items in that codelist, regardless of the time periods for which the item is applicable. That means that for a given code ID in a codelist, there may be duplicates distinguishable only by their validity range.
+
+The `sp_add_codelist()` function tries to take care of this for you, but may not success if there are oddities in the data, e.g. one code with two items valid for the same date. In that case you get an informative error message; you should then resolve the duplicates manually using data returned by `sp_get_codelist()` and supply the edited data to `sp_add_codelist()` as an object.
+
+You can see the list of available codelists at https://monitor.statnipokladna.cz/datovy-katalog/ciselniky. 
+When I refer to codelists below, I use the ID which you can supply as the `"codelist_id"` parameter to `sp_add_codelist()`.
+
+The codelist that you will generally want for comparing organisations is called "ucjed"; this contains metadata on all organisations covered by the data. It is huge so you will want to store it somewhere after you have retrieved (and processed and filtered if relevant.)
+
+**Return data** come broadly in two kinds: budgetary and accounting - see below for how to work with each of them, as the logic differs markedly. Return data come in ZIP files, which can contain on or more files, each with a return (I call them tables for more generality, hence the `sp_get_table()` function.)
+
+You can see the list of returns which `statnipokladna` can process in the `sp_tables` data frame.
+
+While the `sp_get_table()` returns a data frame with column names understandable in English, codelists only exist in Czech.
+
+### Basic structure of data in published ZIP files
+
+You should not have to worry about this if you use the `sp_get_table()` function, but it explains what you see when you use `sp_get_dataset()` directly.
+
+Generally, each CSV file will contain data for all organisations which provided the return; sometimes this will be split into two files, as in some accounting returns.
+
+The column named `ico` in the output of `sp_get_table()` is the unique identifier of an organisation.
+
+Often, there will be multiple returns in one dataset (ZIP file), each in a differently named CSV file. This is particularly the case for budget data.
+
+All CSV files contain some common columns, notably those identifying the organisation, its geography, and its place in the public sector. Note that the geography is derived from the seat of the organisation, not the location of the spending.
+
+You can see the list of datasets (ZIP files) which `statnipokladna` can process in the `sp_datasets` data frame.
+
+### Coverage
+
+Put simply, the data covers organisations which report into the SP system, which broadly means all public organisations (I am sure there is a legal definition and I am sure there are exceptions, but I do not know the detail.) There are codelists "druhuj" (org type) and "poddruhuj" (subtype) which let you see what type an org belongs to, and "forma" will let you know about its legal form.
+
+This means the data covers both state (I call them "central" in `sp_tables`) and local organisations incl. all 6000+ municipalities; and both public organisations themselves and their related organisations (both "podřízené" and "příspěvkové", i.e. subsidiary and contributory, the latter being more independent). Commercial entities owned by public organisations are included at least as codelists items and presumably at least their accounting returns will be included in the data, but I have not researched whether there are cutoffs as to what stake counts as ownership etc. 
+
+State enterprises (a special legal form) are included. And Budvar, the Czech state brewery which also has a special legal form (national company) also makes an appearance in the codelist... NB: I am not sure which return data, if any, they are included in.
+
+State funds - a special kind of non-commercial public organisation which disburses money for specific purposes, such as transport infrastructure, are included.
+
+One special distinction to note is Chapters (kapitola) and OSS (organizační složky státu). Chapters are top-level budget lines, typically managed by a ministry but including many organisations. OSS are quasi-organisations, some are ministries, some not, and some of which manage chapters.
+
+### Periodicity
+
+Report/return data is published in differing periodicities, depending on the kind of return and the kind of organisation.
+
+Generally:
+
+- budget data is published quarterly for local organisations and until 2018 for central organisations; starting from 2018 central organisations budgetary data are published monthly.
+- accounting data is published quarterly; for some organisations such as city districts this only happens annually at year end.
+
+See the list of currently available data releases at https://monitor.statnipokladna.cz/datovy-katalog/transakcni-data.
+
+A ZIP file is published for each time period of each data dump. `sp_get_table()` handles this for you and returns one long data frame containing data for all time periods in the `year` or `month` parameters. In the resulting data frame, the `per*` columns mark the time period of the return.
+
+The data becomes available approx. 3 months after the end of each period; budget data seems to be available more quickly than accounting data.
+
+## Working with budget data
+
+Budget data has a special form: the available data files provide all sorts of breakdowns in a single file, in long format, crossed between each other. This means that any individual value will make little sense - it will be e.g. money from a particular sector, from a particlar source, either capital or current. Each of these categorisations - of which there are a few more - have multiple levels of detail.
+
+What this means is that to get a meaningful number, you need to do a lot of summarising. It also means that if you are only interested in, say, the capital spend of an organisation, you will need to:
+
+- filter for that org by `ico`
+- `sp_add_codelist("polvyk")` for the "druhové členění", roughly meaning the capital x current breakdown
+- group at the right level of the `polvyk_` categorisation
+- summarise
+
+Unless you are interested in further detail, you do not need to add any other codelists.
+
+The sectoral breakdown ("paragrafy") is contained in codelist "paragraf" and the functional breakdown is in "polozka" (not to be confused with "polvyk").
+
+The budget datasets contain columns with monetary values at each phase of the budgetary cycle: in the output of `sp_get_table()`, these are `budget_adopted` for the original budget, `budget_amended` for plan after amendments, `budget_final` (where available) and `budget_spending` for the final reported spend. The first of these does not change throughout the year.
+
+#### Consolidation
+
+If you are summing data across multiple organisations, you will need to take care of consolidation. Typically this concerns relations between levels of government, e.g. a region gives grants to municipalities which then spend them, and consolidation ensures you only count the money once as it flows outside the public sector.
+
+The metadata allowing consolidation is contained in the "polozka" codelist in columns `kon_*`. These are TRUE/FALSE and you consolidate data by excluding certain levels (i.e. filtering out items for which that `kon_*` column is TRUE). 
+
+This is necessary even for seemingly smaller entities, like some municipalities, if they have any organisations which they establish, like schools - because those report their own money. The correct way to get their budgetary figures is to filter for their geography, then summarise across all orgs included in that geography, and consolidate.
+
+Once done, double check your sum with the figure published on the Monitor if available.
+
+## Working with accounting returns
+
+Accounting data is a bit more straightforward as it follows generally known accounting practices, i.e. you will find balance sheets, profit-and-loss accounts, etc.
+
+The only specialised codelist that you will need specifically for accounting data is called to make sense of this data 'polvyk'; it contains something akin to a chart of accounts.
+
+## What this package does not yet provide access to
+
+As noted above, not all open data dumps from SP can currently be processed by `statnipokladna`. See `sp_datasets` for a list of those which can be.
+
+## What is not published in open data
+
+As note above, some data available on the web presentation or analysis tool at <https://monitor.statnipokladna.cz/> are not accessible in a documented way as open data:
+
+- budget preparation - available in the analytical tool
+- budget monitoring and budget responsibility indicators
+- metadata on budgetary management available in the web presentation, e.g. when a budget was adopted
+
+In addition, there are some kinds of information which are held in other datasets:
+
+- public employment and more detailed data on public organisations' payroll costs; this is contained in a separate closed system and partially published in the State Accounts (Státní závěrečný účet).
+- information on subsidies, held in the CEDR database
+- data on European subsidies, held [in open data published by the Ministry of Regional Development](http://data.mmr.cz/dataset?license_id=odc-by&tags=esif)
+
+As far as I am aware, there is no consistent dataset on the geographical breakdown of public/state spending by place of actual spend.
 
