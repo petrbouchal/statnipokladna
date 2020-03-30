@@ -1,5 +1,10 @@
 # statnipokladna (development version)
 
+## Fixes for CRAN
+
+- added URL into Description field in DESCRIPTION
+- fixed URLs in README
+
 # statnipokladna 0.5.3
 
 ## Changes in documentation

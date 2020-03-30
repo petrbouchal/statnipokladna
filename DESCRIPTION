@@ -8,7 +8,8 @@ Authors@R:
            email = "pbouchal@gmail.com",
            comment = c(ORCID = "0000-0002-0471-716X"))
 Description: Get programmatic access to data from the Czech public
-    budgeting and accounting database, Státní pokladna.
+    budgeting and accounting database, Státní pokladna
+    <https://monitor.statnipokladna.cz/>.
 License: MIT + file LICENSE
 URL: https://github.com/petrbouchal/statnipokladna
 BugReports: https://github.com/petrbouchal/statnipokladna/issues

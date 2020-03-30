@@ -118,7 +118,7 @@ local_budgets <- sp_get_table(table_id = "budget-local", # table ID, see `sp_tab
                            month = 9)
 #> ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2019-09'
 #> ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'
-#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmp0YMxQG/statnipokladna/finm/2019/09/'
+#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpICbTZW/statnipokladna/finm/2019/09/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Reading data...
 #> ℹ Transforming data...
@@ -154,7 +154,7 @@ metadata codelists:
 ``` r
 functional_categories <- sp_get_codelist("paragraf")
 #> ℹ Building URL for codelist 'paragraf' - Paragraf
-#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmp0YMxQG/statnipokladna/'
+#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpICbTZW/statnipokladna/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Processing codelist data
 ```
@@ -197,7 +197,7 @@ local_budgets %>%
 #> Joining, by = "paragraf"
 #> Joining, by = "paragraf"
 #> ℹ Building URL for codelist 'polozka' - Rozpočtová položka
-#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmp0YMxQG/statnipokladna/'
+#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpICbTZW/statnipokladna/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Processing codelist data
 #> Joining, by = c("polozka", "_nazev", "_kr_nazev", "_str_nazev", "_start_date", "_end_date")
@@ -234,14 +234,14 @@ get_dataset("finm") # dataset ID, see `sp_datasets`
 #> Call `lifecycle::last_warnings()` to see where this warning was generated.
 #> ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2019-12'
 #> ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'
-#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmp0YMxQG/statnipokladna/finm/2019/12/'
+#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpICbTZW/statnipokladna/finm/2019/12/'
 #> ℹ Set dest_dir for more control over downloaded files.
-#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0YMxQG/statnipokladna/finm/2019/12/FINM201_2019012.csv"
-#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0YMxQG/statnipokladna/finm/2019/12/FINM202_2019012.csv"
-#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0YMxQG/statnipokladna/finm/2019/12/FINM203_2019012.csv"
-#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0YMxQG/statnipokladna/finm/2019/12/FINM204_2019012.csv"
-#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0YMxQG/statnipokladna/finm/2019/12/FINM205_2019012.csv"
-#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp0YMxQG/statnipokladna/finm/2019/12/FINM207_2019012.csv"
+#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpICbTZW/statnipokladna/finm/2019/12/FINM201_2019012.csv"
+#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpICbTZW/statnipokladna/finm/2019/12/FINM202_2019012.csv"
+#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpICbTZW/statnipokladna/finm/2019/12/FINM203_2019012.csv"
+#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpICbTZW/statnipokladna/finm/2019/12/FINM204_2019012.csv"
+#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpICbTZW/statnipokladna/finm/2019/12/FINM205_2019012.csv"
+#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpICbTZW/statnipokladna/finm/2019/12/FINM207_2019012.csv"
 ```
 
 This will put the files in a temp directory.
@@ -270,10 +270,12 @@ an overview of the structure of the data on which this package draws.
 This also contains some notes useful for interpreting the data.
 
 A subset of this information is in the [Get
-started](statnipokladna.html) vignette.
+started](https://petrbouchal.github.io/statnipokladna/articles/statnipokladna.html)
+vignette.
 
 There is also a log of various data gotchas I discovered, also in Czech
-only, stored in the [data issues vignette](data-issues-cz.html).
+only, stored in the [data issues
+vignette](https://petrbouchal.github.io/statnipokladna/articles/data-issues-cz.html).
 
 A basic glossary of some of the terms used in the data sets is at
 <http://monitor.statnipokladna.cz/2019/metodika/>.
@@ -309,8 +311,8 @@ maintaining the application.
     (web and API) access to a large suite of transparency-focused
     datasets and their integration (public disclosures of contracts,
     tenders, political contributions…)
-  - [CEDR](cedr.mfcr.cz/) for a database of public subsidies, incl. to
-    public bodies
+  - [CEDR](https://cedr.mfcr.cz/) for a database of public subsidies,
+    incl. to public bodies
 
 ## Acknowledgments
 
@@ -320,8 +322,11 @@ running.
 
 ## Contributing
 
-See CONTRIBUTING.md for a guide on how to contribute to the project.
+See
+[CONTRIBUTING.md](https://github.com/petrbouchal/statnipokladna/blob/master/.github/CONTRIBUTING.md)
+for a guide on how to contribute to the project.
 
 Please note that the ‘statnipokladna’ project is released with a
-[Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to
-this project, you agree to abide by its terms.
+[Contributor Code of
+Conduct](https://petrbouchal.github.io/statnipokladna/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
