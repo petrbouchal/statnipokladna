@@ -1,13 +1,12 @@
-## Resubmission
+## Resubmission no. 2
 
-This is a resubmission following a first submission for this packages.
+This is a resubmission following a previous submission for this packages.
 
 Corrections made:
 
-- database URL added to Description field in DESCRIPTION
-- added protocol to one URL in README.md
-- added full URLs to 3 links in README.md
-- added one full-URL link to file reference in README.md (CONTRIBUTING.md)
+- added full URLs to 1 link in README.md
+
+My sincere apologies for the hassle - that was an oversight on my part.
 
 ## Test environments
 

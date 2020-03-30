@@ -68,8 +68,9 @@ Please report bugs at
     can be useful in other contexts
   - augment the core data with the desired type of register
 
-See the [Get started](statnipokladna.html) vignette for background on
-the underlying data.
+See the [Get
+started](https://petrbouchal.github.io/statnipokladna/articles/statnipokladna.html)
+vignette for background on the underlying data.
 
 See also [Background information](#background-information) below.
 

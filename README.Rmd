@@ -63,7 +63,7 @@ Please report bugs at https://github.com/petrbouchal/statnipokladna/issues.
 - access registers published alongside the data (e.g. lists of public organisations with their identifiers and metadata), some of which can be useful in other contexts
 - augment the core data with the desired type of register
 
-See the [Get started](statnipokladna.html) vignette for background on the underlying data.
+See the [Get started](https://petrbouchal.github.io/statnipokladna/articles/statnipokladna.html) vignette for background on the underlying data.
 
 See also [Background information] below.
 

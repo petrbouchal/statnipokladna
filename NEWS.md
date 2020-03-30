@@ -1,5 +1,9 @@
 # statnipokladna (development version)
 
+## Fixes for CRAN
+
+- fix last URL in README by making it absolute
+
 # statnipokladna 0.5.4
 
 ## Fixes for CRAN
