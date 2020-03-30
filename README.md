@@ -23,7 +23,12 @@ provide an introduction to the underlying data.
 
 ## Installation
 
-The package is not yet on CRAN.
+You can install this package from CRAN:
+
+``` r
+install.packages("statnipokladna")
+```
+
 
 You can install the current development release of statnipokladna from
 [GitHub](https://github.com/petrbouchal/statnipokladna) with:
