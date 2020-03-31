@@ -87,7 +87,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9000</span>
       </span>
     </div>
 
@@ -160,7 +160,7 @@
   <span class='no'>data</span>,
   <span class='kw'>codelist</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>period_column</span> <span class='kw'>=</span> <span class='no'>.data</span>$<span class='no'>period_vykaz</span>,
-  <span class='kw'>redownload</span> <span class='kw'>=</span> <span class='no'>F</span>,
+  <span class='kw'>redownload</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>dest_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
 )</pre>
 
@@ -218,18 +218,19 @@ joining additional codelists, perhaps in a single pipe call.</p>
 <code><a href='sp_get_table.html'>sp_get_table</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='fu'><a href='sp_get_table.html'>sp_get_table</a></span>(<span class='st'>"budget"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>sp_add_codelist</span>(<span class='st'>"polozka"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>sp_add_codelist</span>(<span class='st'>"paragraf"</span>)
-
-<span class='no'>pol</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sp_get_codelist.html'>sp_get_codelist</a></span>(<span class='st'>"paragraf"</span>)
-<span class='no'>par</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sp_get_codelist.html'>sp_get_codelist</a></span>(<span class='st'>"polozka"</span>)
-
+  <span class='fu'>sp_add_codelist</span>(<span class='st'>"paragraf"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Either year or month not set.</span>
+#&gt; <span class='warning'>Using defaults of 2018 and 12.</span></div><div class='output co'>#&gt; <span class='message'>● Set these values explicitly for reproducibility as the defaults may change in the future</span>
+#&gt; <span class='message'>  to provide access to the latest data by default.</span></div><div class='output co'>#&gt; <span class='error'>Error in ui_code("sp_tables"): could not find function "ui_code"</span></div><div class='input'>
+<span class='no'>pol</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sp_get_codelist.html'>sp_get_codelist</a></span>(<span class='st'>"paragraf"</span>)</div><div class='output co'>#&gt; <span class='message'>ℹ Building URL for codelist 'paragraf' - Paragraf</span></div><div class='output co'>#&gt; <span class='message'>✔ Storing codelist in '/tmp/Rtmpb8C2dw/statnipokladna/'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Set dest_dir for more control over downloaded files.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Processing codelist data</span></div><div class='input'><span class='no'>par</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sp_get_codelist.html'>sp_get_codelist</a></span>(<span class='st'>"polozka"</span>)</div><div class='output co'>#&gt; <span class='message'>ℹ Building URL for codelist 'polozka' - Rozpočtová položka</span></div><div class='output co'>#&gt; <span class='message'>✔ Storing codelist in '/tmp/Rtmpb8C2dw/statnipokladna/'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Set dest_dir for more control over downloaded files.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Processing codelist data</span></div><div class='input'>
 <span class='fu'><a href='sp_get_table.html'>sp_get_table</a></span>(<span class='st'>"budget"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>sp_add_codelist</span>(<span class='no'>pol</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>sp_add_codelist</span>(<span class='no'>par</span>)
-}</div></pre>
+  <span class='fu'>sp_add_codelist</span>(<span class='no'>par</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Either year or month not set.</span>
+#&gt; <span class='warning'>Using defaults of 2018 and 12.</span></div><div class='output co'>#&gt; <span class='message'>● Set these values explicitly for reproducibility as the defaults may change in the future</span>
+#&gt; <span class='message'>  to provide access to the latest data by default.</span></div><div class='output co'>#&gt; <span class='error'>Error in ui_code("sp_tables"): could not find function "ui_code"</span></div><div class='input'># }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

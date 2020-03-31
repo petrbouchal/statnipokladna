@@ -87,7 +87,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.5.9000</span>
       </span>
     </div>
 
@@ -288,13 +288,15 @@ files persist in a temporary directory per session.</p>
 <code><a href='sp_get_dataset.html'>sp_get_dataset</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>allorgs_latest</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_table.html'>get_table</a></span>(<span class='st'>"budget-local"</span>)
-<span class='no'>allorgs_2018</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_table.html'>get_table</a></span>(<span class='st'>"budget-local"</span>, <span class='fl'>2018</span>)
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='no'>allorgs_latest</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_table.html'>get_table</a></span>(<span class='st'>"budget-local"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: `get_table()` is deprecated as of statnipokladna 0.5.2.</span>
+#&gt; <span class='warning'>Please use `sp_get_table()` instead.</span>
+#&gt; <span class='warning'>This warning is displayed once per session.</span>
+#&gt; <span class='warning'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span></div><div class='input'><span class='no'>allorgs_2018</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_table.html'>get_table</a></span>(<span class='st'>"budget-local"</span>, <span class='fl'>2018</span>)
 <span class='no'>allorgs_mid2018</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_table.html'>get_table</a></span>(<span class='st'>"budget-local"</span>, <span class='fl'>2018</span>, <span class='fl'>6</span>)
 <span class='no'>oneorg_multiyear</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_table.html'>get_table</a></span>(<span class='st'>"budget-local"</span>, <span class='fl'>2012</span>:<span class='fl'>2018</span>, <span class='fl'>9</span>, <span class='kw'>ico</span> <span class='kw'>=</span> <span class='st'>"00064581"</span>)
 <span class='no'>oneorg_multihalfyears</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_table.html'>get_table</a></span>(<span class='st'>"budget-local"</span>, <span class='fl'>2012</span>:<span class='fl'>2018</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>6</span>, <span class='fl'>12</span>), <span class='kw'>ico</span> <span class='kw'>=</span> <span class='st'>"00064581"</span>)
-}</div></pre>
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
