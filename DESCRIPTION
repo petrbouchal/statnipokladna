@@ -1,6 +1,6 @@
 Package: statnipokladna
 Title: Use Data from the Czech Public Finance Database
-Version: 0.5.5
+Version: 0.5.5.9000
 Authors@R: 
     person(given = "Petr",
            family = "Bouchal",
