@@ -146,7 +146,7 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
                      to provide access to the latest data by default.")
 
   }
-  if(!(table_id %in% sp_tables_i$id)) usethis::ui_stop("Not a valid table id. Consult {ui_code('sp_tables')}.")
+  if(!(table_id %in% sp_tables_i$id)) usethis::ui_stop("Not a valid table id. Consult {usethis::ui_code('sp_tables')}.")
   dataset_id <- sp_tables_i$dataset_id[sp_tables_i$id == table_id]
   table_regex <- paste0(sp_tables_i$file_regex[sp_tables_i$id == table_id])
   get_one_table <- function(dataset_id, year = year, month = month, dest_dir = dest_dir,

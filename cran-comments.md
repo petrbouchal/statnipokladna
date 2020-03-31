@@ -7,6 +7,7 @@ Corrections made:
 - replaced T and F with TRUE and FALSE in whole package
 - replaced \dontrun{} with \donttest{} in all examples
 - updated examples so they do not use deprecated functions
+- fixed bug in tables.R:149 - missing `usethis::` inside usethis::ui_stop()
 
 ## Test environments
 
