@@ -15,6 +15,7 @@ Other changes made resulting from running examples
 - removed example from unexported function `sp_get_codelist_viewer()`
 - changed default in `sp_get_dataset()` to ensure it points to existing data online
 - removed examples from `sp_get_dataset()` that were not meant to work
+- fixed bug in sp_add_codelist introduced when fixing CRAN note
 
 ## Test environments
 

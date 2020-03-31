@@ -5,6 +5,8 @@
 * fixed bug in sp_get_table() - missing `usethis::`
 * changed default in `sp_get_dataset()`
 * update examples so nothing breaks
+* fixed bug in sp_add_codelist introduced when fixing CRAN note
+
 
 # statnipokladna 0.5.5
 
