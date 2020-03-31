@@ -110,11 +110,9 @@ get_dataset_doc <- function(dataset_id, dest_dir = ".", download = TRUE) {
 #' @return character string with complete paths to downloaded files.
 #' @examples
 #' \donttest{
-#' budget_latest <- sp_get_dataset("finu")
-#' budget_2018 <- sp_get_dataset("finu", 2018)
-#' budget_mid2018 <- sp_get_dataset("finu", 2018, 6)
-#' budget_multiyear <- sp_get_dataset("finu", 2012:2018, 9)
-#' budget_multihalfyears <- sp_get_dataset("finu", 2012:2018, c(6, 12))
+#' budget_latest <- sp_get_dataset("finm")
+#' budget_2018 <- sp_get_dataset("finm", 2018)
+#' budget_mid2018 <- sp_get_dataset("finm", 2018, 6)
 #' }
 #' @family Core workflow
 #' @export
