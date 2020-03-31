@@ -1,12 +1,11 @@
-## Resubmission no. 2
+## Resubmission no. 3
 
-This is a resubmission following a previous submission for this packages.
+This is a resubmission following a previous resubmission for this packages.
 
 Corrections made:
 
-- added full URLs to 1 link in README.md
-
-My sincere apologies for the hassle - that was an oversight on my part.
+- replaced T and F with TRUE and FALSE in whole package
+- replaced \dontrun{} with \donttest{} in all examples
 
 ## Test environments
 
