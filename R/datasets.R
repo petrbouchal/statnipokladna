@@ -102,7 +102,7 @@ get_dataset_doc <- function(dataset_id, dest_dir = ".", download = TRUE) {
 #' subdirectories by dataset, year and month. They persist per session to avoid redownloads.
 #'
 #' @param dataset_id A dataset ID. See `id` column in `sp_datasets` for a list of available codelists.
-#' @param year year, numeric, 2015-2018 for some datasets, 2010-2019 for others. Defaults to 2019.
+#' @param year year, numeric, 2015-2018 for some datasets, 2010-2019 for others. Defaults to 2018.
 #' @param month month, numeric. Must be between 1 and 12. Defaults to 12.
 #' @param dest_dir character. Directory in which downloaded files will be stored. Defaults to `tempdir()`. Will be created if it does not exist.
 #' @param redownload Redownload even if file has already been downloaded? Defaults to FALSE.
@@ -118,7 +118,7 @@ get_dataset_doc <- function(dataset_id, dest_dir = ".", download = TRUE) {
 #' }
 #' @family Core workflow
 #' @export
-sp_get_dataset <- function(dataset_id, year = 2019, month = 12,
+sp_get_dataset <- function(dataset_id, year = 2018, month = 12,
                         dest_dir = tempdir(), redownload = FALSE) {
   if(interactive() == FALSE & (missing(year) | missing(month))) {
     usethis::ui_warn("Either {usethis::ui_field('year')} or {usethis::ui_field('month')} not set.

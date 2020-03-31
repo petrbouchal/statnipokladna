@@ -13,6 +13,7 @@ Other changes made resulting from running examples
 - fixed bug in tables.R:149 - missing `usethis::` inside usethis::ui_stop()
 - updated examples in `sp_get_codelist()` so they run correctly
 - removed example from unexported function `sp_get_codelist_viewer()`
+- changed default in `sp_get_dataset()` to ensure it points to existing data online
 
 ## Test environments
 

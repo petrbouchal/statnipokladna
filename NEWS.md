@@ -3,6 +3,7 @@
 * CRAN fix: replace \dontrun{} with \donttest{} and T/F with TRUE/FALSE
 * updated examples so they do not use deprecated functions
 * fixed bug in sp_get_table() - missing `usethis::`
+* changed default in `sp_get_dataset()`
 * update examples so nothing breaks
 
 # statnipokladna 0.5.5
