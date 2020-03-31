@@ -115,7 +115,7 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install this package from CRAN:</p>
+<p>You can install the released version from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"statnipokladna"</span>)</a></code></pre></div>
 <p>You can install the current development release of statnipokladna from <a href="https://github.com/petrbouchal/statnipokladna">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"petrbouchal/statnipokladna"</span>,</a>
@@ -184,7 +184,7 @@
 <a class="sourceLine" id="cb6-3" data-line-number="3">                           <span class="dt">month =</span> <span class="dv">9</span>)</a>
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2019-09'</span></a>
 <a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpCiy99k/statnipokladna/finm/2019/09/'</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpNKHzQ3/statnipokladna/finm/2019/09/'</span></a>
 <a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; ℹ Set dest_dir for more control over downloaded files.</span></a>
 <a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; ℹ Reading data...</span></a>
 <a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; ℹ Transforming data...</span></a></code></pre></div>
@@ -205,7 +205,7 @@
 <p>…but it has been cleaned up, and can be enriched with any of the metadata codelists:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">functional_categories &lt;-<span class="st"> </span><span class="kw"><a href="reference/sp_get_codelist.html">sp_get_codelist</a></span>(<span class="st">"paragraf"</span>)</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; ℹ Building URL for codelist 'paragraf' - Paragraf</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpCiy99k/statnipokladna/'</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpNKHzQ3/statnipokladna/'</span></a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; ℹ Set dest_dir for more control over downloaded files.</span></a>
 <a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; ℹ Processing codelist data</span></a></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">functional_categories</a>
@@ -236,7 +236,7 @@
 <a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; Joining, by = "paragraf"</span></a>
 <a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; Joining, by = "paragraf"</span></a>
 <a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; ℹ Building URL for codelist 'polozka' - Rozpočtová položka</span></a>
-<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpCiy99k/statnipokladna/'</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpNKHzQ3/statnipokladna/'</span></a>
 <a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; ℹ Set dest_dir for more control over downloaded files.</span></a>
 <a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; ℹ Processing codelist data</span></a>
 <a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; Joining, by = c("polozka", "_nazev", "_kr_nazev", "_str_nazev", "_start_date", "_end_date")</span></a>
@@ -269,14 +269,14 @@
 <a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span></a>
 <a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2019-12'</span></a>
 <a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt; ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span></a>
-<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt; ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpCiy99k/statnipokladna/finm/2019/12/'</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt; ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpNKHzQ3/statnipokladna/finm/2019/12/'</span></a>
 <a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co">#&gt; ℹ Set dest_dir for more control over downloaded files.</span></a>
-<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpCiy99k/statnipokladna/finm/2019/12/FINM201_2019012.csv"</span></a>
-<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="co">#&gt; [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpCiy99k/statnipokladna/finm/2019/12/FINM202_2019012.csv"</span></a>
-<a class="sourceLine" id="cb11-12" data-line-number="12"><span class="co">#&gt; [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpCiy99k/statnipokladna/finm/2019/12/FINM203_2019012.csv"</span></a>
-<a class="sourceLine" id="cb11-13" data-line-number="13"><span class="co">#&gt; [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpCiy99k/statnipokladna/finm/2019/12/FINM204_2019012.csv"</span></a>
-<a class="sourceLine" id="cb11-14" data-line-number="14"><span class="co">#&gt; [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpCiy99k/statnipokladna/finm/2019/12/FINM205_2019012.csv"</span></a>
-<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="co">#&gt; [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpCiy99k/statnipokladna/finm/2019/12/FINM207_2019012.csv"</span></a></code></pre></div>
+<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpNKHzQ3/statnipokladna/finm/2019/12/FINM201_2019012.csv"</span></a>
+<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="co">#&gt; [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpNKHzQ3/statnipokladna/finm/2019/12/FINM202_2019012.csv"</span></a>
+<a class="sourceLine" id="cb11-12" data-line-number="12"><span class="co">#&gt; [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpNKHzQ3/statnipokladna/finm/2019/12/FINM203_2019012.csv"</span></a>
+<a class="sourceLine" id="cb11-13" data-line-number="13"><span class="co">#&gt; [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpNKHzQ3/statnipokladna/finm/2019/12/FINM204_2019012.csv"</span></a>
+<a class="sourceLine" id="cb11-14" data-line-number="14"><span class="co">#&gt; [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpNKHzQ3/statnipokladna/finm/2019/12/FINM205_2019012.csv"</span></a>
+<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="co">#&gt; [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpNKHzQ3/statnipokladna/finm/2019/12/FINM207_2019012.csv"</span></a></code></pre></div>
 <p>This will put the files in a temp directory.</p>
 <p>Then look at its documentation:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">statnipokladna<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/statnipokladna/man/sp_get_dataset_doc.html">sp_get_dataset_doc</a></span>(<span class="st">"finm"</span>)</a>
@@ -349,6 +349,8 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=statnipokladna">https://​cloud.r-project.org/​package=statnipokladna</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/petrbouchal/statnipokladna">https://​github.com/​petrbouchal/​statnipokladna</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/petrbouchal/statnipokladna/issues">https://​github.com/​petrbouchal/​statnipokladna/​issues</a>
@@ -380,6 +382,8 @@
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://CRAN.R-project.org/package=statnipokladna"><img src="https://www.r-pkg.org/badges/version/statnipokladna" alt="CRAN status"></a></li>
+<li><a href="https://CRAN.R-project.org/package=statnipokladna"><img src="https://cranlogs.r-pkg.org/badges/grand-total/statnipokladna" alt="CRAN downloads"></a></li>
+<li><a href="https://CRAN.R-project.org/package=statnipokladna"><img src="https://cranlogs.r-pkg.org/badges/last-month/statnipokladna" alt="CRAN monthly downloads"></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
 <li><a href="https://travis-ci.org/petrbouchal/statnipokladna"><img src="https://travis-ci.org/petrbouchal/statnipokladna.svg?branch=master" alt="Travis build status"></a></li>
 </ul>
