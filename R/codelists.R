@@ -190,14 +190,14 @@ switch_minus <- function(string) {
 #' @export
 #' @examples
 #' \donttest{
-#' sp_get_table("budget") %>%
+#' sp_get_table("budget-central", 2017) %>%
 #'   sp_add_codelist("polozka") %>%
 #'   sp_add_codelist("paragraf")
 #'
 #' pol <- sp_get_codelist("paragraf")
 #' par <- sp_get_codelist("polozka")
 #'
-#' sp_get_table("budget") %>%
+#' sp_get_table("budget-central", 2017) %>%
 #'   sp_add_codelist(pol) %>%
 #'   sp_add_codelist(par)
 #' }
