@@ -110,11 +110,11 @@ Data is processed in the following way:
 }
 \examples{
 \donttest{
-allorgs_latest <- get_table("budget-local")
-allorgs_2018 <- get_table("budget-local", 2018)
-allorgs_mid2018 <- get_table("budget-local", 2018, 6)
-oneorg_multiyear <- get_table("budget-local", 2012:2018, 9, ico = "00064581")
-oneorg_multihalfyears <- get_table("budget-local", 2012:2018, c(6, 12), ico = "00064581")
+allorgs_latest <- sp_get_table("budget-local")
+allorgs_2018 <- sp_get_table("budget-local", 2018)
+allorgs_mid2018 <- sp_get_table("budget-local", 2018, 6)
+oneorg_multiyear <- sp_get_table("budget-local", 2012:2018, 12, ico = "00064581")
+oneorg_multihalfyears <- sp_get_table("budget-local", 2013:2018, c(6, 12), ico = "00064581")
 }
 }
 \seealso{

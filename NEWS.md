@@ -1,6 +1,7 @@
 # statnipokladna 0.5.6
 
 * CRAN fix: replace \dontrun{} with \donttest{} and T/F with TRUE/FALSE
+* updated examples so they do not use deprecated functions
 
 # statnipokladna 0.5.5
 
