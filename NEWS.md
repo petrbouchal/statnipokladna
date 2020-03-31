@@ -1,4 +1,6 @@
-# statnipokladna (development version)
+# statnipokladna 0.5.6
+
+* CRAN fix: replace \dontrun{} with \donttest{} and T/F with TRUE/FALSE
 
 # statnipokladna 0.5.5
 
