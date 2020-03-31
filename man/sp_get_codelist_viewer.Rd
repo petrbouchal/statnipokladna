@@ -17,11 +17,6 @@ a URL, character vector of length one.
 \description{
 Returns a URL for the online codelist browser in monitor.statnipokladna.cz and opens it in browser if open = TRUE.
 }
-\examples{
-\donttest{
-sp_get_codelist_viewer("paragraf")
-}
-}
 \seealso{
 Other Utilities: 
 \code{\link{get_dataset}()},

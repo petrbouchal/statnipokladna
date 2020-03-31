@@ -135,10 +135,6 @@ get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload
 #' @return a URL, character vector of length one.
 #' @family Utilities
 #' @keywords internal
-#' @examples
-#' \donttest{
-#' sp_get_codelist_viewer("paragraf")
-#' }
 sp_get_codelist_viewer <- function(codelist_id, open = TRUE) {
   if(!(codelist_id %in% sp_codelists$id)) stop("Not a valid codelist ID")
   codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
