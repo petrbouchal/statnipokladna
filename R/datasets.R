@@ -28,9 +28,9 @@ sp_datasets_i <- tibble::tribble(~id, ~name, ~implemented,
 #' @family Lists of available entities
 sp_datasets <- sp_datasets_i %>% dplyr::select(.data$id, .data$name) %>%
   dplyr::mutate_if(is.character, stringi::stri_unescape_unicode)
-# usethis::use_data(sp_datasets, overwrite = T)
+# usethis::use_data(sp_datasets, overwrite = TRUE)
 
-get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists = T) {
+get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists = TRUE) {
   if(!(dataset_id %in% sp_datasets_i$id)) usethis::ui_stop("Not a valid dataset ID")
   dataset_name <- sp_datasets_i[sp_datasets_i$id == dataset_id, "name"]
   usethis::ui_info("Building URL for dataset {usethis::ui_value(dataset_id)}: {usethis::ui_value(dataset_name)}, {usethis::ui_value(stringr::str_c(year,'-',month))}")
@@ -59,11 +59,11 @@ get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists
 #' @return character (link) if download = TRUE, nothing otherwise.
 #' @family Utilities
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' sp_get_dataset_doc("finm")
 #' }
 #' @export
-sp_get_dataset_doc <- function(dataset_id, dest_dir = ".", download = T) {
+sp_get_dataset_doc <- function(dataset_id, dest_dir = ".", download = TRUE) {
   if(!curl::has_internet()) usethis::ui_stop(c("No internet connection. Cannot continue. Retry when connected."))
   if(!(dataset_id %in% sp_datasets_i$id)) usethis::ui_stop("Not a valid dataset ID")
   doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
@@ -88,7 +88,7 @@ sp_get_dataset_doc <- function(dataset_id, dest_dir = ".", download = T) {
 #'
 #' @return a tibble
 #' @export
-get_dataset_doc <- function(dataset_id, dest_dir = ".", download = T) {
+get_dataset_doc <- function(dataset_id, dest_dir = ".", download = TRUE) {
   lifecycle::deprecate_soft("0.5.2", "statnipokladna::get_dataset_doc()", "sp_get_dataset_doc()")
   sp_get_dataset_doc(dataset_id = dataset_id, dest_dir = dest_dir, download = download)
 }
@@ -109,7 +109,7 @@ get_dataset_doc <- function(dataset_id, dest_dir = ".", download = T) {
 #'
 #' @return character string with complete paths to downloaded files.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' budget_latest <- get_dataset("finu")
 #' budget_2018 <- get_dataset("finu", 2018)
 #' budget_mid2018 <- get_dataset("finu", 2018, 6)
@@ -119,7 +119,7 @@ get_dataset_doc <- function(dataset_id, dest_dir = ".", download = T) {
 #' @family Core workflow
 #' @export
 sp_get_dataset <- function(dataset_id, year = 2019, month = 12,
-                        dest_dir = tempdir(), redownload = F) {
+                        dest_dir = tempdir(), redownload = FALSE) {
   if(interactive() == FALSE & (missing(year) | missing(month))) {
     usethis::ui_warn("Either {usethis::ui_field('year')} or {usethis::ui_field('month')} not set.
                      Using defaults of {usethis::ui_value(year)} and {usethis::ui_value(month)}.")
@@ -130,7 +130,7 @@ sp_get_dataset <- function(dataset_id, year = 2019, month = 12,
   if(!(year %in% c(2010:lubridate::year(lubridate::today())))) stop("`Year` must be between 2010 and now.")
   month <- formatC(month, width = 2, format = "d", flag = "0")
   td <- paste(dest_dir, "statnipokladna", dataset_id, year, month, sep = "/")
-  dir.create(td, showWarnings = F, recursive = T)
+  dir.create(td, showWarnings = FALSE, recursive = TRUE)
   tf <- paste0(td, "/", dataset_id, year, month, ".zip")
   if(file.exists(tf) & !redownload) {
     usethis::ui_info("Files already in {td}, not downloading. Set {usethis::ui_code('redownload = TRUE')} if needed.")
@@ -157,7 +157,7 @@ sp_get_dataset <- function(dataset_id, year = 2019, month = 12,
 #' @family Utilities
 #' @export
 get_dataset <- function(dataset_id, year = 2019, month = 12,
-                        dest_dir = tempdir(), redownload = F) {
+                        dest_dir = tempdir(), redownload = FALSE) {
   lifecycle::deprecate_soft("0.5.2", "statnipokladna::get_dataset()", "sp_get_dataset()")
   sp_get_dataset(dataset_id = dataset_id, year = year, month = month,
                  dest_dir = dest_dir, redownload = redownload)

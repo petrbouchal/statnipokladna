@@ -45,7 +45,7 @@ sp_codelists <- tibble::tribble(~id, ~name,
   dplyr::mutate(name = stringi::stri_unescape_unicode(.data$name)) %>%
   dplyr::arrange(.data$id)
 # stringi::stri_escape_unicode("xxx")
-# usethis::use_data(sp_codelists, overwrite = T)
+# usethis::use_data(sp_codelists, overwrite = TRUE)
 
 #' Get codelist
 #'
@@ -69,15 +69,15 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #'
 #' @return A tibble
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' sp_get_codelist("paragraf")
 #' }
 #' @export
 #' @family Core workflow
 
-sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload = F) {
+sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload = FALSE) {
   td <- paste0(dest_dir, "/statnipokladna/")
-  dir.create(td, showWarnings = F, recursive = T)
+  dir.create(td, showWarnings = FALSE, recursive = TRUE)
   tf <- paste0(td, codelist_id, ".xml")
   if(file.exists(tf) & !redownload) {
     usethis::ui_info("Codelist file already in {usethis::ui_path(td)}, not downloading. Set {usethis::ui_code('redownload = TRUE')} if needed.")
@@ -119,7 +119,7 @@ sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownl
 #' @export
 #' @family Core workflow
 
-get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload = F) {
+get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload = FALSE) {
   lifecycle::deprecate_soft("0.5.2", "statnipokladna::get_codelist()", "sp_get_codelist()")
   sp_get_codelist(codelist_id = codelist_id, n = n, dest_dir = dest_dir, redownload = redownload)
 }
@@ -136,7 +136,7 @@ get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload
 #' @family Utilities
 #' @keywords internal
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' sp_get_codelist_viewer("paragraf")
 #' }
 sp_get_codelist_viewer <- function(codelist_id, open = TRUE) {
@@ -189,7 +189,7 @@ switch_minus <- function(string) {
 #' @family Core workflow
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' sp_get_table("budget") %>%
 #'   sp_add_codelist("polozka") %>%
 #'   sp_add_codelist("paragraf")
@@ -202,7 +202,7 @@ switch_minus <- function(string) {
 #'   sp_add_codelist(par)
 #' }
 sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_vykaz,
-                         redownload = F,
+                         redownload = FALSE,
                          dest_dir = tempdir()) {
   if(is.null(codelist)) stop("Please supply a codelist")
   # print(rlang::as_label({{period_column}}))
@@ -245,12 +245,12 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
   slepeno <- data %>%
     dplyr::ungroup() %>%
     dplyr::group_by({{period_column}}) %>%
-    dplyr::group_map(slepit, keep = T) %>%
+    dplyr::group_map(slepit, keep = TRUE) %>%
     dplyr::bind_rows()
   return(slepeno)
 }
 
-get_codelist_url <- function(codelist_id, check_if_exists = T) {
+get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
   if(!(codelist_id %in% sp_codelists$id)) usethis::ui_stop("Not a valid codelist ID")
   codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
   if(!curl::has_internet()) usethis::ui_stop(c("No internet connection. Cannot continue. Retry when connected.",
@@ -276,7 +276,7 @@ get_codelist_url <- function(codelist_id, check_if_exists = T) {
 #' @family Core workflow
 #' @export
 add_codelist <- function(data, codelist = NULL, period_column = .data$period_vykaz,
-                            redownload = F,
+                            redownload = FALSE,
                             dest_dir = tempdir()) {
   lifecycle::deprecate_soft("0.5.2", "statnipokladna::add_codelist()", "sp_add_codelist()")
   sp_add_codelist(data = data, codelist = codelist, period_column = period_column,

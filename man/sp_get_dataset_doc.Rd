@@ -4,7 +4,7 @@
 \alias{sp_get_dataset_doc}
 \title{Get dataset documentation}
 \usage{
-sp_get_dataset_doc(dataset_id, dest_dir = ".", download = T)
+sp_get_dataset_doc(dataset_id, dest_dir = ".", download = TRUE)
 }
 \arguments{
 \item{dataset_id}{dataset ID. See \code{sp_datasets}.}
@@ -20,7 +20,7 @@ character (link) if download = TRUE, nothing otherwise.
 Downloads XLS file with dataset documentation, or opens link to this file in browser.
 }
 \examples{
-\dontrun{
+\donttest{
 sp_get_dataset_doc("finm")
 }
 }

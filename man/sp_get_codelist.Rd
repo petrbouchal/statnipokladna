@@ -4,7 +4,12 @@
 \alias{sp_get_codelist}
 \title{Get codelist}
 \usage{
-sp_get_codelist(codelist_id, n = NULL, dest_dir = tempdir(), redownload = F)
+sp_get_codelist(
+  codelist_id,
+  n = NULL,
+  dest_dir = tempdir(),
+  redownload = FALSE
+)
 }
 \arguments{
 \item{codelist_id}{A codelist ID. See \code{id} column in \code{sp_codelists} for a list of available codelists.}
@@ -34,7 +39,7 @@ Codelists XML files are stored in a temporary directory as determined by \code{t
 and persist per session to avoid redownloads.
 }
 \examples{
-\dontrun{
+\donttest{
 sp_get_codelist("paragraf")
 }
 }

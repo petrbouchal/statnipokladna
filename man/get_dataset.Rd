@@ -9,7 +9,7 @@ get_dataset(
   year = 2019,
   month = 12,
   dest_dir = tempdir(),
-  redownload = F
+  redownload = FALSE
 )
 }
 \arguments{

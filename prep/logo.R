@@ -60,7 +60,7 @@ img_hex %>%
   image_write(here::here("prep", "logo_hex_print.png"), density = 600)
 
 img_hex %>%
-  image_convert(format = "png", colorspace = "cmyk", matte = T) %>%
+  image_convert(format = "png", colorspace = "cmyk", matte = TRUE) %>%
   image_scale("1200x1200") %>%
   image_write(here::here("prep", "logo_hex_print.png"), density = 1200, format = "png")
 

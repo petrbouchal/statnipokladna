@@ -4,7 +4,7 @@
 \alias{get_dataset_doc}
 \title{Deprecated: Get dataset documentation}
 \usage{
-get_dataset_doc(dataset_id, dest_dir = ".", download = T)
+get_dataset_doc(dataset_id, dest_dir = ".", download = TRUE)
 }
 \arguments{
 \item{dataset_id}{dataset ID. See \code{sp_datasets}.}

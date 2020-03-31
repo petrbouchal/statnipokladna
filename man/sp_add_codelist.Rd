@@ -8,7 +8,7 @@ sp_add_codelist(
   data,
   codelist = NULL,
   period_column = .data$period_vykaz,
-  redownload = F,
+  redownload = FALSE,
   dest_dir = tempdir()
 )
 }
@@ -48,7 +48,7 @@ Codelist-originating columns in the resulting data frame are renamed so they do 
 joining additional codelists, perhaps in a single pipe call.
 }
 \examples{
-\dontrun{
+\donttest{
 sp_get_table("budget") \%>\%
   sp_add_codelist("polozka") \%>\%
   sp_add_codelist("paragraf")

@@ -4,7 +4,7 @@
 \alias{get_codelist}
 \title{Deprecated: Get codelist}
 \usage{
-get_codelist(codelist_id, n = NULL, dest_dir = tempdir(), redownload = F)
+get_codelist(codelist_id, n = NULL, dest_dir = tempdir(), redownload = FALSE)
 }
 \arguments{
 \item{codelist_id}{A codelist ID. See \code{id} column in \code{sp_codelists} for a list of available codelists.}

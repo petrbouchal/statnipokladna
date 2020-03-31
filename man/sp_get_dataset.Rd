@@ -9,7 +9,7 @@ sp_get_dataset(
   year = 2019,
   month = 12,
   dest_dir = tempdir(),
-  redownload = F
+  redownload = FALSE
 )
 }
 \arguments{
@@ -34,7 +34,7 @@ Files are stored in a temp folder as determined by \code{tempdir()} and further 
 subdirectories by dataset, year and month. They persist per session to avoid redownloads.
 }
 \examples{
-\dontrun{
+\donttest{
 budget_latest <- get_dataset("finu")
 budget_2018 <- get_dataset("finu", 2018)
 budget_mid2018 <- get_dataset("finu", 2018, 6)

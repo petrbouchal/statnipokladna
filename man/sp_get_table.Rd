@@ -109,7 +109,7 @@ Data is processed in the following way:
 }
 }
 \examples{
-\dontrun{
+\donttest{
 allorgs_latest <- get_table("budget-local")
 allorgs_2018 <- get_table("budget-local", 2018)
 allorgs_mid2018 <- get_table("budget-local", 2018, 6)

@@ -32,7 +32,7 @@ You can install the current development release of statnipokladna from
 
 ``` r
 remotes::install_github("petrbouchal/statnipokladna",
-                        build_vignettes = T,
+                        build_vignettes = TRUE,
                         ref = github_release())
 ```
 
@@ -40,7 +40,7 @@ or the latest in-development version with
 
 ``` r
 remotes::install_github("petrbouchal/statnipokladna",
-                         build_vignettes = T)
+                         build_vignettes = TRUE)
 ```
 
 I also keep binaries in a `drat` repo, which you can access by
@@ -88,7 +88,7 @@ the official system has been partially overhauled in February 2020 and I am tryi
 
 ## Getting started
 
-```{r message=FALSE, warning=F}
+```{r message=FALSE, warning=FALSE}
 library(statnipokladna)
 ```
 
@@ -100,7 +100,7 @@ local_budgets <- sp_get_table(table_id = "budget-local", # table ID, see `sp_tab
                            month = 9)
 ```
 
-The data is automatically downloaded to a temp directory, so it will be reused by future calls to `get_table()` made in the same session, unless you set `force_redownload = T`. You set the `dest_dir` parameter e.g. to `"."`, a directory will be created in your current working directory and the data will be downloaded into it so that it can persist across sessions. 
+The data is automatically downloaded to a temp directory, so it will be reused by future calls to `get_table()` made in the same session, unless you set `force_redownload = TRUE`. You set the `dest_dir` parameter e.g. to `"."`, a directory will be created in your current working directory and the data will be downloaded into it so that it can persist across sessions. 
 
 It is a rather raw-looking data frame...
 

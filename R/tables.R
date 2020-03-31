@@ -36,7 +36,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 "sp_tables" <- sp_tables_i %>% dplyr::select(.data$id, .data$dataset_id,
                                              .data$czech_name, .data$note) %>%
   dplyr::mutate_if(is.character, stringi::stri_unescape_unicode)
-# usethis::use_data(sp_tables, overwrite = T)
+# usethis::use_data(sp_tables, overwrite = TRUE)
 
 #' Get a statnipokladna table
 #'
@@ -126,7 +126,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #' @return a tibble; see Details for key to the columns
 #' @encoding UTF-8
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' allorgs_latest <- get_table("budget-local")
 #' allorgs_2018 <- get_table("budget-local", 2018)
 #' allorgs_mid2018 <- get_table("budget-local", 2018, 6)
@@ -161,7 +161,7 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
       dt <- readr::read_csv2(table_file, col_types = readr::cols(.default = readr::col_character()))))
     # print(head(dt))
     usethis::ui_info("Transforming data...")
-    if(max(stringr::str_length(dt$`ZC_ICO:ZC_ICO`), na.rm = T) == 10) {
+    if(max(stringr::str_length(dt$`ZC_ICO:ZC_ICO`), na.rm = TRUE) == 10) {
       dt <- dplyr::mutate(dt, `ZC_ICO:ZC_ICO` = stringr::str_sub(.data$`ZC_ICO:ZC_ICO`, 3, 10))
     }
     if(!is.null(ico)) dt <- dt[dt$`ZC_ICO:ZC_ICO` %in% ico,]
