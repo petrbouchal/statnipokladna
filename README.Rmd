@@ -17,6 +17,8 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/statnipokladna)](https://CRAN.R-project.org/package=statnipokladna)
+[![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/statnipokladna)](https://CRAN.R-project.org/package=statnipokladna)
+[![CRAN monthly downloads](https://cranlogs.r-pkg.org/badges/last-month/statnipokladna)](https://CRAN.R-project.org/package=statnipokladna)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Travis build status](https://travis-ci.org/petrbouchal/statnipokladna.svg?branch=master)](https://travis-ci.org/petrbouchal/statnipokladna)
 <!-- badges: end -->
@@ -25,7 +27,12 @@ The goal of statnipokladna is to provide programmatic access to open data from t
 
 ## Installation
 
-The package is not yet on CRAN.
+You can install the released version from CRAN:
+
+``` r
+install.packages("statnipokladna")
+```
+
 
 You can install the current development release of statnipokladna from
 [GitHub](https://github.com/petrbouchal/statnipokladna) with:
