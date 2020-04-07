@@ -17,7 +17,8 @@ sp_get_table(
 \arguments{
 \item{table_id}{A table ID. See \code{id} column in \code{sp_tables} for a list of available codelists.}
 
-\item{year}{year, numeric, 2015-2018 for some datasets, 2010-2018 for others. Can be a vector of length > 1 (see details).}
+\item{year}{year, numeric, 2015-2018 for some datasets, 2010-2018 for others.
+Can be a vector of length > 1 (see Details for how to work with data across time periods.).}
 
 \item{month}{month, numeric. Must be 3, 6, 9 or 12. Can be a vector of length > 1 (see details).}
 
@@ -36,6 +37,10 @@ Cleans and loads a table. If needed, a dataset containing the table is downloade
 \details{
 The data is loaded from files downloaded automatically by \code{get_dataset()};
 files persist in a temporary directory per session.
+
+How data for different time periods is exported differs by dataset.
+This has significant implications for how you get to usable full-year numbers or time series in different tables.
+See \code{vignette("statnipokladna")} for details on this.
 
 Data is processed in the following way:
 \itemize{

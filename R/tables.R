@@ -45,6 +45,10 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #' The data is loaded from files downloaded automatically by `get_dataset()`;
 #' files persist in a temporary directory per session.
 #'
+#' How data for different time periods is exported differs by dataset.
+#' This has significant implications for how you get to usable full-year numbers or time series in different tables.
+#' See `vignette("statnipokladna")` for details on this.
+#'
 #' Data is processed in the following way:
 #'
 #' - all columns are given names that are human-readable and facilitato add codelists
@@ -117,7 +121,8 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #'
 #'
 #' @param table_id A table ID. See `id` column in `sp_tables` for a list of available codelists.
-#' @param year year, numeric, 2015-2018 for some datasets, 2010-2018 for others. Can be a vector of length > 1 (see details).
+#' @param year year, numeric, 2015-2018 for some datasets, 2010-2018 for others.
+#' Can be a vector of length > 1 (see Details for how to work with data across time periods.).
 #' @param month month, numeric. Must be 3, 6, 9 or 12. Can be a vector of length > 1 (see details).
 #' @param ico ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See <http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/ucjed> to look up ID of any org in the dataset.
 #' @param dest_dir character. Directory in which downloaded files will be stored. Defaults to `tempdir()`. Will be created if it does not exist.

@@ -15,9 +15,11 @@ get_dataset(
 \arguments{
 \item{dataset_id}{A dataset ID. See \code{id} column in \code{sp_datasets} for a list of available codelists.}
 
-\item{year}{year, numeric, 2015-2018 for some datasets, 2010-2019 for others. Defaults to 2018.}
+\item{year}{year, numeric, 2015-2018 for some datasets, 2010-2019 for others. Defaults to 2018.
+(see Details for how to work with data across time periods.)}
 
-\item{month}{month, numeric. Must be between 1 and 12. Defaults to 12.}
+\item{month}{month, numeric. Must be between 1 and 12. Defaults to 12.
+(see Details for how to work with data across time periods.)}
 
 \item{dest_dir}{character. Directory in which downloaded files will be stored. Defaults to \code{tempdir()}. Will be created if it does not exist.}
 

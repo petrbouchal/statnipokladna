@@ -1,6 +1,9 @@
 # statnipokladna (development version)
 
+## Documentation updates
+
 * nicer vignette index entries
+* vignette and functions now document working with multiple time periods, which differs between datasets/tables
 
 # statnipokladna 0.5.6
 

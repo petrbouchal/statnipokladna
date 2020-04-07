@@ -101,9 +101,15 @@ get_dataset_doc <- function(dataset_id, dest_dir = ".", download = TRUE) {
 #' Files are stored in a temp folder as determined by `tempdir()` and further sorted into
 #' subdirectories by dataset, year and month. They persist per session to avoid redownloads.
 #'
+#' How data for different time periods is exported differs by dataset.
+#' This has significant implications for how you get to usable full-year numbers or time series in different tables.
+#' See `vignette("statnipokladna")` for details on this.
+#'
 #' @param dataset_id A dataset ID. See `id` column in `sp_datasets` for a list of available codelists.
 #' @param year year, numeric, 2015-2018 for some datasets, 2010-2019 for others. Defaults to 2018.
+#' (see Details for how to work with data across time periods.)
 #' @param month month, numeric. Must be between 1 and 12. Defaults to 12.
+#' (see Details for how to work with data across time periods.)
 #' @param dest_dir character. Directory in which downloaded files will be stored. Defaults to `tempdir()`. Will be created if it does not exist.
 #' @param redownload Redownload even if file has already been downloaded? Defaults to FALSE.
 #'
