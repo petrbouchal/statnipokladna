@@ -1,5 +1,11 @@
 # statnipokladna (development version)
 
+## Bug fixes
+
+* adapt to new URL scheme for data exports at statnipokladna.cz, fixes #74
+
+## Documentation updates
+
 * nicer vignette index entries
 
 # statnipokladna 0.5.6

@@ -1,14 +1,14 @@
 
-sp_datasets_i <- tibble::tribble(~id, ~name, ~implemented,
-                               "finm", "FIN 2-12 M - Pln\\u011bn\\u00ed rozpo\\u010dtu M\\u0158O", F,
-                               "finu", "FIN 2-04 U - Pln\\u011bn\\u00ed rozpo\\u010dtu KAP, OSS a SF (2010 - 2014)", F,
-                               "finsf", "FIN 2-04 U - Pln\\u011bn\\u00ed rozpo\\u010dtu SF", F,
-                               "misris", "FIN 1-12 OSS - Pln\\u011bn\\u00ed rozpo\\u010dtu KAP a OSS", F,
-                               "rozv", "Rozvaha", F,
-                               "ppt", "P\\u0159ehled pen\\u011b\\u017en\\u00edch tok\\u016f", F,
-                               "pozvk", "P\\u0159ehled o zm\\u011bn\\u00e1ch vlastn\\u00edho kapit\\u00e1lu", F,
-                               "pril", "P\\u0159\\u00edloha", F,
-                               "vykzz", "V\\u00fdkaz zisk\\u016f a ztr\\u00e1t", F) %>%
+sp_datasets_i <- tibble::tribble(~id, ~name, ~implemented, ~dir,
+                               "finm", "FIN 2-12 M - Pln\\u011bn\\u00ed rozpo\\u010dtu M\\u0158O", F, "FinM",
+                               "finu", "FIN 2-04 U - Pln\\u011bn\\u00ed rozpo\\u010dtu KAP, OSS a SF (2010 - 2014)", F, "FinU",
+                               "finsf", "FIN 2-04 U - Pln\\u011bn\\u00ed rozpo\\u010dtu SF", F, "FinSF",
+                               "misris", "FIN 1-12 OSS - Pln\\u011bn\\u00ed rozpo\\u010dtu KAP a OSS", F, "FinOSS",
+                               "rozv", "Rozvaha", F, "Rozvaha",
+                               "ppt", "P\\u0159ehled pen\\u011b\\u017en\\u00edch tok\\u016f", F, "PenezniToky",
+                               "pozvk", "P\\u0159ehled o zm\\u011bn\\u00e1ch vlastn\\u00edho kapit\\u00e1lu", F, "VlastniKapital",
+                               "pril", "P\\u0159\\u00edloha", F, "Priloha",
+                               "vykzz", "V\\u00fdkaz zisk\\u016f a ztr\\u00e1t", F, "ZiskZtraty") %>%
   dplyr::mutate(name = stringi::stri_unescape_unicode(.data$name)) %>%
   dplyr::arrange(.data$id)
 # stringi::stri_escape_unicode("xxx")
@@ -33,8 +33,9 @@ sp_datasets <- sp_datasets_i %>% dplyr::select(.data$id, .data$name) %>%
 get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists = TRUE) {
   if(!(dataset_id %in% sp_datasets_i$id)) usethis::ui_stop("Not a valid dataset ID")
   dataset_name <- sp_datasets_i[sp_datasets_i$id == dataset_id, "name"]
+  dataset_dir <- sp_datasets_i[sp_datasets_i$id == dataset_id, "dir"]
   usethis::ui_info("Building URL for dataset {usethis::ui_value(dataset_id)}: {usethis::ui_value(dataset_name)}, {usethis::ui_value(stringr::str_c(year,'-',month))}")
-  x <- stringr::str_glue("{sp_base_url}/data/{year}_{month}_Data_CSUIS_{toupper(dataset_id)}.zip")
+  x <- stringr::str_glue("{sp_base_url}/data/extrakty/csv/{dataset_dir}/{year}_{month}_Data_CSUIS_{toupper(dataset_id)}.zip")
   # print(x)
   if(!curl::has_internet()) usethis::ui_stop(c("No internet connection. Cannot continue. Retry when connected.",
                                                "If you need offline access to the data across R sessions, set the {ui_field('dest_dir')} parameter."))
