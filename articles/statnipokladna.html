@@ -124,6 +124,13 @@
 <p>The data published on <a href="https://monitor.statnipokladna.cz/datovy-katalog/" class="uri">https://monitor.statnipokladna.cz/datovy-katalog/</a> are exports from a much larger database used by Státní pokladna (SP), a comprehensive budgeting and financial/accounting reporting system for most Czech public organisations.</p>
 <p>In some ways the data is a secondary product not always dogfooded by the data maintainers, so sometimes (though not often) there are small inconsistencies on formats and content.</p>
 <p>Several datasets are not published in open data but are available in the <a href="https://monitor.statnipokladna.cz/analyza/#">analytical tool</a> (only in Czech) or the web-based overviews. This relates to data on budget preparation and budgetary responsibility, respectively.</p>
+<div id="exports-and-time-periods" class="section level5 bs-callout bs-callout-red">
+<h5 class="hasAnchor">
+<a href="#exports-and-time-periods" class="anchor"></a>Exports and time periods</h5>
+<p>How data for different time periods is exported differs by dataset. This has significant implications for how you get to usable full-year numbers or time series in different tables.</p>
+<p>For budget datasets <code>finm</code> and <code>finu</code> (tables <code>budget-central-old*</code> and <code>budget-local*</code>) and all accounting reports, the data dump for month N will contain data describing what was reported at month M. The <code>period_vykaz</code> column will contain only one unique value. (For budget data, the <code>budget_adopted</code> column does not change throughout the year, but the others do. The <code>budget_spending</code> column contains spending up to month M.) To see time series of spending throughout a year, you need to download multiple datasets (which <code>sp_get_table</code>). To get a full-year’s spending, run <code><a href="../reference/sp_get_table.html">sp_get_table("table_id", year = "YYYY")</a></code> to get the 12th month.</p>
+<p>In the newer central budget reports, <code>budget-central</code> (dataset <code>misris</code>) and <code>budget-state-funds</code> (dataset <code>finsf</code>), data for month M will contain separate rows for spending <em>in</em> (not <em>up to</em>) each month of the year up to month M. To get cumulative spending up to month M in year Y, you need to only download the dataset for month M and then sum the rows in that table. To get a full-year’s spending, run <code><a href="../reference/sp_get_table.html">sp_get_table("table_id", year = "YYYY")</a></code> to get the 12th month, <em>then sum the values</em> across the months contained in the resulting data frame.</p>
+</div>
 </div>
 <div id="types-of-data" class="section level3">
 <h3 class="hasAnchor">
