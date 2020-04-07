@@ -46,6 +46,10 @@ The function filters the codelist to obtain a set of entries relevant to the tim
 If \code{data} contains tables for multiple periods, this is handled appropriately.
 Codelist-originating columns in the resulting data frame are renamed so they do not interfere with
 joining additional codelists, perhaps in a single pipe call.
+
+Note that some codelists are "secondary" and can only be joined onto other codelists.
+If a codelist does not join using \code{sp_add_codelis()}, store the output of \code{sp_get_codelist()} and join
+it manually using \code{dplyr}.
 }
 \examples{
 \donttest{

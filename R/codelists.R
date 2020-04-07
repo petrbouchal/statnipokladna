@@ -178,6 +178,10 @@ switch_minus <- function(string) {
 #'
 #' @param data a data frame returned by `get_table()`.
 #' @param codelist The codelist to add. Either a character vector of length one (see `sp_tables` for possible values), or a data frame returned by `get_codelist()`.
+#' Note that some codelists are "secondary" and can only be joined onto other codelists.
+#' If a codelist does not join using `sp_add_codelis()`, store the output of `sp_get_codelist()` and join
+#' it manually using `dplyr`.
+#'
 #' @param dest_dir character. Directory in which downloaded files will be stored. Defaults to `tempdir()`.
 #' @param period_column Unquoted column name of column identifying the data period in `data`. Leave to default if you have not changed the `data` object returned by `get_table()`.
 #' @param redownload Redownload even if file has already been downloaded? Defaults to FALSE.

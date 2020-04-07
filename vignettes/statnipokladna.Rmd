@@ -45,7 +45,12 @@ Zooming in on the data that is available from the open data dumps, there are two
 
 One thing to bear in mind is that codelist data contains all items in that codelist, regardless of the time periods for which the item is applicable. That means that for a given code ID in a codelist, there may be duplicates distinguishable only by their validity range.
 
-The `sp_add_codelist()` function tries to take care of this for you, but may not success if there are oddities in the data, e.g. one code with two items valid for the same date. In that case you get an informative error message; you should then resolve the duplicates manually using data returned by `sp_get_codelist()` and supply the edited data to `sp_add_codelist()` as an object.
+The `sp_add_codelist()` function tries to take care of this for you, but may not success if there are oddities in the data, e.g. one code with two items valid for the same date. 
+In that case you get an informative error message; you should then resolve the duplicates manually using data returned by `sp_get_codelist()` and supply the edited data to `sp_add_codelist()` as an object.
+
+Note also that there are two kinds of codelists: some can be joined to core data, others are joined to another codelist, in effect decoding some items in that codelist. 
+Currently the package cannot handle the latter type automatically, so you need to save the output of `sp_get_codelist()` into an object and joit it yourself using `dplyr`.
+
 
 You can see the list of available codelists at https://monitor.statnipokladna.cz/datovy-katalog/ciselniky. 
 When I refer to codelists below, I use the ID which you can supply as the `"codelist_id"` parameter to `sp_add_codelist()`.
