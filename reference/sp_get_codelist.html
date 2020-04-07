@@ -88,7 +88,7 @@ of available codelists with their IDs and names." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6.9000</span>
       </span>
     </div>
 
@@ -209,20 +209,7 @@ and persist per session to avoid redownloads.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'>sp_get_codelist</span>(<span class='st'>"paragraf"</span>)</div><div class='output co'>#&gt; <span class='message'>ℹ Codelist file already in '/tmp/RtmpyLcC3Q/statnipokladna/', not downloading. Set `redownload = TRUE` if needed.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Processing codelist data</span></div><div class='output co'>#&gt; # A tibble: 550 x 9
-#&gt;    paragraf skupina oddil pododdil nazev kr_nazev str_nazev start_date
-#&gt;    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;date&gt;    
-#&gt;  1 0000     Příjmy  Příj… Příjmy   Pro … "Pro př… "Pro pří… 1900-01-01
-#&gt;  2 1011     Zemědě… Země… Zeměděl… Udrž… ""       ""        1900-01-01
-#&gt;  3 1012     Zemědě… Země… Zeměděl… Podn… "Podn.,… "Podniká… 1900-01-01
-#&gt;  4 1013     Zemědě… Země… Zeměděl… Gene… "Genet.… "Genetic… 1900-01-01
-#&gt;  5 1014     Zemědě… Země… Zeměděl… Ozdr… "Ozdrav… "Ozdrav.… 1900-01-01
-#&gt;  6 1019     Zemědě… Země… Zeměděl… Osta… "Ost.ze… "Ostatní… 1900-01-01
-#&gt;  7 1021     Zemědě… Země… Regulac… Orga… "Regul.… "Regulac… 1900-01-01
-#&gt;  8 1022     Zemědě… Země… Regulac… Orga… "Regul.… "Reg.trh… 1900-01-01
-#&gt;  9 1023     Zemědě… Země… Regulac… Orga… "Regul.… "Organiz… 1900-01-01
-#&gt; 10 1024     Zemědě… Země… Regulac… Orga… "Regul.… "Reg.trh… 1900-01-01
-#&gt; # … with 540 more rows, and 1 more variable: end_date &lt;date&gt;</div><div class='input'># }
+<span class='fu'>sp_get_codelist</span>(<span class='st'>"paragraf"</span>)</div><div class='output co'>#&gt; <span class='message'>ℹ Building URL for codelist 'paragraf' - Paragraf</span></div><div class='output co'>#&gt; <span class='message'>✔ Storing codelist in '/tmp/RtmpHLDsDu/statnipokladna/'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Set dest_dir for more control over downloaded files.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: cannot open URL 'https://monitor.statnipokladna.cz/data/paragraf.xml': HTTP status was '404 Not Found'</span></div><div class='output co'>#&gt; <span class='error'>Error in utils::download.file(url, tf, headers = c(`User-Agent` = usr)): cannot open URL 'http://monitor.statnipokladna.cz/data/paragraf.xml'</span></div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

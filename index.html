@@ -46,7 +46,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6.9000</span>
       </span>
     </div>
 
@@ -111,7 +111,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of statnipokladna is to provide programmatic access to open data from the Státní pokladna system. Státní pokladna is a comprehensive budgeting, reporting and accounting system for Czech public organisations. This package provides user-friendly ways to access the open data from that system available at <a href="https://monitor.statnipokladna.cz" class="uri">https://monitor.statnipokladna.cz</a>. The vignettes in the package also provide an introduction to the underlying data.</p>
+<p>The goal of statnipokladna is to provide programmatic access to open data from the StÃ¡tnÃ­ pokladna system. StÃ¡tnÃ­ pokladna is a comprehensive budgeting, reporting and accounting system for Czech public organisations. This package provides user-friendly ways to access the open data from that system available at <a href="https://monitor.statnipokladna.cz" class="uri">https://monitor.statnipokladna.cz</a>. The vignettes in the package also provide an introduction to the underlying data.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -144,7 +144,7 @@
 </ul>
 </li>
 <li>do this through a consistent API which supplements some of the documentation that is missing from the official endpoints (<em>still subject to some change</em>)</li>
-<li>access registers published alongside the data (e.g. lists of public organisations with their identifiers and metadata), some of which can be useful in other contexts</li>
+<li>access registers published alongside the data (e.g.Â lists of public organisations with their identifiers and metadata), some of which can be useful in other contexts</li>
 <li>augment the core data with the desired type of register</li>
 </ul>
 <p>See the <a href="https://petrbouchal.github.io/statnipokladna/articles/statnipokladna.html">Get started</a> vignette for background on the underlying data.</p>
@@ -156,7 +156,7 @@
 <ul>
 <li>no limit on the number of data points</li>
 <li>no limits on the number of organisations, unlike the official interface which forces you to use a filter on some tables</li>
-<li>different reports (local gov, central gov…) in one place in consistent form</li>
+<li>different reports (local gov, central govâ¦) in one place in consistent form</li>
 <li>much faster for analysis (the current version of the online interface takes long to render)</li>
 <li>reproducible!!! While the online interface provides a permanent link to your analysis, this must be copied manually and does not necessarily provide an easily legible overview of how the analysis was produced (filters, columns etc.)</li>
 <li>no need for the web =&gt; excel =&gt; R dance</li>
@@ -166,11 +166,11 @@
 <div id="future-development" class="section level3">
 <h3 class="hasAnchor">
 <a href="#future-development" class="anchor"></a>Future development</h3>
-<p>the official system has been partially overhauled in February 2020 and I am trying to find out about which parts of its new API will remain stable and can be used externally. Depending on the result, some functionality in this package can be streamlined and some can be added - e.g. </p>
+<p>the official system has been partially overhauled in February 2020 and I am trying to find out about which parts of its new API will remain stable and can be used externally. Depending on the result, some functionality in this package can be streamlined and some can be added - e.g.Â </p>
 <ul>
 <li>listing of available releases</li>
 <li>checking against existing releases and data sets</li>
-<li>retrieving some previously unpublished data e.g. calculated indicators and budget responsibility monitoring</li>
+<li>retrieving some previously unpublished data e.g.Â calculated indicators and budget responsibility monitoring</li>
 </ul>
 </div>
 </div>
@@ -178,51 +178,51 @@
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting started</h2>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(statnipokladna)</a></code></pre></div>
-<p>Get data from a particular part (file) of a dataset (“výkaz”):</p>
+<p>Get data from a particular part (file) of a dataset (âvÃ½kazâ):</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">local_budgets &lt;-<span class="st"> </span><span class="kw"><a href="reference/sp_get_table.html">sp_get_table</a></span>(<span class="dt">table_id =</span> <span class="st">"budget-local"</span>, <span class="co"># table ID, see `sp_tables`</span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">                           <span class="dt">year =</span> <span class="dv">2019</span>,</a>
 <a class="sourceLine" id="cb6-3" data-line-number="3">                           <span class="dt">month =</span> <span class="dv">9</span>)</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2019-09'</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpNKHzQ3/statnipokladna/finm/2019/09/'</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; ℹ Set dest_dir for more control over downloaded files.</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; ℹ Reading data...</span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; ℹ Transforming data...</span></a></code></pre></div>
-<p>The data is automatically downloaded to a temp directory, so it will be reused by future calls to <code><a href="reference/get_table.html">get_table()</a></code> made in the same session, unless you set <code>force_redownload = TRUE</code>. You set the <code>dest_dir</code> parameter e.g. to <code>"."</code>, a directory will be created in your current working directory and the data will be downloaded into it so that it can persist across sessions.</p>
-<p>It is a rather raw-looking data frame…</p>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; â¹ Building URL for dataset 'finm': FIN 2-12 M - PlnÄnÃ­ rozpoÄtu MÅO, '2019-09'</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; â¹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; â Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpNKHzQ3/statnipokladna/finm/2019/09/'</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; â¹ Set dest_dir for more control over downloaded files.</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; â¹ Reading data...</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; â¹ Transforming data...</span></a></code></pre></div>
+<p>The data is automatically downloaded to a temp directory, so it will be reused by future calls to <code><a href="reference/get_table.html">get_table()</a></code> made in the same session, unless you set <code>force_redownload = TRUE</code>. You set the <code>dest_dir</code> parameter e.g.Â to <code>"."</code>, a directory will be created in your current working directory and the data will be downloaded into it so that it can persist across sessions.</p>
+<p>It is a rather raw-looking data frameâ¦</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(local_budgets)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; # A tibble: 6 x 15</span></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt;   vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka</span></a>
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;  </span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; 1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364   </span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; 2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909   </span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111   </span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112   </span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113   </span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121   </span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; # … with 4 more variables: budget_adopted &lt;dbl&gt;, budget_amended &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; 1 051   0002â¦ 2019   09    1000â¦ 7508â¦ CZ03  CZ03  3          6409     5364   </span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; 2 051   0002â¦ 2019   09    1000â¦ 7508â¦ CZ03  CZ03  3          6409     5909   </span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt; 3 051   0001â¦ 2019   09    1000â¦ 0006â¦ CZ010 CZ01â¦ 2          0000     1111   </span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; 4 051   0001â¦ 2019   09    1000â¦ 0006â¦ CZ010 CZ01â¦ 2          0000     1112   </span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; 5 051   0001â¦ 2019   09    1000â¦ 0006â¦ CZ010 CZ01â¦ 2          0000     1113   </span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 6 051   0001â¦ 2019   09    1000â¦ 0006â¦ CZ010 CZ01â¦ 2          0000     1121   </span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; # â¦ with 4 more variables: budget_adopted &lt;dbl&gt;, budget_amended &lt;dbl&gt;,</span></a>
 <a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; #   budget_spending &lt;dbl&gt;, period_vykaz &lt;date&gt;</span></a></code></pre></div>
-<p>…but it has been cleaned up, and can be enriched with any of the metadata codelists:</p>
+<p>â¦but it has been cleaned up, and can be enriched with any of the metadata codelists:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">functional_categories &lt;-<span class="st"> </span><span class="kw"><a href="reference/sp_get_codelist.html">sp_get_codelist</a></span>(<span class="st">"paragraf"</span>)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; ℹ Building URL for codelist 'paragraf' - Paragraf</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpNKHzQ3/statnipokladna/'</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; ℹ Set dest_dir for more control over downloaded files.</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; ℹ Processing codelist data</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; â¹ Building URL for codelist 'paragraf' - Paragraf</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; â Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpNKHzQ3/statnipokladna/'</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; â¹ Set dest_dir for more control over downloaded files.</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; â¹ Processing codelist data</span></a></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">functional_categories</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; # A tibble: 550 x 9</span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt;    paragraf skupina oddil pododdil nazev kr_nazev str_nazev start_date</span></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;date&gt;    </span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt;  1 0000     Příjmy  Příj… Příjmy   Pro … "Pro př… "Pro pří… 1900-01-01</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt;  2 1011     Zemědě… Země… Zeměděl… Udrž… ""       ""        1900-01-01</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt;  3 1012     Zemědě… Země… Zeměděl… Podn… "Podn.,… "Podniká… 1900-01-01</span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt;  4 1013     Zemědě… Země… Zeměděl… Gene… "Genet.… "Genetic… 1900-01-01</span></a>
-<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt;  5 1014     Zemědě… Země… Zeměděl… Ozdr… "Ozdrav… "Ozdrav.… 1900-01-01</span></a>
-<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt;  6 1019     Zemědě… Země… Zeměděl… Osta… "Ost.ze… "Ostatní… 1900-01-01</span></a>
-<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt;  7 1021     Zemědě… Země… Regulac… Orga… "Regul.… "Regulac… 1900-01-01</span></a>
-<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt;  8 1022     Zemědě… Země… Regulac… Orga… "Regul.… "Reg.trh… 1900-01-01</span></a>
-<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt;  9 1023     Zemědě… Země… Regulac… Orga… "Regul.… "Organiz… 1900-01-01</span></a>
-<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; 10 1024     Zemědě… Země… Regulac… Orga… "Regul.… "Reg.trh… 1900-01-01</span></a>
-<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; # … with 540 more rows, and 1 more variable: end_date &lt;date&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt;  1 0000     PÅÃ­jmy  PÅÃ­jâ¦ PÅÃ­jmy   Pro â¦ "Pro pÅâ¦ "Pro pÅÃ­â¦ 1900-01-01</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt;  2 1011     ZemÄdÄâ¦ ZemÄâ¦ ZemÄdÄlâ¦ UdrÅ¾â¦ ""       ""        1900-01-01</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt;  3 1012     ZemÄdÄâ¦ ZemÄâ¦ ZemÄdÄlâ¦ Podnâ¦ "Podn.,â¦ "PodnikÃ¡â¦ 1900-01-01</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt;  4 1013     ZemÄdÄâ¦ ZemÄâ¦ ZemÄdÄlâ¦ Geneâ¦ "Genet.â¦ "Geneticâ¦ 1900-01-01</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt;  5 1014     ZemÄdÄâ¦ ZemÄâ¦ ZemÄdÄlâ¦ Ozdrâ¦ "Ozdravâ¦ "Ozdrav.â¦ 1900-01-01</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt;  6 1019     ZemÄdÄâ¦ ZemÄâ¦ ZemÄdÄlâ¦ Ostaâ¦ "Ost.zeâ¦ "OstatnÃ­â¦ 1900-01-01</span></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt;  7 1021     ZemÄdÄâ¦ ZemÄâ¦ Regulacâ¦ Orgaâ¦ "Regul.â¦ "Regulacâ¦ 1900-01-01</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt;  8 1022     ZemÄdÄâ¦ ZemÄâ¦ Regulacâ¦ Orgaâ¦ "Regul.â¦ "Reg.trhâ¦ 1900-01-01</span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt;  9 1023     ZemÄdÄâ¦ ZemÄâ¦ Regulacâ¦ Orgaâ¦ "Regul.â¦ "Organizâ¦ 1900-01-01</span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; 10 1024     ZemÄdÄâ¦ ZemÄâ¦ Regulacâ¦ Orgaâ¦ "Regul.â¦ "Reg.trhâ¦ 1900-01-01</span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; # â¦ with 540 more rows, and 1 more variable: end_date &lt;date&gt;</span></a></code></pre></div>
 <p>This contains all codes for this codelist, some of which are not valid for the time period of our core data. The function <code><a href="reference/add_codelist.html">add_codelist()</a></code> resolves this automatically.</p>
 <p>As you can see below, you can</p>
 <ul>
@@ -235,42 +235,42 @@
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="reference/sp_add_codelist.html">sp_add_codelist</a></span>(<span class="st">"polozka"</span>)</a>
 <a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; Joining, by = "paragraf"</span></a>
 <a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; Joining, by = "paragraf"</span></a>
-<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; ℹ Building URL for codelist 'polozka' - Rozpočtová položka</span></a>
-<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpNKHzQ3/statnipokladna/'</span></a>
-<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; ℹ Set dest_dir for more control over downloaded files.</span></a>
-<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; ℹ Processing codelist data</span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; â¹ Building URL for codelist 'polozka' - RozpoÄtovÃ¡ poloÅ¾ka</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; â Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpNKHzQ3/statnipokladna/'</span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; â¹ Set dest_dir for more control over downloaded files.</span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; â¹ Processing codelist data</span></a>
 <a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; Joining, by = c("polozka", "_nazev", "_kr_nazev", "_str_nazev", "_start_date", "_end_date")</span></a>
 <a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; Joining, by = c("polozka", "_nazev", "_kr_nazev", "_str_nazev", "_start_date", "_end_date")</span></a>
 <a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; # A tibble: 1,189,627 x 31</span></a>
 <a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt;    vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka</span></a>
 <a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;  </span></a>
-<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt;  1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364   </span></a>
-<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt;  2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909   </span></a>
-<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt;  3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111   </span></a>
-<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt;  4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112   </span></a>
-<a class="sourceLine" id="cb10-19" data-line-number="19"><span class="co">#&gt;  5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113   </span></a>
-<a class="sourceLine" id="cb10-20" data-line-number="20"><span class="co">#&gt;  6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121   </span></a>
-<a class="sourceLine" id="cb10-21" data-line-number="21"><span class="co">#&gt;  7 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1122   </span></a>
-<a class="sourceLine" id="cb10-22" data-line-number="22"><span class="co">#&gt;  8 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1211   </span></a>
-<a class="sourceLine" id="cb10-23" data-line-number="23"><span class="co">#&gt;  9 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1332   </span></a>
-<a class="sourceLine" id="cb10-24" data-line-number="24"><span class="co">#&gt; 10 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1333   </span></a>
-<a class="sourceLine" id="cb10-25" data-line-number="25"><span class="co">#&gt; # … with 1,189,617 more rows, and 20 more variables: budget_adopted &lt;dbl&gt;,</span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt;  1 051   0002â¦ 2019   09    1000â¦ 7508â¦ CZ03  CZ03  3          6409     5364   </span></a>
+<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt;  2 051   0002â¦ 2019   09    1000â¦ 7508â¦ CZ03  CZ03  3          6409     5909   </span></a>
+<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt;  3 051   0001â¦ 2019   09    1000â¦ 0006â¦ CZ010 CZ01â¦ 2          0000     1111   </span></a>
+<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt;  4 051   0001â¦ 2019   09    1000â¦ 0006â¦ CZ010 CZ01â¦ 2          0000     1112   </span></a>
+<a class="sourceLine" id="cb10-19" data-line-number="19"><span class="co">#&gt;  5 051   0001â¦ 2019   09    1000â¦ 0006â¦ CZ010 CZ01â¦ 2          0000     1113   </span></a>
+<a class="sourceLine" id="cb10-20" data-line-number="20"><span class="co">#&gt;  6 051   0001â¦ 2019   09    1000â¦ 0006â¦ CZ010 CZ01â¦ 2          0000     1121   </span></a>
+<a class="sourceLine" id="cb10-21" data-line-number="21"><span class="co">#&gt;  7 051   0001â¦ 2019   09    1000â¦ 0006â¦ CZ010 CZ01â¦ 2          0000     1122   </span></a>
+<a class="sourceLine" id="cb10-22" data-line-number="22"><span class="co">#&gt;  8 051   0001â¦ 2019   09    1000â¦ 0006â¦ CZ010 CZ01â¦ 2          0000     1211   </span></a>
+<a class="sourceLine" id="cb10-23" data-line-number="23"><span class="co">#&gt;  9 051   0001â¦ 2019   09    1000â¦ 0006â¦ CZ010 CZ01â¦ 2          0000     1332   </span></a>
+<a class="sourceLine" id="cb10-24" data-line-number="24"><span class="co">#&gt; 10 051   0001â¦ 2019   09    1000â¦ 0006â¦ CZ010 CZ01â¦ 2          0000     1333   </span></a>
+<a class="sourceLine" id="cb10-25" data-line-number="25"><span class="co">#&gt; # â¦ with 1,189,617 more rows, and 20 more variables: budget_adopted &lt;dbl&gt;,</span></a>
 <a class="sourceLine" id="cb10-26" data-line-number="26"><span class="co">#&gt; #   budget_amended &lt;dbl&gt;, budget_spending &lt;dbl&gt;, period_vykaz &lt;date&gt;,</span></a>
 <a class="sourceLine" id="cb10-27" data-line-number="27"><span class="co">#&gt; #   skupina &lt;chr&gt;, oddil &lt;chr&gt;, pododdil &lt;chr&gt;, `_nazev` &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb10-28" data-line-number="28"><span class="co">#&gt; #   `_kr_nazev` &lt;chr&gt;, `_str_nazev` &lt;chr&gt;, `_start_date` &lt;date&gt;,</span></a>
 <a class="sourceLine" id="cb10-29" data-line-number="29"><span class="co">#&gt; #   `_end_date` &lt;date&gt;, druh &lt;chr&gt;, trida &lt;chr&gt;, seskupeni &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb10-30" data-line-number="30"><span class="co">#&gt; #   podseskupeni &lt;chr&gt;, kon_pol &lt;lgl&gt;, kon_okr &lt;lgl&gt;, kon_kraj &lt;lgl&gt;,</span></a>
 <a class="sourceLine" id="cb10-31" data-line-number="31"><span class="co">#&gt; #   kon_rep &lt;lgl&gt;</span></a></code></pre></div>
-<p>Download a whole “výkaz” (dataset/data dump):</p>
+<p>Download a whole âvÃ½kazâ (dataset/data dump):</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="reference/get_dataset.html">get_dataset</a></span>(<span class="st">"finm"</span>) <span class="co"># dataset ID, see `sp_datasets`</span></a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; Warning: `get_dataset()` is deprecated as of statnipokladna 0.5.2.</span></a>
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; Please use `sp_get_dataset()` instead.</span></a>
 <a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt; This warning is displayed once per session.</span></a>
 <a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span></a>
-<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2019-12'</span></a>
-<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt; ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span></a>
-<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt; ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpNKHzQ3/statnipokladna/finm/2019/12/'</span></a>
-<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co">#&gt; ℹ Set dest_dir for more control over downloaded files.</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; â¹ Building URL for dataset 'finm': FIN 2-12 M - PlnÄnÃ­ rozpoÄtu MÅO, '2019-12'</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt; â¹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt; â Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpNKHzQ3/statnipokladna/finm/2019/12/'</span></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co">#&gt; â¹ Set dest_dir for more control over downloaded files.</span></a>
 <a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpNKHzQ3/statnipokladna/finm/2019/12/FINM201_2019012.csv"</span></a>
 <a class="sourceLine" id="cb11-11" data-line-number="11"><span class="co">#&gt; [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpNKHzQ3/statnipokladna/finm/2019/12/FINM202_2019012.csv"</span></a>
 <a class="sourceLine" id="cb11-12" data-line-number="12"><span class="co">#&gt; [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpNKHzQ3/statnipokladna/finm/2019/12/FINM203_2019012.csv"</span></a>
@@ -288,7 +288,7 @@
 <h2 class="hasAnchor">
 <a href="#background-information" class="anchor"></a>Background information</h2>
 <p>Note that while the package provides a bridge from complicated data dumps to a clean data structure, you still need quite a bit of domain knowledge to be able analyse the data safely.</p>
-<p>See the <a href="https://petrbouchal.github.io/statnipokladna/articles/how-the-data-works-cz.html">“How the data works”</a> vignette (in Czech only, the terminology is impossible to translate) for an overview of the structure of the data on which this package draws. This also contains some notes useful for interpreting the data.</p>
+<p>See the <a href="https://petrbouchal.github.io/statnipokladna/articles/how-the-data-works-cz.html">âHow the data worksâ</a> vignette (in Czech only, the terminology is impossible to translate) for an overview of the structure of the data on which this package draws. This also contains some notes useful for interpreting the data.</p>
 <p>A subset of this information is in the <a href="https://petrbouchal.github.io/statnipokladna/articles/statnipokladna.html">Get started</a> vignette.</p>
 <p>There is also a log of various data gotchas I discovered, also in Czech only, stored in the <a href="https://petrbouchal.github.io/statnipokladna/articles/data-issues-cz.html">data issues vignette</a>.</p>
 <p>A basic glossary of some of the terms used in the data sets is at <a href="http://monitor.statnipokladna.cz/2019/metodika/" class="uri">http://monitor.statnipokladna.cz/2019/metodika/</a>.</p>
@@ -314,7 +314,7 @@
 <li>
 <a href="https://cran.r-project.org/package=eurostat">eurostat</a> for access to Eurostat data</li>
 <li>
-<a href="https://cran.r-project.org/package=OECD">OECD</a> for access to OECD data, incl. a large amount of financial and economic data</li>
+<a href="https://cran.r-project.org/package=OECD">OECD</a> for access to OECD data, incl.Â a large amount of financial and economic data</li>
 </ul>
 </div>
 <div id="other-czech-public-data" class="section level3">
@@ -323,24 +323,24 @@
 <ul>
 <li><a href="https://data.gov.cz">National Open Data Catalogue</a></li>
 <li>
-<a href="https://github.com/kokes/knod">KNOD</a> by Ondřej Kokeš for an overview of public data</li>
+<a href="https://github.com/kokes/knod">KNOD</a> by OndÅej KokeÅ¡ for an overview of public data</li>
 <li>
-<a href="https://hlidacstatu.cz/">Hlídač státu</a> by @michalblaha for easy (web and API) access to a large suite of transparency-focused datasets and their integration (public disclosures of contracts, tenders, political contributions…)</li>
+<a href="https://hlidacstatu.cz/">HlÃ­daÄ stÃ¡tu</a> by @michalblaha for easy (web and API) access to a large suite of transparency-focused datasets and their integration (public disclosures of contracts, tenders, political contributionsâ¦)</li>
 <li>
-<a href="https://cedr.mfcr.cz/">CEDR</a> for a database of public subsidies, incl. to public bodies</li>
+<a href="https://cedr.mfcr.cz/">CEDR</a> for a database of public subsidies, incl.Â to public bodies</li>
 </ul>
 </div>
 </div>
 <div id="acknowledgments" class="section level2">
 <h2 class="hasAnchor">
 <a href="#acknowledgments" class="anchor"></a>Acknowledgments</h2>
-<p>Thanks to @smallhillcz and the Státní pokladna/Monitor developers and maintainers for responding to queries and generally keeping the thing running.</p>
+<p>Thanks to @smallhillcz and the StÃ¡tnÃ­ pokladna/Monitor developers and maintainers for responding to queries and generally keeping the thing running.</p>
 </div>
 <div id="contributing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contributing" class="anchor"></a>Contributing</h2>
 <p>See <a href="https://github.com/petrbouchal/statnipokladna/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING.md</a> for a guide on how to contribute to the project.</p>
-<p>Please note that the ‘statnipokladna’ project is released with a <a href="https://petrbouchal.github.io/statnipokladna/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<p>Please note that the âstatnipokladnaâ project is released with a <a href="https://petrbouchal.github.io/statnipokladna/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </div>
