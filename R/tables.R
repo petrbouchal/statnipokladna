@@ -22,12 +22,12 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #' List of available tables (PARTIAL)
 #'
 #' Contains IDs and names of all available tables that can be
-#' retrieved by get_table. Look inside the XLS documentation for each dataset at <https://monitor.statnipokladna.cz/2019/zdrojova-data/transakcni-data>
+#' retrieved by sp_get_table. Look inside the XLS documentation for each dataset at <https://monitor.statnipokladna.cz/2019/zdrojova-data/transakcni-data>
 #' to see more detailed descriptions. Note that tables do not correspond to the tabulka/`vtab` attribute of the tables, they represent files inside datasets.
 #'
 #' @format A data frame with 2 rows and 4 variables:
 #' \describe{
-#'   \item{\code{id}}{character Table id, used as `table_id` argument to `get_table`.}
+#'   \item{\code{id}}{character Table id, used as `table_id` argument to `sp_get_table`.}
 #'   \item{\code{dataset_id}}{integer Table number.}
 #'   \item{\code{czech_name}}{character Czech name of the table.}
 #'   \item{\code{note}}{character Note.}
@@ -42,7 +42,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #'
 #' Cleans and loads a table. If needed, a dataset containing the table is downloaded.
 #'
-#' The data is loaded from files downloaded automatically by `get_dataset()`;
+#' The data is loaded from files downloaded automatically by `sp_get_dataset()`;
 #' files persist in a temporary directory per session.
 #'
 #' How data for different time periods is exported differs by dataset.
@@ -156,7 +156,7 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
   table_regex <- paste0(sp_tables_i$file_regex[sp_tables_i$id == table_id])
   get_one_table <- function(dataset_id, year = year, month = month, dest_dir = dest_dir,
                             redownload = redownload) {
-    dslist <- get_dataset(dataset_id, year = year, month = month, dest_dir = dest_dir,
+    dslist <- sp_get_dataset(dataset_id, year = year, month = month, dest_dir = dest_dir,
                           redownload = redownload)
     table_file <- dslist[stringr::str_detect(dslist,
                                              paste0(table_regex, "(_[0-9]*)?\\.(csv|CSV)"))]
@@ -215,11 +215,11 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
   dt_fin <- purrr::map2_dfr(years_months$y, years_months$m,
                             ~get_one_table(dataset_id, .x, .y, dest_dir = dest_dir,
                                            redownload = redownload))
-  # onyr <- c(2018) %>% purrr::map_dfr(~ get_table(51101, year = ., month = 12))
+  # onyr <- c(2018) %>% purrr::map_dfr(~ sp_get_table(51101, year = ., month = 12))
 
   }
-# onyr <- c(2018) %>% purrr::map_dfr(~ get_table(2, year = ., month = 12))
-# onyr <- c(2018) %>% purrr::map_dfr(~ get_table(1, year = ., month = 12))
+# onyr <- c(2018) %>% purrr::map_dfr(~ sp_get_table(2, year = ., month = 12))
+# onyr <- c(2018) %>% purrr::map_dfr(~ sp_get_table(1, year = ., month = 12))
 
 #' Deprecated: Get a statnipokladna table
 #'

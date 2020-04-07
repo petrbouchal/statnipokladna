@@ -3,13 +3,13 @@
 #'
 #' Contains IDs and names of all (most) available codelists that can be retrieved by get_codelist.
 #'
-#' The `id` is to be used as the `codelist_id` parameter in `get_codelist`.
+#' The `id` is to be used as the `codelist_id` parameter in `sp_get_codelist`.
 #' See <https://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky> for a more detailed
 #' descriptions and a GUI for exploring the lists.
 #'
 #' @format A data frame with 27 rows and 2 variables:
 #' \describe{
-#'   \item{\code{id}}{character. ID, used as `codelist_id` argument in `get_codelist`.}
+#'   \item{\code{id}}{character. ID, used as `codelist_id` argument in `sp_get_codelist`.}
 #'   \item{\code{name}}{character. Short name, mostly corresponds to title used on statnipokladna.cz.}
 #' }
 #' @family Lists of available entities
@@ -59,8 +59,9 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #' the data, autamatically using `add_codelist()` or manually.
 #' The entire codelist is downloaded and not filtered for any particular date.
 #'
-#' Codelists XML files are stored in a temporary directory as determined by `tempdir()`
+#' Codelist XML files are stored in a temporary directory as determined by `tempdir()`
 #' and persist per session to avoid redownloads.
+#'
 #'
 #' @param codelist_id A codelist ID. See `id` column in `sp_codelists` for a list of available codelists.
 #' @param n Number of rows to return. Default (NULL) means all. Useful for quickly inspecting a codelist.
@@ -160,9 +161,9 @@ switch_minus <- function(string) {
 #'
 #' Joins a provided codelist, or downloads and processes one if necessary, and adds it to the data.
 #'
-#' The `data` argument should be a data frame produced by `get_table()` If this is true, the `period_column` argument is not needed.
+#' The `data` argument should be a data frame produced by `sp_get_table()` If this is true, the `period_column` argument is not needed.
 #' The `codelist` argument, if a data frame, should be a data frame produced by
-#' `get_codelist()`. Specifically, it assumes it contains the following columns:
+#' `sp_get_codelist()`. Specifically, it assumes it contains the following columns:
 #'
 #' - start_date, a date
 #' - end_date, a date
@@ -176,14 +177,14 @@ switch_minus <- function(string) {
 #' Codelist-originating columns in the resulting data frame are renamed so they do not interfere with
 #' joining additional codelists, perhaps in a single pipe call.
 #'
-#' @param data a data frame returned by `get_table()`.
-#' @param codelist The codelist to add. Either a character vector of length one (see `sp_tables` for possible values), or a data frame returned by `get_codelist()`.
 #' Note that some codelists are "secondary" and can only be joined onto other codelists.
 #' If a codelist does not join using `sp_add_codelis()`, store the output of `sp_get_codelist()` and join
 #' it manually using `dplyr`.
 #'
+#' @param data a data frame returned by `sp_get_table()`.
+#' @param codelist The codelist to add. Either a character vector of length one (see `sp_tables` for possible values), or a data frame returned by `sp_get_codelist()`.
 #' @param dest_dir character. Directory in which downloaded files will be stored. Defaults to `tempdir()`.
-#' @param period_column Unquoted column name of column identifying the data period in `data`. Leave to default if you have not changed the `data` object returned by `get_table()`.
+#' @param period_column Unquoted column name of column identifying the data period in `data`. Leave to default if you have not changed the `data` object returned by `sp_get_table()`.
 #' @param redownload Redownload even if file has already been downloaded? Defaults to FALSE.
 #' @return A data frame of same length as `data`, with added columns from `codelist`. See Details.
 #' @family Core workflow
@@ -210,7 +211,7 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
             "data.frame" %in% class(codelist) | is.character(codelist))
   if(is.character(codelist)) stopifnot(length(codelist) == 1)
   if(is.character(codelist)) {
-    cl_data <- get_codelist(codelist, redownload = redownload,
+    cl_data <- sp_get_codelist(codelist, redownload = redownload,
                             dest_dir = dest_dir)
     codelist_name <- codelist
   } else {

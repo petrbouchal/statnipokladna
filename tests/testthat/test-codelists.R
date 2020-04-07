@@ -7,5 +7,6 @@ test_that("List of codelists make sense", {
 })
 
 test_that("get_codelist works", {
-  expect_error(get_codelist("blah"))
+  expect_error(sp_get_codelist("blah"))
 })
+

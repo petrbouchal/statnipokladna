@@ -6,7 +6,7 @@
 \title{List of available codelists}
 \format{A data frame with 27 rows and 2 variables:
 \describe{
-\item{\code{id}}{character. ID, used as \code{codelist_id} argument in \code{get_codelist}.}
+\item{\code{id}}{character. ID, used as \code{codelist_id} argument in \code{sp_get_codelist}.}
 \item{\code{name}}{character. Short name, mostly corresponds to title used on statnipokladna.cz.}
 }}
 \usage{
@@ -16,7 +16,7 @@ sp_codelists
 Contains IDs and names of all (most) available codelists that can be retrieved by get_codelist.
 }
 \details{
-The \code{id} is to be used as the \code{codelist_id} parameter in \code{get_codelist}.
+The \code{id} is to be used as the \code{codelist_id} parameter in \code{sp_get_codelist}.
 See \url{https://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky} for a more detailed
 descriptions and a GUI for exploring the lists.
 }

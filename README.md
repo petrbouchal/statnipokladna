@@ -127,18 +127,18 @@ local_budgets <- sp_get_table(table_id = "budget-local", # table ID, see `sp_tab
                            month = 9)
 #> ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2019-09'
 #> ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'
-#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpNKHzQ3/statnipokladna/finm/2019/09/'
+#> ✓ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpcIxvXd/statnipokladna/finm/2019/09/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Reading data...
 #> ℹ Transforming data...
 ```
 
 The data is automatically downloaded to a temp directory, so it will be
-reused by future calls to `get_table()` made in the same session, unless
-you set `force_redownload = TRUE`. You set the `dest_dir` parameter
-e.g. to `"."`, a directory will be created in your current working
-directory and the data will be downloaded into it so that it can persist
-across sessions.
+reused by future calls to `sp_get_table()` made in the same session,
+unless you set `force_redownload = TRUE`. You set the `dest_dir`
+parameter e.g. to `"."`, a directory will be created in your current
+working directory and the data will be downloaded into it so that it can
+persist across sessions.
 
 It is a rather raw-looking data frame…
 
@@ -163,9 +163,13 @@ metadata codelists:
 ``` r
 functional_categories <- sp_get_codelist("paragraf")
 #> ℹ Building URL for codelist 'paragraf' - Paragraf
-#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpNKHzQ3/statnipokladna/'
+#> ✓ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpcIxvXd/statnipokladna/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Processing codelist data
+#> Warning: The `x` argument of `as_tibble.matrix()` must have column names if `.name_repair` is omitted as of tibble 2.0.0.
+#> Using compatibility `.name_repair`.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_warnings()` to see where this warning was generated.
 ```
 
 ``` r
@@ -206,12 +210,12 @@ local_budgets %>%
 #> Joining, by = "paragraf"
 #> Joining, by = "paragraf"
 #> ℹ Building URL for codelist 'polozka' - Rozpočtová položka
-#> ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpNKHzQ3/statnipokladna/'
+#> ✓ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpcIxvXd/statnipokladna/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Processing codelist data
-#> Joining, by = c("polozka", "_nazev", "_kr_nazev", "_str_nazev", "_start_date", "_end_date")
-#> Joining, by = c("polozka", "_nazev", "_kr_nazev", "_str_nazev", "_start_date", "_end_date")
-#> # A tibble: 1,189,627 x 31
+#> Joining, by = "polozka"
+#> Joining, by = "polozka"
+#> # A tibble: 1,189,627 x 36
 #>    vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka
 #>    <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr> <chr>      <chr>    <chr>  
 #>  1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364   
@@ -224,33 +228,37 @@ local_budgets %>%
 #>  8 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1211   
 #>  9 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1332   
 #> 10 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1333   
-#> # … with 1,189,617 more rows, and 20 more variables: budget_adopted <dbl>,
+#> # … with 1,189,617 more rows, and 25 more variables: budget_adopted <dbl>,
 #> #   budget_amended <dbl>, budget_spending <dbl>, period_vykaz <date>,
-#> #   skupina <chr>, oddil <chr>, pododdil <chr>, `_nazev` <chr>,
-#> #   `_kr_nazev` <chr>, `_str_nazev` <chr>, `_start_date` <date>,
-#> #   `_end_date` <date>, druh <chr>, trida <chr>, seskupeni <chr>,
-#> #   podseskupeni <chr>, kon_pol <lgl>, kon_okr <lgl>, kon_kraj <lgl>,
+#> #   skupina <chr>, oddil <chr>, pododdil <chr>,
+#> #   functional_categories_nazev <chr>, functional_categories_kr_nazev <chr>,
+#> #   functional_categories_str_nazev <chr>,
+#> #   functional_categories_start_date <date>,
+#> #   functional_categories_end_date <date>, polozka_start_date <date>,
+#> #   polozka_end_date <date>, druh <chr>, trida <chr>, seskupeni <chr>,
+#> #   podseskupeni <chr>, polozka_nazev <chr>, polozka_kr_nazev <chr>,
+#> #   polozka_str_nazev <chr>, kon_pol <lgl>, kon_okr <lgl>, kon_kraj <lgl>,
 #> #   kon_rep <lgl>
 ```
 
 Download a whole “výkaz” (dataset/data dump):
 
 ``` r
-get_dataset("finm") # dataset ID, see `sp_datasets`
-#> Warning: `get_dataset()` is deprecated as of statnipokladna 0.5.2.
-#> Please use `sp_get_dataset()` instead.
-#> This warning is displayed once per session.
-#> Call `lifecycle::last_warnings()` to see where this warning was generated.
-#> ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2019-12'
+sp_get_dataset("finm") # dataset ID, see `sp_datasets`
+#> Warning: Either year or month not set.
+#> Using defaults of 2018 and 12.
+#> ● Set these values explicitly for reproducibility as the defaults may change in the future
+#>   to provide access to the latest data by default.
+#> ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2018-12'
 #> ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'
-#> ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpNKHzQ3/statnipokladna/finm/2019/12/'
+#> ✓ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpcIxvXd/statnipokladna/finm/2018/12/'
 #> ℹ Set dest_dir for more control over downloaded files.
-#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpNKHzQ3/statnipokladna/finm/2019/12/FINM201_2019012.csv"
-#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpNKHzQ3/statnipokladna/finm/2019/12/FINM202_2019012.csv"
-#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpNKHzQ3/statnipokladna/finm/2019/12/FINM203_2019012.csv"
-#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpNKHzQ3/statnipokladna/finm/2019/12/FINM204_2019012.csv"
-#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpNKHzQ3/statnipokladna/finm/2019/12/FINM205_2019012.csv"
-#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpNKHzQ3/statnipokladna/finm/2019/12/FINM207_2019012.csv"
+#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpcIxvXd/statnipokladna/finm/2018/12/FINM201_2018012.csv"
+#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpcIxvXd/statnipokladna/finm/2018/12/FINM202_2018012.csv"
+#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpcIxvXd/statnipokladna/finm/2018/12/FINM203_2018012.csv"
+#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpcIxvXd/statnipokladna/finm/2018/12/FINM204_2018012.csv"
+#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpcIxvXd/statnipokladna/finm/2018/12/FINM205_2018012.csv"
+#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpcIxvXd/statnipokladna/finm/2018/12/FINM207_2018012.csv"
 ```
 
 This will put the files in a temp directory.

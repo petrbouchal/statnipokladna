@@ -13,11 +13,11 @@ add_codelist(
 )
 }
 \arguments{
-\item{data}{a data frame returned by \code{get_table()}.}
+\item{data}{a data frame returned by \code{sp_get_table()}.}
 
-\item{codelist}{The codelist to add. Either a character vector of length one (see \code{sp_tables} for possible values), or a data frame returned by \code{get_codelist()}.}
+\item{codelist}{The codelist to add. Either a character vector of length one (see \code{sp_tables} for possible values), or a data frame returned by \code{sp_get_codelist()}.}
 
-\item{period_column}{Unquoted column name of column identifying the data period in \code{data}. Leave to default if you have not changed the \code{data} object returned by \code{get_table()}.}
+\item{period_column}{Unquoted column name of column identifying the data period in \code{data}. Leave to default if you have not changed the \code{data} object returned by \code{sp_get_table()}.}
 
 \item{redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
 

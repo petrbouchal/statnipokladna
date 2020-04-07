@@ -13,11 +13,11 @@ sp_add_codelist(
 )
 }
 \arguments{
-\item{data}{a data frame returned by \code{get_table()}.}
+\item{data}{a data frame returned by \code{sp_get_table()}.}
 
-\item{codelist}{The codelist to add. Either a character vector of length one (see \code{sp_tables} for possible values), or a data frame returned by \code{get_codelist()}.}
+\item{codelist}{The codelist to add. Either a character vector of length one (see \code{sp_tables} for possible values), or a data frame returned by \code{sp_get_codelist()}.}
 
-\item{period_column}{Unquoted column name of column identifying the data period in \code{data}. Leave to default if you have not changed the \code{data} object returned by \code{get_table()}.}
+\item{period_column}{Unquoted column name of column identifying the data period in \code{data}. Leave to default if you have not changed the \code{data} object returned by \code{sp_get_table()}.}
 
 \item{redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
 
@@ -30,9 +30,9 @@ A data frame of same length as \code{data}, with added columns from \code{codeli
 Joins a provided codelist, or downloads and processes one if necessary, and adds it to the data.
 }
 \details{
-The \code{data} argument should be a data frame produced by \code{get_table()} If this is true, the \code{period_column} argument is not needed.
+The \code{data} argument should be a data frame produced by \code{sp_get_table()} If this is true, the \code{period_column} argument is not needed.
 The \code{codelist} argument, if a data frame, should be a data frame produced by
-\code{get_codelist()}. Specifically, it assumes it contains the following columns:
+\code{sp_get_codelist()}. Specifically, it assumes it contains the following columns:
 \itemize{
 \item start_date, a date
 \item end_date, a date

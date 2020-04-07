@@ -7,5 +7,5 @@ test_that("List of datasets makes sense", {
 })
 
 test_that("get_dataset breaks on nonsense", {
-  expect_error(get_dataset("blah"))
+  expect_error(sp_get_dataset("blah"))
 })

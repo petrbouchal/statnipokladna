@@ -35,7 +35,7 @@ a tibble; see Details for key to the columns
 Cleans and loads a table. If needed, a dataset containing the table is downloaded.
 }
 \details{
-The data is loaded from files downloaded automatically by \code{get_dataset()};
+The data is loaded from files downloaded automatically by \code{sp_get_dataset()};
 files persist in a temporary directory per session.
 
 How data for different time periods is exported differs by dataset.

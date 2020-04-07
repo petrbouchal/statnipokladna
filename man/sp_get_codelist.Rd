@@ -35,7 +35,7 @@ The processing ensures that the resulting codelist can be correctly joined to
 the data, autamatically using \code{add_codelist()} or manually.
 The entire codelist is downloaded and not filtered for any particular date.
 
-Codelists XML files are stored in a temporary directory as determined by \code{tempdir()}
+Codelist XML files are stored in a temporary directory as determined by \code{tempdir()}
 and persist per session to avoid redownloads.
 }
 \examples{
