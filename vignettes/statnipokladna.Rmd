@@ -2,7 +2,7 @@
 title: "Getting started with statnipokladna"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{statnipokladna}
+  %\VignetteIndexEntry{Getting Started with statnipokladna}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

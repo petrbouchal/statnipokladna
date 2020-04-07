@@ -2,7 +2,7 @@
 title: "How the data works"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{how-the-data-works}
+  %\VignetteIndexEntry{How the data works}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
