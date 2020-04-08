@@ -209,7 +209,7 @@ and persist per session to avoid redownloads.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'>sp_get_codelist</span>(<span class='st'>"paragraf"</span>)</div><div class='output co'>#&gt; <span class='message'>ℹ Building URL for codelist 'paragraf' - Paragraf</span></div><div class='output co'>#&gt; <span class='message'>✔ Storing codelist in '/tmp/RtmpIFxmgk/statnipokladna/'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Set dest_dir for more control over downloaded files.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: cannot open URL 'https://monitor.statnipokladna.cz/data/paragraf.xml': HTTP status was '404 Not Found'</span></div><div class='output co'>#&gt; <span class='error'>Error in utils::download.file(url, tf, headers = c(`User-Agent` = usr)): cannot open URL 'http://monitor.statnipokladna.cz/data/paragraf.xml'</span></div><div class='input'># }
+<span class='fu'>sp_get_codelist</span>(<span class='st'>"paragraf"</span>)</div><div class='output co'>#&gt; <span class='message'>ℹ Building URL for codelist 'paragraf' - Paragraf</span></div><div class='output co'>#&gt; <span class='error'>Error: Codelist XML for a codelist with this ID does not exist</span></div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
