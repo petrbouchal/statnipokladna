@@ -8,6 +8,7 @@
 ## Minor improvements
 
 * `sp_add_codelist()` returns a message if joining by multiple columns
+* `sp_add_codelist()` gains a `by` parameter
 
 ## Documentation updates
 

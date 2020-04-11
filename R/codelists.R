@@ -183,6 +183,7 @@ switch_minus <- function(string) {
 #'
 #' @param data a data frame returned by `sp_get_table()`.
 #' @param codelist The codelist to add. Either a character vector of length one (see `sp_tables` for possible values), or a data frame returned by `sp_get_codelist()`.
+#' @param by character. Columns by which to join the codelist. Same form as for `dplyr::left_join()``.`.
 #' @param dest_dir character. Directory in which downloaded files will be stored. Defaults to `tempdir()`.
 #' @param period_column Unquoted column name of column identifying the data period in `data`. Leave to default if you have not changed the `data` object returned by `sp_get_table()`.
 #' @param redownload Redownload even if file has already been downloaded? Defaults to FALSE.
@@ -203,8 +204,9 @@ switch_minus <- function(string) {
 #'   sp_add_codelist(par)
 #' }
 sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_vykaz,
-                         redownload = FALSE,
-                         dest_dir = tempdir()) {
+                            by = NULL,
+                            redownload = FALSE,
+                            dest_dir = tempdir()) {
   if(is.null(codelist)) stop("Please supply a codelist")
   # print(rlang::as_label({{period_column}}))
   stopifnot("data.frame" %in% class(data),
@@ -223,11 +225,13 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
   }
   common_columns <- names(data)[names(data) %in% names(cl_data)]
   overlap <- length(common_columns)
-  if (overlap > 1) {
+  if (overlap > 1 & is.null(by)) {
     usethis::ui_info(c("Joining on {overlap} columns: {stringr::str_c(common_columns, collapse = ', ')}.",
-                       "This may indicate a problem with the data."))
+                       "This may indicate a problem with the data.",
+                       "Set {usethis::ui_field('by')} if needed."))
   } else if(overlap == 0) {usethis::ui_stop(c("No columns to join by.",
-                                              "Are you sure you are merging the right codelist onto the right data?"))}
+                                              "Are you sure you are merging the right codelist onto the right data?",
+                                              "Set {usethis::ui_field('by')} if needed."))}
 
     slepit <- function(.x, .y) {
     # print(.x)
@@ -241,7 +245,7 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
       dplyr::rename_at(dplyr::vars(dplyr::ends_with("nazev")), ~paste0(codelist_name, "_", .))
 
     # print(codelist_filtered)
-    slp <- suppressMessages(dplyr::left_join(.x, codelist_filtered))
+    slp <- suppressMessages(dplyr::left_join(.x, codelist_filtered, by = by))
     if(nrow(slp) != nrows_start) {
       errmsg <- stringr::str_glue(
         "Something went wrong with matching the codelist to the data for period {this_period}.
@@ -262,7 +266,7 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
       dplyr::bind_rows()
   } else {
     slepeno <- suppressMessages(data %>%
-      dplyr::left_join(cl_data))
+      dplyr::left_join(cl_data, by = by))
   }
   return(slepeno)
 }
