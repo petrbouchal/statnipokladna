@@ -16,7 +16,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Getting started with statnipokladna">
+<script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<meta property="og:title" content="Getting started with statnipokladna">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/logo.png">
 <meta name="twitter:card" content="summary">
@@ -44,7 +45,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
       </span>
     </div>
 
@@ -141,14 +142,23 @@
 <li>the actual report/return data (what the SP system calls “transaction data”)</li>
 </ul>
 <p><strong>Codelists</strong> are generally long lists of metadata items. These allow you to “translate” codes contained in return data. Codes identify individual lines, telling you which categories the value in that line belongs to, often across multiple categorisations (see <a href="#working-with-budget-data">Working with budget data</a>.)</p>
+<div id="codelists-and-time-periods" class="section level5 bs-callout bs-callout-orange">
+<h5 class="hasAnchor">
+<a href="#codelists-and-time-periods" class="anchor"></a>Codelists and time periods</h5>
 <p>One thing to bear in mind is that codelist data contains all items in that codelist, regardless of the time periods for which the item is applicable. That means that for a given code ID in a codelist, there may be duplicates distinguishable only by their validity range.</p>
 <p>The <code><a href="../reference/sp_add_codelist.html">sp_add_codelist()</a></code> function tries to take care of this for you, but may not success if there are oddities in the data, e.g. one code with two items valid for the same date. In that case you get an informative error message; you should then resolve the duplicates manually using data returned by <code><a href="../reference/sp_get_codelist.html">sp_get_codelist()</a></code> and supply the edited data to <code><a href="../reference/sp_add_codelist.html">sp_add_codelist()</a></code> as an object.</p>
+</div>
+<div id="primary-and-secondary-codelists" class="section level5 bs-callout bs-callout-orange">
+<h5 class="hasAnchor">
+<a href="#primary-and-secondary-codelists" class="anchor"></a>Primary and secondary codelists</h5>
 <p>Note also that there are two kinds of codelists: some can be joined to core data, others are joined to another codelist, in effect decoding some items in that codelist. Currently the package cannot handle the latter type automatically, so you need to save the output of <code><a href="../reference/sp_get_codelist.html">sp_get_codelist()</a></code> into an object and joit it yourself using <code>dplyr</code>.</p>
-<p>You can see the list of available codelists at <a href="https://monitor.statnipokladna.cz/datovy-katalog/ciselniky" class="uri">https://monitor.statnipokladna.cz/datovy-katalog/ciselniky</a>. When I refer to codelists below, I use the ID which you can supply as the <code>"codelist_id"</code> parameter to <code><a href="../reference/sp_add_codelist.html">sp_add_codelist()</a></code>.</p>
+<p>You can see the list of available codelists at <a href="https://monitor.statnipokladna.cz/datovy-katalog/ciselniky" class="uri">https://monitor.statnipokladna.cz/datovy-katalog/ciselniky</a> and in <code>sp_codelists</code>. When I refer to codelists below, I use the ID which you can supply as the <code>"codelist_id"</code> parameter to <code><a href="../reference/sp_add_codelist.html">sp_add_codelist()</a></code>.</p>
 <p>The codelist that you will generally want for comparing organisations is called “ucjed”; this contains metadata on all organisations covered by the data. It is huge so you will want to store it somewhere after you have retrieved (and processed and filtered if relevant.)</p>
+<p>Note that some codelists can only be joined onto other codelists, e.g. the <code>ucjed</code> codelist, which contains most metadata on reporting organisations, has several columns named <code>somethings_id</code>. Those columns can be “decoded” using using the respective <code>something</code> codelist.</p>
 <p><strong>Return data</strong> come broadly in two kinds: budgetary and accounting - see below for how to work with each of them, as the logic differs markedly. Return data come in ZIP files, which can contain on or more files, each with a return (I call them tables for more generality, hence the <code><a href="../reference/sp_get_table.html">sp_get_table()</a></code> function.)</p>
 <p>You can see the list of returns which <code>statnipokladna</code> can process in the <code>sp_tables</code> data frame.</p>
 <p>While the <code><a href="../reference/sp_get_table.html">sp_get_table()</a></code> returns a data frame with column names understandable in English, codelists only exist in Czech.</p>
+</div>
 </div>
 <div id="basic-structure-of-data-in-published-zip-files" class="section level3">
 <h3 class="hasAnchor">
@@ -159,6 +169,11 @@
 <p>Often, there will be multiple returns in one dataset (ZIP file), each in a differently named CSV file. This is particularly the case for budget data.</p>
 <p>All CSV files contain some common columns, notably those identifying the organisation, its geography, and its place in the public sector. Note that the geography is derived from the seat of the organisation, not the location of the spending.</p>
 <p>You can see the list of datasets (ZIP files) which <code>statnipokladna</code> can process in the <code>sp_datasets</code> data frame.</p>
+<div id="central-budgets-and-codelists" class="section level5 bs-callout bs-callout-orange">
+<h5 class="hasAnchor">
+<a href="#central-budgets-and-codelists" class="anchor"></a>Central budgets and codelists</h5>
+<p>The more recent central budgets stored in the <code>budget-central</code> table (<code>misris</code> dataset) require a different codelist for sectoral (“paragraf”) breakdown. Use the <code>paragraf_long</code> codelist, not <code>paragraf</code>. If you use <code>paragraf</code>, <code><a href="../reference/sp_add_codelist.html">sp_add_codelist()</a></code> will technically work but the joined columns will be empty.</p>
+</div>
 </div>
 <div id="coverage" class="section level3">
 <h3 class="hasAnchor">

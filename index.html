@@ -16,7 +16,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Use Data from the Czech Public Finance Database">
+<script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
+<meta property="og:title" content="Use Data from the Czech Public Finance Database">
 <meta property="og:description" content="Get programmatic access to data from the Czech public
     budgeting and accounting database, Státní pokladna
     &lt;https://monitor.statnipokladna.cz/&gt;.">
@@ -46,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.6.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
       </span>
     </div>
 
@@ -184,7 +185,7 @@
 <a class="sourceLine" id="cb6-3" data-line-number="3">                           <span class="dt">month =</span> <span class="dv">9</span>)</a>
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; â¹ Building URL for dataset 'finm': FIN 2-12 M - PlnÄnÃ­ rozpoÄtu MÅO, '2019-09'</span></a>
 <a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; â¹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; â Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpcIxvXd/statnipokladna/finm/2019/09/'</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; â Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpaqkcMK/statnipokladna/finm/2019/09/'</span></a>
 <a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; â¹ Set dest_dir for more control over downloaded files.</span></a>
 <a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; â¹ Reading data...</span></a>
 <a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; â¹ Transforming data...</span></a></code></pre></div>
@@ -202,10 +203,10 @@
 <a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt; 6 051   0001â¦ 2019   09    1000â¦ 0006â¦ CZ010 CZ01â¦ 2          0000     1121   </span></a>
 <a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt; # â¦ with 4 more variables: budget_adopted &lt;dbl&gt;, budget_amended &lt;dbl&gt;,</span></a>
 <a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; #   budget_spending &lt;dbl&gt;, period_vykaz &lt;date&gt;</span></a></code></pre></div>
-<p>â¦but it has been cleaned up, and can be enriched with any of the metadata codelists:</p>
+<p>but it has been cleaned up, and can be enriched with any of the metadata codelists:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">functional_categories &lt;-<span class="st"> </span><span class="kw"><a href="reference/sp_get_codelist.html">sp_get_codelist</a></span>(<span class="st">"paragraf"</span>)</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; â¹ Building URL for codelist 'paragraf' - Paragraf</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; â Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpcIxvXd/statnipokladna/'</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; â Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpaqkcMK/statnipokladna/'</span></a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; â¹ Set dest_dir for more control over downloaded files.</span></a>
 <a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; â¹ Processing codelist data</span></a>
 <a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; Warning: The `x` argument of `as_tibble.matrix()` must have column names if `.name_repair` is omitted as of tibble 2.0.0.</span></a>
@@ -240,7 +241,7 @@
 <a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; Joining, by = "paragraf"</span></a>
 <a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; Joining, by = "paragraf"</span></a>
 <a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; â¹ Building URL for codelist 'polozka' - RozpoÄtovÃ¡ poloÅ¾ka</span></a>
-<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; â Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpcIxvXd/statnipokladna/'</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; â Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpaqkcMK/statnipokladna/'</span></a>
 <a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; â¹ Set dest_dir for more control over downloaded files.</span></a>
 <a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; â¹ Processing codelist data</span></a>
 <a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; Joining, by = "polozka"</span></a>
@@ -277,14 +278,14 @@
 <a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt;   to provide access to the latest data by default.</span></a>
 <a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; â¹ Building URL for dataset 'finm': FIN 2-12 M - PlnÄnÃ­ rozpoÄtu MÅO, '2018-12'</span></a>
 <a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt; â¹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span></a>
-<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt; â Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpcIxvXd/statnipokladna/finm/2018/12/'</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt; â Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpaqkcMK/statnipokladna/finm/2018/12/'</span></a>
 <a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co">#&gt; â¹ Set dest_dir for more control over downloaded files.</span></a>
-<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpcIxvXd/statnipokladna/finm/2018/12/FINM201_2018012.csv"</span></a>
-<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="co">#&gt; [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpcIxvXd/statnipokladna/finm/2018/12/FINM202_2018012.csv"</span></a>
-<a class="sourceLine" id="cb11-12" data-line-number="12"><span class="co">#&gt; [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpcIxvXd/statnipokladna/finm/2018/12/FINM203_2018012.csv"</span></a>
-<a class="sourceLine" id="cb11-13" data-line-number="13"><span class="co">#&gt; [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpcIxvXd/statnipokladna/finm/2018/12/FINM204_2018012.csv"</span></a>
-<a class="sourceLine" id="cb11-14" data-line-number="14"><span class="co">#&gt; [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpcIxvXd/statnipokladna/finm/2018/12/FINM205_2018012.csv"</span></a>
-<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="co">#&gt; [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpcIxvXd/statnipokladna/finm/2018/12/FINM207_2018012.csv"</span></a></code></pre></div>
+<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpaqkcMK/statnipokladna/finm/2018/12/FINM201_2018012.csv"</span></a>
+<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="co">#&gt; [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpaqkcMK/statnipokladna/finm/2018/12/FINM202_2018012.csv"</span></a>
+<a class="sourceLine" id="cb11-12" data-line-number="12"><span class="co">#&gt; [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpaqkcMK/statnipokladna/finm/2018/12/FINM203_2018012.csv"</span></a>
+<a class="sourceLine" id="cb11-13" data-line-number="13"><span class="co">#&gt; [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpaqkcMK/statnipokladna/finm/2018/12/FINM204_2018012.csv"</span></a>
+<a class="sourceLine" id="cb11-14" data-line-number="14"><span class="co">#&gt; [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpaqkcMK/statnipokladna/finm/2018/12/FINM205_2018012.csv"</span></a>
+<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="co">#&gt; [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpaqkcMK/statnipokladna/finm/2018/12/FINM207_2018012.csv"</span></a></code></pre></div>
 <p>This will put the files in a temp directory.</p>
 <p>Then look at its documentation:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">statnipokladna<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/statnipokladna/man/sp_get_dataset_doc.html">sp_get_dataset_doc</a></span>(<span class="st">"finm"</span>)</a>
