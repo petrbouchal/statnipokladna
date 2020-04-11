@@ -210,6 +210,9 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
   stopifnot("data.frame" %in% class(data),
             "data.frame" %in% class(codelist) | is.character(codelist))
   if(is.character(codelist)) stopifnot(length(codelist) == 1)
+
+
+
   if(is.character(codelist)) {
     cl_data <- sp_get_codelist(codelist, redownload = redownload,
                             dest_dir = dest_dir)
@@ -218,7 +221,15 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
     cl_data <- codelist
     codelist_name <- deparse(substitute(codelist))
   }
-  slepit <- function(.x, .y) {
+  common_columns <- names(data)[names(data) %in% names(cl_data)]
+  overlap <- length(common_columns)
+  if (overlap > 1) {
+    usethis::ui_info(c("Joining on {overlap} columns: {stringr::str_c(common_columns, collapse = ', ')}.",
+                       "This may indicate a problem with the data."))
+  } else if(overlap == 0) {usethis::ui_stop(c("No columns to join by.",
+                                              "Are you sure you are merging the right codelist onto the right data?"))}
+
+    slepit <- function(.x, .y) {
     # print(.x)
     # print(.y)
     nrows_start <- nrow(.x)
@@ -230,7 +241,7 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
       dplyr::rename_at(dplyr::vars(dplyr::ends_with("nazev")), ~paste0(codelist_name, "_", .))
 
     # print(codelist_filtered)
-    slp <- dplyr::left_join(.x, codelist_filtered)
+    slp <- suppressMessages(dplyr::left_join(.x, codelist_filtered))
     if(nrow(slp) != nrows_start) {
       errmsg <- stringr::str_glue(
         "Something went wrong with matching the codelist to the data for period {this_period}.
@@ -250,8 +261,8 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
       dplyr::group_map(slepit, keep = TRUE) %>%
       dplyr::bind_rows()
   } else {
-    slepeno <- data %>%
-      dplyr::left_join(cl_data)
+    slepeno <- suppressMessages(data %>%
+      dplyr::left_join(cl_data))
   }
   return(slepeno)
 }

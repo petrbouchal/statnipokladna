@@ -5,6 +5,10 @@
 * adapt to new URL scheme for data exports at statnipokladna.cz, fixes #74
 * simple codelists with no `*_date` columns now work in `sp_add_codelist()`, fixes #66
 
+## Minor improvements
+
+* `sp_add_codelist()` returns a message if joining by multiple columns
+
 ## Documentation updates
 
 * nicer vignette index entries
