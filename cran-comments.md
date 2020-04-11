@@ -1,21 +1,7 @@
-## Resubmission no. 3
+## New patch version
 
-This is a resubmission following a previous resubmission for this packages.
-
-Corrections made:
-
-- replaced T and F with TRUE and FALSE in whole package
-- replaced \dontrun{} with \donttest{} in all examples
-
-Other changes made resulting from running examples
-
-- updated examples so they do not use deprecated functions
-- fixed bug in tables.R:149 - missing `usethis::` inside usethis::ui_stop()
-- updated examples in `sp_get_codelist()` so they run correctly
-- removed example from unexported function `sp_get_codelist_viewer()`
-- changed default in `sp_get_dataset()` to ensure it points to existing data online
-- removed examples from `sp_get_dataset()` that were not meant to work
-- fixed bug in sp_add_codelist introduced when fixing CRAN note
+This is an update with a quick fix responding to a change in the URL scheme on the publisher's website.
+It also contains several other minor improvements.
 
 ## Test environments
 
@@ -26,11 +12,7 @@ Other changes made resulting from running examples
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-* This is a new release.
-
-CRAN-type check on r-hub also adds a note when "checking CRAN incoming feasibility":
+0 errors | 0 warnings | 0 notes
 
 Possibly mis-spelled words in DESCRIPTION:
      St�tn� (11:40)
