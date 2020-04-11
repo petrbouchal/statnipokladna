@@ -247,13 +247,9 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
     # print(codelist_filtered)
     slp <- suppressMessages(dplyr::left_join(.x, codelist_filtered, by = by))
     if(nrow(slp) != nrows_start) {
-      errmsg <- stringr::str_glue(
-        "Something went wrong with matching the codelist to the data for period {this_period}.
-        Please inspect the dates on the codelist to make sure there are no duplicate
-        items valid for one given date.\nYou may want to filter/edit the codelist manually
-        and pass it to the add_codelist function as an object."
-      )
-      stop(errmsg)
+      usethis::ui_stop(c("Something went wrong with matching the codelist to the data for period {this_period}.",
+        "Please inspect the dates on the codelist to make sure there are no duplicate items valid for one given date.",
+        "You may want to filter/edit the codelist manually and pass it to the add_codelist function as an object."))
       }
     return(slp)
   }
