@@ -257,7 +257,7 @@ get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
   if(!curl::has_internet()) usethis::ui_stop(c("No internet connection. Cannot continue. Retry when connected.",
                                                "If you need offline access to the data across R sessions, set the {ui_field('dest_dir')} parameter."))
   usethis::ui_info("Building URL for codelist {usethis::ui_value(codelist_id)} - {usethis::ui_value(codelist_name)}")
-  x <- stringr::str_glue("{sp_base_url}/data/{codelist_id}.xml")
+  x <- stringr::str_glue("{sp_base_url}/data/xml/{codelist_id}.xml")
   if(check_if_exists) {
     iserror <- httr::http_error(x)
     if(iserror) usethis::ui_stop("Codelist XML for a codelist with this ID does not exist")
