@@ -3,11 +3,18 @@
 ## Bug fixes
 
 * adapt to new URL scheme for data exports at statnipokladna.cz, fixes #74
+* simple codelists with no `*_date` columns now work in `sp_add_codelist()`, fixes #66
+
+## Minor improvements
+
+* `sp_add_codelist()` returns a message if joining by multiple columns
+* `sp_add_codelist()` gains a `by` parameter
 
 ## Documentation updates
 
 * nicer vignette index entries
 * vignette and functions now document working with multiple time periods, which differs between datasets/tables
+* several clarifications on how to use codelists
 
 # statnipokladna 0.5.6
 
