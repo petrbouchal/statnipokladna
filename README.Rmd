@@ -166,7 +166,7 @@ A subset of this information is in the [Get started](https://petrbouchal.github.
 
 There is also a log of various data gotchas I discovered, also in Czech only, stored in the [data issues vignette](https://petrbouchal.github.io/statnipokladna/articles/data-issues-cz.html).
 
-A basic glossary of some of the terms used in the data sets is at <http://monitor.statnipokladna.cz/2019/metodika/>.
+A basic glossary of some of the terms used in the data sets is at <http://monitor.statnipokladna.cz/metodika/>.
 
 ### Note
 

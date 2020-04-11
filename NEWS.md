@@ -12,6 +12,7 @@
 
 ## Documentation updates
 
+* fixed all outdated links to statnipokladna.cz
 * nicer vignette index entries
 * vignette and functions now document working with multiple time periods, which differs between datasets/tables
 * several clarifications on how to use codelists

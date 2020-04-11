@@ -127,7 +127,7 @@ local_budgets <- sp_get_table(table_id = "budget-local", # table ID, see `sp_tab
                            month = 9)
 #> ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2019-09'
 #> ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'
-#> ✓ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpaqkcMK/statnipokladna/finm/2019/09/'
+#> ✓ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmp52TEmf/statnipokladna/finm/2019/09/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Reading data...
 #> ℹ Transforming data...
@@ -163,7 +163,7 @@ codelists:
 ``` r
 functional_categories <- sp_get_codelist("paragraf")
 #> ℹ Building URL for codelist 'paragraf' - Paragraf
-#> ✓ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpaqkcMK/statnipokladna/'
+#> ✓ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmp52TEmf/statnipokladna/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Processing codelist data
 #> Warning: The `x` argument of `as_tibble.matrix()` must have column names if `.name_repair` is omitted as of tibble 2.0.0.
@@ -210,7 +210,7 @@ local_budgets %>%
 #> Joining, by = "paragraf"
 #> Joining, by = "paragraf"
 #> ℹ Building URL for codelist 'polozka' - Rozpočtová položka
-#> ✓ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpaqkcMK/statnipokladna/'
+#> ✓ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmp52TEmf/statnipokladna/'
 #> ℹ Set dest_dir for more control over downloaded files.
 #> ℹ Processing codelist data
 #> Joining, by = "polozka"
@@ -251,14 +251,14 @@ sp_get_dataset("finm") # dataset ID, see `sp_datasets`
 #>   to provide access to the latest data by default.
 #> ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2018-12'
 #> ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'
-#> ✓ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpaqkcMK/statnipokladna/finm/2018/12/'
+#> ✓ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmp52TEmf/statnipokladna/finm/2018/12/'
 #> ℹ Set dest_dir for more control over downloaded files.
-#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpaqkcMK/statnipokladna/finm/2018/12/FINM201_2018012.csv"
-#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpaqkcMK/statnipokladna/finm/2018/12/FINM202_2018012.csv"
-#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpaqkcMK/statnipokladna/finm/2018/12/FINM203_2018012.csv"
-#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpaqkcMK/statnipokladna/finm/2018/12/FINM204_2018012.csv"
-#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpaqkcMK/statnipokladna/finm/2018/12/FINM205_2018012.csv"
-#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpaqkcMK/statnipokladna/finm/2018/12/FINM207_2018012.csv"
+#> [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp52TEmf/statnipokladna/finm/2018/12/FINM201_2018012.csv"
+#> [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp52TEmf/statnipokladna/finm/2018/12/FINM202_2018012.csv"
+#> [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp52TEmf/statnipokladna/finm/2018/12/FINM203_2018012.csv"
+#> [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp52TEmf/statnipokladna/finm/2018/12/FINM204_2018012.csv"
+#> [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp52TEmf/statnipokladna/finm/2018/12/FINM205_2018012.csv"
+#> [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp52TEmf/statnipokladna/finm/2018/12/FINM207_2018012.csv"
 ```
 
 This will put the files in a temp directory.
@@ -295,7 +295,7 @@ only, stored in the [data issues
 vignette](https://petrbouchal.github.io/statnipokladna/articles/data-issues-cz.html).
 
 A basic glossary of some of the terms used in the data sets is at
-<http://monitor.statnipokladna.cz/2019/metodika/>.
+<http://monitor.statnipokladna.cz/metodika/>.
 
 ### Note
 

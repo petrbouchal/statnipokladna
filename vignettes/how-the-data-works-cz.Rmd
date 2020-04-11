@@ -34,9 +34,9 @@ Nejsem rozpočtář ani účetní - tato data primárně používám k zodpovíd
 
 ## Kde brát informace
 
-- [základní glosář k terminologii](http://monitor.statnipokladna.cz/2019/metodika/#prijmy)
+- [základní glosář k terminologii](http://monitor.statnipokladna.cz/metodika/#prijmy)
 - [vyhláška o rozpočtové skladbě](https://www.zakonyprolidi.cz/cs/2002-323#p2) - k tomu viz níže
-- v popisu struktury v excelech [u jednotlivých datasetů](http://monitor.statnipokladna.cz/2019/zdrojova-data/transakcni-data#fin2-12m)
+- v popisu struktury v excelech [u jednotlivých datasetů](https://monitor.statnipokladna.cz/datovy-katalog/transakcni-data)
 - ledacos se hodí bazálně ověřit proti ručně sestavené tabulce v [analytickém rozhraní](http://monitor.statnipokladna.cz/analyza/)
 - při ověřování může taky pomoct např.
   - příloha vyhlášky o RUD ([2019](https://www.mfcr.cz/cs/legislativa/legislativni-dokumenty/2019/vyhlaska-c-219-2019-sb-36077))
@@ -46,12 +46,12 @@ Nejsem rozpočtář ani účetní - tato data primárně používám k zodpovíd
 ## Soustava prvků dostupných ze státní pokladny
 
 - [číselníky](http://monitor.statnipokladna.cz/2019/zdrojova-data/ciselniky)
-- výkazy (publikovány jako ["transakční data"](http://monitor.statnipokladna.cz/2019/zdrojova-data/transakcni-data)) bez téměř jakýkcholi lidsky čitelných identifikátorů - k tomu je potřeba napojit číselníky
+- výkazy (publikovány jako ["transakční data"](http://monitor.statnipokladna.cz/datovy-katalog/transakcni-data)) bez téměř jakýkcholi lidsky čitelných identifikátorů - k tomu je potřeba napojit číselníky
 - části výkazu (tabulky - v datech označeny v daném sloupci)
 
 Prakticky to vypadá tak, že jeden balík s výkazem obsahuje více CSV souborů, kdy jednotlivé soubory obsahují jednu nebo víc tabulek daného výkazu.
 
-Číselníky jsou v XML, ale dají se i prohlížet ([příklad](http://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/vykaz?date=7.11.2019)) a tamtéž stáhnout v CSV.
+Číselníky jsou v XML, ale dají se i prohlížet ([příklad](https://monitor.statnipokladna.cz/datovy-katalog/ciselniky/prohlizec/13)) a tamtéž stáhnout v CSV.
 
 Pozor: číselníky jsou časově determinované a pokud neodfiltrujete položky nerelevantní pro dané časové období, můžou při napojování JOINem vzniknout chyby nebo nechtěné duplicity...
 
