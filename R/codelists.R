@@ -243,13 +243,19 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
     return(slp)
   }
 
-  slepeno <- data %>%
-    dplyr::ungroup() %>%
-    dplyr::group_by({{period_column}}) %>%
-    dplyr::group_map(slepit, keep = TRUE) %>%
-    dplyr::bind_rows()
+  if("start_date" %in% names(cl_data) & "end_date" %in% names(cl_data)) {
+    slepeno <- data %>%
+      dplyr::ungroup() %>%
+      dplyr::group_by({{period_column}}) %>%
+      dplyr::group_map(slepit, keep = TRUE) %>%
+      dplyr::bind_rows()
+  } else {
+    slepeno <- data %>%
+      dplyr::left_join(cl_data)
+  }
   return(slepeno)
 }
+
 
 get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
   if(!(codelist_id %in% sp_codelists$id)) usethis::ui_stop("Not a valid codelist ID")
