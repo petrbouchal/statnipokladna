@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 ### Doplněno 28. 11. 2019:
 
 - v číselnících mohou být dvě stejné položky platné v jeden moment, tj. i po profiltrování přes datum (příklad položka 1381 v číselníku položek) - možná je to metodicky správně, ale rozhodně neintuitivní a je potřeba to ošetřit při napojování číselníků
-- URL prohlížeče číselníku ne vždy odpovídá jeho názvu/URL jeho XML souboru (příklad [prohlizec-ciselniku/smeruc](https://monitor.statnipokladna.cz/2019/zdrojova-data/prohlizec-ciselniku/smeruc?date=28.11.2019) x [/uctosnova.xml](https://monitor.statnipokladna.cz/data/uctosnova.xml))
+- [poznámka o URL číselníků a prohlížečů odstraněna: už nerelevantní (URL prohlížečů už mají jinou logiku)]
 - názvy sloupců označující fáze rozpočtového cyklu (ZU_ROZ*) se liší mezi obcemi (výkaz FINM) a státem (výkaz FINU) - není to chyba, ale je to třeba vědět
 
 ### Doplněno 28. 2. 2020:
