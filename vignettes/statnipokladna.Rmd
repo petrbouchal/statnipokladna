@@ -81,6 +81,11 @@ All CSV files contain some common columns, notably those identifying the organis
 
 You can see the list of datasets (ZIP files) which `statnipokladna` can process in the `sp_datasets` data frame.
 
+##### Central budgets and codelists {.bs-callout .bs-callout-yellow}
+
+The more recent central budgets stored in the `budget-central` table (`misris` dataset) require a 
+different codelist for sectoral ("paragraf") breakdown. Use the `paragraf_long` codelist, not `paragraf`. If you use `paragraf`, `sp_add_codelist()` will technically work but the joined columns will be empty.
+
 ### Coverage
 
 Put simply, the data covers organisations which report into the SP system, which broadly means all public organisations (I am sure there is a legal definition and I am sure there are exceptions, but I do not know the detail.) There are codelists "druhuj" (organisation type) and "poddruhuj" (subtype) which let you see what type an organisation belongs to, and "forma" will let you know about its legal form.
