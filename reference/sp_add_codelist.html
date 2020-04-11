@@ -17,23 +17,27 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -47,7 +51,6 @@
 <meta property="og:title" content="Add codelist data to downloaded data — sp_add_codelist" />
 <meta property="og:description" content="Joins a provided codelist, or downloads and processes one if necessary, and adds it to the data." />
 <meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/logo.png" />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -75,7 +78,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -131,7 +134,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/petrbouchal/statnipokladna">
+  <a href="https://github.com/petrbouchal/statnipokladna/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -233,10 +236,10 @@ it manually using <code>dplyr</code>.</p>
   <span class='fu'>sp_add_codelist</span>(<span class='st'>"polozka"</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>sp_add_codelist</span>(<span class='st'>"paragraf"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Either year or month not set.</span>
 #&gt; <span class='warning'>Using defaults of 2017 and 12.</span></div><div class='output co'>#&gt; <span class='message'>● Set these values explicitly for reproducibility as the defaults may change in the future</span>
-#&gt; <span class='message'>  to provide access to the latest data by default.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Building URL for dataset 'misris': FIN 1-12 OSS - Plnění rozpočtu KAP a OSS, '2017-12'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/misris.xlsx'</span></div><div class='output co'>#&gt; <span class='message'>✔ Storing downloaded archive in and extracting to '/tmp/RtmpS66SAO/statnipokladna/misris/2017/12/'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Set dest_dir for more control over downloaded files.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Reading data...</span></div><div class='output co'>#&gt; <span class='message'>ℹ Transforming data...</span></div><div class='output co'>#&gt; <span class='message'>ℹ Building URL for codelist 'polozka' - Rozpočtová položka</span></div><div class='output co'>#&gt; <span class='message'>✔ Storing codelist in '/tmp/RtmpS66SAO/statnipokladna/'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Set dest_dir for more control over downloaded files.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Processing codelist data</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The `x` argument of `as_tibble.matrix()` must have column names if `.name_repair` is omitted as of tibble 2.0.0.</span>
+#&gt; <span class='message'>  to provide access to the latest data by default.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Building URL for dataset 'misris': FIN 1-12 OSS - Plnění rozpočtu KAP a OSS, '2017-12'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/misris.xlsx'</span></div><div class='output co'>#&gt; <span class='message'>✔ Storing downloaded archive in and extracting to '/tmp/RtmpevEDcp/statnipokladna/misris/2017/12/'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Set dest_dir for more control over downloaded files.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Reading data...</span></div><div class='output co'>#&gt; <span class='message'>ℹ Transforming data...</span></div><div class='output co'>#&gt; <span class='message'>ℹ Building URL for codelist 'polozka' - Rozpočtová položka</span></div><div class='output co'>#&gt; <span class='message'>✔ Storing codelist in '/tmp/RtmpevEDcp/statnipokladna/'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Set dest_dir for more control over downloaded files.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Processing codelist data</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The `x` argument of `as_tibble.matrix()` must have column names if `.name_repair` is omitted as of tibble 2.0.0.</span>
 #&gt; <span class='warning'>Using compatibility `.name_repair`.</span>
 #&gt; <span class='warning'>This warning is displayed once every 8 hours.</span>
-#&gt; <span class='warning'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Building URL for codelist 'paragraf' - Paragraf</span></div><div class='output co'>#&gt; <span class='message'>✔ Storing codelist in '/tmp/RtmpS66SAO/statnipokladna/'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Set dest_dir for more control over downloaded files.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Processing codelist data</span></div><div class='output co'>#&gt; # A tibble: 1,058,136 x 39
+#&gt; <span class='warning'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Building URL for codelist 'paragraf' - Paragraf</span></div><div class='output co'>#&gt; <span class='message'>✔ Storing codelist in '/tmp/RtmpevEDcp/statnipokladna/'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Set dest_dir for more control over downloaded files.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Processing codelist data</span></div><div class='output co'>#&gt; # A tibble: 1,058,136 x 39
 #&gt;    per_yr per_m ucjed ico   kapitola finmisto polozka paragraf zdroj ZC_EDS
 #&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; 
 #&gt;  1 2017   01    1000… 0000… 0302     3020001  5194    611100   1100… &lt;NA&gt;  
@@ -259,12 +262,12 @@ it manually using <code>dplyr</code>.</p>
 #&gt; #   oddil &lt;chr&gt;, pododdil &lt;chr&gt;, paragraf_nazev &lt;chr&gt;, paragraf_kr_nazev &lt;chr&gt;,
 #&gt; #   paragraf_str_nazev &lt;chr&gt;, paragraf_start_date &lt;date&gt;,
 #&gt; #   paragraf_end_date &lt;date&gt;</div><div class='input'>
-<span class='no'>pol</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sp_get_codelist.html'>sp_get_codelist</a></span>(<span class='st'>"paragraf"</span>)</div><div class='output co'>#&gt; <span class='message'>ℹ Codelist file already in '/tmp/RtmpS66SAO/statnipokladna/', not downloading. Set `redownload = TRUE` if needed.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Processing codelist data</span></div><div class='input'><span class='no'>par</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sp_get_codelist.html'>sp_get_codelist</a></span>(<span class='st'>"polozka"</span>)</div><div class='output co'>#&gt; <span class='message'>ℹ Codelist file already in '/tmp/RtmpS66SAO/statnipokladna/', not downloading. Set `redownload = TRUE` if needed.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Processing codelist data</span></div><div class='input'>
+<span class='no'>pol</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sp_get_codelist.html'>sp_get_codelist</a></span>(<span class='st'>"paragraf"</span>)</div><div class='output co'>#&gt; <span class='message'>ℹ Codelist file already in '/tmp/RtmpevEDcp/statnipokladna/', not downloading. Set `redownload = TRUE` if needed.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Processing codelist data</span></div><div class='input'><span class='no'>par</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sp_get_codelist.html'>sp_get_codelist</a></span>(<span class='st'>"polozka"</span>)</div><div class='output co'>#&gt; <span class='message'>ℹ Codelist file already in '/tmp/RtmpevEDcp/statnipokladna/', not downloading. Set `redownload = TRUE` if needed.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Processing codelist data</span></div><div class='input'>
 <span class='fu'><a href='sp_get_table.html'>sp_get_table</a></span>(<span class='st'>"budget-central"</span>, <span class='fl'>2017</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>sp_add_codelist</span>(<span class='no'>pol</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'>sp_add_codelist</span>(<span class='no'>par</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Either year or month not set.</span>
 #&gt; <span class='warning'>Using defaults of 2017 and 12.</span></div><div class='output co'>#&gt; <span class='message'>● Set these values explicitly for reproducibility as the defaults may change in the future</span>
-#&gt; <span class='message'>  to provide access to the latest data by default.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Files already in /tmp/RtmpS66SAO/statnipokladna/misris/2017/12, not downloading. Set `redownload = TRUE` if needed.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Reading data...</span></div><div class='output co'>#&gt; <span class='message'>ℹ Transforming data...</span></div><div class='output co'>#&gt; # A tibble: 1,058,136 x 39
+#&gt; <span class='message'>  to provide access to the latest data by default.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Files already in /tmp/RtmpevEDcp/statnipokladna/misris/2017/12, not downloading. Set `redownload = TRUE` if needed.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Reading data...</span></div><div class='output co'>#&gt; <span class='message'>ℹ Transforming data...</span></div><div class='output co'>#&gt; # A tibble: 1,058,136 x 39
 #&gt;    per_yr per_m ucjed ico   kapitola finmisto polozka paragraf zdroj ZC_EDS
 #&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; 
 #&gt;  1 2017   01    1000… 0000… 0302     3020001  5194    611100   1100… &lt;NA&gt;  
@@ -289,16 +292,10 @@ it manually using <code>dplyr</code>.</p>
 #&gt; #   kon_rep &lt;lgl&gt;</div><div class='input'># }
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -309,7 +306,7 @@ it manually using <code>dplyr</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
