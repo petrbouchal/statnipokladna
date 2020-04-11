@@ -43,6 +43,8 @@ Zooming in on the data that is available from the open data dumps, there are two
 
 **Codelists** are generally long lists of metadata items. These allow you to "translate" codes contained in return data. Codes identify individual lines, telling you which categories the value in that line belongs to, often across multiple categorisations (see [Working with budget data].)
 
+##### Codelists and time periods {.bs-callout .bs-callout-yellow}
+
 One thing to bear in mind is that codelist data contains all items in that codelist, regardless of the time periods for which the item is applicable. That means that for a given code ID in a codelist, there may be duplicates distinguishable only by their validity range.
 
 The `sp_add_codelist()` function tries to take care of this for you, but may not success if there are oddities in the data, e.g. one code with two items valid for the same date. 
