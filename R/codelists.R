@@ -56,7 +56,7 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #' are looking to expand, e.g. the codes in column paragraf can be expanded by codelist paragraf.
 #'
 #' The processing ensures that the resulting codelist can be correctly joined to
-#' the data, autamatically using `add_codelist()` or manually.
+#' the data, automatically using `sp_add_codelist()` or manually.
 #' The entire codelist is downloaded and not filtered for any particular date.
 #'
 #' Codelist XML files are stored in a temporary directory as determined by `tempdir()`
