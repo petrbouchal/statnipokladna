@@ -115,7 +115,7 @@ It is a rather raw-looking data frame...
 head(local_budgets)
 ```
 
-...but it has been cleaned up, and can be enriched with any of the metadata codelists:
+but it has been cleaned up, and can be enriched with any of the metadata codelists:
 
 ```{r}
 functional_categories <- sp_get_codelist("paragraf")
