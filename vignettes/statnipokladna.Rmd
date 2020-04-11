@@ -52,10 +52,12 @@ Note also that there are two kinds of codelists: some can be joined to core data
 Currently the package cannot handle the latter type automatically, so you need to save the output of `sp_get_codelist()` into an object and joit it yourself using `dplyr`.
 
 
-You can see the list of available codelists at https://monitor.statnipokladna.cz/datovy-katalog/ciselniky. 
+You can see the list of available codelists at https://monitor.statnipokladna.cz/datovy-katalog/ciselniky and in `sp_codelists`.
 When I refer to codelists below, I use the ID which you can supply as the `"codelist_id"` parameter to `sp_add_codelist()`.
 
 The codelist that you will generally want for comparing organisations is called "ucjed"; this contains metadata on all organisations covered by the data. It is huge so you will want to store it somewhere after you have retrieved (and processed and filtered if relevant.)
+
+Note that some codelists can only be joined onto other codelists, e.g. the `ucjed` codelist, which contains most metadata on reporting organisations, has several columns named `somethings_id`. Those columns can be "decoded" using using the respective `something` codelist.
 
 **Return data** come broadly in two kinds: budgetary and accounting - see below for how to work with each of them, as the logic differs markedly. Return data come in ZIP files, which can contain on or more files, each with a return (I call them tables for more generality, hence the `sp_get_table()` function.)
 
