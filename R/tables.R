@@ -90,6 +90,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #'  | Original | Output | English | Czech | Note |
 #'  | --- | --- | --- | --- | --- |
 #'  | ZC_POLVYK | polvyk | item/line  | položka výkazu  | -  |
+#'  | ZC_SYNUC | synuc | synthetic account  | syntetický účet  | -  |
 #'  | ZU_MONET | previous_net | net, previous period  | netto minulé období | - |
 #'  | ZU_AOBTTO | current_gross | gross, current period   | brutto běžné období   | - |
 #'  | ZU_AONET | current_net | net, current period  | netto běžné období  | - |
@@ -208,6 +209,7 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
                         ZU_ZVYS = "increase",
                         ZU_SNIZ = "decrease",
                         ZU_BEZUO = "current",
+                        ZU_SYNUC = "synuc",
                         `0FUNC_AREA` = "paragraf")
     return(dt)
   }

@@ -81,6 +81,7 @@ Data is processed in the following way:
 \strong{Tables \verb{balance-sheet*}}\tabular{lllll}{
    Original \tab Output \tab English \tab Czech \tab Note \cr
    ZC_POLVYK \tab polvyk \tab item/line \tab položka výkazu \tab - \cr
+   ZC_SYNUC \tab synuc \tab synthetic account \tab syntetický účet \tab - \cr
    ZU_MONET \tab previous_net \tab net, previous period \tab netto minulé období \tab - \cr
    ZU_AOBTTO \tab current_gross \tab gross, current period \tab brutto běžné období \tab - \cr
    ZU_AONET \tab current_net \tab net, current period \tab netto běžné období \tab - \cr
