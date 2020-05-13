@@ -4,11 +4,13 @@
 \name{sp_codelists}
 \alias{sp_codelists}
 \title{List of available codelists}
-\format{A data frame with 27 rows and 2 variables:
+\format{
+A data frame with 27 rows and 2 variables:
 \describe{
 \item{\code{id}}{character. ID, used as \code{codelist_id} argument in \code{sp_get_codelist}.}
 \item{\code{name}}{character. Short name, mostly corresponds to title used on statnipokladna.cz.}
-}}
+}
+}
 \usage{
 sp_codelists
 }

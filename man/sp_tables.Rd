@@ -4,13 +4,15 @@
 \name{sp_tables}
 \alias{sp_tables}
 \title{List of available tables (PARTIAL)}
-\format{A data frame with 2 rows and 4 variables:
+\format{
+A data frame with 2 rows and 4 variables:
 \describe{
 \item{\code{id}}{character Table id, used as \code{table_id} argument to \code{sp_get_table}.}
 \item{\code{dataset_id}}{integer Table number.}
 \item{\code{czech_name}}{character Czech name of the table.}
 \item{\code{note}}{character Note.}
-}}
+}
+}
 \usage{
 sp_tables
 }

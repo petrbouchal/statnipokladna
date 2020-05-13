@@ -4,11 +4,13 @@
 \name{sp_datasets}
 \alias{sp_datasets}
 \title{List of available datasets}
-\format{A data frame with 9 rows and 3 variables:
+\format{
+A data frame with 9 rows and 3 variables:
 \describe{
 \item{\code{id}}{character. Dataset ID, used as \code{dataset_id} argument to \code{sp_get_dataset}.}
 \item{\code{name}}{character. Dataset name, mostly corresponds to title on the statnipokladna GUI.}
-}}
+}
+}
 \usage{
 sp_datasets
 }
