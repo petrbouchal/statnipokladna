@@ -132,11 +132,11 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #' @encoding UTF-8
 #' @examples
 #' \donttest{
-#' allorgs_latest <- sp_get_table("budget-local")
-#' allorgs_2018 <- sp_get_table("budget-local", 2018)
-#' allorgs_mid2018 <- sp_get_table("budget-local", 2018, 6)
-#' oneorg_multiyear <- sp_get_table("budget-local", 2012:2018, 12, ico = "00064581")
-#' oneorg_multihalfyears <- sp_get_table("budget-local", 2013:2018, c(6, 12), ico = "00064581")
+#' allorgs_latest <- sp_get_table("budget-central")
+#' allorgs_2018 <- sp_get_table("budget-central", 2018)
+#' allorgs_mid2018 <- sp_get_table("budget-central", 2018, 6)
+#' oneorg_multiyear <- sp_get_table("budget-central", 2017:2018, 12, ico = "00064581")
+#' oneorg_multihalfyears <- sp_get_table("budget-central", 2017:2018, c(6, 12), ico = "00064581")
 #' }
 #' @export
 #' @family Core workflow
