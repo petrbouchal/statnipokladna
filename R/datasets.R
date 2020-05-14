@@ -139,7 +139,7 @@ sp_get_dataset <- function(dataset_id, year = 2018, month = 12,
   if(!(month %in% c(1:12))) stop("`Month` must be an integer from 1 to 12.")
   if(!(year %in% c(2010:lubridate::year(lubridate::today())))) stop("`Year` must be between 2010 and now.")
   month <- formatC(month, width = 2, format = "d", flag = "0")
-  td <- paste(dest_dir, "statnipokladna", dataset_id, year, month, sep = "/")
+  td <- paste(dest_dir, dataset_id, year, month, sep = "/")
   dir.create(td, showWarnings = FALSE, recursive = TRUE)
   tf <- paste0(td, "/", dataset_id, year, month, ".zip")
   if(file.exists(tf) & !redownload) {

@@ -77,12 +77,12 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #' @export
 #' @family Core workflow
 
-  td <- paste0(dest_dir, "/statnipokladna/")
 sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload = FALSE) {
 
   if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
                                               default = tempdir())
 
+  td <- dest_dir
   dir.create(td, showWarnings = FALSE, recursive = TRUE)
   tf <- paste0(td, codelist_id, ".xml")
   if(file.exists(tf) & !redownload) {
