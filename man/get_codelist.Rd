@@ -4,14 +4,15 @@
 \alias{get_codelist}
 \title{Deprecated: Get codelist}
 \usage{
-get_codelist(codelist_id, n = NULL, dest_dir = tempdir(), redownload = FALSE)
+get_codelist(codelist_id, n = NULL, dest_dir = NULL, redownload = FALSE)
 }
 \arguments{
 \item{codelist_id}{A codelist ID. See \code{id} column in \code{sp_codelists} for a list of available codelists.}
 
 \item{n}{Number of rows to return. Default (NULL) means all. Useful for quickly inspecting a codelist.}
 
-\item{dest_dir}{character. Directory in which downloaded files will be stored. Defaults to \code{tempdir()}.}
+\item{dest_dir}{character. Directory in which downloaded files will be stored.
+If left unset, will use the \code{statnipokladna.dest_dir} option if the option is set, and \code{tempdir()} otherwise. Will be created if it does not exist.}
 
 \item{redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
 }

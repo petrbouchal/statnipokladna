@@ -10,7 +10,7 @@ get_table(
   month = 12,
   ico = NULL,
   redownload = FALSE,
-  dest_dir = tempdir()
+  dest_dir = NULL
 )
 }
 \arguments{
@@ -25,7 +25,8 @@ Can be a vector of length > 1 (see Details for how to work with data across time
 
 \item{redownload}{Redownload even if recent file present? Defaults to FALSE.}
 
-\item{dest_dir}{character. Directory in which downloaded files will be stored. Defaults to \code{tempdir()}. Will be created if it does not exist.}
+\item{dest_dir}{character. Directory in which downloaded files will be stored.
+If left unset, will use the \code{statnipokladna.dest_dir} option if the option is set, and \code{tempdir()} otherwise. Will be created if it does not exist.}
 }
 \value{
 a tibble

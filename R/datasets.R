@@ -111,7 +111,8 @@ get_dataset_doc <- function(dataset_id, dest_dir = ".", download = TRUE) {
 #' (see Details for how to work with data across time periods.)
 #' @param month month, numeric. Must be between 1 and 12. Defaults to 12.
 #' (see Details for how to work with data across time periods.)
-#' @param dest_dir character. Directory in which downloaded files will be stored. Defaults to `tempdir()`. Will be created if it does not exist.
+#' @param dest_dir character. Directory in which downloaded files will be stored.
+#' If left unset, will use the `statnipokladna.dest_dir` option if the option is set, and `tempdir()` otherwise. Will be created if it does not exist.
 #' @param redownload Redownload even if file has already been downloaded? Defaults to FALSE.
 #'
 #' @return character string with complete paths to downloaded files.
@@ -124,13 +125,17 @@ get_dataset_doc <- function(dataset_id, dest_dir = ".", download = TRUE) {
 #' @family Core workflow
 #' @export
 sp_get_dataset <- function(dataset_id, year = 2018, month = 12,
-                        dest_dir = tempdir(), redownload = FALSE) {
+                        dest_dir = NULL, redownload = FALSE) {
   if(interactive() == FALSE & (missing(year) | missing(month))) {
     usethis::ui_warn("Either {usethis::ui_field('year')} or {usethis::ui_field('month')} not set.
                      Using defaults of {usethis::ui_value(year)} and {usethis::ui_value(month)}.")
     usethis::ui_todo("Set these values explicitly for reproducibility as the defaults may change in the future
                      to provide access to the latest data by default.")
   }
+
+  if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
+                                              default = tempdir())
+
   if(!(month %in% c(1:12))) stop("`Month` must be an integer from 1 to 12.")
   if(!(year %in% c(2010:lubridate::year(lubridate::today())))) stop("`Year` must be between 2010 and now.")
   month <- formatC(month, width = 2, format = "d", flag = "0")
@@ -162,7 +167,7 @@ sp_get_dataset <- function(dataset_id, year = 2018, month = 12,
 #' @family Utilities
 #' @export
 get_dataset <- function(dataset_id, year = 2019, month = 12,
-                        dest_dir = tempdir(), redownload = FALSE) {
+                        dest_dir = NULL, redownload = FALSE) {
   lifecycle::deprecate_soft("0.5.2", "statnipokladna::get_dataset()", "sp_get_dataset()")
   sp_get_dataset(dataset_id = dataset_id, year = year, month = month,
                  dest_dir = dest_dir, redownload = redownload)

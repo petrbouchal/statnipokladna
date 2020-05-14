@@ -10,7 +10,7 @@ sp_add_codelist(
   period_column = .data$period_vykaz,
   by = NULL,
   redownload = FALSE,
-  dest_dir = tempdir()
+  dest_dir = NULL
 )
 }
 \arguments{
@@ -24,7 +24,8 @@ sp_add_codelist(
 
 \item{redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
 
-\item{dest_dir}{character. Directory in which downloaded files will be stored. Defaults to \code{tempdir()}.}
+\item{dest_dir}{character. Directory in which downloaded files will be stored.
+If left unset, will use the \code{statnipokladna.dest_dir} option if the option is set, and \code{tempdir()} otherwise. Will be created if it does not exist.}
 }
 \value{
 A data frame of same length as \code{data}, with added columns from \code{codelist}. See Details.

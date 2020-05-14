@@ -126,7 +126,8 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #' Can be a vector of length > 1 (see Details for how to work with data across time periods.).
 #' @param month month, numeric. Must be 3, 6, 9 or 12. Can be a vector of length > 1 (see details).
 #' @param ico ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See <http://monitor.statnipokladna.cz/datovy-katalog/prohlizec-ciselniku/ucjed> to look up ID of any org in the dataset.
-#' @param dest_dir character. Directory in which downloaded files will be stored. Defaults to `tempdir()`. Will be created if it does not exist.
+#' @param dest_dir character. Directory in which downloaded files will be stored.
+#' If left unset, will use the `statnipokladna.dest_dir` option if the option is set, and `tempdir()` otherwise. Will be created if it does not exist.
 #' @param redownload Redownload even if recent file present? Defaults to FALSE.
 #'
 #' @return a tibble; see Details for key to the columns
@@ -143,7 +144,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #' @family Core workflow
 #'
 sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
-                      redownload = FALSE, dest_dir = tempdir()) {
+                      redownload = FALSE, dest_dir = NULL) {
   stopifnot(is.character(ico) | is.null(ico))
   if(interactive() == FALSE & (missing(year) | missing(month))) {
     usethis::ui_warn("Either {usethis::ui_field('year')} or {usethis::ui_field('month')} not set.
@@ -152,6 +153,10 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
                      to provide access to the latest data by default.")
 
   }
+
+  if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
+                                              default = tempdir())
+
   if(!(table_id %in% sp_tables_i$id)) usethis::ui_stop("Not a valid table id. Consult {usethis::ui_code('sp_tables')}.")
   dataset_id <- sp_tables_i$dataset_id[sp_tables_i$id == table_id]
   table_regex <- paste0(sp_tables_i$file_regex[sp_tables_i$id == table_id])
@@ -234,6 +239,6 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
 #' @return a tibble
 #' @export
 get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
-                      redownload = FALSE, dest_dir = tempdir()) {
+                      redownload = FALSE, dest_dir = NULL) {
   lifecycle::deprecate_soft("0.5.2", "statnipokladna::get_table()", "sp_get_table()")
 }

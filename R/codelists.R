@@ -65,7 +65,8 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #'
 #' @param codelist_id A codelist ID. See `id` column in `sp_codelists` for a list of available codelists.
 #' @param n Number of rows to return. Default (NULL) means all. Useful for quickly inspecting a codelist.
-#' @param dest_dir character. Directory in which downloaded files will be stored. Defaults to `tempdir()`.
+#' @param dest_dir character. Directory in which downloaded files will be stored.
+#' If left unset, will use the `statnipokladna.dest_dir` option if the option is set, and `tempdir()` otherwise. Will be created if it does not exist.
 #' @param redownload Redownload even if file has already been downloaded? Defaults to FALSE.
 #'
 #' @return A tibble
@@ -76,8 +77,12 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #' @export
 #' @family Core workflow
 
-sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload = FALSE) {
   td <- paste0(dest_dir, "/statnipokladna/")
+sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload = FALSE) {
+
+  if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
+                                              default = tempdir())
+
   dir.create(td, showWarnings = FALSE, recursive = TRUE)
   tf <- paste0(td, codelist_id, ".xml")
   if(file.exists(tf) & !redownload) {
@@ -120,7 +125,7 @@ sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownl
 #' @export
 #' @family Core workflow
 
-get_codelist <- function(codelist_id, n = NULL, dest_dir = tempdir(), redownload = FALSE) {
+get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload = FALSE) {
   lifecycle::deprecate_soft("0.5.2", "statnipokladna::get_codelist()", "sp_get_codelist()")
   sp_get_codelist(codelist_id = codelist_id, n = n, dest_dir = dest_dir, redownload = redownload)
 }
@@ -184,7 +189,8 @@ switch_minus <- function(string) {
 #' @param data a data frame returned by `sp_get_table()`.
 #' @param codelist The codelist to add. Either a character vector of length one (see `sp_tables` for possible values), or a data frame returned by `sp_get_codelist()`.
 #' @param by character. Columns by which to join the codelist. Same form as for `dplyr::left_join()``.`.
-#' @param dest_dir character. Directory in which downloaded files will be stored. Defaults to `tempdir()`.
+#' @param dest_dir character. Directory in which downloaded files will be stored.
+#' If left unset, will use the `statnipokladna.dest_dir` option if the option is set, and `tempdir()` otherwise. Will be created if it does not exist.
 #' @param period_column Unquoted column name of column identifying the data period in `data`. Leave to default if you have not changed the `data` object returned by `sp_get_table()`.
 #' @param redownload Redownload even if file has already been downloaded? Defaults to FALSE.
 #' @return A data frame of same length as `data`, with added columns from `codelist`. See Details.
@@ -206,7 +212,7 @@ switch_minus <- function(string) {
 sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_vykaz,
                             by = NULL,
                             redownload = FALSE,
-                            dest_dir = tempdir()) {
+                            dest_dir = NULL) {
   if(is.null(codelist)) stop("Please supply a codelist")
   # print(rlang::as_label({{period_column}}))
   stopifnot("data.frame" %in% class(data),
@@ -295,7 +301,7 @@ get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
 #' @export
 add_codelist <- function(data, codelist = NULL, period_column = .data$period_vykaz,
                             redownload = FALSE,
-                            dest_dir = tempdir()) {
+                            dest_dir = NULL) {
   lifecycle::deprecate_soft("0.5.2", "statnipokladna::add_codelist()", "sp_add_codelist()")
   sp_add_codelist(data = data, codelist = codelist, period_column = period_column,
                   redownload = redownload, dest_dir = dest_dir)

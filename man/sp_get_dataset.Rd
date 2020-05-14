@@ -8,7 +8,7 @@ sp_get_dataset(
   dataset_id,
   year = 2018,
   month = 12,
-  dest_dir = tempdir(),
+  dest_dir = NULL,
   redownload = FALSE
 )
 }
@@ -21,7 +21,8 @@ sp_get_dataset(
 \item{month}{month, numeric. Must be between 1 and 12. Defaults to 12.
 (see Details for how to work with data across time periods.)}
 
-\item{dest_dir}{character. Directory in which downloaded files will be stored. Defaults to \code{tempdir()}. Will be created if it does not exist.}
+\item{dest_dir}{character. Directory in which downloaded files will be stored.
+If left unset, will use the \code{statnipokladna.dest_dir} option if the option is set, and \code{tempdir()} otherwise. Will be created if it does not exist.}
 
 \item{redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
 }
