@@ -92,7 +92,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
       </span>
     </div>
 
@@ -166,7 +166,7 @@
   <span class='kw'>codelist</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>period_column</span> <span class='kw'>=</span> <span class='no'>.data</span>$<span class='no'>period_vykaz</span>,
   <span class='kw'>redownload</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>dest_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>()
+  <span class='kw'>dest_dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -190,7 +190,8 @@
     </tr>
     <tr>
       <th>dest_dir</th>
-      <td><p>character. Directory in which downloaded files will be stored. Defaults to <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code>.</p></td>
+      <td><p>character. Directory in which downloaded files will be stored.
+If left unset, will use the <code>statnipokladna.dest_dir</code> option if the option is set, and <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code> otherwise. Will be created if it does not exist.</p></td>
     </tr>
     </table>
 

@@ -92,7 +92,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
       </span>
     </div>
 
@@ -165,7 +165,7 @@
   <span class='no'>dataset_id</span>,
   <span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>2018</span>,
   <span class='kw'>month</span> <span class='kw'>=</span> <span class='fl'>12</span>,
-  <span class='kw'>dest_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(),
+  <span class='kw'>dest_dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>redownload</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )</pre>
 
@@ -188,7 +188,8 @@
     </tr>
     <tr>
       <th>dest_dir</th>
-      <td><p>character. Directory in which downloaded files will be stored. Defaults to <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code>. Will be created if it does not exist.</p></td>
+      <td><p>character. Directory in which downloaded files will be stored.
+If left unset, will use the <code>statnipokladna.dest_dir</code> option if the option is set, and <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code> otherwise. Will be created if it does not exist.</p></td>
     </tr>
     <tr>
       <th>redownload</th>
@@ -219,9 +220,9 @@ See <code><a href='../articles/statnipokladna.html'>vignette("statnipokladna")</
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='no'>budget_latest</span> <span class='kw'>&lt;-</span> <span class='fu'>sp_get_dataset</span>(<span class='st'>"finm"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Either year or month not set.</span>
 #&gt; <span class='warning'>Using defaults of 2018 and 12.</span></div><div class='output co'>#&gt; <span class='message'>● Set these values explicitly for reproducibility as the defaults may change in the future</span>
-#&gt; <span class='message'>  to provide access to the latest data by default.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2018-12'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span></div><div class='output co'>#&gt; <span class='message'>✔ Storing downloaded archive in and extracting to '/tmp/RtmpEsFRqQ/statnipokladna/finm/2018/12/'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Set dest_dir for more control over downloaded files.</span></div><div class='input'><span class='no'>budget_2018</span> <span class='kw'>&lt;-</span> <span class='fu'>sp_get_dataset</span>(<span class='st'>"finm"</span>, <span class='fl'>2018</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Either year or month not set.</span>
+#&gt; <span class='message'>  to provide access to the latest data by default.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2018-12'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span></div><div class='output co'>#&gt; <span class='message'>✔ Storing downloaded archive in and extracting to '/tmp/Rtmpj1jeBO/finm/2018/12/'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Set dest_dir for more control over downloaded files.</span></div><div class='input'><span class='no'>budget_2018</span> <span class='kw'>&lt;-</span> <span class='fu'>sp_get_dataset</span>(<span class='st'>"finm"</span>, <span class='fl'>2018</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Either year or month not set.</span>
 #&gt; <span class='warning'>Using defaults of 2018 and 12.</span></div><div class='output co'>#&gt; <span class='message'>● Set these values explicitly for reproducibility as the defaults may change in the future</span>
-#&gt; <span class='message'>  to provide access to the latest data by default.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Files already in /tmp/RtmpEsFRqQ/statnipokladna/finm/2018/12, not downloading. Set `redownload = TRUE` if needed.</span></div><div class='input'><span class='no'>budget_mid2018</span> <span class='kw'>&lt;-</span> <span class='fu'>sp_get_dataset</span>(<span class='st'>"finm"</span>, <span class='fl'>2018</span>, <span class='fl'>6</span>)</div><div class='output co'>#&gt; <span class='message'>ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2018-06'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span></div><div class='output co'>#&gt; <span class='message'>✔ Storing downloaded archive in and extracting to '/tmp/RtmpEsFRqQ/statnipokladna/finm/2018/06/'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Set dest_dir for more control over downloaded files.</span></div><div class='input'># }
+#&gt; <span class='message'>  to provide access to the latest data by default.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Files already in /tmp/Rtmpj1jeBO/finm/2018/12, not downloading. Set `redownload = TRUE` if needed.</span></div><div class='input'><span class='no'>budget_mid2018</span> <span class='kw'>&lt;-</span> <span class='fu'>sp_get_dataset</span>(<span class='st'>"finm"</span>, <span class='fl'>2018</span>, <span class='fl'>6</span>)</div><div class='output co'>#&gt; <span class='message'>ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2018-06'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span></div><div class='output co'>#&gt; <span class='message'>✔ Storing downloaded archive in and extracting to '/tmp/Rtmpj1jeBO/finm/2018/06/'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Set dest_dir for more control over downloaded files.</span></div><div class='input'># }
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
