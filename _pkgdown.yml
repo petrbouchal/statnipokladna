@@ -1,8 +1,19 @@
+home:
+  title: An R package for using data from the Czech public finance database (Monitor Státní pokladny)
+  description: Discover, retrieve and use open data from the Czech public finance database (Monitor Státní pokladny, including accounting and budgetary data for all public organisations and municipalities.
+
 destination: docs
 url: https://petrbouchal.github.io/statnipokladna
 template:
   params:
     ganalytics: UA-156460113-1
+  opengraph:
+    image:
+      src: man/figures/card.png
+      alt: "statnipokladna: R package for using Czech public finance data (Monitor Státní pokladny)"
+    twitter:
+      creator: "@petrbouchal"
+      card: summary_large_image
 reference:
 - title: Core workflow
   desc:  Functions for executing the core workflow.
