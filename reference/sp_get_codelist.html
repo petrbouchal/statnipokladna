@@ -51,7 +51,11 @@
 <meta property="og:title" content="Get codelist — sp_get_codelist" />
 <meta property="og:description" content="Downloads and processes codelist identified by codelist_id. See sp_codelists for a list of
 of available codelists with their IDs and names." />
-<meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/logo.png" />
+<meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/reference/figures/card.png" />
+<meta property="og:image:alt" content="statnipokladna: R package for using Czech public finance data (Monitor Státní pokladny)" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@petrbouchal" />
+<meta name="twitter:site" content="@petrbouchal" />
 
 
 
@@ -210,7 +214,7 @@ and persist per session to avoid redownloads.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'>sp_get_codelist</span>(<span class='st'>"paragraf"</span>)</div><div class='output co'>#&gt; <span class='message'>ℹ Codelist file already in '/tmp/Rtmpj1jeBO/', not downloading. Set `redownload = TRUE` if needed.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Processing codelist data</span></div><div class='output co'>#&gt; # A tibble: 550 x 9
+<span class='fu'>sp_get_codelist</span>(<span class='st'>"paragraf"</span>)</div><div class='output co'>#&gt; <span class='message'>ℹ Codelist file already in '/tmp/RtmpcJUEia/', not downloading. Set `redownload = TRUE` if needed.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Processing codelist data</span></div><div class='output co'>#&gt; # A tibble: 550 x 9
 #&gt;    paragraf skupina oddil pododdil nazev kr_nazev str_nazev start_date
 #&gt;    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;date&gt;    
 #&gt;  1 0000     Příjmy  Příj… Příjmy   Pro … "Pro př… "Pro pří… 1900-01-01
