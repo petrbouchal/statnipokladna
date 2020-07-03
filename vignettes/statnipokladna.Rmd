@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-> Note for Czech speakers: a previous note covering similar information, sometimes in more depth, is available in Czech [the Czech guide to the data](how-the-data-works-cz.html).
+> Note for Czech speakers: a previous note covering similar information, sometimes in more depth, is available in [the Czech guide to the data](how-the-data-works-cz.html).
 
 This vignette provides background on the data that `statnipokladna` provides access to. Make sure you read the relevant parts before analysing the data: it can be quite complicated and it is easy to make mistakes and end up with wrong numbers.
 
@@ -92,7 +92,7 @@ different codelist for sectoral ("paragraf") breakdown. Use the `paragraf_long` 
 
 Put simply, the data covers organisations which report into the SP system, which broadly means all public organisations (I am sure there is a legal definition and I am sure there are exceptions, but I do not know the detail.) There are codelists "druhuj" (organisation type) and "poddruhuj" (subtype) which let you see what type an organisation belongs to, and "forma" will let you know about its legal form.
 
-This means the data covers both state (I call them "central" in `sp_tables`) and local organisations incl. all 6000+ municipalities; and both public organisations themselves and their related organisations (both "podřízené" and "příspěvkové", i.e. subsidiary and contributory, the latter being more independent). Commercial entities owned by public organisations are included at least as codelists items and presumably at least their accounting returns will be included in the data, but I have not researched whether there are cut-offs as to what stake counts as ownership etc. 
+This means the data covers both state (I call them "central" in `sp_tables`) and local organisations incl. all 6000+ municipalities; and both public organisations themselves and their related organisations (both "podřízené" and "příspěvkové", i.e. subsidiary and sponsored, the latter being more independent). Commercial entities owned by public organisations are included at least as codelists items and presumably at least their accounting returns will be included in the data, but I have not researched whether there are cut-offs as to what stake counts as ownership etc. 
 
 State enterprises (a special legal form) are included. And Budvar, the Czech state brewery which also has a special legal form (national company) also makes an appearance in the codelist... NB: I am not sure which return data, if any, they are included in.
 
