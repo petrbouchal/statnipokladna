@@ -106,7 +106,8 @@ Report/return data is published in differing periodicities, depending on the kin
 
 Generally:
 
-- budget data is published quarterly for local organisations and until 2018 for central organisations; starting from 2018 central organisations budgetary data are published monthly.
+- budget data is published quarterly for local organisations and until 2018 for central organisations; starting from 2018 central organisations budgetary data are published monthly. 
+- starting from 2020 local (municipal) budget data is published monthly
 - accounting data is published quarterly; for some organisations such as city districts this only happens annually at year end.
 
 See the list of currently available data releases at https://monitor.statnipokladna.cz/datovy-katalog/transakcni-data.
