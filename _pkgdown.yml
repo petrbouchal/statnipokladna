@@ -4,9 +4,9 @@ home:
 
 destination: docs
 url: https://petrbouchal.github.io/statnipokladna
+development:
+  mode: auto
 template:
-  params:
-    ganalytics: UA-156460113-1
   opengraph:
     image:
       src: man/figures/card.png
