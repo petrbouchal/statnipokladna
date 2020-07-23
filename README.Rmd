@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
 [![CRAN monthly downloads](https://cranlogs.r-pkg.org/badges/last-month/statnipokladna)](https://CRAN.R-project.org/package=statnipokladna)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Travis build status](https://travis-ci.org/petrbouchal/statnipokladna.svg?branch=master)](https://travis-ci.org/petrbouchal/statnipokladna)
+[![R build status](https://github.com/petrbouchal/statnipokladna/workflows/R-CMD-check/badge.svg)](https://github.com/petrbouchal/statnipokladna/actions)
 <!-- badges: end -->
 
 The goal of statnipokladna is to provide programmatic access to open data from the Státní pokladna system. Státní pokladna is a comprehensive budgeting, reporting and accounting system for Czech public organisations. This package provides user-friendly ways to access the open data from that system available at <https://monitor.statnipokladna.cz>. The vignettes in the package also provide an introduction to the underlying data.
@@ -176,7 +177,7 @@ Not created or endorsed by the Czech Ministry of Finance, who produce the data -
 
 ### R Packages
 
-- [CzechData](https://github.com/JanCaha/CzechData) by @JanCaha for (mainly) geospatial data and data about 
+- [CzechData](https://jancaha.github.io/CzechData) by @JanCaha for (mainly) geospatial data about the Czech Republic (both admin. boundaries and topology and geography)
 - [RCzechia](https://cran.r-project.org/package=RCzechia) for another approach to Czech geospatial data and access to the official public geocoder and reverse geocoder
 - [czso](https://github.com/petrbouchal/czso) for access to Czech statistical open data
 - [eurostat](https://cran.r-project.org/package=eurostat) for access to Eurostat data
