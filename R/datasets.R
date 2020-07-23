@@ -54,7 +54,8 @@ get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists
 #' Downloads XLS file with dataset documentation, or opens link to this file in browser.
 #'
 #' @param dataset_id dataset ID. See `sp_datasets`.
-#' @param dest_dir character. Where the file should be written. Defaults to working directory.
+#' @param dest_dir character. Directory in which downloaded files will be stored.
+#' If left unset, will use the `statnipokladna.dest_dir` option if the option is set, and `tempdir()` otherwise. Will be created if it does not exist.
 #' @param download Whether to download (the default) or open link in browser.
 #'
 #' @return character (link) if download = TRUE, nothing otherwise.
@@ -64,10 +65,14 @@ get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists
 #' sp_get_dataset_doc("finm")
 #' }
 #' @export
-sp_get_dataset_doc <- function(dataset_id, dest_dir = ".", download = TRUE) {
+sp_get_dataset_doc <- function(dataset_id, dest_dir = NULL, download = TRUE) {
   if(!curl::has_internet()) usethis::ui_stop(c("No internet connection. Cannot continue. Retry when connected."))
   if(!(dataset_id %in% sp_datasets_i$id)) usethis::ui_stop("Not a valid dataset ID")
   doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
+
+  if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
+                                              default = tempdir())
+
   if(!download) {
     utils::browseURL(doc_url)
     return(stringr::str_glue("Link to file opened in browser."))

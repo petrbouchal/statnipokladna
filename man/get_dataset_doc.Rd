@@ -9,7 +9,8 @@ get_dataset_doc(dataset_id, dest_dir = ".", download = TRUE)
 \arguments{
 \item{dataset_id}{dataset ID. See \code{sp_datasets}.}
 
-\item{dest_dir}{character. Where the file should be written. Defaults to working directory.}
+\item{dest_dir}{character. Directory in which downloaded files will be stored.
+If left unset, will use the \code{statnipokladna.dest_dir} option if the option is set, and \code{tempdir()} otherwise. Will be created if it does not exist.}
 
 \item{download}{Whether to download (the default) or open link in browser.}
 }
