@@ -6,6 +6,7 @@
 * downloaded data is no longer nested in a `statnipokladna` directory inside `dest_dir`.
 * minor improvements and updates in vignettes.
 * properly included the tibble package to ensure correct print methods for output tibbles
+* `sp_get_dataset()` and `sp_get_dataset_doc()` now return their outputs invisibly and provide better messages
 
 ## Bug fixes
 

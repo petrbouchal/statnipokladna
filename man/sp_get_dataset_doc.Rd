@@ -15,7 +15,7 @@ If left unset, will use the \code{statnipokladna.dest_dir} option if the option 
 \item{download}{Whether to download (the default) or open link in browser.}
 }
 \value{
-character (link) if download = TRUE, nothing otherwise.
+(invisible) path to file if \code{download = TRUE}, URL otherwise
 }
 \description{
 Downloads XLS file with dataset documentation, or opens link to this file in browser.

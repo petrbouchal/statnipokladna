@@ -58,7 +58,7 @@ get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists
 #' If left unset, will use the `statnipokladna.dest_dir` option if the option is set, and `tempdir()` otherwise. Will be created if it does not exist.
 #' @param download Whether to download (the default) or open link in browser.
 #'
-#' @return character (link) if download = TRUE, nothing otherwise.
+#' @return (invisible) path to file if `download = TRUE`, URL otherwise
 #' @family Utilities
 #' @examples
 #' \donttest{
@@ -75,12 +75,14 @@ sp_get_dataset_doc <- function(dataset_id, dest_dir = NULL, download = TRUE) {
 
   if(!download) {
     utils::browseURL(doc_url)
-    return(stringr::str_glue("Link to file opened in browser."))
+    usethis::ui_info("Link to file opened in browser. ({usethis::ui_path(doc_url)})")
+    invisible(doc_url)
     } else {
-    file_path <- stringr::str_glue("{dest_dir}/{dataset_id}.xlsx")
-    message(stringr::str_glue("Getting dataset documentation from {doc_url}"))
+    file_path <- file.path(dest_dir, stringr::str_glue("{dataset_id}.xlsx"))
+    usethis::ui_info("Getting dataset documentation from {doc_url}")
     utils::download.file(doc_url, file_path, headers = c('User-Agent' = usr))
-    return(stringr::str_glue("File downloaded to {file_path}."))
+    usethis::ui_info("File downloaded to {usethis::ui_path(file_path)}.")
+    invisible(file_path)
   }
 }
 
@@ -156,7 +158,7 @@ sp_get_dataset <- function(dataset_id, year = 2018, month = 12,
     utils::unzip(tf, exdir = td)
   }
   file_list <- paste0(td, "/", list.files(td, pattern = "(csv|CSV)$"))
-  return(file_list)
+  invisible(file_list)
 }
 
 #' Deprecated: Retrieve and read dataset from statnipokladna
