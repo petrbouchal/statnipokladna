@@ -17,7 +17,7 @@ If left unset, will use the \code{statnipokladna.dest_dir} option if the option 
 \item{redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
 }
 \value{
-A tibble
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 Downloads and processes codelist identified by \code{codelist_id}. See \code{sp_codelists} for a list of

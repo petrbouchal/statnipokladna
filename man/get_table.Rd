@@ -30,7 +30,7 @@ Can be a vector of length > 1 (see Details for how to work with data across time
 If left unset, will use the \code{statnipokladna.dest_dir} option if the option is set, and \code{tempdir()} otherwise. Will be created if it does not exist.}
 }
 \value{
-a tibble
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 \lifecycle{deprecated}

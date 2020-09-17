@@ -15,7 +15,7 @@ If left unset, will use the \code{statnipokladna.dest_dir} option if the option 
 \item{download}{Whether to download (the default) or open link in browser.}
 }
 \value{
-a tibble
+a \link[tibble:tibble-package]{tibble}
 }
 \description{
 Deprecated, use \code{sp_get_dataset_doc()} instead.\cr\cr

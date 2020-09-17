@@ -5,6 +5,7 @@
 * directory for downloading raw data and documentation in all `sp_get_*()` functions can now be set in the option `statnipokladna.dest_dir`. Set this at the beginning of your script or once per session, or in your `.Rprofile` (e.g. `setOption(statnipokladna.dest_dir = "~/sp_data")` for cross-session storage or `setOption(statnipokladna.dest_dir = "sp_data")` for storing all data downloaded by statnipokladna in an `sp_data` subfolder of the current project.)
 * downloaded data is no longer nested in a `statnipokladna` directory inside `dest_dir`.
 * minor improvements and updates in vignettes.
+* properly included the tibble package to ensure correct print methods for output tibbles
 
 ## Deprecations
 

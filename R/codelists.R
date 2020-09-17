@@ -69,7 +69,7 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #' If left unset, will use the `statnipokladna.dest_dir` option if the option is set, and `tempdir()` otherwise. Will be created if it does not exist.
 #' @param redownload Redownload even if file has already been downloaded? Defaults to FALSE.
 #'
-#' @return A tibble
+#' @return a [tibble][tibble::tibble-package]
 #' @examples
 #' \donttest{
 #' sp_get_codelist("paragraf")
@@ -102,7 +102,7 @@ sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload =
   xvals <- purrr::map_df(xml_children, function(x) {x %>% xml2::xml_children() %>%
       xml2::xml_text() %>%
       # as.character() %>%
-      t() %>% tibble::as_tibble()}) %>%
+      t() %>% tibble::as_tibble(.name_repair = "minimal")}) %>%
     purrr::set_names(nms) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), lubridate::dmy) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::starts_with("kon_")), as.logical) %>%
@@ -122,7 +122,7 @@ sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload =
 #'
 #' @inheritParams sp_get_codelist
 #'
-#' @return A tibble
+#' @return A [tibble][tibble::tibble-package]
 #' @export
 #' @family Core workflow
 
@@ -194,7 +194,7 @@ switch_minus <- function(string) {
 #' If left unset, will use the `statnipokladna.dest_dir` option if the option is set, and `tempdir()` otherwise. Will be created if it does not exist.
 #' @param period_column Unquoted column name of column identifying the data period in `data`. Leave to default if you have not changed the `data` object returned by `sp_get_table()`.
 #' @param redownload Redownload even if file has already been downloaded? Defaults to FALSE.
-#' @return A data frame of same length as `data`, with added columns from `codelist`. See Details.
+#' @return A [tibble][tibble::tibble-package] of same length as `data`, with added columns from `codelist`. See Details.
 #' @family Core workflow
 #' @export
 #' @examples
@@ -296,7 +296,7 @@ get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
 #'
 #' @inheritParams sp_add_codelist
 #'
-#' @return A data frame of same length as `data`, with added columns from `codelist`. See Details.
+#' @return A [tibble][tibble::tibble-package] of same length as `data`, with added columns from `codelist`. See Details.
 #' @family Core workflow
 #' @export
 add_codelist <- function(data, codelist = NULL, period_column = .data$period_vykaz,

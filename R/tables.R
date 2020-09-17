@@ -130,7 +130,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #' If left unset, will use the `statnipokladna.dest_dir` option if the option is set, and `tempdir()` otherwise. Will be created if it does not exist.
 #' @param redownload Redownload even if recent file present? Defaults to FALSE.
 #'
-#' @return a tibble; see Details for key to the columns
+#' @return a [tibble][tibble::tibble-package]; see Details for key to the columns
 #' @encoding UTF-8
 #' @examples
 #' \donttest{
@@ -235,7 +235,7 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
 #'
 #' @inheritParams sp_get_table
 #'
-#' @return a tibble
+#' @return a [tibble][tibble::tibble-package]
 #' @export
 get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
                       redownload = FALSE, dest_dir = NULL) {

@@ -91,7 +91,7 @@ sp_get_dataset_doc <- function(dataset_id, dest_dir = NULL, download = TRUE) {
 #'
 #' @inheritParams sp_get_dataset_doc
 #'
-#' @return a tibble
+#' @return a [tibble][tibble::tibble-package]
 #' @export
 get_dataset_doc <- function(dataset_id, dest_dir = ".", download = TRUE) {
   lifecycle::deprecate_warn("0.5.2", "statnipokladna::get_dataset_doc()", "sp_get_dataset_doc()")

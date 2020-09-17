@@ -25,7 +25,7 @@ add_codelist(
 If left unset, will use the \code{statnipokladna.dest_dir} option if the option is set, and \code{tempdir()} otherwise. Will be created if it does not exist.}
 }
 \value{
-A data frame of same length as \code{data}, with added columns from \code{codelist}. See Details.
+A \link[tibble:tibble-package]{tibble} of same length as \code{data}, with added columns from \code{codelist}. See Details.
 }
 \description{
 Deprecated, use \code{sp_add_codelist()} instead.\cr\cr

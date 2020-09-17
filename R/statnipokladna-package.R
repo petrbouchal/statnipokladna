@@ -6,5 +6,6 @@
 # roxygen namespace tags. Modify with care!
 ## usethis namespace: start
 #' @importFrom lifecycle deprecate_soft
+#' @importFrom tibble tibble
 ## usethis namespace: end
 NULL
