@@ -2,7 +2,7 @@
 title: "Jak fungují open data státní pokladny"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Jak fungují open data státní pokladny}
+  %\VignetteIndexEntry{How the data works (in Czech)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -2,7 +2,7 @@
 title: "Známé datové zádrhele"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Known data issues}
+  %\VignetteIndexEntry{Known data issues (in Czech)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
