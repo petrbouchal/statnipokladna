@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Deprecated: Get a statnipokladna table — get_table • statnipokladna</title>
+<title>Deprecated: Get a statnipokladna table
+Deprecated, use sp_get_table() instead. — get_table • statnipokladna</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +49,9 @@
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
 
-<meta property="og:title" content="Deprecated: Get a statnipokladna table — get_table" />
-<meta property="og:description" content="Deprecated, use sp_get_table() instead." />
+<meta property="og:title" content="Deprecated: Get a statnipokladna table
+Deprecated, use sp_get_table() instead. — get_table" />
+<meta property="og:description" content="" />
 <meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/reference/figures/card.png" />
 <meta property="og:image:alt" content="statnipokladna: R package for using Czech public finance data (Monitor Státní pokladny)" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -146,22 +148,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Deprecated: Get a statnipokladna table</h1>
+    <h1>Deprecated: Get a statnipokladna table<br /><br />
+Deprecated, use <code>sp_get_table()</code> instead.</h1>
     <small class="dont-index">Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/R/tables.R'><code>R/tables.R</code></a></small>
     <div class="hidden name"><code>get_table.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Deprecated, use <code><a href='sp_get_table.html'>sp_get_table()</a></code> instead.</p>
+    <p><img src='figures/lifecycle-soft-deprecated.svg' alt='Soft-deprecated lifecycle' /></p>
     </div>
 
     <pre class="usage"><span class='fu'>get_table</span>(
-  <span class='no'>table_id</span>,
-  <span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>2018</span>,
-  <span class='kw'>month</span> <span class='kw'>=</span> <span class='fl'>12</span>,
-  <span class='kw'>ico</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>redownload</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>dest_dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  <span class='kw'>table_id</span>,
+  year = <span class='fl'>2018</span>,
+  month = <span class='fl'>12</span>,
+  ico = <span class='kw'>NULL</span>,
+  redownload = <span class='fl'>FALSE</span>,
+  dest_dir = <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -198,9 +201,6 @@ If left unset, will use the <code>statnipokladna.dest_dir</code> option if the o
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>a tibble</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p><img src='figures/lifecycle-soft-deprecated.svg' alt='Soft-deprecated lifecycle' /></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -217,7 +217,7 @@ If left unset, will use the <code>statnipokladna.dest_dir</code> option if the o
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

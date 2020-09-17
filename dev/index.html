@@ -110,9 +110,9 @@
 <a href="#output-github_document" class="anchor"></a>output: github_document</h2>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 </div>
-<div id="statnipokladna" class="section level1">
+<div id="statnipokladna-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#statnipokladna" class="anchor"></a>statnipokladna <img src="reference/figures/logo.png" align="right" height="138">
+<a href="#statnipokladna-" class="anchor"></a>statnipokladna <img src="reference/figures/logo.png" align="right" height="138">
 </h1></div>
 <!-- badges: start -->
 
@@ -121,16 +121,24 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the released version from CRAN:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"statnipokladna"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"statnipokladna"</span>)
+</pre></div>
 <p>You can install the current development release of statnipokladna from <a href="https://github.com/petrbouchal/statnipokladna">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"petrbouchal/statnipokladna"</span>,
-                        <span class="kw">build_vignettes</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                        <span class="kw">ref</span> <span class="kw">=</span> <span class="fu">github_release</span>())</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"petrbouchal/statnipokladna"</span>,
+                        build_vignettes = <span class="fl">TRUE</span>,
+                        ref = <span class="fu">github_release</span>())
+</pre></div>
 <p>or the latest in-development version with</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"petrbouchal/statnipokladna"</span>,
-                         <span class="kw">build_vignettes</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"petrbouchal/statnipokladna"</span>,
+                         build_vignettes = <span class="fl">TRUE</span>)
+</pre></div>
 <p>I also keep binaries in a <code>drat</code> repo, which you can access by</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"statnipokladna"</span>, <span class="kw">repos</span> <span class="kw">=</span> <span class="st">"https://petrbouchal.github.io/drat"</span>)</pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"statnipokladna"</span>, repos = <span class="st">"https://petrbouchal.github.io/drat"</span>)
+</pre></div>
 </div>
 <div id="bug-reports" class="section level2">
 <h2 class="hasAnchor">
@@ -171,7 +179,7 @@
 <div id="future-development" class="section level3">
 <h3 class="hasAnchor">
 <a href="#future-development" class="anchor"></a>Future development</h3>
-<p>the official system has been partially overhauled in February 2020 and I am trying to find out about which parts of its new API will remain stable and can be used externally. Depending on the result, some functionality in this package can be streamlined and some can be added - e.g.</p>
+<p>the official system has been partially overhauled in February 2020 and I am trying to find out about which parts of its new API will remain stable and can be used externally. Depending on the result, some functionality in this package can be streamlined and some can be added - e.g. </p>
 <ul>
 <li>listing of available releases</li>
 <li>checking against existing releases and data sets</li>
@@ -182,20 +190,25 @@
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting started</h2>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">statnipokladna</span>)</pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/petrbouchal/statnipokladna">statnipokladna</a></span>)
+</pre></div>
 <p>Get data from a particular part (file) of a dataset (“výkaz”):</p>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="no">local_budgets</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/sp_get_table.html">sp_get_table</a></span>(<span class="kw">table_id</span> <span class="kw">=</span> <span class="st">"budget-local"</span>, <span class="co"># table ID, see `sp_tables`</span>
-                           <span class="kw">year</span> <span class="kw">=</span> <span class="fl">2019</span>,
-                           <span class="kw">month</span> <span class="kw">=</span> <span class="fl">9</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">local_budgets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sp_get_table.html">sp_get_table</a></span>(table_id = <span class="st">"budget-local"</span>, <span class="co"># table ID, see `sp_tables`</span>
+                           year = <span class="fl">2019</span>,
+                           month = <span class="fl">9</span>)
 <span class="co">#&gt; ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2019-09'</span>
 <span class="co">#&gt; ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span>
 <span class="co">#&gt; ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpTdW3Ow/statnipokladna/finm/2019/09/'</span>
 <span class="co">#&gt; ℹ Set dest_dir for more control over downloaded files.</span>
 <span class="co">#&gt; ℹ Reading data...</span>
-<span class="co">#&gt; ℹ Transforming data...</span></pre></div>
+<span class="co">#&gt; ℹ Transforming data...</span>
+</pre></div>
 <p>The data is automatically downloaded to a temp directory, so it will be reused by future calls to <code><a href="reference/sp_get_table.html">sp_get_table()</a></code> made in the same session, unless you set <code>force_redownload = TRUE</code>. You set the <code>dest_dir</code> parameter e.g. to <code>"."</code>, a directory will be created in your current working directory and the data will be downloaded into it so that it can persist across sessions.</p>
 <p>It is a rather raw-looking data frame…</p>
-<div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">local_budgets</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">local_budgets</span>)
 <span class="co">#&gt; # A tibble: 6 x 15</span>
 <span class="co">#&gt;   vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka</span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;  </span>
@@ -206,9 +219,11 @@
 <span class="co">#&gt; 5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113   </span>
 <span class="co">#&gt; 6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121   </span>
 <span class="co">#&gt; # … with 4 more variables: budget_adopted &lt;dbl&gt;, budget_amended &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   budget_spending &lt;dbl&gt;, period_vykaz &lt;date&gt;</span></pre></div>
+<span class="co">#&gt; #   budget_spending &lt;dbl&gt;, period_vykaz &lt;date&gt;</span>
+</pre></div>
 <p>but it has been cleaned up, and can be enriched with any of the metadata codelists:</p>
-<div class="sourceCode" id="cb8"><pre class="r"><span class="no">functional_categories</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/sp_get_codelist.html">sp_get_codelist</a></span>(<span class="st">"paragraf"</span>)
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="kw">functional_categories</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sp_get_codelist.html">sp_get_codelist</a></span>(<span class="st">"paragraf"</span>)
 <span class="co">#&gt; ℹ Building URL for codelist 'paragraf' - Paragraf</span>
 <span class="co">#&gt; ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpTdW3Ow/statnipokladna/'</span>
 <span class="co">#&gt; ℹ Set dest_dir for more control over downloaded files.</span>
@@ -216,8 +231,10 @@
 <span class="co">#&gt; Warning: The `x` argument of `as_tibble.matrix()` must have column names if `.name_repair` is omitted as of tibble 2.0.0.</span>
 <span class="co">#&gt; Using compatibility `.name_repair`.</span>
 <span class="co">#&gt; This warning is displayed once every 8 hours.</span>
-<span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span></pre></div>
-<div class="sourceCode" id="cb9"><pre class="r"><span class="no">functional_categories</span>
+<span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span>
+</pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="kw">functional_categories</span>
 <span class="co">#&gt; # A tibble: 550 x 9</span>
 <span class="co">#&gt;    paragraf skupina oddil pododdil nazev kr_nazev str_nazev start_date</span>
 <span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;date&gt;    </span>
@@ -231,7 +248,8 @@
 <span class="co">#&gt;  8 1022     Zemědě… Země… Regulac… Orga… "Regul.… "Reg.trh… 1900-01-01</span>
 <span class="co">#&gt;  9 1023     Zemědě… Země… Regulac… Orga… "Regul.… "Organiz… 1900-01-01</span>
 <span class="co">#&gt; 10 1024     Zemědě… Země… Regulac… Orga… "Regul.… "Reg.trh… 1900-01-01</span>
-<span class="co">#&gt; # … with 540 more rows, and 1 more variable: end_date &lt;date&gt;</span></pre></div>
+<span class="co">#&gt; # … with 540 more rows, and 1 more variable: end_date &lt;date&gt;</span>
+</pre></div>
 <p>This contains all codes for this codelist, some of which are not valid for the time period of our core data. The function <code><a href="reference/add_codelist.html">add_codelist()</a></code> resolves this automatically.</p>
 <p>As you can see below, you can</p>
 <ul>
@@ -239,8 +257,9 @@
 <li>add a codelist without downloading it first - just pass its ID to the function as a character instead of an object.</li>
 </ul>
 <p>Codelists are also cached, but you have one in your namespace, you can pass it as an object, provided that it has the right columns.</p>
-<div class="sourceCode" id="cb10"><pre class="r"><span class="no">local_budgets</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/sp_add_codelist.html">sp_add_codelist</a></span>(<span class="no">functional_categories</span>) <span class="kw">%&gt;%</span>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="kw">local_budgets</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/sp_add_codelist.html">sp_add_codelist</a></span>(<span class="kw">functional_categories</span>) <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/sp_add_codelist.html">sp_add_codelist</a></span>(<span class="st">"polozka"</span>)
 <span class="co">#&gt; ℹ Building URL for codelist 'polozka' - Rozpočtová položka</span>
 <span class="co">#&gt; ✔ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpTdW3Ow/statnipokladna/'</span>
@@ -269,9 +288,11 @@
 <span class="co">#&gt; #   polozka_end_date &lt;date&gt;, druh &lt;chr&gt;, trida &lt;chr&gt;, seskupeni &lt;chr&gt;,</span>
 <span class="co">#&gt; #   podseskupeni &lt;chr&gt;, polozka_nazev &lt;chr&gt;, polozka_kr_nazev &lt;chr&gt;,</span>
 <span class="co">#&gt; #   polozka_str_nazev &lt;chr&gt;, kon_pol &lt;lgl&gt;, kon_okr &lt;lgl&gt;, kon_kraj &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   kon_rep &lt;lgl&gt;</span></pre></div>
+<span class="co">#&gt; #   kon_rep &lt;lgl&gt;</span>
+</pre></div>
 <p>Download a whole “výkaz” (dataset/data dump):</p>
-<div class="sourceCode" id="cb11"><pre class="r"><span class="fu"><a href="reference/sp_get_dataset.html">sp_get_dataset</a></span>(<span class="st">"finm"</span>) <span class="co"># dataset ID, see `sp_datasets`</span>
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="fu"><a href="reference/sp_get_dataset.html">sp_get_dataset</a></span>(<span class="st">"finm"</span>) <span class="co"># dataset ID, see `sp_datasets`</span>
 <span class="co">#&gt; ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2018-12'</span>
 <span class="co">#&gt; ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span>
 <span class="co">#&gt; ✔ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/RtmpTdW3Ow/statnipokladna/finm/2018/12/'</span>
@@ -281,12 +302,15 @@
 <span class="co">#&gt; [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpTdW3Ow/statnipokladna/finm/2018/12/FINM203_2018012.csv"</span>
 <span class="co">#&gt; [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpTdW3Ow/statnipokladna/finm/2018/12/FINM204_2018012.csv"</span>
 <span class="co">#&gt; [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpTdW3Ow/statnipokladna/finm/2018/12/FINM205_2018012.csv"</span>
-<span class="co">#&gt; [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpTdW3Ow/statnipokladna/finm/2018/12/FINM207_2018012.csv"</span></pre></div>
+<span class="co">#&gt; [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//RtmpTdW3Ow/statnipokladna/finm/2018/12/FINM207_2018012.csv"</span>
+</pre></div>
 <p>This will put the files in a temp directory.</p>
 <p>Then look at its documentation:</p>
-<div class="sourceCode" id="cb12"><pre class="r"><span class="kw pkg">statnipokladna</span><span class="kw ns">::</span><span class="fu"><a href="reference/sp_get_dataset_doc.html">sp_get_dataset_doc</a></span>(<span class="st">"finm"</span>)
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="kw">statnipokladna</span>::<span class="fu"><a href="reference/sp_get_dataset_doc.html">sp_get_dataset_doc</a></span>(<span class="st">"finm"</span>)
 <span class="co">#&gt; Getting dataset documentation from http://monitor.statnipokladna.cz/data/struktura/finm.xlsx</span>
-<span class="co">#&gt; File downloaded to ./finm.xlsx.</span></pre></div>
+<span class="co">#&gt; File downloaded to ./finm.xlsx.</span>
+</pre></div>
 <p>You can get details of all the available tables in the <code>sp_tables</code> data frame; for datasets, see <code>sp_datasets</code>.</p>
 </div>
 <div id="background-information" class="section level2">
@@ -319,7 +343,7 @@
 <li>
 <a href="https://cran.r-project.org/package=eurostat">eurostat</a> for access to Eurostat data</li>
 <li>
-<a href="https://cran.r-project.org/package=OECD">OECD</a> for access to OECD data, incl. a large amount of financial and economic data</li>
+<a href="https://cran.r-project.org/package=OECD">OECD</a> for access to OECD data, incl. a large amount of financial and economic data</li>
 </ul>
 </div>
 <div id="other-czech-public-data" class="section level3">
@@ -332,7 +356,7 @@
 <li>
 <a href="https://hlidacstatu.cz/">Hlídač státu</a> by @michalblaha for easy (web and API) access to a large suite of transparency-focused datasets and their integration (public disclosures of contracts, tenders, political contributions…)</li>
 <li>
-<a href="https://cedr.mfcr.cz/">CEDR</a> for a database of public subsidies, incl. to public bodies</li>
+<a href="https://cedr.mfcr.cz/">CEDR</a> for a database of public subsidies, incl. to public bodies</li>
 </ul>
 </div>
 </div>
@@ -404,7 +428,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
