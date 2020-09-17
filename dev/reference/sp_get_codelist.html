@@ -183,7 +183,7 @@ If left unset, will use the <code>statnipokladna.dest_dir</code> option if the o
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble</p>
+    <p>a <a href='https://tibble.tidyverse.org/reference/tibble-package.html'>tibble</a></p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>You can usually tell which codelist you need from the name of the column whose code you
@@ -205,23 +205,19 @@ and persist per session to avoid redownloads.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='fu'>sp_get_codelist</span>(<span class='st'>"paragraf"</span>)
-</div><div class='output co'>#&gt; <span class='message'><span style='color: #BBBB00;'>ℹ</span><span> Codelist file already in </span><span style='color: #0000BB;'>'/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/RtmpFBHimQ/'</span><span>, not downloading. Set </span><span style='color: #555555;'>`redownload = TRUE`</span><span> if needed.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Processing codelist data</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Problem with `mutate()` input `start_date`.</span>
-#&gt; <span class='warning'></span><span style='color: #0000BB;'>ℹ</span><span> All formats failed to parse. No formats found.</span>
-#&gt; <span class='warning'></span><span style='color: #0000BB;'>ℹ</span><span> Input `start_date` is `(function (..., quiet = FALSE, tz = NULL, locale = Sys.getlocale("LC_TIME"), ...`.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: All formats failed to parse. No formats found.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Problem with `mutate()` input `end_date`.</span>
-#&gt; <span class='warning'></span><span style='color: #0000BB;'>ℹ</span><span> All formats failed to parse. No formats found.</span>
-#&gt; <span class='warning'></span><span style='color: #0000BB;'>ℹ</span><span> Input `end_date` is `(function (..., quiet = FALSE, tz = NULL, locale = Sys.getlocale("LC_TIME"), ...`.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: All formats failed to parse. No formats found.</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 552 x 7</span><span>
+</div><div class='output co'>#&gt; <span class='message'><span style='color: #BBBB00;'>ℹ</span><span> Codelist file already in </span><span style='color: #0000BB;'>'/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/RtmpO45Pmd/'</span><span>, not downloading. Set </span><span style='color: #555555;'>`redownload = TRUE`</span><span> if needed.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Processing codelist data</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 552 x 7</span><span>
 #&gt;    paragraf skupina pododdil oddil paragraf_nazev          start_date end_date  
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                   </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span>    
-#&gt; </span><span style='color: #555555;'> 1</span><span> 0000     0       0        0     Pro příjmy (technický … </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #555555;'> 2</span><span> 1011     1       101      10    Udržování výrobního po… </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #555555;'> 3</span><span> 1012     1       101      10    Podnikání a restruktur… </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #555555;'> 4</span><span> 1013     1       101      10    Genetický potenciál ho… </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #555555;'> 5</span><span> 1014     1       101      10    Ozdravování hospodářsk… </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #555555;'> 6</span><span> 1019     1       101      10    Ostatní zemědělská a p… </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #555555;'> 7</span><span> 1021     1       102      10    Organizace trhu s prod… </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #555555;'> 8</span><span> 1022     1       102      10    Organizace trhu s výro… </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #555555;'> 9</span><span> 1023     1       102      10    Organizace trhu s prod… </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>        
-#&gt; </span><span style='color: #555555;'>10</span><span> 1024     1       102      10    Organizace trhu s výro… </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span>        
+#&gt; </span><span style='color: #555555;'> 1</span><span> 0000     0       0        0     Pro příjmy (technický … 1900-01-01 9999-12-31
+#&gt; </span><span style='color: #555555;'> 2</span><span> 1011     1       101      10    Udržování výrobního po… 1900-01-01 9999-12-31
+#&gt; </span><span style='color: #555555;'> 3</span><span> 1012     1       101      10    Podnikání a restruktur… 1900-01-01 9999-12-31
+#&gt; </span><span style='color: #555555;'> 4</span><span> 1013     1       101      10    Genetický potenciál ho… 1900-01-01 9999-12-31
+#&gt; </span><span style='color: #555555;'> 5</span><span> 1014     1       101      10    Ozdravování hospodářsk… 1900-01-01 9999-12-31
+#&gt; </span><span style='color: #555555;'> 6</span><span> 1019     1       101      10    Ostatní zemědělská a p… 1900-01-01 9999-12-31
+#&gt; </span><span style='color: #555555;'> 7</span><span> 1021     1       102      10    Organizace trhu s prod… 1900-01-01 9999-12-31
+#&gt; </span><span style='color: #555555;'> 8</span><span> 1022     1       102      10    Organizace trhu s výro… 1900-01-01 9999-12-31
+#&gt; </span><span style='color: #555555;'> 9</span><span> 1023     1       102      10    Organizace trhu s prod… 1900-01-01 9999-12-31
+#&gt; </span><span style='color: #555555;'>10</span><span> 1024     1       102      10    Organizace trhu s výro… 1900-01-01 9999-12-31
 #&gt; </span><span style='color: #555555;'># … with 542 more rows</span><span></div><div class='input'><span class='co'># }</span>
 </div></span></pre>
   </div>

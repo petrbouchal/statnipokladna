@@ -160,16 +160,34 @@
 <li>directory for downloading raw data and documentation in all <code>sp_get_*()</code> functions can now be set in the option <code>statnipokladna.dest_dir</code>. Set this at the beginning of your script or once per session, or in your <code>.Rprofile</code> (e.g. <code>setOption(statnipokladna.dest_dir = "~/sp_data")</code> for cross-session storage or <code>setOption(statnipokladna.dest_dir = "sp_data")</code> for storing all data downloaded by statnipokladna in an <code>sp_data</code> subfolder of the current project.)</li>
 <li>downloaded data is no longer nested in a <code>statnipokladna</code> directory inside <code>dest_dir</code>.</li>
 <li>minor improvements and updates in vignettes.</li>
+<li>properly included the tibble package to ensure correct print methods for output tibbles</li>
+<li>
+<code><a href="../reference/sp_get_dataset.html">sp_get_dataset()</a></code> and <code><a href="../reference/sp_get_dataset_doc.html">sp_get_dataset_doc()</a></code> now return their outputs invisibly and provide better messages</li>
 </ul>
+</div>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>
+<code><a href="../reference/sp_get_codelist.html">sp_get_codelist()</a></code> no longer issues a tibble-related warning</li>
+<li>
+<code><a href="../reference/sp_get_codelist.html">sp_get_codelist()</a></code> now parses all dates correctly</li>
+</ul>
+</div>
+<div id="deprecations" class="section level2">
+<h2 class="hasAnchor">
+<a href="#deprecations" class="anchor"></a>Deprecations</h2>
+<p>Functions with names not starting with <code>sp_</code> are deprecated and emit a warning. Use equivalent functions named <code>sp_*</code>.</p>
 </div>
 </div>
     <div id="statnipokladna-057" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.7">
 <a href="#statnipokladna-057" class="anchor"></a>statnipokladna 0.5.7<small> 2020-04-12 </small>
 </h1>
-<div id="bug-fixes" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>adapt to new URL scheme for data exports at statnipokladna.cz, fixes <a href='https://github.com/petrbouchal/statnipokladna/issues/74'>#74</a></li>
 <li>simple codelists with no <code>*_date</code> columns now work in <code><a href="../reference/sp_add_codelist.html">sp_add_codelist()</a></code>, fixes <a href='https://github.com/petrbouchal/statnipokladna/issues/66'>#66</a></li>
