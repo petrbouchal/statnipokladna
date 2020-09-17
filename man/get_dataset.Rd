@@ -30,9 +30,7 @@ If left unset, will use the \code{statnipokladna.dest_dir} option if the option 
 character (link) if download = TRUE, nothing otherwise.
 }
 \description{
-Deprecated, use \code{sp_get_dataset()} instead.
-}
-\details{
+Deprecated, use \code{sp_get_dataset()} instead.\cr\cr
 \lifecycle{soft-deprecated}
 }
 \seealso{

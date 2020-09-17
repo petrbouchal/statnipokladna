@@ -228,8 +228,7 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
 # onyr <- c(2018) %>% purrr::map_dfr(~ sp_get_table(2, year = ., month = 12))
 # onyr <- c(2018) %>% purrr::map_dfr(~ sp_get_table(1, year = ., month = 12))
 
-#' Deprecated: Get a statnipokladna table
-#'
+#' Deprecated: Get a statnipokladna table\cr\cr
 #' Deprecated, use `sp_get_table()` instead.
 #'
 #' \lifecycle{soft-deprecated}

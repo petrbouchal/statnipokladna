@@ -28,9 +28,7 @@ If left unset, will use the \code{statnipokladna.dest_dir} option if the option 
 A data frame of same length as \code{data}, with added columns from \code{codelist}. See Details.
 }
 \description{
-Deprecated, use \code{sp_add_codelist()} instead.
-}
-\details{
+Deprecated, use \code{sp_add_codelist()} instead.\cr\cr
 \lifecycle{soft-deprecated}
 }
 \seealso{

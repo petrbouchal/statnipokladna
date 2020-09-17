@@ -86,8 +86,7 @@ sp_get_dataset_doc <- function(dataset_id, dest_dir = NULL, download = TRUE) {
 
 #' Deprecated: Get dataset documentation
 #'
-#' Deprecated, use `sp_get_dataset_doc()` instead.
-#'
+#' Deprecated, use `sp_get_dataset_doc()` instead.\cr\cr
 #' \lifecycle{soft-deprecated}
 #'
 #' @inheritParams sp_get_dataset_doc
@@ -162,8 +161,7 @@ sp_get_dataset <- function(dataset_id, year = 2018, month = 12,
 
 #' Deprecated: Retrieve and read dataset from statnipokladna
 #'
-#' Deprecated, use `sp_get_dataset()` instead.
-#'
+#' Deprecated, use `sp_get_dataset()` instead.\cr\cr
 #' \lifecycle{soft-deprecated}
 #'
 #' @inheritParams sp_get_dataset

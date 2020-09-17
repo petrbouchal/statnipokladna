@@ -2,7 +2,8 @@
 % Please edit documentation in R/tables.R
 \name{get_table}
 \alias{get_table}
-\title{Deprecated: Get a statnipokladna table}
+\title{Deprecated: Get a statnipokladna table\cr\cr
+Deprecated, use \code{sp_get_table()} instead.}
 \usage{
 get_table(
   table_id,
@@ -32,8 +33,5 @@ If left unset, will use the \code{statnipokladna.dest_dir} option if the option 
 a tibble
 }
 \description{
-Deprecated, use \code{sp_get_table()} instead.
-}
-\details{
 \lifecycle{soft-deprecated}
 }

@@ -117,7 +117,8 @@ sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload =
 
 #' Deprecated: Get codelist
 #'
-#' Deprecated: use `sp_get_codelist()`
+#' Deprecated: use `sp_get_codelist()`\cr\cr
+#' \lifecycle{soft-deprecated}
 #'
 #' @inheritParams sp_get_codelist
 #'
@@ -290,8 +291,7 @@ get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
 
 #' Deprecated: Add codelist data to downloaded data
 #'
-#' Deprecated, use `sp_add_codelist()` instead.
-#'
+#' Deprecated, use `sp_add_codelist()` instead.\cr\cr
 #' \lifecycle{soft-deprecated}
 #'
 #' @inheritParams sp_add_codelist

@@ -20,7 +20,8 @@ If left unset, will use the \code{statnipokladna.dest_dir} option if the option 
 A tibble
 }
 \description{
-Deprecated: use \code{sp_get_codelist()}
+Deprecated: use \code{sp_get_codelist()}\cr\cr
+\lifecycle{soft-deprecated}
 }
 \seealso{
 Other Core workflow: 
