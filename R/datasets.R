@@ -133,9 +133,17 @@ get_dataset_doc <- function(dataset_id, dest_dir = ".", download = TRUE) {
 sp_get_dataset <- function(dataset_id, year = 2018, month = 12,
                            dest_dir = NULL, redownload = FALSE) {
   if(interactive() == FALSE & (missing(year) | missing(month))) {
-    usethis::ui_warn("Either {usethis::ui_field('year')} or {usethis::ui_field('month')} not set.
-                     Using defaults of {usethis::ui_value(year)} and {usethis::ui_value(month)}.")
-    usethis::ui_todo("Set these values explicitly for reproducibility as the defaults may change in the future
+    if(missing(year)) {
+      usethis::ui_warn("{usethis::ui_field('year')} not set.
+                     Using default of {usethis::ui_value(year)}.")
+
+    } else if(missing(month)) {
+      usethis::ui_warn("{usethis::ui_field('month')} not set.
+                     Using default of {usethis::ui_value(month)}.")
+
+    }
+
+    usethis::ui_todo("Set period parameters explicitly for reproducibility as the defaults may change in the future
                      to provide access to the latest data by default.")
   }
 
