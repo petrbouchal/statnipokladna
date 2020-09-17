@@ -234,7 +234,7 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
 
   if(is.character(codelist)) {
     cl_data <- sp_get_codelist(codelist, redownload = redownload,
-                            dest_dir = dest_dir)
+                               dest_dir = dest_dir)
     codelist_name <- codelist
   } else {
     cl_data <- codelist
@@ -250,7 +250,7 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
                                               "Are you sure you are merging the right codelist onto the right data?",
                                               "Set {usethis::ui_field('by')} if needed."))}
 
-    slepit <- function(.x, .y) {
+  slepit <- function(.x, .y) {
     # print(.x)
     # print(.y)
     nrows_start <- nrow(.x)
@@ -265,9 +265,9 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
     slp <- suppressMessages(dplyr::left_join(.x, codelist_filtered, by = by))
     if(nrow(slp) != nrows_start) {
       usethis::ui_stop(c("Something went wrong with matching the codelist to the data for period {this_period}.",
-        "Please inspect the dates on the codelist to make sure there are no duplicate items valid for one given date.",
-        "You may want to filter/edit the codelist manually and pass it to the add_codelist function as an object."))
-      }
+                         "Please inspect the dates on the codelist to make sure there are no duplicate items valid for one given date.",
+                         "You may want to filter/edit the codelist manually and pass it to the add_codelist function as an object."))
+    }
     return(slp)
   }
 
@@ -279,7 +279,7 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
       dplyr::bind_rows()
   } else {
     slepeno <- suppressMessages(data %>%
-      dplyr::left_join(cl_data, by = by))
+                                  dplyr::left_join(cl_data, by = by))
   }
   return(slepeno)
 }
@@ -310,8 +310,8 @@ get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
 #' @family Core workflow
 #' @export
 add_codelist <- function(data, codelist = NULL, period_column = .data$period_vykaz,
-                            redownload = FALSE,
-                            dest_dir = NULL) {
+                         redownload = FALSE,
+                         dest_dir = NULL) {
   lifecycle::deprecate_warn("0.5.2", "statnipokladna::add_codelist()", "sp_add_codelist()")
   sp_add_codelist(data = data, codelist = codelist, period_column = period_column,
                   redownload = redownload, dest_dir = dest_dir)
