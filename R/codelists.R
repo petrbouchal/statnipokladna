@@ -99,10 +99,20 @@ sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload =
   xml_children_all <- xml_all %>% xml2::xml_children()
   xml_children <- if(is.null(n)) xml_children_all else xml_children_all[1:n]
   nms <- xml2::xml_child(xml_all) %>% xml2::xml_children() %>% xml2::xml_name()
-  xvals <- purrr::map_df(xml_children, function(x) {x %>% xml2::xml_children() %>%
+
+  process_codelist <- function(x) {x %>% xml2::xml_children() %>%
       xml2::xml_text() %>%
       # as.character() %>%
-      t() %>% tibble::as_tibble(.name_repair = "minimal")}) %>%
+      t() %>%
+      # purrr::set_names(nms) %>%
+      as.data.frame() %>%
+      tibble::as_tibble(.name_repair = "minimal")}
+
+  xvals_raw <- purrr::map_df(xml_children, process_codelist)
+
+  # print(xvals_raw)
+
+  xvals <- xvals_raw %>%
     purrr::set_names(nms) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), lubridate::dmy) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::starts_with("kon_")), as.logical) %>%

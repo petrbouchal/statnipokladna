@@ -7,6 +7,10 @@
 * minor improvements and updates in vignettes.
 * properly included the tibble package to ensure correct print methods for output tibbles
 
+## Bug fixes
+
+* `sp_get_codelist()` no longer issues a tibble-related warning
+
 ## Deprecations
 
 Functions with names not starting with `sp_` are deprecated and emit a warning. Use equivalent functions named `sp_*`.
