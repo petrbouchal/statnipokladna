@@ -114,7 +114,7 @@ sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload =
 
   xvals <- xvals_raw %>%
     purrr::set_names(nms) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), lubridate::dmy) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), readr::parse_date) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::starts_with("kon_")), as.logical) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::matches("^vtab$")),
                      ~stringr::str_pad(., 6, "left", "0")) %>%
