@@ -1,14 +1,14 @@
 
 sp_datasets_i <- tibble::tribble(~id, ~name, ~implemented, ~dir,
-                               "finm", "FIN 2-12 M - Pln\\u011bn\\u00ed rozpo\\u010dtu M\\u0158O", F, "FinM",
-                               "finu", "FIN 2-04 U - Pln\\u011bn\\u00ed rozpo\\u010dtu KAP, OSS a SF (2010 - 2014)", F, "FinU",
-                               "finsf", "FIN 2-04 U - Pln\\u011bn\\u00ed rozpo\\u010dtu SF", F, "FinSF",
-                               "misris", "FIN 1-12 OSS - Pln\\u011bn\\u00ed rozpo\\u010dtu KAP a OSS", F, "FinOSS",
-                               "rozv", "Rozvaha", F, "Rozvaha",
-                               "ppt", "P\\u0159ehled pen\\u011b\\u017en\\u00edch tok\\u016f", F, "PenezniToky",
-                               "pozvk", "P\\u0159ehled o zm\\u011bn\\u00e1ch vlastn\\u00edho kapit\\u00e1lu", F, "VlastniKapital",
-                               "pril", "P\\u0159\\u00edloha", F, "Priloha",
-                               "vykzz", "V\\u00fdkaz zisk\\u016f a ztr\\u00e1t", F, "ZiskZtraty") %>%
+                                 "finm", "FIN 2-12 M - Pln\\u011bn\\u00ed rozpo\\u010dtu M\\u0158O", F, "FinM",
+                                 "finu", "FIN 2-04 U - Pln\\u011bn\\u00ed rozpo\\u010dtu KAP, OSS a SF (2010 - 2014)", F, "FinU",
+                                 "finsf", "FIN 2-04 U - Pln\\u011bn\\u00ed rozpo\\u010dtu SF", F, "FinSF",
+                                 "misris", "FIN 1-12 OSS - Pln\\u011bn\\u00ed rozpo\\u010dtu KAP a OSS", F, "FinOSS",
+                                 "rozv", "Rozvaha", F, "Rozvaha",
+                                 "ppt", "P\\u0159ehled pen\\u011b\\u017en\\u00edch tok\\u016f", F, "PenezniToky",
+                                 "pozvk", "P\\u0159ehled o zm\\u011bn\\u00e1ch vlastn\\u00edho kapit\\u00e1lu", F, "VlastniKapital",
+                                 "pril", "P\\u0159\\u00edloha", F, "Priloha",
+                                 "vykzz", "V\\u00fdkaz zisk\\u016f a ztr\\u00e1t", F, "ZiskZtraty") %>%
   dplyr::mutate(name = stringi::stri_unescape_unicode(.data$name)) %>%
   dplyr::arrange(.data$id)
 # stringi::stri_escape_unicode("xxx")
@@ -77,7 +77,7 @@ sp_get_dataset_doc <- function(dataset_id, dest_dir = NULL, download = TRUE) {
     utils::browseURL(doc_url)
     usethis::ui_info("Link to file opened in browser. ({usethis::ui_path(doc_url)})")
     invisible(doc_url)
-    } else {
+  } else {
     file_path <- file.path(dest_dir, stringr::str_glue("{dataset_id}.xlsx"))
     usethis::ui_info("Getting dataset documentation from {doc_url}")
     utils::download.file(doc_url, file_path, headers = c('User-Agent' = usr))
@@ -131,7 +131,7 @@ get_dataset_doc <- function(dataset_id, dest_dir = ".", download = TRUE) {
 #' @family Core workflow
 #' @export
 sp_get_dataset <- function(dataset_id, year = 2018, month = 12,
-                        dest_dir = NULL, redownload = FALSE) {
+                           dest_dir = NULL, redownload = FALSE) {
   if(interactive() == FALSE & (missing(year) | missing(month))) {
     usethis::ui_warn("Either {usethis::ui_field('year')} or {usethis::ui_field('month')} not set.
                      Using defaults of {usethis::ui_value(year)} and {usethis::ui_value(month)}.")
