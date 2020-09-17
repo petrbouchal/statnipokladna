@@ -29,7 +29,7 @@ A data frame of same length as \code{data}, with added columns from \code{codeli
 }
 \description{
 Deprecated, use \code{sp_add_codelist()} instead.\cr\cr
-\lifecycle{soft-deprecated}
+\lifecycle{deprecated}
 }
 \seealso{
 Other Core workflow: 

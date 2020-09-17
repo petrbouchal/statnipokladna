@@ -6,6 +6,10 @@
 * downloaded data is no longer nested in a `statnipokladna` directory inside `dest_dir`.
 * minor improvements and updates in vignettes.
 
+## Deprecations
+
+Functions with names not starting with `sp_` are deprecated and emit a warning. Use equivalent functions named `sp_*`.
+
 # statnipokladna 0.5.7
 
 ## Bug fixes

@@ -19,5 +19,5 @@ a tibble
 }
 \description{
 Deprecated, use \code{sp_get_dataset_doc()} instead.\cr\cr
-\lifecycle{soft-deprecated}
+\lifecycle{deprecated}
 }

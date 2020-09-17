@@ -21,7 +21,7 @@ A tibble
 }
 \description{
 Deprecated: use \code{sp_get_codelist()}\cr\cr
-\lifecycle{soft-deprecated}
+\lifecycle{deprecated}
 }
 \seealso{
 Other Core workflow: 

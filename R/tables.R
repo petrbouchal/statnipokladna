@@ -231,7 +231,7 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
 #' Deprecated: Get a statnipokladna table\cr\cr
 #' Deprecated, use `sp_get_table()` instead.
 #'
-#' \lifecycle{soft-deprecated}
+#' \lifecycle{deprecated}
 #'
 #' @inheritParams sp_get_table
 #'
@@ -239,5 +239,5 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
 #' @export
 get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
                       redownload = FALSE, dest_dir = NULL) {
-  lifecycle::deprecate_soft("0.5.2", "statnipokladna::get_table()", "sp_get_table()")
+  lifecycle::deprecate_warn("0.5.2", "statnipokladna::get_table()", "sp_get_table()")
 }

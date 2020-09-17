@@ -118,7 +118,7 @@ sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload =
 #' Deprecated: Get codelist
 #'
 #' Deprecated: use `sp_get_codelist()`\cr\cr
-#' \lifecycle{soft-deprecated}
+#' \lifecycle{deprecated}
 #'
 #' @inheritParams sp_get_codelist
 #'
@@ -127,7 +127,7 @@ sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload =
 #' @family Core workflow
 
 get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload = FALSE) {
-  lifecycle::deprecate_soft("0.5.2", "statnipokladna::get_codelist()", "sp_get_codelist()")
+  lifecycle::deprecate_warn("0.5.2", "statnipokladna::get_codelist()", "sp_get_codelist()")
   sp_get_codelist(codelist_id = codelist_id, n = n, dest_dir = dest_dir, redownload = redownload)
 }
 
@@ -292,7 +292,7 @@ get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
 #' Deprecated: Add codelist data to downloaded data
 #'
 #' Deprecated, use `sp_add_codelist()` instead.\cr\cr
-#' \lifecycle{soft-deprecated}
+#' \lifecycle{deprecated}
 #'
 #' @inheritParams sp_add_codelist
 #'
@@ -302,7 +302,7 @@ get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
 add_codelist <- function(data, codelist = NULL, period_column = .data$period_vykaz,
                             redownload = FALSE,
                             dest_dir = NULL) {
-  lifecycle::deprecate_soft("0.5.2", "statnipokladna::add_codelist()", "sp_add_codelist()")
+  lifecycle::deprecate_warn("0.5.2", "statnipokladna::add_codelist()", "sp_add_codelist()")
   sp_add_codelist(data = data, codelist = codelist, period_column = period_column,
                   redownload = redownload, dest_dir = dest_dir)
 }

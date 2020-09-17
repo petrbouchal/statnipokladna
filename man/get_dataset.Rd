@@ -31,7 +31,7 @@ character (link) if download = TRUE, nothing otherwise.
 }
 \description{
 Deprecated, use \code{sp_get_dataset()} instead.\cr\cr
-\lifecycle{soft-deprecated}
+\lifecycle{deprecated}
 }
 \seealso{
 Other Utilities: 

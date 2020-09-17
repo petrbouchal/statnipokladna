@@ -33,5 +33,5 @@ If left unset, will use the \code{statnipokladna.dest_dir} option if the option 
 a tibble
 }
 \description{
-\lifecycle{soft-deprecated}
+\lifecycle{deprecated}
 }
