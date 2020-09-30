@@ -25,6 +25,7 @@ descriptions and a GUI for exploring the lists.
 \seealso{
 Other Lists of available entities: 
 \code{\link{sp_datasets}},
+\code{\link{sp_get_catalogue}()},
 \code{\link{sp_tables}}
 }
 \concept{Lists of available entities}

@@ -1,5 +1,9 @@
 # statnipokladna (development version)
 
+## New features
+
+* `sp_get_catalogue()` returns a list of all currently available files for download along with their metadata (temporal coverage, URL), using the SPARQL endpoint at <https://opendata.mfcr.cz/lod/monitor>.
+
 ## Improvements
 
 * directory for downloading raw data and documentation in all `sp_get_*()` functions can now be set in the option `statnipokladna.dest_dir`. Set this at the beginning of your script or once per session, or in your `.Rprofile` (e.g. `setOption(statnipokladna.dest_dir = "~/sp_data")` for cross-session storage or `setOption(statnipokladna.dest_dir = "sp_data")` for storing all data downloaded by statnipokladna in an `sp_data` subfolder of the current project.)
