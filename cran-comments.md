@@ -1,12 +1,11 @@
-## New patch version
+## New minor version
 
-This is an update with a quick fix responding to a change in the URL scheme on the publisher's website.
-It also contains several other minor improvements.
+This version includes several minor improvements and bug fixes and a single new feature: an option can be set to store data dumps downloaded from the external source in a custom directory so as to avoid redownloading them later. By default, `tempdir()` is used and the user has to actively set a parameter or option for the package to store any data outside working or temporary directories.
 
 ## Test environments
 
-* local R installation on MacOS, R 3.6.3
-* ubuntu 16.04 (on travis-ci and r-hub), R 3.6.3
+* local R installation on MacOS, R 4.0.2
+* ubuntu 16.04 (on travis-ci and r-hub), R 4.0.2
 * fedora-clang (devel on r-hub)
 * win-builder on r-hub (devel)
 
