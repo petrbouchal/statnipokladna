@@ -12,7 +12,7 @@ test_that("get_codelist works", {
 
 check_codelist_error <- function(codelist_id) {
   x <- stringr::str_glue("{sp_base_url}/data/xml/{codelist_id}.xml")
-  iserror <- httr::http_error(x)
+  iserror <- httr::http_error(x, httr::user_agent(usr))
   iserror
 }
 
