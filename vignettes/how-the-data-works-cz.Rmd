@@ -40,7 +40,7 @@ Nejsem rozpočtář ani účetní - tato data primárně používám k zodpovíd
 - ledacos se hodí bazálně ověřit proti ručně sestavené tabulce v [analytickém rozhraní](http://monitor.statnipokladna.cz/analyza/)
 - při ověřování může taky pomoct např.
   - příloha vyhlášky o RUD ([2019](https://www.mfcr.cz/cs/legislativa/legislativni-dokumenty/2019/vyhlaska-c-219-2019-sb-36077))
-  - státní závěrečné účty nejlépe z [webu sněmovny](http://www.psp.cz/sqw/tisky.sqw?o=8&F=H&PT=U&dx=1&na=N%E1vrh+st%E1tn%EDho+z%E1v%ECre%E8n%E9ho+%FA%E8tu+%C8R&t=&za=&f_N=on&f_S=on&f_R=on&f_I=on&f_Z=on&f_V=on&f_U=on&f_P=on&f_O=on&ra=20)
+  - státní závěrečné účty nejlépe z [webu sněmovny](http://www.psp.cz/sqw/tisky.sqw) (hledání "státního závěrečného účtu")
   - údaje o výběru daní od Finanční správy:  ([tabulky](https://www.financnisprava.cz/cs/dane/kraje-a-obce/danove-prijmy-kraju-a-obci/prubeh-celostatniho-inkasa-sdilenych-dani-3735), [statistiky](https://www.financnisprava.cz/cs/dane/analyzy-a-statistiky/udaje-z-vyberu-dani))
 
 ## Soustava prvků dostupných ze státní pokladny
