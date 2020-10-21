@@ -275,7 +275,7 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
     slepeno <- data %>%
       dplyr::ungroup() %>%
       dplyr::group_by({{period_column}}) %>%
-      dplyr::group_map(slepit, keep = TRUE) %>%
+      dplyr::group_map(slepit, .keep = TRUE) %>%
       dplyr::bind_rows()
   } else {
     slepeno <- suppressMessages(data %>%
