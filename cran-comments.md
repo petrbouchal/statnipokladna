@@ -4,20 +4,21 @@ This version includes several minor improvements and bug fixes and a single new 
 
 ## Test environments
 
-* local R installation on MacOS, R 4.0.2
-* ubuntu 16.04 (on travis-ci and r-hub), R 4.0.2
-* fedora-clang (devel on r-hub)
-* win-builder on r-hub (devel)
+* local MacOS installation, R 4.0.3
+* win-builder, R 4.0.3
+* win (devel on r-hub)
+* fedora-clang gfortran (devel on r-hub)
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 notes on win-devel:
 
-Possibly mis-spelled words in DESCRIPTION:
-     St�tn� (11:40)
-     pokladna (11:47)
-     
-This is a reference to the data source to which the package provides access. If possible, I would like to keep it including the non-ASCII characters (the file has UTF-8 encoding). This will aid discoverability.
+Found the following (possibly) invalid URLs:
+  URL: data.gov.cz
+    From: README.md
+    Status: Error
+    Message: libcurl error code 35:
+      	schannel: next InitializeSecurityContext failed: SEC_E_ILLEGAL_MESSAGE (0x80090326) - This error usually occurs when a fatal SSL/TLS alert is received (e.g. handshake failed).
 
 ## Reverse dependencies
 
