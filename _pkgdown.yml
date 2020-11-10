@@ -3,7 +3,7 @@ home:
   description: Discover, retrieve and use open data from the Czech public finance database (Monitor Státní pokladny, including accounting and budgetary data for all public organisations and municipalities.
 
 destination: docs
-url: https://petrbouchal.github.io/statnipokladna
+url: https://petrbouchal.xyz/statnipokladna
 development:
   mode: auto
 template:

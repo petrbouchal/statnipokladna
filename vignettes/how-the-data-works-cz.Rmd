@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 library(statnipokladna)
 ```
 
-> Note: for a basic English-language intro to the package, see the [index page](https://petrbouchal.github.io/statnipokladna/index.html) (basic usage) and the [Get started vignette](statnipokladna.html) (background on the underlying data).
+> Note: for a basic English-language intro to the package, see the [index page](https://petrbouchal.xyz/statnipokladna/index.html) (basic usage) and the [Get started vignette](statnipokladna.html) (background on the underlying data).
 
 > Poznámka: seznam vysledovaných problémů se zdrojovými daty jsem vyčlenil do [zvláštního dokumentu](data-issues-cz.html)
 

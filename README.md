@@ -54,7 +54,7 @@ remotes::install_github("petrbouchal/statnipokladna",
 I also keep binaries in a `drat` repo, which you can access by
 
 ``` r
-install.packages("statnipokladna", repos = "https://petrbouchal.github.io/drat")
+install.packages("statnipokladna", repos = "https://petrbouchal.xyz/drat")
 ```
 
 ## Bug reports
@@ -64,43 +64,43 @@ Please report bugs at
 
 ## What this package enables you to do:
 
-  - get cleaned-up, ready to analyse data frames based on open data
+-   get cleaned-up, ready to analyse data frames based on open data
     dumps from the public finance database
-      - the package draws on the online data and returns a clean data
+    -   the package draws on the online data and returns a clean data
         frame
-      - the resulting data is ready to merge into time series
-      - time series is built based on user input
-  - do this through a consistent API which supplements some of the
+    -   the resulting data is ready to merge into time series
+    -   time series is built based on user input
+-   do this through a consistent API which supplements some of the
     documentation that is missing from the official endpoints (*still
     subject to some change*)
-  - access registers published alongside the data (e.g. lists of public
+-   access registers published alongside the data (e.g. lists of public
     organisations with their identifiers and metadata), some of which
     can be useful in other contexts
-  - augment the core data with the desired type of register
+-   augment the core data with the desired type of register
 
 See the [Get
-started](https://petrbouchal.github.io/statnipokladna/articles/statnipokladna.html)
+started](https://petrbouchal.xyz/statnipokladna/articles/statnipokladna.html)
 vignette for background on the underlying data.
 
 See also [Background information](#background-information) below.
 
 ## How does this compare to the [official analytical interface](http://monitor.statnipokladna.cz/)?
 
-  - no limit on the number of data points
-  - no limits on the number of organisations, unlike the official
+-   no limit on the number of data points
+-   no limits on the number of organisations, unlike the official
     interface which forces you to use a filter on some tables
-  - different reports (local gov, central gov…) in one place in
+-   different reports (local gov, central gov…) in one place in
     consistent form
-  - much faster for analysis (the current version of the online
+-   much faster for analysis (the current version of the online
     interface takes long to render)
-  - reproducible\!\!\! While the online interface provides a permanent
-    link to your analysis, this must be copied manually and does not
+-   reproducible!!! While the online interface provides a permanent link
+    to your analysis, this must be copied manually and does not
     necessarily provide an easily legible overview of how the analysis
     was produced (filters, columns etc.)
-  - no need for the web =\> excel =\> R dance
-  - drawback: for some reports, the data is published in different forms
+-   no need for the web =&gt; excel =&gt; R dance
+-   drawback: for some reports, the data is published in different forms
     for different time periods (pre- and post-2015)
-  - drawback: consolidation must be done manually
+-   drawback: consolidation must be done manually
 
 ### Future development
 
@@ -110,9 +110,9 @@ stable and can be used externally. Depending on the result, some
 functionality in this package can be streamlined and some can be added -
 e.g. 
 
-  - listing of available releases
-  - checking against existing releases and data sets
-  - retrieving some previously unpublished data e.g. calculated
+-   listing of available releases
+-   checking against existing releases and data sets
+-   retrieving some previously unpublished data e.g. calculated
     indicators and budget responsibility monitoring
 
 ## Getting started
@@ -189,8 +189,8 @@ resolves this automatically.
 
 As you can see below, you can
 
-  - add multiple codelists in one pipe
-  - add a codelist without downloading it first - just pass its ID to
+-   add multiple codelists in one pipe
+-   add a codelist without downloading it first - just pass its ID to
     the function as a character instead of an object.
 
 Codelists are also cached, but you have one in your namespace, you can
@@ -256,18 +256,18 @@ dumps to a clean data structure, you still need quite a bit of domain
 knowledge to be able analyse the data safely.
 
 See the [“How the data
-works”](https://petrbouchal.github.io/statnipokladna/articles/how-the-data-works-cz.html)
+works”](https://petrbouchal.xyz/statnipokladna/articles/how-the-data-works-cz.html)
 vignette (in Czech only, the terminology is impossible to translate) for
 an overview of the structure of the data on which this package draws.
 This also contains some notes useful for interpreting the data.
 
 A subset of this information is in the [Get
-started](https://petrbouchal.github.io/statnipokladna/articles/statnipokladna.html)
+started](https://petrbouchal.xyz/statnipokladna/articles/statnipokladna.html)
 vignette.
 
 There is also a log of various data gotchas I discovered, also in Czech
 only, stored in the [data issues
-vignette](https://petrbouchal.github.io/statnipokladna/articles/data-issues-cz.html).
+vignette](https://petrbouchal.xyz/statnipokladna/articles/data-issues-cz.html).
 
 A basic glossary of some of the terms used in the data sets is at
 <http://monitor.statnipokladna.cz/metodika/>.
@@ -282,29 +282,29 @@ maintaining the application.
 
 ### R Packages
 
-  - [CzechData](https://jancaha.github.io/CzechData) by @JanCaha for
+-   [CzechData](https://jancaha.github.io/CzechData) by @JanCaha for
     (mainly) geospatial data about the Czech Republic (both admin.
     boundaries and topology and geography)
-  - [RCzechia](https://cran.r-project.org/package=RCzechia) for another
+-   [RCzechia](https://cran.r-project.org/package=RCzechia) for another
     approach to Czech geospatial data and access to the official public
     geocoder and reverse geocoder
-  - [czso](https://github.com/petrbouchal/czso) for access to Czech
+-   [czso](https://github.com/petrbouchal/czso) for access to Czech
     statistical open data
-  - [eurostat](https://cran.r-project.org/package=eurostat) for access
+-   [eurostat](https://cran.r-project.org/package=eurostat) for access
     to Eurostat data
-  - [OECD](https://cran.r-project.org/package=OECD) for access to OECD
+-   [OECD](https://cran.r-project.org/package=OECD) for access to OECD
     data, incl. a large amount of financial and economic data
 
 ### Other Czech public data
 
-  - [National Open Data Catalogue](https://data.gov.cz)
-  - [KNOD](https://github.com/kokes/knod) by Ondřej Kokeš for an
+-   [National Open Data Catalogue](https://data.gov.cz)
+-   [KNOD](https://github.com/kokes/knod) by Ondřej Kokeš for an
     overview of public data
-  - [Hlídač státu](https://hlidacstatu.cz/) by @michalblaha for easy
+-   [Hlídač státu](https://www.hlidacstatu.cz/) by @michalblaha for easy
     (web and API) access to a large suite of transparency-focused
     datasets and their integration (public disclosures of contracts,
     tenders, political contributions…)
-  - [CEDR](https://cedr.mfcr.cz/) for a database of public subsidies,
+-   [CEDR](https://cedr.mfcr.cz/) for a database of public subsidies,
     incl. to public bodies
 
 ## Acknowledgments
@@ -321,5 +321,5 @@ for a guide on how to contribute to the project.
 
 Please note that the ‘statnipokladna’ project is released with a
 [Contributor Code of
-Conduct](https://petrbouchal.github.io/statnipokladna/CODE_OF_CONDUCT.html).
+Conduct](https://petrbouchal.xyz/statnipokladna/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.

@@ -54,7 +54,7 @@ remotes::install_github("petrbouchal/statnipokladna",
 I also keep binaries in a `drat` repo, which you can access by
 
 ``` r
-install.packages("statnipokladna", repos = "https://petrbouchal.github.io/drat")
+install.packages("statnipokladna", repos = "https://petrbouchal.xyz/drat")
 ```
 
 ## Bug reports
@@ -71,7 +71,7 @@ Please report bugs at https://github.com/petrbouchal/statnipokladna/issues.
 - access registers published alongside the data (e.g. lists of public organisations with their identifiers and metadata), some of which can be useful in other contexts
 - augment the core data with the desired type of register
 
-See the [Get started](https://petrbouchal.github.io/statnipokladna/articles/statnipokladna.html) vignette for background on the underlying data.
+See the [Get started](https://petrbouchal.xyz/statnipokladna/articles/statnipokladna.html) vignette for background on the underlying data.
 
 See also [Background information] below.
 
@@ -161,11 +161,11 @@ You can get details of all the available tables in the `sp_tables` data frame; f
 
 Note that while the package provides a bridge from complicated data dumps to a clean data structure, you still need quite a bit of domain knowledge to be able analyse the data safely.
 
-See the ["How the data works"](https://petrbouchal.github.io/statnipokladna/articles/how-the-data-works-cz.html) vignette (in Czech only, the terminology is impossible to translate) for an overview of the structure of the data on which this package draws. This also contains some notes useful for interpreting the data.
+See the ["How the data works"](https://petrbouchal.xyz/statnipokladna/articles/how-the-data-works-cz.html) vignette (in Czech only, the terminology is impossible to translate) for an overview of the structure of the data on which this package draws. This also contains some notes useful for interpreting the data.
 
-A subset of this information is in the [Get started](https://petrbouchal.github.io/statnipokladna/articles/statnipokladna.html) vignette.
+A subset of this information is in the [Get started](https://petrbouchal.xyz/statnipokladna/articles/statnipokladna.html) vignette.
 
-There is also a log of various data gotchas I discovered, also in Czech only, stored in the [data issues vignette](https://petrbouchal.github.io/statnipokladna/articles/data-issues-cz.html).
+There is also a log of various data gotchas I discovered, also in Czech only, stored in the [data issues vignette](https://petrbouchal.xyz/statnipokladna/articles/data-issues-cz.html).
 
 A basic glossary of some of the terms used in the data sets is at <http://monitor.statnipokladna.cz/metodika/>.
 
@@ -188,7 +188,7 @@ Not created or endorsed by the Czech Ministry of Finance, who produce the data -
 
 - [National Open Data Catalogue](https://data.gov.cz)
 - [KNOD](https://github.com/kokes/knod) by Ondřej Kokeš for an overview of public data
-- [Hlídač státu](https://hlidacstatu.cz/) by @michalblaha for easy (web and API) access to a large suite of transparency-focused datasets and their integration (public disclosures of contracts, tenders, political contributions...)
+- [Hlídač státu](https://www.hlidacstatu.cz/) by @michalblaha for easy (web and API) access to a large suite of transparency-focused datasets and their integration (public disclosures of contracts, tenders, political contributions...)
 - [CEDR](https://cedr.mfcr.cz/) for a database of public subsidies, incl. to public bodies
 
 ## Acknowledgments
@@ -200,5 +200,5 @@ Thanks to @smallhillcz and the Státní pokladna/Monitor developers and maintain
 See [CONTRIBUTING.md](https://github.com/petrbouchal/statnipokladna/blob/master/.github/CONTRIBUTING.md) for a guide on how to contribute to the project.
 
 Please note that the 'statnipokladna' project is released with a
-[Contributor Code of Conduct](https://petrbouchal.github.io/statnipokladna/CODE_OF_CONDUCT.html).
+[Contributor Code of Conduct](https://petrbouchal.xyz/statnipokladna/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.

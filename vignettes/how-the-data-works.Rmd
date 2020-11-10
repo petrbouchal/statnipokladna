@@ -16,6 +16,6 @@ knitr::opts_chunk$set(
 
 > Poznámka: pro logičtější členění dokumentace jsem český background přesunul do [jiného dokumentu](how-the-data-works-cz.html) a oddělil [soupis datových zádrhelů](data-issues-cz.html).
 
-> Note: this vignette will over time accrue more detailed information on the data from which the package draws. For now, see the [index page](https://petrbouchal.github.io/statnipokladna/index.html) (basic usage) and the [Get started vignette](statnipokladna.html) (background on the underlying data).
+> Note: this vignette will over time accrue more detailed information on the data from which the package draws. For now, see the [index page](https://petrbouchal.xyz/statnipokladna/index.html) (basic usage) and the [Get started vignette](statnipokladna.html) (background on the underlying data).
 
   
