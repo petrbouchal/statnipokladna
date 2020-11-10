@@ -200,6 +200,10 @@ pass it as an object, provided that it has the right columns.
 local_budgets %>% 
   sp_add_codelist(functional_categories) %>% 
   sp_add_codelist("polozka")
+#> Warning: The `keep` argument of `group_map()` is deprecated as of dplyr 1.0.0.
+#> Please use the `.keep` argument instead.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_warnings()` to see where this warning was generated.
 #> ℹ Codelist file already in '~/sp_data/', not downloading. Set `redownload = TRUE` if needed.
 #> ℹ Processing codelist data
 #> # A tibble: 1,189,627 x 27
@@ -282,7 +286,7 @@ maintaining the application.
 
 ### R Packages
 
--   [CzechData](https://jancaha.github.io/CzechData) by @JanCaha for
+-   [CzechData](https://jancaha.github.io/CzechData/) by @JanCaha for
     (mainly) geospatial data about the Czech Republic (both admin.
     boundaries and topology and geography)
 -   [RCzechia](https://cran.r-project.org/package=RCzechia) for another
@@ -297,7 +301,7 @@ maintaining the application.
 
 ### Other Czech public data
 
--   [National Open Data Catalogue](https://data.gov.cz)
+-   [National Open Data Catalogue](https://data.gov.cz/)
 -   [KNOD](https://github.com/kokes/knod) by Ondřej Kokeš for an
     overview of public data
 -   [Hlídač státu](https://www.hlidacstatu.cz/) by @michalblaha for easy

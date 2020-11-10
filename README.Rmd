@@ -177,7 +177,7 @@ Not created or endorsed by the Czech Ministry of Finance, who produce the data -
 
 ### R Packages
 
-- [CzechData](https://jancaha.github.io/CzechData) by @JanCaha for (mainly) geospatial data about the Czech Republic (both admin. boundaries and topology and geography)
+- [CzechData](https://jancaha.github.io/CzechData/) by @JanCaha for (mainly) geospatial data about the Czech Republic (both admin. boundaries and topology and geography)
 - [RCzechia](https://cran.r-project.org/package=RCzechia) for another approach to Czech geospatial data and access to the official public geocoder and reverse geocoder
 - [czso](https://github.com/petrbouchal/czso) for access to Czech statistical open data
 - [eurostat](https://cran.r-project.org/package=eurostat) for access to Eurostat data
@@ -186,7 +186,7 @@ Not created or endorsed by the Czech Ministry of Finance, who produce the data -
 
 ### Other Czech public data
 
-- [National Open Data Catalogue](https://data.gov.cz)
+- [National Open Data Catalogue](https://data.gov.cz/)
 - [KNOD](https://github.com/kokes/knod) by Ondřej Kokeš for an overview of public data
 - [Hlídač státu](https://www.hlidacstatu.cz/) by @michalblaha for easy (web and API) access to a large suite of transparency-focused datasets and their integration (public disclosures of contracts, tenders, political contributions...)
 - [CEDR](https://cedr.mfcr.cz/) for a database of public subsidies, incl. to public bodies
