@@ -46,11 +46,11 @@
 
 
   <link href="../extra.css" rel="stylesheet">
-  
+  <script src="../extra.js"></script>
 
 <meta property="og:title" content="Add codelist data to downloaded data — sp_add_codelist" />
 <meta property="og:description" content="Joins a provided codelist, or downloads and processes one if necessary, and adds it to the data." />
-<meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/reference/figures/card.png" />
+<meta property="og:image" content="https://petrbouchal.xyz/statnipokladna/reference/figures/card.png" />
 <meta property="og:image:alt" content="statnipokladna: R package for using Czech public finance data (Monitor Státní pokladny)" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:creator" content="@petrbouchal" />
@@ -69,16 +69,6 @@
 <![endif]-->
 
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-156460113-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-156460113-1');
-</script>
-
 
   </head>
 
@@ -96,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -143,6 +133,12 @@
      
   </a>
 </li>
+<li>
+  <a href="https://petrbouchal.xyz">
+    <span class="fa fa-asterisk fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -165,14 +161,14 @@
     <p>Joins a provided codelist, or downloads and processes one if necessary, and adds it to the data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sp_add_codelist</span>(
-  <span class='no'>data</span>,
-  <span class='kw'>codelist</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>period_column</span> <span class='kw'>=</span> <span class='no'>.data</span>$<span class='no'>period_vykaz</span>,
-  <span class='kw'>by</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>redownload</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>dest_dir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>sp_add_codelist</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  codelist <span class='op'>=</span> <span class='cn'>NULL</span>,
+  period_column <span class='op'>=</span> <span class='va'>.data</span><span class='op'>$</span><span class='va'>period_vykaz</span>,
+  by <span class='op'>=</span> <span class='cn'>NULL</span>,
+  redownload <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  dest_dir <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -206,7 +202,7 @@ If left unset, will use the <code>statnipokladna.dest_dir</code> option if the o
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame of same length as <code>data</code>, with added columns from <code>codelist</code>. See Details.</p>
+    <p>A <a href='https://tibble.tidyverse.org/reference/tibble-package.html'>tibble</a> of same length as <code>data</code>, with added columns from <code>codelist</code>. See Details.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The <code>data</code> argument should be a data frame produced by <code><a href='sp_get_table.html'>sp_get_table()</a></code> If this is true, the <code>period_column</code> argument is not needed.
@@ -237,65 +233,60 @@ it manually using <code>dplyr</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'><a href='sp_get_table.html'>sp_get_table</a></span>(<span class='st'>"budget-central"</span>, <span class='fl'>2017</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>sp_add_codelist</span>(<span class='st'>"polozka"</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>sp_add_codelist</span>(<span class='st'>"paragraf"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Either year or month not set.</span>
-#&gt; <span class='warning'>Using defaults of 2017 and 12.</span></div><div class='output co'>#&gt; <span class='message'>● Set these values explicitly for reproducibility as the defaults may change in the future</span>
-#&gt; <span class='message'>  to provide access to the latest data by default.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Building URL for dataset 'misris': FIN 1-12 OSS - Plnění rozpočtu KAP a OSS, '2017-12'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/misris.xlsx'</span></div><div class='output co'>#&gt; <span class='message'>✔ Storing downloaded archive in and extracting to '/tmp/RtmpcJUEia/misris/2017/12/'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Set dest_dir for more control over downloaded files.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Reading data...</span></div><div class='output co'>#&gt; <span class='message'>ℹ Transforming data...</span></div><div class='output co'>#&gt; <span class='message'>ℹ Building URL for codelist 'polozka' - Rozpočtová položka</span></div><div class='output co'>#&gt; <span class='message'>✔ Storing codelist in '/tmp/RtmpcJUEia/'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Set dest_dir for more control over downloaded files.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Processing codelist data</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The `x` argument of `as_tibble.matrix()` must have column names if `.name_repair` is omitted as of tibble 2.0.0.</span>
-#&gt; <span class='warning'>Using compatibility `.name_repair`.</span>
-#&gt; <span class='warning'>This warning is displayed once every 8 hours.</span>
-#&gt; <span class='warning'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Building URL for codelist 'paragraf' - Paragraf</span></div><div class='output co'>#&gt; <span class='message'>✔ Storing codelist in '/tmp/RtmpcJUEia/'</span></div><div class='output co'>#&gt; <span class='message'>ℹ Set dest_dir for more control over downloaded files.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Processing codelist data</span></div><div class='output co'>#&gt; # A tibble: 1,058,136 x 39
+<span class='fu'><a href='sp_get_table.html'>sp_get_table</a></span><span class='op'>(</span><span class='st'>"budget-central"</span>, <span class='fl'>2017</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>sp_add_codelist</span><span class='op'>(</span><span class='st'>"polozka"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>sp_add_codelist</span><span class='op'>(</span><span class='st'>"paragraf"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Either <span style='color: #00BB00;'>year</span><span> or </span><span style='color: #00BB00;'>month</span><span> not set.</span>
+#&gt; <span class='warning'>Using defaults of </span><span style='color: #0000BB;'>2017</span><span> and </span><span style='color: #0000BB;'>12</span><span>.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BB0000;'>●</span><span> Set these values explicitly for reproducibility as the defaults may change in the future</span>
+#&gt; <span class='message'>  to provide access to the latest data by default.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Building URL for dataset </span><span style='color: #0000BB;'>'misris'</span><span>: </span><span style='color: #0000BB;'>FIN 1-12 OSS - Plnění rozpočtu KAP a OSS</span><span>, </span><span style='color: #0000BB;'>'2017-12'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Get the dataset documentation at </span><span style='color: #0000BB;'>'http:/monitor.statnipokladna.cz/data/struktura/misris.xlsx'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Storing downloaded archive in and extracting to </span><span style='color: #0000BB;'>'/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/Rtmpc8s2MX/misris/2017/12/'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Set </span><span style='color: #00BB00;'>dest_dir</span><span> for more control over downloaded files.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Reading data...</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Transforming data...</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Building URL for codelist </span><span style='color: #0000BB;'>'polozka'</span><span> - </span><span style='color: #0000BB;'>Rozpočtová položka</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Storing codelist in </span><span style='color: #0000BB;'>'/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/Rtmpc8s2MX/'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Set </span><span style='color: #00BB00;'>dest_dir</span><span> for more control over downloaded files.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Processing codelist data</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Building URL for codelist </span><span style='color: #0000BB;'>'paragraf'</span><span> - </span><span style='color: #0000BB;'>Paragraf</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Storing codelist in </span><span style='color: #0000BB;'>'/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/Rtmpc8s2MX/'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Set </span><span style='color: #00BB00;'>dest_dir</span><span> for more control over downloaded files.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Processing codelist data</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1,058,136 x 30</span><span>
 #&gt;    per_yr per_m ucjed ico   kapitola finmisto polozka paragraf zdroj ZC_EDS
-#&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; 
-#&gt;  1 2017   01    1000… 0000… 0302     3020001  5194    611100   1100… &lt;NA&gt;  
-#&gt;  2 2017   01    1000… 0000… 0302     3020001  5194    611100   4100… &lt;NA&gt;  
-#&gt;  3 2017   01    1000… 0000… 0302     3020001  5195    611100   1100… &lt;NA&gt;  
-#&gt;  4 2017   01    1000… 0000… 0302     3020001  5196    611100   1100… &lt;NA&gt;  
-#&gt;  5 2017   01    1000… 0000… 0302     3020001  5196    611100   1100… &lt;NA&gt;  
-#&gt;  6 2017   01    1000… 0000… 0302     3020001  5196    611100   4100… &lt;NA&gt;  
-#&gt;  7 2017   01    1000… 0000… 0302     3020001  5342    611100   1100… &lt;NA&gt;  
-#&gt;  8 2017   01    1000… 0000… 0302     3020001  5342    611100   4100… &lt;NA&gt;  
-#&gt;  9 2017   01    1000… 0000… 0302     3020001  5362    611100   1100… &lt;NA&gt;  
-#&gt; 10 2017   01    1000… 0000… 0302     3020001  5362    611100   4100… &lt;NA&gt;  
-#&gt; # … with 1,058,126 more rows, and 29 more variables: ZC_UCRIS &lt;chr&gt;,
-#&gt; #   ZC_PVS &lt;chr&gt;, budget_adopted &lt;dbl&gt;, budget_amended &lt;dbl&gt;,
-#&gt; #   budget_final &lt;dbl&gt;, ZU_OBLIG &lt;dbl&gt;, budget_spending &lt;dbl&gt;,
-#&gt; #   period_vykaz &lt;date&gt;, polozka_start_date &lt;date&gt;, polozka_end_date &lt;date&gt;,
-#&gt; #   druh &lt;chr&gt;, trida &lt;chr&gt;, seskupeni &lt;chr&gt;, podseskupeni &lt;chr&gt;,
-#&gt; #   polozka_nazev &lt;chr&gt;, polozka_kr_nazev &lt;chr&gt;, polozka_str_nazev &lt;chr&gt;,
-#&gt; #   kon_pol &lt;lgl&gt;, kon_okr &lt;lgl&gt;, kon_kraj &lt;lgl&gt;, kon_rep &lt;lgl&gt;, skupina &lt;chr&gt;,
-#&gt; #   oddil &lt;chr&gt;, pododdil &lt;chr&gt;, paragraf_nazev &lt;chr&gt;, paragraf_kr_nazev &lt;chr&gt;,
-#&gt; #   paragraf_str_nazev &lt;chr&gt;, paragraf_start_date &lt;date&gt;,
-#&gt; #   paragraf_end_date &lt;date&gt;</div><div class='input'>
-<span class='no'>pol</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sp_get_codelist.html'>sp_get_codelist</a></span>(<span class='st'>"paragraf"</span>)</div><div class='output co'>#&gt; <span class='message'>ℹ Codelist file already in '/tmp/RtmpcJUEia/', not downloading. Set `redownload = TRUE` if needed.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Processing codelist data</span></div><div class='input'><span class='no'>par</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sp_get_codelist.html'>sp_get_codelist</a></span>(<span class='st'>"polozka"</span>)</div><div class='output co'>#&gt; <span class='message'>ℹ Codelist file already in '/tmp/RtmpcJUEia/', not downloading. Set `redownload = TRUE` if needed.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Processing codelist data</span></div><div class='input'>
-<span class='fu'><a href='sp_get_table.html'>sp_get_table</a></span>(<span class='st'>"budget-central"</span>, <span class='fl'>2017</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>sp_add_codelist</span>(<span class='no'>pol</span>) <span class='kw'>%&gt;%</span>
-  <span class='fu'>sp_add_codelist</span>(<span class='no'>par</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Either year or month not set.</span>
-#&gt; <span class='warning'>Using defaults of 2017 and 12.</span></div><div class='output co'>#&gt; <span class='message'>● Set these values explicitly for reproducibility as the defaults may change in the future</span>
-#&gt; <span class='message'>  to provide access to the latest data by default.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Files already in /tmp/RtmpcJUEia/misris/2017/12, not downloading. Set `redownload = TRUE` if needed.</span></div><div class='output co'>#&gt; <span class='message'>ℹ Reading data...</span></div><div class='output co'>#&gt; <span class='message'>ℹ Transforming data...</span></div><div class='output co'>#&gt; # A tibble: 1,058,136 x 39
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> 
+#&gt; </span><span style='color: #555555;'> 1</span><span> 2017   01    1000… 0000… 0302     3020001  5194    611100   1100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 2</span><span> 2017   01    1000… 0000… 0302     3020001  5194    611100   4100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 3</span><span> 2017   01    1000… 0000… 0302     3020001  5195    611100   1100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 4</span><span> 2017   01    1000… 0000… 0302     3020001  5196    611100   1100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 5</span><span> 2017   01    1000… 0000… 0302     3020001  5196    611100   1100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 6</span><span> 2017   01    1000… 0000… 0302     3020001  5196    611100   4100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 7</span><span> 2017   01    1000… 0000… 0302     3020001  5342    611100   1100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 8</span><span> 2017   01    1000… 0000… 0302     3020001  5342    611100   4100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 9</span><span> 2017   01    1000… 0000… 0302     3020001  5362    611100   1100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'>10</span><span> 2017   01    1000… 0000… 0302     3020001  5362    611100   4100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'># … with 1,058,126 more rows, and 20 more variables: ZC_UCRIS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   ZC_PVS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, budget_adopted </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, budget_amended </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   budget_final </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, ZU_OBLIG </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, budget_spending </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   period_vykaz </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>, polozka_start_date </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>, polozka_end_date </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   trida </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, seskupeni </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, podseskupeni </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, polozka_nazev </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   skupina </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, pododdil </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, oddil </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, paragraf_paragraf_nazev </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   paragraf_start_date </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>, paragraf_end_date </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span></div><div class='input'>
+<span class='va'>pol</span> <span class='op'>&lt;-</span> <span class='fu'><a href='sp_get_codelist.html'>sp_get_codelist</a></span><span class='op'>(</span><span class='st'>"paragraf"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Codelist file already in </span><span style='color: #0000BB;'>'/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/Rtmpc8s2MX/'</span><span>, not downloading. Set </span><span style='color: #555555;'>`redownload = TRUE`</span><span> if needed.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Processing codelist data</span></div><div class='input'><span class='va'>par</span> <span class='op'>&lt;-</span> <span class='fu'><a href='sp_get_codelist.html'>sp_get_codelist</a></span><span class='op'>(</span><span class='st'>"polozka"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Codelist file already in </span><span style='color: #0000BB;'>'/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/Rtmpc8s2MX/'</span><span>, not downloading. Set </span><span style='color: #555555;'>`redownload = TRUE`</span><span> if needed.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Processing codelist data</span></div><div class='input'>
+<span class='fu'><a href='sp_get_table.html'>sp_get_table</a></span><span class='op'>(</span><span class='st'>"budget-central"</span>, <span class='fl'>2017</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>sp_add_codelist</span><span class='op'>(</span><span class='va'>pol</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>sp_add_codelist</span><span class='op'>(</span><span class='va'>par</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: Either </span><span style='color: #00BB00;'>year</span><span> or </span><span style='color: #00BB00;'>month</span><span> not set.</span>
+#&gt; <span class='warning'>Using defaults of </span><span style='color: #0000BB;'>2017</span><span> and </span><span style='color: #0000BB;'>12</span><span>.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BB0000;'>●</span><span> Set these values explicitly for reproducibility as the defaults may change in the future</span>
+#&gt; <span class='message'>  to provide access to the latest data by default.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Files already in /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpc8s2MX/misris/2017/12, not downloading. Set </span><span style='color: #555555;'>`redownload = TRUE`</span><span> if needed.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Reading data...</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Transforming data...</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1,058,136 x 30</span><span>
 #&gt;    per_yr per_m ucjed ico   kapitola finmisto polozka paragraf zdroj ZC_EDS
-#&gt;    &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; 
-#&gt;  1 2017   01    1000… 0000… 0302     3020001  5194    611100   1100… &lt;NA&gt;  
-#&gt;  2 2017   01    1000… 0000… 0302     3020001  5194    611100   4100… &lt;NA&gt;  
-#&gt;  3 2017   01    1000… 0000… 0302     3020001  5195    611100   1100… &lt;NA&gt;  
-#&gt;  4 2017   01    1000… 0000… 0302     3020001  5196    611100   1100… &lt;NA&gt;  
-#&gt;  5 2017   01    1000… 0000… 0302     3020001  5196    611100   1100… &lt;NA&gt;  
-#&gt;  6 2017   01    1000… 0000… 0302     3020001  5196    611100   4100… &lt;NA&gt;  
-#&gt;  7 2017   01    1000… 0000… 0302     3020001  5342    611100   1100… &lt;NA&gt;  
-#&gt;  8 2017   01    1000… 0000… 0302     3020001  5342    611100   4100… &lt;NA&gt;  
-#&gt;  9 2017   01    1000… 0000… 0302     3020001  5362    611100   1100… &lt;NA&gt;  
-#&gt; 10 2017   01    1000… 0000… 0302     3020001  5362    611100   4100… &lt;NA&gt;  
-#&gt; # … with 1,058,126 more rows, and 29 more variables: ZC_UCRIS &lt;chr&gt;,
-#&gt; #   ZC_PVS &lt;chr&gt;, budget_adopted &lt;dbl&gt;, budget_amended &lt;dbl&gt;,
-#&gt; #   budget_final &lt;dbl&gt;, ZU_OBLIG &lt;dbl&gt;, budget_spending &lt;dbl&gt;,
-#&gt; #   period_vykaz &lt;date&gt;, skupina &lt;chr&gt;, oddil &lt;chr&gt;, pododdil &lt;chr&gt;,
-#&gt; #   pol_nazev &lt;chr&gt;, pol_kr_nazev &lt;chr&gt;, pol_str_nazev &lt;chr&gt;,
-#&gt; #   pol_start_date &lt;date&gt;, pol_end_date &lt;date&gt;, par_start_date &lt;date&gt;,
-#&gt; #   par_end_date &lt;date&gt;, druh &lt;chr&gt;, trida &lt;chr&gt;, seskupeni &lt;chr&gt;,
-#&gt; #   podseskupeni &lt;chr&gt;, par_nazev &lt;chr&gt;, par_kr_nazev &lt;chr&gt;,
-#&gt; #   par_str_nazev &lt;chr&gt;, kon_pol &lt;lgl&gt;, kon_okr &lt;lgl&gt;, kon_kraj &lt;lgl&gt;,
-#&gt; #   kon_rep &lt;lgl&gt;</div><div class='input'># }
-</div></pre>
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> 
+#&gt; </span><span style='color: #555555;'> 1</span><span> 2017   01    1000… 0000… 0302     3020001  5194    611100   1100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 2</span><span> 2017   01    1000… 0000… 0302     3020001  5194    611100   4100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 3</span><span> 2017   01    1000… 0000… 0302     3020001  5195    611100   1100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 4</span><span> 2017   01    1000… 0000… 0302     3020001  5196    611100   1100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 5</span><span> 2017   01    1000… 0000… 0302     3020001  5196    611100   1100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 6</span><span> 2017   01    1000… 0000… 0302     3020001  5196    611100   4100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 7</span><span> 2017   01    1000… 0000… 0302     3020001  5342    611100   1100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 8</span><span> 2017   01    1000… 0000… 0302     3020001  5342    611100   4100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'> 9</span><span> 2017   01    1000… 0000… 0302     3020001  5362    611100   1100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'>10</span><span> 2017   01    1000… 0000… 0302     3020001  5362    611100   4100… </span><span style='color: #BB0000;'>NA</span><span>    
+#&gt; </span><span style='color: #555555;'># … with 1,058,126 more rows, and 20 more variables: ZC_UCRIS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   ZC_PVS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, budget_adopted </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, budget_amended </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   budget_final </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, ZU_OBLIG </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, budget_spending </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   period_vykaz </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>, skupina </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, pododdil </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, oddil </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   pol_paragraf_nazev </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, pol_start_date </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>, pol_end_date </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   par_start_date </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>, par_end_date </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span style='color: #555555;'>, trida </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, seskupeni </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   podseskupeni </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, par_nazev </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div><div class='input'><span class='co'># }</span>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -311,7 +302,7 @@ it manually using <code>dplyr</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

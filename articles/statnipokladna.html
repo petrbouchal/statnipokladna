@@ -18,9 +18,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Getting started with statnipokladna">
+<script src="../extra.js"></script><meta property="og:title" content="Getting started with statnipokladna">
 <meta property="og:description" content="statnipokladna">
-<meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/reference/figures/card.png">
+<meta property="og:image" content="https://petrbouchal.xyz/statnipokladna/reference/figures/card.png">
 <meta property="og:image:alt" content="statnipokladna: R package for using Czech public finance data (Monitor Státní pokladny)">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:creator" content="@petrbouchal">
@@ -28,13 +28,7 @@
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-156460113-1"></script><script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-156460113-1');
-</script>
+<![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
@@ -49,7 +43,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -96,6 +90,12 @@
      
   </a>
 </li>
+<li>
+  <a href="https://petrbouchal.xyz">
+    <span class="fa fa-asterisk fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
 </div>
 <!--/.nav-collapse -->
@@ -106,7 +106,8 @@
 
       
 
-      </header><div class="row">
+      </header><script src="statnipokladna_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="statnipokladna_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="statnipokladna_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Getting started with statnipokladna</h1>
@@ -120,7 +121,7 @@
     
     
 <blockquote>
-<p>Note for Czech speakers: a previous note covering similar information, sometimes in more depth, is available in Czech <a href="how-the-data-works-cz.html">the Czech guide to the data</a>.</p>
+<p>Note for Czech speakers: a previous note covering similar information, sometimes in more depth, is available in <a href="how-the-data-works-cz.html">the Czech guide to the data</a>.</p>
 </blockquote>
 <p>This vignette provides background on the data that <code>statnipokladna</code> provides access to. Make sure you read the relevant parts before analysing the data: it can be quite complicated and it is easy to make mistakes and end up with wrong numbers.</p>
 <div id="the-nature-of-the-data" class="section level3">
@@ -133,8 +134,8 @@
 <h5 class="hasAnchor">
 <a href="#exports-and-time-periods" class="anchor"></a>Exports and time periods</h5>
 <p>How data for different time periods is exported differs by dataset. This has significant implications for how you get to usable full-year numbers or time series in different tables.</p>
-<p>For budget datasets <code>finm</code> and <code>finu</code> (tables <code>budget-central-old*</code> and <code>budget-local*</code>) and all accounting reports, the data dump for month N will contain data describing what was reported at month M. The <code>period_vykaz</code> column will contain only one unique value. (For budget data, the <code>budget_adopted</code> column does not change throughout the year, but the others do. The <code>budget_spending</code> column contains spending up to month M.) To see time series of spending throughout a year, you need to download multiple datasets (which <code>sp_get_table</code>). To get a full-year’s spending, run <code><a href="../reference/sp_get_table.html">sp_get_table("table_id", year = "YYYY")</a></code> to get the 12th month.</p>
-<p>In the newer central budget reports, <code>budget-central</code> (dataset <code>misris</code>) and <code>budget-state-funds</code> (dataset <code>finsf</code>), data for month M will contain separate rows for spending <em>in</em> (not <em>up to</em>) each month of the year up to month M. To get cumulative spending up to month M in year Y, you need to only download the dataset for month M and then sum the rows in that table. To get a full-year’s spending, run <code><a href="../reference/sp_get_table.html">sp_get_table("table_id", year = "YYYY")</a></code> to get the 12th month, <em>then sum the values</em> across the months contained in the resulting data frame.</p>
+<p>For budget datasets <code>finm</code> and <code>finu</code> (tables <code>budget-central-old*</code> and <code>budget-local*</code>) and all accounting reports, the data dump for month N will contain data describing what was reported at month M. The <code>period_vykaz</code> column will contain only one unique value. (For budget data, the <code>budget_adopted</code> column does not change throughout the year, but the others do. The <code>budget_spending</code> column contains spending up to month M.) To see time series of spending throughout a year, you need to download multiple datasets (with <code><a href="../reference/sp_get_table.html">sp_get_table()</a></code>). To get a full-year’s spending, run <code><a href="../reference/sp_get_table.html">sp_get_table("table_id", year = "YYYY")</a></code> to get the 12th month.</p>
+<p>In the newer central budget reports, <code>budget-central</code> (dataset <code>misris</code>) and <code>budget-state-funds</code> (dataset <code>finsf</code>), data for month M will contain separate rows for spending <em>in</em> (not <em>up to</em>) each month of the year up to month M. To get cumulative spending up to month M in year Y, you need to only download the dataset for month M and then sum the rows in that table. To get a full-year’s spending, run <code><a href="../reference/sp_get_table.html">sp_get_table("table_id", year = "YYYY")</a></code> to get the 12th month’s release, containing data for all months, <em>then sum the values</em> across the months contained in the resulting data frame.</p>
 </div>
 </div>
 <div id="types-of-data" class="section level3">
@@ -183,7 +184,7 @@
 <h3 class="hasAnchor">
 <a href="#coverage" class="anchor"></a>Coverage</h3>
 <p>Put simply, the data covers organisations which report into the SP system, which broadly means all public organisations (I am sure there is a legal definition and I am sure there are exceptions, but I do not know the detail.) There are codelists “druhuj” (organisation type) and “poddruhuj” (subtype) which let you see what type an organisation belongs to, and “forma” will let you know about its legal form.</p>
-<p>This means the data covers both state (I call them “central” in <code>sp_tables</code>) and local organisations incl. all 6000+ municipalities; and both public organisations themselves and their related organisations (both “podřízené” and “příspěvkové”, i.e. subsidiary and contributory, the latter being more independent). Commercial entities owned by public organisations are included at least as codelists items and presumably at least their accounting returns will be included in the data, but I have not researched whether there are cut-offs as to what stake counts as ownership etc.</p>
+<p>This means the data covers both state (I call them “central” in <code>sp_tables</code>) and local organisations incl. all 6000+ municipalities; and both public organisations themselves and their related organisations (both “podřízené” and “příspěvkové”, i.e. subsidiary and sponsored, the latter being more independent). Commercial entities owned by public organisations are included at least as codelists items and presumably at least their accounting returns will be included in the data, but I have not researched whether there are cut-offs as to what stake counts as ownership etc.</p>
 <p>State enterprises (a special legal form) are included. And Budvar, the Czech state brewery which also has a special legal form (national company) also makes an appearance in the codelist… NB: I am not sure which return data, if any, they are included in.</p>
 <p>State funds - a special kind of non-commercial public organisation which disburses money for specific purposes, such as transport infrastructure, are included.</p>
 <p>One special distinction to note is Chapters (kapitola) and OSS (organizační složky státu). Chapters are top-level budget lines, typically managed by a ministry but including many organisations. OSS are quasi-organisations, some are ministries, some not, and some of which manage chapters.</p>
@@ -195,6 +196,7 @@
 <p>Generally:</p>
 <ul>
 <li>budget data is published quarterly for local organisations and until 2018 for central organisations; starting from 2018 central organisations budgetary data are published monthly.</li>
+<li>starting from 2020 local (municipal) budget data is published monthly</li>
 <li>accounting data is published quarterly; for some organisations such as city districts this only happens annually at year end.</li>
 </ul>
 <p>See the list of currently available data releases at <a href="https://monitor.statnipokladna.cz/datovy-katalog/transakcni-data" class="uri">https://monitor.statnipokladna.cz/datovy-katalog/transakcni-data</a>.</p>
@@ -272,7 +274,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

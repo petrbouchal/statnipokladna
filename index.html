@@ -18,9 +18,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
-<meta property="og:title" content="An R package for using data from the Czech public finance database (Monitor Státní pokladny)">
+<script src="extra.js"></script><meta property="og:title" content="An R package for using data from the Czech public finance database (Monitor Státní pokladny)">
 <meta property="og:description" content="Discover, retrieve and use open data from the Czech public finance database (Monitor Státní pokladny, including accounting and budgetary data for all public organisations and municipalities.">
-<meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/reference/figures/card.png">
+<meta property="og:image" content="https://petrbouchal.xyz/statnipokladna/reference/figures/card.png">
 <meta property="og:image:alt" content="statnipokladna: R package for using Czech public finance data (Monitor Státní pokladny)">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:creator" content="@petrbouchal">
@@ -28,13 +28,7 @@
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-156460113-1"></script><script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-156460113-1');
-</script>
+<![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
     <div class="container template-home">
@@ -49,7 +43,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -96,6 +90,12 @@
      
   </a>
 </li>
+<li>
+  <a href="https://petrbouchal.xyz">
+    <span class="fa fa-asterisk fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
 </div>
 <!--/.nav-collapse -->
@@ -108,9 +108,9 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="statnipokladna" class="section level1">
+<div id="statnipokladna-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#statnipokladna" class="anchor"></a>statnipokladna <img src="reference/figures/logo.png" align="right" height="138">
+<a href="#statnipokladna-" class="anchor"></a>statnipokladna <img src="reference/figures/logo.png" align="right" height="138">
 </h1></div>
 <!-- badges: start -->
 
@@ -119,16 +119,20 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the released version from CRAN:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"statnipokladna"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"statnipokladna"</span><span class="op">)</span></code></pre></div>
 <p>You can install the current development release of statnipokladna from <a href="https://github.com/petrbouchal/statnipokladna">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"petrbouchal/statnipokladna"</span>,
-                        <span class="kw">build_vignettes</span> <span class="kw">=</span> <span class="fl">TRUE</span>,
-                        <span class="kw">ref</span> <span class="kw">=</span> <span class="fu">github_release</span>())</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"petrbouchal/statnipokladna"</span>,
+                        build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>,
+                        ref <span class="op">=</span> <span class="fu">github_release</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>or the latest in-development version with</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"petrbouchal/statnipokladna"</span>,
-                         <span class="kw">build_vignettes</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"petrbouchal/statnipokladna"</span>,
+                         build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>I also keep binaries in a <code>drat</code> repo, which you can access by</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"statnipokladna"</span>, <span class="kw">repos</span> <span class="kw">=</span> <span class="st">"https://petrbouchal.github.io/drat"</span>)</pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"statnipokladna"</span>, repos <span class="op">=</span> <span class="st">"https://petrbouchal.xyz/drat"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="bug-reports" class="section level2">
 <h2 class="hasAnchor">
@@ -150,7 +154,7 @@
 <li>access registers published alongside the data (e.g. lists of public organisations with their identifiers and metadata), some of which can be useful in other contexts</li>
 <li>augment the core data with the desired type of register</li>
 </ul>
-<p>See the <a href="https://petrbouchal.github.io/statnipokladna/articles/statnipokladna.html">Get started</a> vignette for background on the underlying data.</p>
+<p>See the <a href="https://petrbouchal.xyz/statnipokladna/articles/statnipokladna.html">Get started</a> vignette for background on the underlying data.</p>
 <p>See also <a href="#background-information">Background information</a> below.</p>
 </div>
 <div id="how-does-this-compare-to-the-official-analytical-interface" class="section level2">
@@ -180,20 +184,20 @@
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting started</h2>
-<div class="sourceCode" id="cb5"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">statnipokladna</span>)</pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/petrbouchal/statnipokladna">statnipokladna</a></span><span class="op">)</span></code></pre></div>
 <p>Get data from a particular part (file) of a dataset (“výkaz”):</p>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="no">local_budgets</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/sp_get_table.html">sp_get_table</a></span>(<span class="kw">table_id</span> <span class="kw">=</span> <span class="st">"budget-local"</span>, <span class="co"># table ID, see `sp_tables`</span>
-                           <span class="kw">year</span> <span class="kw">=</span> <span class="fl">2019</span>,
-                           <span class="kw">month</span> <span class="kw">=</span> <span class="fl">9</span>)
-<span class="co">#&gt; ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2019-09'</span>
-<span class="co">#&gt; ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span>
-<span class="co">#&gt; ✓ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmp52TEmf/statnipokladna/finm/2019/09/'</span>
-<span class="co">#&gt; ℹ Set dest_dir for more control over downloaded files.</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">local_budgets</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sp_get_table.html">sp_get_table</a></span><span class="op">(</span>table_id <span class="op">=</span> <span class="st">"budget-local"</span>, <span class="co"># table ID, see `sp_tables`</span>
+                           year <span class="op">=</span> <span class="fl">2019</span>,
+                           month <span class="op">=</span> <span class="fl">9</span><span class="op">)</span>
+<span class="co">#&gt; ℹ Files already in ~/sp_data/finm/2019/09, not downloading. Set `redownload = TRUE` if needed.</span>
 <span class="co">#&gt; ℹ Reading data...</span>
-<span class="co">#&gt; ℹ Transforming data...</span></pre></div>
+<span class="co">#&gt; ℹ Transforming data...</span></code></pre></div>
 <p>The data is automatically downloaded to a temp directory, so it will be reused by future calls to <code><a href="reference/sp_get_table.html">sp_get_table()</a></code> made in the same session, unless you set <code>force_redownload = TRUE</code>. You set the <code>dest_dir</code> parameter e.g. to <code>"."</code>, a directory will be created in your current working directory and the data will be downloaded into it so that it can persist across sessions.</p>
 <p>It is a rather raw-looking data frame…</p>
-<div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">local_budgets</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">local_budgets</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 6 x 15</span>
 <span class="co">#&gt;   vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka</span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;  </span>
@@ -204,32 +208,28 @@
 <span class="co">#&gt; 5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113   </span>
 <span class="co">#&gt; 6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121   </span>
 <span class="co">#&gt; # … with 4 more variables: budget_adopted &lt;dbl&gt;, budget_amended &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   budget_spending &lt;dbl&gt;, period_vykaz &lt;date&gt;</span></pre></div>
+<span class="co">#&gt; #   budget_spending &lt;dbl&gt;, period_vykaz &lt;date&gt;</span></code></pre></div>
 <p>but it has been cleaned up, and can be enriched with any of the metadata codelists:</p>
-<div class="sourceCode" id="cb8"><pre class="r"><span class="no">functional_categories</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/sp_get_codelist.html">sp_get_codelist</a></span>(<span class="st">"paragraf"</span>)
-<span class="co">#&gt; ℹ Building URL for codelist 'paragraf' - Paragraf</span>
-<span class="co">#&gt; ✓ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmp52TEmf/statnipokladna/'</span>
-<span class="co">#&gt; ℹ Set dest_dir for more control over downloaded files.</span>
-<span class="co">#&gt; ℹ Processing codelist data</span>
-<span class="co">#&gt; Warning: The `x` argument of `as_tibble.matrix()` must have column names if `.name_repair` is omitted as of tibble 2.0.0.</span>
-<span class="co">#&gt; Using compatibility `.name_repair`.</span>
-<span class="co">#&gt; This warning is displayed once every 8 hours.</span>
-<span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span></pre></div>
-<div class="sourceCode" id="cb9"><pre class="r"><span class="no">functional_categories</span>
-<span class="co">#&gt; # A tibble: 550 x 9</span>
-<span class="co">#&gt;    paragraf skupina oddil pododdil nazev kr_nazev str_nazev start_date</span>
-<span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;date&gt;    </span>
-<span class="co">#&gt;  1 0000     Příjmy  Příj… Příjmy   Pro … "Pro př… "Pro pří… 1900-01-01</span>
-<span class="co">#&gt;  2 1011     Zemědě… Země… Zeměděl… Udrž… ""       ""        1900-01-01</span>
-<span class="co">#&gt;  3 1012     Zemědě… Země… Zeměděl… Podn… "Podn.,… "Podniká… 1900-01-01</span>
-<span class="co">#&gt;  4 1013     Zemědě… Země… Zeměděl… Gene… "Genet.… "Genetic… 1900-01-01</span>
-<span class="co">#&gt;  5 1014     Zemědě… Země… Zeměděl… Ozdr… "Ozdrav… "Ozdrav.… 1900-01-01</span>
-<span class="co">#&gt;  6 1019     Zemědě… Země… Zeměděl… Osta… "Ost.ze… "Ostatní… 1900-01-01</span>
-<span class="co">#&gt;  7 1021     Zemědě… Země… Regulac… Orga… "Regul.… "Regulac… 1900-01-01</span>
-<span class="co">#&gt;  8 1022     Zemědě… Země… Regulac… Orga… "Regul.… "Reg.trh… 1900-01-01</span>
-<span class="co">#&gt;  9 1023     Zemědě… Země… Regulac… Orga… "Regul.… "Organiz… 1900-01-01</span>
-<span class="co">#&gt; 10 1024     Zemědě… Země… Regulac… Orga… "Regul.… "Reg.trh… 1900-01-01</span>
-<span class="co">#&gt; # … with 540 more rows, and 1 more variable: end_date &lt;date&gt;</span></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">functional_categories</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sp_get_codelist.html">sp_get_codelist</a></span><span class="op">(</span><span class="st">"paragraf"</span><span class="op">)</span>
+<span class="co">#&gt; ℹ Codelist file already in '~/sp_data/', not downloading. Set `redownload = TRUE` if needed.</span>
+<span class="co">#&gt; ℹ Processing codelist data</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">functional_categories</span>
+<span class="co">#&gt; # A tibble: 552 x 7</span>
+<span class="co">#&gt;    paragraf skupina pododdil oddil paragraf_nazev          start_date end_date  </span>
+<span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;                   &lt;date&gt;     &lt;date&gt;    </span>
+<span class="co">#&gt;  1 0000     0       0        0     Pro příjmy (technický … 1900-01-01 9999-12-31</span>
+<span class="co">#&gt;  2 1011     1       101      10    Udržování výrobního po… 1900-01-01 9999-12-31</span>
+<span class="co">#&gt;  3 1012     1       101      10    Podnikání a restruktur… 1900-01-01 9999-12-31</span>
+<span class="co">#&gt;  4 1013     1       101      10    Genetický potenciál ho… 1900-01-01 9999-12-31</span>
+<span class="co">#&gt;  5 1014     1       101      10    Ozdravování hospodářsk… 1900-01-01 9999-12-31</span>
+<span class="co">#&gt;  6 1019     1       101      10    Ostatní zemědělská a p… 1900-01-01 9999-12-31</span>
+<span class="co">#&gt;  7 1021     1       102      10    Organizace trhu s prod… 1900-01-01 9999-12-31</span>
+<span class="co">#&gt;  8 1022     1       102      10    Organizace trhu s výro… 1900-01-01 9999-12-31</span>
+<span class="co">#&gt;  9 1023     1       102      10    Organizace trhu s prod… 1900-01-01 9999-12-31</span>
+<span class="co">#&gt; 10 1024     1       102      10    Organizace trhu s výro… 1900-01-01 9999-12-31</span>
+<span class="co">#&gt; # … with 542 more rows</span></code></pre></div>
 <p>This contains all codes for this codelist, some of which are not valid for the time period of our core data. The function <code><a href="reference/add_codelist.html">add_codelist()</a></code> resolves this automatically.</p>
 <p>As you can see below, you can</p>
 <ul>
@@ -237,18 +237,17 @@
 <li>add a codelist without downloading it first - just pass its ID to the function as a character instead of an object.</li>
 </ul>
 <p>Codelists are also cached, but you have one in your namespace, you can pass it as an object, provided that it has the right columns.</p>
-<div class="sourceCode" id="cb10"><pre class="r"><span class="no">local_budgets</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/sp_add_codelist.html">sp_add_codelist</a></span>(<span class="no">functional_categories</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/sp_add_codelist.html">sp_add_codelist</a></span>(<span class="st">"polozka"</span>)
-<span class="co">#&gt; Joining, by = "paragraf"</span>
-<span class="co">#&gt; Joining, by = "paragraf"</span>
-<span class="co">#&gt; ℹ Building URL for codelist 'polozka' - Rozpočtová položka</span>
-<span class="co">#&gt; ✓ Storing codelist in '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmp52TEmf/statnipokladna/'</span>
-<span class="co">#&gt; ℹ Set dest_dir for more control over downloaded files.</span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">local_budgets</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/sp_add_codelist.html">sp_add_codelist</a></span><span class="op">(</span><span class="va">functional_categories</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/sp_add_codelist.html">sp_add_codelist</a></span><span class="op">(</span><span class="st">"polozka"</span><span class="op">)</span>
+<span class="co">#&gt; Warning: The `keep` argument of `group_map()` is deprecated as of dplyr 1.0.0.</span>
+<span class="co">#&gt; Please use the `.keep` argument instead.</span>
+<span class="co">#&gt; This warning is displayed once every 8 hours.</span>
+<span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span>
+<span class="co">#&gt; ℹ Codelist file already in '~/sp_data/', not downloading. Set `redownload = TRUE` if needed.</span>
 <span class="co">#&gt; ℹ Processing codelist data</span>
-<span class="co">#&gt; Joining, by = "polozka"</span>
-<span class="co">#&gt; Joining, by = "polozka"</span>
-<span class="co">#&gt; # A tibble: 1,189,627 x 36</span>
+<span class="co">#&gt; # A tibble: 1,189,627 x 27</span>
 <span class="co">#&gt;    vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka</span>
 <span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;  </span>
 <span class="co">#&gt;  1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364   </span>
@@ -261,47 +260,37 @@
 <span class="co">#&gt;  8 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1211   </span>
 <span class="co">#&gt;  9 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1332   </span>
 <span class="co">#&gt; 10 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1333   </span>
-<span class="co">#&gt; # … with 1,189,617 more rows, and 25 more variables: budget_adopted &lt;dbl&gt;,</span>
+<span class="co">#&gt; # … with 1,189,617 more rows, and 16 more variables: budget_adopted &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   budget_amended &lt;dbl&gt;, budget_spending &lt;dbl&gt;, period_vykaz &lt;date&gt;,</span>
-<span class="co">#&gt; #   skupina &lt;chr&gt;, oddil &lt;chr&gt;, pododdil &lt;chr&gt;,</span>
-<span class="co">#&gt; #   functional_categories_nazev &lt;chr&gt;, functional_categories_kr_nazev &lt;chr&gt;,</span>
-<span class="co">#&gt; #   functional_categories_str_nazev &lt;chr&gt;,</span>
+<span class="co">#&gt; #   skupina &lt;chr&gt;, pododdil &lt;chr&gt;, oddil &lt;chr&gt;,</span>
+<span class="co">#&gt; #   functional_categories_paragraf_nazev &lt;chr&gt;,</span>
 <span class="co">#&gt; #   functional_categories_start_date &lt;date&gt;,</span>
 <span class="co">#&gt; #   functional_categories_end_date &lt;date&gt;, polozka_start_date &lt;date&gt;,</span>
-<span class="co">#&gt; #   polozka_end_date &lt;date&gt;, druh &lt;chr&gt;, trida &lt;chr&gt;, seskupeni &lt;chr&gt;,</span>
-<span class="co">#&gt; #   podseskupeni &lt;chr&gt;, polozka_nazev &lt;chr&gt;, polozka_kr_nazev &lt;chr&gt;,</span>
-<span class="co">#&gt; #   polozka_str_nazev &lt;chr&gt;, kon_pol &lt;lgl&gt;, kon_okr &lt;lgl&gt;, kon_kraj &lt;lgl&gt;,</span>
-<span class="co">#&gt; #   kon_rep &lt;lgl&gt;</span></pre></div>
+<span class="co">#&gt; #   polozka_end_date &lt;date&gt;, trida &lt;chr&gt;, seskupeni &lt;chr&gt;, podseskupeni &lt;chr&gt;,</span>
+<span class="co">#&gt; #   polozka_nazev &lt;chr&gt;</span></code></pre></div>
 <p>Download a whole “výkaz” (dataset/data dump):</p>
-<div class="sourceCode" id="cb11"><pre class="r"><span class="fu"><a href="reference/sp_get_dataset.html">sp_get_dataset</a></span>(<span class="st">"finm"</span>) <span class="co"># dataset ID, see `sp_datasets`</span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="reference/sp_get_dataset.html">sp_get_dataset</a></span><span class="op">(</span><span class="st">"finm"</span><span class="op">)</span> <span class="co"># dataset ID, see `sp_datasets`</span>
 <span class="co">#&gt; Warning: Either year or month not set.</span>
 <span class="co">#&gt; Using defaults of 2018 and 12.</span>
 <span class="co">#&gt; ● Set these values explicitly for reproducibility as the defaults may change in the future</span>
 <span class="co">#&gt;   to provide access to the latest data by default.</span>
-<span class="co">#&gt; ℹ Building URL for dataset 'finm': FIN 2-12 M - Plnění rozpočtu MŘO, '2018-12'</span>
-<span class="co">#&gt; ℹ Get the dataset documentation at 'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span>
-<span class="co">#&gt; ✓ Storing downloaded archive in and extracting to '/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T/Rtmp52TEmf/statnipokladna/finm/2018/12/'</span>
-<span class="co">#&gt; ℹ Set dest_dir for more control over downloaded files.</span>
-<span class="co">#&gt; [1] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp52TEmf/statnipokladna/finm/2018/12/FINM201_2018012.csv"</span>
-<span class="co">#&gt; [2] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp52TEmf/statnipokladna/finm/2018/12/FINM202_2018012.csv"</span>
-<span class="co">#&gt; [3] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp52TEmf/statnipokladna/finm/2018/12/FINM203_2018012.csv"</span>
-<span class="co">#&gt; [4] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp52TEmf/statnipokladna/finm/2018/12/FINM204_2018012.csv"</span>
-<span class="co">#&gt; [5] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp52TEmf/statnipokladna/finm/2018/12/FINM205_2018012.csv"</span>
-<span class="co">#&gt; [6] "/var/folders/c8/pj33jytj233g8vr0tw4b2h7m0000gn/T//Rtmp52TEmf/statnipokladna/finm/2018/12/FINM207_2018012.csv"</span></pre></div>
+<span class="co">#&gt; ℹ Files already in ~/sp_data/finm/2018/12, not downloading. Set `redownload = TRUE` if needed.</span></code></pre></div>
 <p>This will put the files in a temp directory.</p>
 <p>Then look at its documentation:</p>
-<div class="sourceCode" id="cb12"><pre class="r"><span class="kw pkg">statnipokladna</span><span class="kw ns">::</span><span class="fu"><a href="reference/sp_get_dataset_doc.html">sp_get_dataset_doc</a></span>(<span class="st">"finm"</span>)
-<span class="co">#&gt; Getting dataset documentation from http://monitor.statnipokladna.cz/data/struktura/finm.xlsx</span>
-<span class="co">#&gt; File downloaded to ./finm.xlsx.</span></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">statnipokladna</span><span class="fu">::</span><span class="fu"><a href="reference/sp_get_dataset_doc.html">sp_get_dataset_doc</a></span><span class="op">(</span><span class="st">"finm"</span><span class="op">)</span>
+<span class="co">#&gt; ℹ Getting dataset documentation from http://monitor.statnipokladna.cz/data/struktura/finm.xlsx</span>
+<span class="co">#&gt; ℹ File downloaded to '~/sp_data/finm.xlsx'.</span></code></pre></div>
 <p>You can get details of all the available tables in the <code>sp_tables</code> data frame; for datasets, see <code>sp_datasets</code>.</p>
 </div>
 <div id="background-information" class="section level2">
 <h2 class="hasAnchor">
 <a href="#background-information" class="anchor"></a>Background information</h2>
 <p>Note that while the package provides a bridge from complicated data dumps to a clean data structure, you still need quite a bit of domain knowledge to be able analyse the data safely.</p>
-<p>See the <a href="https://petrbouchal.github.io/statnipokladna/articles/how-the-data-works-cz.html">“How the data works”</a> vignette (in Czech only, the terminology is impossible to translate) for an overview of the structure of the data on which this package draws. This also contains some notes useful for interpreting the data.</p>
-<p>A subset of this information is in the <a href="https://petrbouchal.github.io/statnipokladna/articles/statnipokladna.html">Get started</a> vignette.</p>
-<p>There is also a log of various data gotchas I discovered, also in Czech only, stored in the <a href="https://petrbouchal.github.io/statnipokladna/articles/data-issues-cz.html">data issues vignette</a>.</p>
+<p>See the <a href="https://petrbouchal.xyz/statnipokladna/articles/how-the-data-works-cz.html">“How the data works”</a> vignette (in Czech only, the terminology is impossible to translate) for an overview of the structure of the data on which this package draws. This also contains some notes useful for interpreting the data.</p>
+<p>A subset of this information is in the <a href="https://petrbouchal.xyz/statnipokladna/articles/statnipokladna.html">Get started</a> vignette.</p>
+<p>There is also a log of various data gotchas I discovered, also in Czech only, stored in the <a href="https://petrbouchal.xyz/statnipokladna/articles/data-issues-cz.html">data issues vignette</a>.</p>
 <p>A basic glossary of some of the terms used in the data sets is at <a href="http://monitor.statnipokladna.cz/metodika/" class="uri">http://monitor.statnipokladna.cz/metodika/</a>.</p>
 <div id="note" class="section level3">
 <h3 class="hasAnchor">
@@ -317,7 +306,7 @@
 <a href="#r-packages" class="anchor"></a>R Packages</h3>
 <ul>
 <li>
-<a href="https://github.com/JanCaha/CzechData">CzechData</a> by @JanCaha for (mainly) geospatial data and data about</li>
+<a href="https://jancaha.github.io/CzechData/">CzechData</a> by @JanCaha for (mainly) geospatial data about the Czech Republic (both admin. boundaries and topology and geography)</li>
 <li>
 <a href="https://cran.r-project.org/package=RCzechia">RCzechia</a> for another approach to Czech geospatial data and access to the official public geocoder and reverse geocoder</li>
 <li>
@@ -332,11 +321,11 @@
 <h3 class="hasAnchor">
 <a href="#other-czech-public-data" class="anchor"></a>Other Czech public data</h3>
 <ul>
-<li><a href="https://data.gov.cz">National Open Data Catalogue</a></li>
+<li><a href="https://data.gov.cz/">National Open Data Catalogue</a></li>
 <li>
 <a href="https://github.com/kokes/knod">KNOD</a> by Ondřej Kokeš for an overview of public data</li>
 <li>
-<a href="https://hlidacstatu.cz/">Hlídač státu</a> by @michalblaha for easy (web and API) access to a large suite of transparency-focused datasets and their integration (public disclosures of contracts, tenders, political contributions…)</li>
+<a href="https://www.hlidacstatu.cz/">Hlídač státu</a> by @michalblaha for easy (web and API) access to a large suite of transparency-focused datasets and their integration (public disclosures of contracts, tenders, political contributions…)</li>
 <li>
 <a href="https://cedr.mfcr.cz/">CEDR</a> for a database of public subsidies, incl. to public bodies</li>
 </ul>
@@ -351,7 +340,7 @@
 <h2 class="hasAnchor">
 <a href="#contributing" class="anchor"></a>Contributing</h2>
 <p>See <a href="https://github.com/petrbouchal/statnipokladna/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING.md</a> for a guide on how to contribute to the project.</p>
-<p>Please note that the ‘statnipokladna’ project is released with a <a href="https://petrbouchal.github.io/statnipokladna/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<p>Please note that the ‘statnipokladna’ project is released with a <a href="https://petrbouchal.xyz/statnipokladna/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </div>
@@ -397,6 +386,7 @@
 <li><a href="https://CRAN.R-project.org/package=statnipokladna"><img src="https://cranlogs.r-pkg.org/badges/last-month/statnipokladna" alt="CRAN monthly downloads"></a></li>
 <li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
 <li><a href="https://travis-ci.org/petrbouchal/statnipokladna"><img src="https://travis-ci.org/petrbouchal/statnipokladna.svg?branch=master" alt="Travis build status"></a></li>
+<li><a href="https://github.com/petrbouchal/statnipokladna/actions"><img src="https://github.com/petrbouchal/statnipokladna/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 </ul>
 </div>
 </div>
@@ -408,7 +398,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

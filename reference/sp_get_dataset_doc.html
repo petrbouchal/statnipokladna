@@ -46,11 +46,11 @@
 
 
   <link href="../extra.css" rel="stylesheet">
-  
+  <script src="../extra.js"></script>
 
 <meta property="og:title" content="Get dataset documentation — sp_get_dataset_doc" />
 <meta property="og:description" content="Downloads XLS file with dataset documentation, or opens link to this file in browser." />
-<meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/reference/figures/card.png" />
+<meta property="og:image" content="https://petrbouchal.xyz/statnipokladna/reference/figures/card.png" />
 <meta property="og:image:alt" content="statnipokladna: R package for using Czech public finance data (Monitor Státní pokladny)" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:creator" content="@petrbouchal" />
@@ -69,16 +69,6 @@
 <![endif]-->
 
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-156460113-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-156460113-1');
-</script>
-
 
   </head>
 
@@ -96,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -143,6 +133,12 @@
      
   </a>
 </li>
+<li>
+  <a href="https://petrbouchal.xyz">
+    <span class="fa fa-asterisk fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -165,7 +161,7 @@
     <p>Downloads XLS file with dataset documentation, or opens link to this file in browser.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sp_get_dataset_doc</span>(<span class='no'>dataset_id</span>, <span class='kw'>dest_dir</span> <span class='kw'>=</span> <span class='st'>"."</span>, <span class='kw'>download</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>sp_get_dataset_doc</span><span class='op'>(</span><span class='va'>dataset_id</span>, dest_dir <span class='op'>=</span> <span class='cn'>NULL</span>, download <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -176,7 +172,8 @@
     </tr>
     <tr>
       <th>dest_dir</th>
-      <td><p>character. Where the file should be written. Defaults to working directory.</p></td>
+      <td><p>character. Directory in which downloaded files will be stored.
+If left unset, will use the <code>statnipokladna.dest_dir</code> option if the option is set, and <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code> otherwise. Will be created if it does not exist.</p></td>
     </tr>
     <tr>
       <th>download</th>
@@ -186,7 +183,7 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>character (link) if download = TRUE, nothing otherwise.</p>
+    <p>(invisible) path to file if <code>download = TRUE</code>, URL otherwise</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other Utilities: 
@@ -195,8 +192,9 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'>sp_get_dataset_doc</span>(<span class='st'>"finm"</span>)</div><div class='output co'>#&gt; <span class='message'>Getting dataset documentation from http://monitor.statnipokladna.cz/data/struktura/finm.xlsx</span></div><div class='output co'>#&gt; File downloaded to ./finm.xlsx.</div><div class='input'># }
-</div></pre>
+<span class='fu'>sp_get_dataset_doc</span><span class='op'>(</span><span class='st'>"finm"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'><span style='color: #BBBB00;'>ℹ</span><span> Getting dataset documentation from http://monitor.statnipokladna.cz/data/struktura/finm.xlsx</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> File downloaded to </span><span style='color: #0000BB;'>'/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/Rtmpc8s2MX/finm.xlsx'</span><span>.</span></div><div class='input'><span class='co'># }</span>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -212,7 +210,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

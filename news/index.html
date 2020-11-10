@@ -46,10 +46,10 @@
 
 
   <link href="../extra.css" rel="stylesheet">
-  
+  <script src="../extra.js"></script>
 
 <meta property="og:title" content="Changelog" />
-<meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/reference/figures/card.png" />
+<meta property="og:image" content="https://petrbouchal.xyz/statnipokladna/reference/figures/card.png" />
 <meta property="og:image:alt" content="statnipokladna: R package for using Czech public finance data (Monitor Státní pokladny)" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:creator" content="@petrbouchal" />
@@ -68,16 +68,6 @@
 <![endif]-->
 
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-156460113-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-156460113-1');
-</script>
-
 
   </head>
 
@@ -95,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -142,6 +132,12 @@
      
   </a>
 </li>
+<li>
+  <a href="https://petrbouchal.xyz">
+    <span class="fa fa-asterisk fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -159,26 +155,46 @@
       <small>Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="statnipokladna-development-version" class="section level1">
-<h1 class="page-header" data-toc-text="development version">
-<a href="#statnipokladna-development-version" class="anchor"></a>statnipokladna (development version)<small> Unreleased </small>
+    <div id="statnipokladna-060" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.0">
+<a href="#statnipokladna-060" class="anchor"></a>statnipokladna 0.6.0<small> Unreleased </small>
 </h1>
 <div id="improvements" class="section level2">
 <h2 class="hasAnchor">
 <a href="#improvements" class="anchor"></a>Improvements</h2>
 <ul>
-<li>directory for downloading raw data in all <code>sp_get_*()</code> functions can now be set in the option <code>statnipokladna.dest_dir</code>. Set this at the beginning of your script or once per session, or in your <code>.Rprofile</code> (e.g. <code>setOption(statnipokladna.dest_dir = "~/sp_data")</code> for cross-session storage or <code>setOption(statnipokladna.dest_dir = "sp_data")</code> for storing all data downloaded by statnipokladna in an <code>sp_data</code> subfolder of the current project.)</li>
+<li>directory for downloading raw data and documentation in all <code>sp_get_*()</code> functions can now be set in the option <code>statnipokladna.dest_dir</code>. Set this at the beginning of your script or once per session, or in your <code>.Rprofile</code> (e.g. <code>setOption(statnipokladna.dest_dir = "~/sp_data")</code> for cross-session storage or <code>setOption(statnipokladna.dest_dir = "sp_data")</code> for storing all data downloaded by statnipokladna in an <code>sp_data</code> subfolder of the current project.)</li>
 <li>downloaded data is no longer nested in a <code>statnipokladna</code> directory inside <code>dest_dir</code>.</li>
+<li>minor improvements and updates in vignettes.</li>
+<li>properly included the tibble package to ensure correct print methods for output tibbles</li>
+<li>
+<code><a href="../reference/sp_get_dataset.html">sp_get_dataset()</a></code> and <code><a href="../reference/sp_get_dataset_doc.html">sp_get_dataset_doc()</a></code> now return their outputs invisibly and provide better messages</li>
 </ul>
 </div>
-</div>
-    <div id="statnipokladna-0-5-7" class="section level1">
-<h1 class="page-header" data-toc-text="0.5.7">
-<a href="#statnipokladna-0-5-7" class="anchor"></a>statnipokladna 0.5.7<small> 2020-04-12 </small>
-</h1>
 <div id="bug-fixes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>adapt <code><a href="../reference/sp_get_table.html">sp_get_table()</a></code> to a new structure of some data dumps on the part of the data provider</li>
+<li>
+<code><a href="../reference/sp_get_codelist.html">sp_get_codelist()</a></code> no longer issues a tibble-related warning</li>
+<li>
+<code><a href="../reference/sp_get_codelist.html">sp_get_codelist()</a></code> now parses all dates correctly</li>
+</ul>
+</div>
+<div id="deprecations" class="section level2">
+<h2 class="hasAnchor">
+<a href="#deprecations" class="anchor"></a>Deprecations</h2>
+<p>Functions with names not starting with <code>sp_</code> are deprecated and emit a warning. Use equivalent functions named <code>sp_*</code>.</p>
+</div>
+</div>
+    <div id="statnipokladna-057" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.7">
+<a href="#statnipokladna-057" class="anchor"></a>statnipokladna 0.5.7<small> 2020-04-12 </small>
+</h1>
+<div id="bug-fixes-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>adapt to new URL scheme for data exports at statnipokladna.cz, fixes <a href='https://github.com/petrbouchal/statnipokladna/issues/74'>#74</a></li>
 <li>simple codelists with no <code>*_date</code> columns now work in <code><a href="../reference/sp_add_codelist.html">sp_add_codelist()</a></code>, fixes <a href='https://github.com/petrbouchal/statnipokladna/issues/66'>#66</a></li>
@@ -205,9 +221,9 @@
 </ul>
 </div>
 </div>
-    <div id="statnipokladna-0-5-6" class="section level1">
+    <div id="statnipokladna-056" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.6">
-<a href="#statnipokladna-0-5-6" class="anchor"></a>statnipokladna 0.5.6<small> 2020-03-31 </small>
+<a href="#statnipokladna-056" class="anchor"></a>statnipokladna 0.5.6<small> 2020-03-31 </small>
 </h1>
 <ul>
 <li>CRAN fix: replace \dontrun{} with \donttest{} and T/F with TRUE/FALSE</li>
@@ -220,9 +236,9 @@
 <li>fixed bug in sp_add_codelist introduced when fixing CRAN note</li>
 </ul>
 </div>
-    <div id="statnipokladna-0-5-5" class="section level1">
+    <div id="statnipokladna-055" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.5">
-<a href="#statnipokladna-0-5-5" class="anchor"></a>statnipokladna 0.5.5<small> Unreleased </small>
+<a href="#statnipokladna-055" class="anchor"></a>statnipokladna 0.5.5<small> Unreleased </small>
 </h1>
 <div id="fixes-for-cran" class="section level2">
 <h2 class="hasAnchor">
@@ -232,9 +248,9 @@
 </ul>
 </div>
 </div>
-    <div id="statnipokladna-0-5-4" class="section level1">
+    <div id="statnipokladna-054" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.4">
-<a href="#statnipokladna-0-5-4" class="anchor"></a>statnipokladna 0.5.4<small> Unreleased </small>
+<a href="#statnipokladna-054" class="anchor"></a>statnipokladna 0.5.4<small> Unreleased </small>
 </h1>
 <div id="fixes-for-cran-1" class="section level2">
 <h2 class="hasAnchor">
@@ -245,9 +261,9 @@
 </ul>
 </div>
 </div>
-    <div id="statnipokladna-0-5-3" class="section level1">
+    <div id="statnipokladna-053" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.3">
-<a href="#statnipokladna-0-5-3" class="anchor"></a>statnipokladna 0.5.3<small> Unreleased </small>
+<a href="#statnipokladna-053" class="anchor"></a>statnipokladna 0.5.3<small> Unreleased </small>
 </h1>
 <div id="changes-in-documentation" class="section level2">
 <h2 class="hasAnchor">
@@ -279,17 +295,17 @@
 </ul>
 </div>
 </div>
-    <div id="statnipokladna-0-5-2" class="section level1">
+    <div id="statnipokladna-052" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.2">
-<a href="#statnipokladna-0-5-2" class="anchor"></a>statnipokladna 0.5.2<small> Unreleased </small>
+<a href="#statnipokladna-052" class="anchor"></a>statnipokladna 0.5.2<small> Unreleased </small>
 </h1>
 <ul>
 <li>all exported functions renamed to <code>sp_*</code> to avoid conflicts with other packages and for better discoverability via autocomplete; original functions are soft-deprecated.</li>
 </ul>
 </div>
-    <div id="statnipokladna-0-5-1" class="section level1">
+    <div id="statnipokladna-051" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.1">
-<a href="#statnipokladna-0-5-1" class="anchor"></a>statnipokladna 0.5.1<small> Unreleased </small>
+<a href="#statnipokladna-051" class="anchor"></a>statnipokladna 0.5.1<small> Unreleased </small>
 </h1>
 <div id="improvements-1" class="section level2">
 <h2 class="hasAnchor">
@@ -300,9 +316,9 @@
 </ul>
 </div>
 </div>
-    <div id="statnipokladna-0-5-0" class="section level1">
+    <div id="statnipokladna-050" class="section level1">
 <h1 class="page-header" data-toc-text="0.5.0">
-<a href="#statnipokladna-0-5-0" class="anchor"></a>statnipokladna 0.5.0<small> Unreleased </small>
+<a href="#statnipokladna-050" class="anchor"></a>statnipokladna 0.5.0<small> Unreleased </small>
 </h1>
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
@@ -322,9 +338,9 @@
 </ul>
 </div>
 </div>
-    <div id="statnipokladna-0-4-2" class="section level1">
+    <div id="statnipokladna-042" class="section level1">
 <h1 class="page-header" data-toc-text="0.4.2">
-<a href="#statnipokladna-0-4-2" class="anchor"></a>statnipokladna 0.4.2<small> Unreleased </small>
+<a href="#statnipokladna-042" class="anchor"></a>statnipokladna 0.4.2<small> Unreleased </small>
 </h1>
 <ul>
 <li>added examples to documentation</li>
@@ -333,17 +349,17 @@
 </li>
 </ul>
 </div>
-    <div id="statnipokladna-0-4-1" class="section level1">
+    <div id="statnipokladna-041" class="section level1">
 <h1 class="page-header" data-toc-text="0.4.1">
-<a href="#statnipokladna-0-4-1" class="anchor"></a>statnipokladna 0.4.1<small> Unreleased </small>
+<a href="#statnipokladna-041" class="anchor"></a>statnipokladna 0.4.1<small> Unreleased </small>
 </h1>
 <ul>
 <li>fixed bug where <code><a href="../reference/get_codelist.html">get_codelist()</a></code> did not create the right temp directory</li>
 </ul>
 </div>
-    <div id="statnipokladna-0-4-0" class="section level1">
+    <div id="statnipokladna-040" class="section level1">
 <h1 class="page-header" data-toc-text="0.4.0">
-<a href="#statnipokladna-0-4-0" class="anchor"></a>statnipokladna 0.4.0<small> Unreleased </small>
+<a href="#statnipokladna-040" class="anchor"></a>statnipokladna 0.4.0<small> Unreleased </small>
 </h1>
 <div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
@@ -373,9 +389,9 @@
 </ul>
 </div>
 </div>
-    <div id="statnipokladna-0-3-0" class="section level1">
+    <div id="statnipokladna-030" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.0">
-<a href="#statnipokladna-0-3-0" class="anchor"></a>statnipokladna 0.3.0<small> Unreleased </small>
+<a href="#statnipokladna-030" class="anchor"></a>statnipokladna 0.3.0<small> Unreleased </small>
 </h1>
 <div id="breaking-changes-1" class="section level2">
 <h2 class="hasAnchor">
@@ -407,18 +423,18 @@
 </ul>
 </div>
 </div>
-    <div id="statnipokladna-0-2-3" class="section level1">
+    <div id="statnipokladna-023" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.3">
-<a href="#statnipokladna-0-2-3" class="anchor"></a>statnipokladna 0.2.3<small> Unreleased </small>
+<a href="#statnipokladna-023" class="anchor"></a>statnipokladna 0.2.3<small> Unreleased </small>
 </h1>
 <ul>
 <li>handle transformation of consolidation columns in <code><a href="../reference/get_codelist.html">get_codelist()</a></code>
 </li>
 </ul>
 </div>
-    <div id="statnipokladna-0-2-2" class="section level1">
+    <div id="statnipokladna-022" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.2">
-<a href="#statnipokladna-0-2-2" class="anchor"></a>statnipokladna 0.2.2<small> Unreleased </small>
+<a href="#statnipokladna-022" class="anchor"></a>statnipokladna 0.2.2<small> Unreleased </small>
 </h1>
 <ul>
 <li>bug fix in get_table and get_codelist: corrected logic around druhove trideni (polozka codelist)</li>
@@ -426,18 +442,18 @@
 <li>correction in vignette regarding consolidation</li>
 </ul>
 </div>
-    <div id="statnipokladna-0-2-1" class="section level1">
+    <div id="statnipokladna-021" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.1">
-<a href="#statnipokladna-0-2-1" class="anchor"></a>statnipokladna 0.2.1<small> Unreleased </small>
+<a href="#statnipokladna-021" class="anchor"></a>statnipokladna 0.2.1<small> Unreleased </small>
 </h1>
 <ul>
 <li>improved documentation</li>
 <li>updated README</li>
 </ul>
 </div>
-    <div id="statnipokladna-0-2-0" class="section level1">
+    <div id="statnipokladna-020" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.0">
-<a href="#statnipokladna-0-2-0" class="anchor"></a>statnipokladna 0.2.0<small> Unreleased </small>
+<a href="#statnipokladna-020" class="anchor"></a>statnipokladna 0.2.0<small> Unreleased </small>
 </h1>
 <ul>
 <li>new <code><a href="../reference/get_dataset.html">get_dataset()</a></code> function for retrieving files</li>
@@ -448,18 +464,18 @@
 <li>minor updates to data vignette</li>
 </ul>
 </div>
-    <div id="statnipokladna-0-1-1" class="section level1">
+    <div id="statnipokladna-011" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.1">
-<a href="#statnipokladna-0-1-1" class="anchor"></a>statnipokladna 0.1.1<small> Unreleased </small>
+<a href="#statnipokladna-011" class="anchor"></a>statnipokladna 0.1.1<small> Unreleased </small>
 </h1>
 <ul>
 <li>added feedback info to data vignette</li>
 <li>fixed typos and testing infrastructure</li>
 </ul>
 </div>
-    <div id="statnipokladna-0-1-0" class="section level1">
+    <div id="statnipokladna-010" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.0">
-<a href="#statnipokladna-0-1-0" class="anchor"></a>statnipokladna 0.1.0<small> Unreleased </small>
+<a href="#statnipokladna-010" class="anchor"></a>statnipokladna 0.1.0<small> Unreleased </small>
 </h1>
 <ul>
 <li>exported <code><a href="../reference/get_codelist.html">get_codelist()</a></code>
@@ -467,9 +483,9 @@
 <li>added vignette explaining the underlying open data</li>
 </ul>
 </div>
-    <div id="statnipokladna-0-0-0-9000" class="section level1">
+    <div id="statnipokladna-0009000" class="section level1">
 <h1 class="page-header" data-toc-text="0.0.0.9000">
-<a href="#statnipokladna-0-0-0-9000" class="anchor"></a>statnipokladna 0.0.0.9000<small> Unreleased </small>
+<a href="#statnipokladna-0009000" class="anchor"></a>statnipokladna 0.0.0.9000<small> Unreleased </small>
 </h1>
 <ul>
 <li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
@@ -492,7 +508,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

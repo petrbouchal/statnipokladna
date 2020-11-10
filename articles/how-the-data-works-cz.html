@@ -18,9 +18,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Jak fungují open data státní pokladny">
+<script src="../extra.js"></script><meta property="og:title" content="Jak fungují open data státní pokladny">
 <meta property="og:description" content="statnipokladna">
-<meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/reference/figures/card.png">
+<meta property="og:image" content="https://petrbouchal.xyz/statnipokladna/reference/figures/card.png">
 <meta property="og:image:alt" content="statnipokladna: R package for using Czech public finance data (Monitor Státní pokladny)">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:creator" content="@petrbouchal">
@@ -28,13 +28,7 @@
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-156460113-1"></script><script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-156460113-1');
-</script>
+<![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
@@ -49,7 +43,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.7.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
       </span>
     </div>
 
@@ -96,6 +90,12 @@
      
   </a>
 </li>
+<li>
+  <a href="https://petrbouchal.xyz">
+    <span class="fa fa-asterisk fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
 </div>
 <!--/.nav-collapse -->
@@ -106,7 +106,8 @@
 
       
 
-      </header><div class="row">
+      </header><script src="how-the-data-works-cz_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="how-the-data-works-cz_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="how-the-data-works-cz_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Jak fungují open data státní pokladny</h1>
@@ -120,7 +121,7 @@
     
     
 <blockquote>
-<p>Note: for a basic English-language intro to the package, see the <a href="https://petrbouchal.github.io/statnipokladna/index.html">index page</a> (basic usage) and the <a href="statnipokladna.html">Get started vignette</a> (background on the underlying data).</p>
+<p>Note: for a basic English-language intro to the package, see the <a href="https://petrbouchal.xyz/statnipokladna/index.html">index page</a> (basic usage) and the <a href="statnipokladna.html">Get started vignette</a> (background on the underlying data).</p>
 </blockquote>
 <blockquote>
 <p>Poznámka: seznam vysledovaných problémů se zdrojovými daty jsem vyčlenil do <a href="data-issues-cz.html">zvláštního dokumentu</a></p>
@@ -150,8 +151,7 @@
 <li>při ověřování může taky pomoct např.
 <ul>
 <li>příloha vyhlášky o RUD (<a href="https://www.mfcr.cz/cs/legislativa/legislativni-dokumenty/2019/vyhlaska-c-219-2019-sb-36077">2019</a>)</li>
-<li>státní závěrečné účty nejlépe z <a href="http://www.psp.cz/sqw/tisky.sqw?o=8&amp;F=H&amp;PT=U&amp;dx=1&amp;na=N%E1vrh+st%E1tn%EDho+z%E1v%ECre%E8n%E9ho+%FA%E8tu+%C8R&amp;t=&amp;za=&amp;f_N=on&amp;f_S=on&amp;f_R=on&amp;f_I=on&amp;f_Z=on&amp;f_V=on&amp;f_U=on&amp;f_P=on&amp;f_O=on&amp;ra=20">webu sněmovny</a>
-</li>
+<li>státní závěrečné účty nejlépe z <a href="https://www.psp.cz/sqw/tisky.sqw">webu sněmovny</a> (hledání “státního závěrečného účtu”)</li>
 <li>údaje o výběru daní od Finanční správy: (<a href="https://www.financnisprava.cz/cs/dane/kraje-a-obce/danove-prijmy-kraju-a-obci/prubeh-celostatniho-inkasa-sdilenych-dani-3735">tabulky</a>, <a href="https://www.financnisprava.cz/cs/dane/analyzy-a-statistiky/udaje-z-vyberu-dani">statistiky</a>)</li>
 </ul>
 </li>
@@ -247,7 +247,8 @@
 <a href="#jednotky-anal%C3%BDzy-o-kom-a-%C4%8Dem-se-vykazuje" class="anchor"></a>Jednotky analýzy: o kom a čem se vykazuje</h2>
 <ul>
 <li><p>typ organizace: toto se odráží na úrovni výkazů/datasetů: místně řízené organizace (M) mají jiné výkazy než ústředně řízení (U) a jsou i odděleně zveřejňovány, ovšem sdílí číselníky a rozpočtovou skladbu.</p></li>
-<li>účetní jednotka
+<li>
+<p>účetní jednotka</p>
 <ul>
 <li>je organizace (ministerstvo, firma, podřízenka, příspěvkovka, ale i obec nebo kraj ve smyslu organizace, která řídí veřejné finance dané jednotky)</li>
 <li>má IČO, adresu sídla apod.</li>
@@ -258,8 +259,8 @@
 <li>spadá pod nějaký region NUTS3, popř. i jemnější jednotku</li>
 </ul>
 </li>
-<li>organizace = účetní jednotka (?)</li>
-<li>finanční místo: kapitola nebo organizační složka státu</li>
+<li><p>organizace = účetní jednotka (?)</p></li>
+<li><p>finanční místo: kapitola nebo organizační složka státu</p></li>
 <li><p>kapitola = jednotka, za kterou se rozpočtuje a skládají účty v rámci státního rozpočtu, tj. “centrální” úrovně státu. Každá kapitola zahrnuje jednu nebo víc organizací (snad s výjimkou pokladní správy), popř. za ni je nějaká organizace odpovědná - buď ministerstvo nebo někdo jiný (takže kapitola nerovná se ministerstvo ani sektor/funkce).</p></li>
 </ul>
 </div>
@@ -324,7 +325,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
