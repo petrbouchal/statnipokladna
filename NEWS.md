@@ -10,6 +10,7 @@
 
 ## Bug fixes
 
+* adapt `sp_get_table()` to a new structure of some data dumps on the part of the data provider
 * `sp_get_codelist()` no longer issues a tibble-related warning
 * `sp_get_codelist()` now parses all dates correctly
 
