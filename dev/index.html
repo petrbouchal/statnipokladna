@@ -20,7 +20,7 @@
 <script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <script src="extra.js"></script><meta property="og:title" content="An R package for using data from the Czech public finance database (Monitor Státní pokladny)">
 <meta property="og:description" content="Discover, retrieve and use open data from the Czech public finance database (Monitor Státní pokladny, including accounting and budgetary data for all public organisations and municipalities.">
-<meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/reference/figures/card.png">
+<meta property="og:image" content="https://petrbouchal.xyz/statnipokladna/reference/figures/card.png">
 <meta property="og:image:alt" content="statnipokladna: R package for using Czech public finance data (Monitor Státní pokladny)">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:creator" content="@petrbouchal">
@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">statnipokladna</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.5.7.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
       </span>
     </div>
 
@@ -133,7 +133,7 @@
                          build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>I also keep binaries in a <code>drat</code> repo, which you can access by</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"statnipokladna"</span>, repos <span class="op">=</span> <span class="st">"https://petrbouchal.github.io/drat"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"statnipokladna"</span>, repos <span class="op">=</span> <span class="st">"https://petrbouchal.xyz/drat"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="bug-reports" class="section level2">
 <h2 class="hasAnchor">
@@ -155,7 +155,7 @@
 <li>access registers published alongside the data (e.g. lists of public organisations with their identifiers and metadata), some of which can be useful in other contexts</li>
 <li>augment the core data with the desired type of register</li>
 </ul>
-<p>See the <a href="https://petrbouchal.github.io/statnipokladna/articles/statnipokladna.html">Get started</a> vignette for background on the underlying data.</p>
+<p>See the <a href="https://petrbouchal.xyz/statnipokladna/articles/statnipokladna.html">Get started</a> vignette for background on the underlying data.</p>
 <p>See also <a href="#background-information">Background information</a> below.</p>
 </div>
 <div id="how-does-this-compare-to-the-official-analytical-interface" class="section level2">
@@ -242,6 +242,10 @@
 <code class="sourceCode R"><span class="va">local_budgets</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/sp_add_codelist.html">sp_add_codelist</a></span><span class="op">(</span><span class="va">functional_categories</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/sp_add_codelist.html">sp_add_codelist</a></span><span class="op">(</span><span class="st">"polozka"</span><span class="op">)</span>
+<span class="co">#&gt; Warning: The `keep` argument of `group_map()` is deprecated as of dplyr 1.0.0.</span>
+<span class="co">#&gt; Please use the `.keep` argument instead.</span>
+<span class="co">#&gt; This warning is displayed once every 8 hours.</span>
+<span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span>
 <span class="co">#&gt; ℹ Codelist file already in '~/sp_data/', not downloading. Set `redownload = TRUE` if needed.</span>
 <span class="co">#&gt; ℹ Processing codelist data</span>
 <span class="co">#&gt; # A tibble: 1,189,627 x 27</span>
@@ -285,9 +289,9 @@
 <h2 class="hasAnchor">
 <a href="#background-information" class="anchor"></a>Background information</h2>
 <p>Note that while the package provides a bridge from complicated data dumps to a clean data structure, you still need quite a bit of domain knowledge to be able analyse the data safely.</p>
-<p>See the <a href="https://petrbouchal.github.io/statnipokladna/articles/how-the-data-works-cz.html">“How the data works”</a> vignette (in Czech only, the terminology is impossible to translate) for an overview of the structure of the data on which this package draws. This also contains some notes useful for interpreting the data.</p>
-<p>A subset of this information is in the <a href="https://petrbouchal.github.io/statnipokladna/articles/statnipokladna.html">Get started</a> vignette.</p>
-<p>There is also a log of various data gotchas I discovered, also in Czech only, stored in the <a href="https://petrbouchal.github.io/statnipokladna/articles/data-issues-cz.html">data issues vignette</a>.</p>
+<p>See the <a href="https://petrbouchal.xyz/statnipokladna/articles/how-the-data-works-cz.html">“How the data works”</a> vignette (in Czech only, the terminology is impossible to translate) for an overview of the structure of the data on which this package draws. This also contains some notes useful for interpreting the data.</p>
+<p>A subset of this information is in the <a href="https://petrbouchal.xyz/statnipokladna/articles/statnipokladna.html">Get started</a> vignette.</p>
+<p>There is also a log of various data gotchas I discovered, also in Czech only, stored in the <a href="https://petrbouchal.xyz/statnipokladna/articles/data-issues-cz.html">data issues vignette</a>.</p>
 <p>A basic glossary of some of the terms used in the data sets is at <a href="http://monitor.statnipokladna.cz/metodika/" class="uri">http://monitor.statnipokladna.cz/metodika/</a>.</p>
 <div id="note" class="section level3">
 <h3 class="hasAnchor">
@@ -303,7 +307,7 @@
 <a href="#r-packages" class="anchor"></a>R Packages</h3>
 <ul>
 <li>
-<a href="https://jancaha.github.io/CzechData">CzechData</a> by @JanCaha for (mainly) geospatial data about the Czech Republic (both admin. boundaries and topology and geography)</li>
+<a href="https://jancaha.github.io/CzechData/">CzechData</a> by @JanCaha for (mainly) geospatial data about the Czech Republic (both admin. boundaries and topology and geography)</li>
 <li>
 <a href="https://cran.r-project.org/package=RCzechia">RCzechia</a> for another approach to Czech geospatial data and access to the official public geocoder and reverse geocoder</li>
 <li>
@@ -318,11 +322,11 @@
 <h3 class="hasAnchor">
 <a href="#other-czech-public-data" class="anchor"></a>Other Czech public data</h3>
 <ul>
-<li><a href="https://data.gov.cz">National Open Data Catalogue</a></li>
+<li><a href="https://data.gov.cz/">National Open Data Catalogue</a></li>
 <li>
 <a href="https://github.com/kokes/knod">KNOD</a> by Ondřej Kokeš for an overview of public data</li>
 <li>
-<a href="https://hlidacstatu.cz/">Hlídač státu</a> by @michalblaha for easy (web and API) access to a large suite of transparency-focused datasets and their integration (public disclosures of contracts, tenders, political contributions…)</li>
+<a href="https://www.hlidacstatu.cz/">Hlídač státu</a> by @michalblaha for easy (web and API) access to a large suite of transparency-focused datasets and their integration (public disclosures of contracts, tenders, political contributions…)</li>
 <li>
 <a href="https://cedr.mfcr.cz/">CEDR</a> for a database of public subsidies, incl. to public bodies</li>
 </ul>
@@ -337,7 +341,7 @@
 <h2 class="hasAnchor">
 <a href="#contributing" class="anchor"></a>Contributing</h2>
 <p>See <a href="https://github.com/petrbouchal/statnipokladna/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING.md</a> for a guide on how to contribute to the project.</p>
-<p>Please note that the ‘statnipokladna’ project is released with a <a href="https://petrbouchal.github.io/statnipokladna/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<p>Please note that the ‘statnipokladna’ project is released with a <a href="https://petrbouchal.xyz/statnipokladna/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </div>

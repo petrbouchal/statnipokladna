@@ -49,7 +49,7 @@
   <script src="../extra.js"></script>
 
 <meta property="og:title" content="Changelog" />
-<meta property="og:image" content="https://petrbouchal.github.io/statnipokladna/reference/figures/card.png" />
+<meta property="og:image" content="https://petrbouchal.xyz/statnipokladna/reference/figures/card.png" />
 <meta property="og:image:alt" content="statnipokladna: R package for using Czech public finance data (Monitor Státní pokladny)" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:creator" content="@petrbouchal" />
@@ -85,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.5.7.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.6.0.9000</span>
       </span>
     </div>
 
@@ -159,6 +159,20 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#statnipokladna-development-version" class="anchor"></a>statnipokladna (development version)<small> Unreleased </small>
 </h1>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>when setting <code>dest_dir</code> in <code>sp_get_*()</code> functions, files are now put into the right directory even if <code>dest_dir</code> does not contain a trailing slash</li>
+<li>
+<code><a href="../reference/sp_get_dataset_doc.html">sp_get_dataset_doc()</a></code> now creates <code>dest_dir</code> if it does not exist, as advertised in the documentation</li>
+</ul>
+</div>
+</div>
+    <div id="statnipokladna-060" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.0">
+<a href="#statnipokladna-060" class="anchor"></a>statnipokladna 0.6.0<small> 2020-11-10 </small>
+</h1>
 <div id="improvements" class="section level2">
 <h2 class="hasAnchor">
 <a href="#improvements" class="anchor"></a>Improvements</h2>
@@ -171,10 +185,11 @@
 <code><a href="../reference/sp_get_dataset.html">sp_get_dataset()</a></code> and <code><a href="../reference/sp_get_dataset_doc.html">sp_get_dataset_doc()</a></code> now return their outputs invisibly and provide better messages</li>
 </ul>
 </div>
-<div id="bug-fixes" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
+<li>adapt <code><a href="../reference/sp_get_table.html">sp_get_table()</a></code> to a new structure of some data dumps on the part of the data provider</li>
 <li>
 <code><a href="../reference/sp_get_codelist.html">sp_get_codelist()</a></code> no longer issues a tibble-related warning</li>
 <li>
@@ -191,9 +206,9 @@
 <h1 class="page-header" data-toc-text="0.5.7">
 <a href="#statnipokladna-057" class="anchor"></a>statnipokladna 0.5.7<small> 2020-04-12 </small>
 </h1>
-<div id="bug-fixes-1" class="section level2">
+<div id="bug-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>adapt to new URL scheme for data exports at statnipokladna.cz, fixes <a href='https://github.com/petrbouchal/statnipokladna/issues/74'>#74</a></li>
 <li>simple codelists with no <code>*_date</code> columns now work in <code><a href="../reference/sp_add_codelist.html">sp_add_codelist()</a></code>, fixes <a href='https://github.com/petrbouchal/statnipokladna/issues/66'>#66</a></li>
