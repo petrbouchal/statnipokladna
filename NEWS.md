@@ -1,5 +1,10 @@
 # statnipokladna (development version)
 
+## Bug fixes
+
+* when setting `dest_dir` in `sp_get_*()` functions, files are now put into the right directory even if `dest_dir` does not contain a trailing slash
+* `sp_get_dataset_doc()` now creates `dest_dir` if it does not exist, as advertised in the documentation 
+
 # statnipokladna 0.6.0
 
 ## Improvements

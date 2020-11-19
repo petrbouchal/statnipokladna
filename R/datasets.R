@@ -73,6 +73,8 @@ sp_get_dataset_doc <- function(dataset_id, dest_dir = NULL, download = TRUE) {
   if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
                                               default = tempdir())
 
+  dir.create(dest_dir, showWarnings = F, recursive = T)
+
   if(!download) {
     utils::browseURL(doc_url)
     usethis::ui_info("Link to file opened in browser. ({usethis::ui_path(doc_url)})")
@@ -153,9 +155,9 @@ sp_get_dataset <- function(dataset_id, year = 2018, month = 12,
   if(!(month %in% c(1:12))) stop("`Month` must be an integer from 1 to 12.")
   if(!(year %in% c(2010:lubridate::year(lubridate::today())))) stop("`Year` must be between 2010 and now.")
   month <- formatC(month, width = 2, format = "d", flag = "0")
-  td <- paste(dest_dir, dataset_id, year, month, sep = "/")
+  td <- file.path(dest_dir, dataset_id, year, month)
   dir.create(td, showWarnings = FALSE, recursive = TRUE)
-  tf <- paste0(td, "/", dataset_id, year, month, ".zip")
+  tf <- file.path(td, paste0(dataset_id, year, month, ".zip"))
   if(file.exists(tf) & !redownload) {
     usethis::ui_info("Files already in {td}, not downloading. Set {usethis::ui_code('redownload = TRUE')} if needed.")
   } else {
