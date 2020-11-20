@@ -17,7 +17,7 @@ Depends:
     R (>= 3.5.0)
 Imports: 
     curl (>= 4.3),
-    dplyr (>= 0.8.3),
+    dplyr (>= 1.0.0),
     httr (>= 1.4.1),
     jsonlite,
     lifecycle,
