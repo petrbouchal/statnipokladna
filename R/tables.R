@@ -223,8 +223,8 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
                             ~get_one_table(dataset_id, .x, .y, dest_dir = dest_dir,
                                            redownload = redownload))
   # onyr <- c(2018) %>% purrr::map_dfr(~ sp_get_table(51101, year = ., month = 12))
-
-  }
+  return(dt_fin)
+}
 # onyr <- c(2018) %>% purrr::map_dfr(~ sp_get_table(2, year = ., month = 12))
 # onyr <- c(2018) %>% purrr::map_dfr(~ sp_get_table(1, year = ., month = 12))
 
