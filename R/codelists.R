@@ -48,10 +48,10 @@ sp_codelists <- tibble::tribble(~id, ~name,
 # stringi::stri_escape_unicode("xxx")
 # usethis::use_data(sp_codelists, overwrite = TRUE)
 
-sp_load_codelist <- function(file, n = NULL) {
-  xml_all <- xml2::read_xml(file)
+sp_load_codelist <- function(path, n = NULL) {
+  xml_all <- xml2::read_xml(path)
   usethis::ui_info("Processing codelist data")
-  if(grepl("ucjed", file)) usethis::ui_info("Large codelist: this will take a while...")
+  if(grepl("ucjed", path)) usethis::ui_info("Large codelist: this will take a while...")
   xml_children_all <- xml_all %>% xml2::xml_children()
   xml_children <- if(is.null(n)) xml_children_all else xml_children_all[1:n]
   nms <- xml2::xml_child(xml_all) %>% xml2::xml_children() %>% xml2::xml_name()
