@@ -330,7 +330,7 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
 #' sp_get_codelist_url("ucjed_wrong", FALSE) # works but returns invalid URL
 #' if(FALSE) sp_get_codelist_url("ucjed_wrong", TRUE) # fails, invalid codelist
 #' }
-
+#' @export
 sp_get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
   if(!(codelist_id %in% sp_codelists$id)) ui_stop("Not a valid codelist ID")
   codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]

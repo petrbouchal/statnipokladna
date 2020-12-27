@@ -92,6 +92,7 @@ sp_get_table_file <- function(table_id, dataset_path) {
 #' tf <- sp_get_table_file("balance-sheet", ds)
 #' sp_load_table(tf)
 #' }
+#' @export
 sp_load_table <- function(path, ico = NULL) {
 
   ui_info("Reading data...")
