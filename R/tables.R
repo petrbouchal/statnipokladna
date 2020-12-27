@@ -65,11 +65,11 @@ sp_get_table_file <- function(table_id, dataset_path) {
                                            paste0(table_regex, "(_[0-9]*)?\\.(csv|CSV)"))]
   if(length(table_file) != 1) {
     if (length(table_file) > 1) {
-      usethis::ui_stop(c("More than one CSV files in the archive match.",
-                         "You might want to report a bug at {usethis::ui_path('https://github.com/petrbouchal/statnipokladna/issues')}."))
+      ui_stop(c("More than one CSV files in the archive match.",
+                         "You might want to report a bug at {ui_path('https://github.com/petrbouchal/statnipokladna/issues')}."))
     }  else {
-      usethis::ui_stop(c("No CSV file inside the downloaded archive matches files needed for the table.",
-                         "You might want to report a bug at {usethis::ui_path('https://github.com/petrbouchal/statnipokladna/issues')}."))
+      ui_stop(c("No CSV file inside the downloaded archive matches files needed for the table.",
+                         "You might want to report a bug at {ui_path('https://github.com/petrbouchal/statnipokladna/issues')}."))
     }
   }
   return(table_file)
@@ -94,11 +94,11 @@ sp_get_table_file <- function(table_id, dataset_path) {
 #' }
 sp_load_table <- function(path, ico = NULL) {
 
-  usethis::ui_info("Reading data...")
+  ui_info("Reading data...")
   suppressWarnings(suppressMessages(
     dt <- readr::read_csv2(path, col_types = readr::cols(.default = readr::col_character()))))
   # print(head(dt))
-  usethis::ui_info("Transforming data...")
+  ui_info("Transforming data...")
   if(max(stringr::str_length(dt$`ZC_ICO:ZC_ICO`), na.rm = TRUE) == 10) {
     dt <- dplyr::mutate(dt, `ZC_ICO:ZC_ICO` = stringr::str_sub(.data$`ZC_ICO:ZC_ICO`, 3, 10))
   }
@@ -255,9 +255,9 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
                       redownload = FALSE, dest_dir = NULL) {
   stopifnot(is.character(ico) | is.null(ico))
   if(interactive() == FALSE & (missing(year) | missing(month))) {
-    usethis::ui_warn("Either {usethis::ui_field('year')} or {usethis::ui_field('month')} not set.
-                     Using defaults of {usethis::ui_value(year)} and {usethis::ui_value(month)}.")
-    usethis::ui_todo("Set these values explicitly for reproducibility as the defaults may change in the future
+    ui_warn("Either {ui_field('year')} or {ui_field('month')} not set.
+                     Using defaults of {ui_value(year)} and {ui_value(month)}.")
+    ui_todo("Set these values explicitly for reproducibility as the defaults may change in the future
                      to provide access to the latest data by default.")
 
   }
@@ -265,7 +265,7 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
   if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
                                               default = tempdir())
 
-  if(!(table_id %in% sp_tables_i$id)) usethis::ui_stop("Not a valid table id. Consult {usethis::ui_code('sp_tables')}.")
+  if(!(table_id %in% sp_tables_i$id)) ui_stop("Not a valid table id. Consult {ui_code('sp_tables')}.")
   dataset_id <- sp_tables_i$dataset_id[sp_tables_i$id == table_id]
   table_regex <- paste0(sp_tables_i$file_regex[sp_tables_i$id == table_id])
   years_months <- expand.grid(y = year, m = month)

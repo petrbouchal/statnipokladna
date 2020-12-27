@@ -54,21 +54,21 @@ sp_datasets <- sp_datasets_i %>% dplyr::select(.data$id, .data$name) %>%
 #' }
 #' @export
 sp_get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists = TRUE) {
-  if(!(dataset_id %in% sp_datasets_i$id)) usethis::ui_stop("Not a valid dataset ID")
+  if(!(dataset_id %in% sp_datasets_i$id)) ui_stop("Not a valid dataset ID")
   dataset_name <- sp_datasets_i[sp_datasets_i$id == dataset_id, "name"]
   dataset_dir <- sp_datasets_i[sp_datasets_i$id == dataset_id, "dir"]
   month <- formatC(month, width = 2, format = "d", flag = "0")
-  usethis::ui_info("Building URL for dataset {usethis::ui_value(dataset_id)}: {usethis::ui_value(dataset_name)}, {usethis::ui_value(stringr::str_c(year,'-',month))}")
+  ui_info("Building URL for dataset {ui_value(dataset_id)}: {ui_value(dataset_name)}, {ui_value(stringr::str_c(year,'-',month))}")
   x <- stringr::str_glue("{sp_base_url}/data/extrakty/csv/{dataset_dir}/{year}_{month}_Data_CSUIS_{toupper(dataset_id)}.zip")
   # print(x)
-  if(!curl::has_internet()) usethis::ui_stop(c("No internet connection. Cannot continue. Retry when connected.",
+  if(!curl::has_internet()) ui_stop(c("No internet connection. Cannot continue. Retry when connected.",
                                                "If you need offline access to the data across R sessions, set the {ui_field('dest_dir')} parameter."))
   if(check_if_exists) {
     iserror <- httr::http_error(x, httr::user_agent(usr))
-    if(iserror) usethis::ui_stop("File does not exist for this dataset and period combination.")
+    if(iserror) ui_stop("File does not exist for this dataset and period combination.")
   }
   doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
-  usethis::ui_info("Get the dataset documentation at {usethis::ui_path(doc_url)}")
+  ui_info("Get the dataset documentation at {ui_path(doc_url)}")
   return(x)
 }
 
@@ -90,8 +90,8 @@ sp_get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exi
 #' }
 #' @export
 sp_get_dataset_doc <- function(dataset_id, dest_dir = NULL, download = TRUE) {
-  if(!curl::has_internet()) usethis::ui_stop(c("No internet connection. Cannot continue. Retry when connected."))
-  if(!(dataset_id %in% sp_datasets_i$id)) usethis::ui_stop("Not a valid dataset ID")
+  if(!curl::has_internet()) ui_stop(c("No internet connection. Cannot continue. Retry when connected."))
+  if(!(dataset_id %in% sp_datasets_i$id)) ui_stop("Not a valid dataset ID")
   doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
 
   if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
@@ -101,13 +101,13 @@ sp_get_dataset_doc <- function(dataset_id, dest_dir = NULL, download = TRUE) {
 
   if(!download) {
     utils::browseURL(doc_url)
-    usethis::ui_info("Link to file opened in browser. ({usethis::ui_path(doc_url)})")
+    ui_info("Link to file opened in browser. ({ui_path(doc_url)})")
     invisible(doc_url)
   } else {
     file_path <- file.path(dest_dir, stringr::str_glue("{dataset_id}.xlsx"))
-    usethis::ui_info("Getting dataset documentation from {doc_url}")
+    ui_info("Getting dataset documentation from {doc_url}")
     utils::download.file(doc_url, file_path, headers = c('User-Agent' = usr))
-    usethis::ui_info("File downloaded to {usethis::ui_path(file_path)}.")
+    ui_info("File downloaded to {ui_path(file_path)}.")
     invisible(file_path)
   }
 }
@@ -146,16 +146,16 @@ sp_get_dataset <- function(dataset_id, year = 2018, month = 12,
                            dest_dir = NULL, redownload = FALSE) {
   if(interactive() == FALSE & (missing(year) | missing(month))) {
     if(missing(year)) {
-      usethis::ui_warn("{usethis::ui_field('year')} not set.
-                     Using default of {usethis::ui_value(year)}.")
+      ui_warn("{ui_field('year')} not set.
+                     Using default of {ui_value(year)}.")
 
     } else if(missing(month)) {
-      usethis::ui_warn("{usethis::ui_field('month')} not set.
-                     Using default of {usethis::ui_value(month)}.")
+      ui_warn("{ui_field('month')} not set.
+                     Using default of {ui_value(month)}.")
 
     }
 
-    usethis::ui_todo("Set period parameters explicitly for reproducibility as the defaults may change in the future
+    ui_todo("Set period parameters explicitly for reproducibility as the defaults may change in the future
                      to provide access to the latest data by default.")
   }
 
@@ -173,11 +173,11 @@ sp_get_dataset <- function(dataset_id, year = 2018, month = 12,
     dir.create(td, showWarnings = FALSE, recursive = TRUE)
     tf <- file.path(td, paste0(dataset_id, year, month, ".zip"))
     if(file.exists(tf) & !redownload) {
-      usethis::ui_info("Files already in {td}, not downloading. Set {usethis::ui_code('redownload = TRUE')} if needed.")
+      ui_info("Files already in {td}, not downloading. Set {ui_code('redownload = TRUE')} if needed.")
     } else {
       dataset_url <- sp_get_dataset_url(dataset_id = dataset_id, year = year, month = month)
-      usethis::ui_done("Storing downloaded archive in and extracting to {usethis::ui_path(td)}")
-      if(dest_dir == tempdir()) usethis::ui_info("Set {usethis::ui_field('dest_dir')} for more control over downloaded files.")
+      ui_done("Storing downloaded archive in and extracting to {ui_path(td)}")
+      if(dest_dir == tempdir()) ui_info("Set {ui_field('dest_dir')} for more control over downloaded files.")
       utils::download.file(dataset_url, tf, headers = c('User-Agent' = usr))
     }
     return(tf)

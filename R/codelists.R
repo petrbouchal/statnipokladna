@@ -68,8 +68,8 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #' @export
 sp_load_codelist <- function(path, n = NULL) {
   xml_all <- xml2::read_xml(path)
-  usethis::ui_info("Processing codelist data")
-  if(grepl("ucjed", path)) usethis::ui_info("Large codelist: this will take a while...")
+  ui_info("Processing codelist data")
+  if(grepl("ucjed", path)) ui_info("Large codelist: this will take a while...")
   xml_children_all <- xml_all %>% xml2::xml_children()
   xml_children <- if(is.null(n)) xml_children_all else xml_children_all[1:n]
   nms <- xml2::xml_child(xml_all) %>% xml2::xml_children() %>% xml2::xml_name()
@@ -134,11 +134,11 @@ sp_get_codelist_file <- function(codelist_id = NULL, url = NULL, dest_dir = NULL
 
   tf <- file.path(td, filename)
   if(file.exists(tf) & !redownload) {
-    usethis::ui_info("Codelist file already in {usethis::ui_path(td)}, not downloading. Set {usethis::ui_code('redownload = TRUE')} if needed.")
+    ui_info("Codelist file already in {ui_path(td)}, not downloading. Set {ui_code('redownload = TRUE')} if needed.")
   } else {
     if(is.null(url)) url <- sp_get_codelist_url(codelist_id)
-    usethis::ui_done("Storing codelist in {usethis::ui_path(td)}")
-    if(dest_dir == tempdir()) usethis::ui_info("Set {usethis::ui_field('dest_dir')} for more control over downloaded files.")
+    ui_done("Storing codelist in {ui_path(td)}")
+    if(dest_dir == tempdir()) ui_info("Set {ui_field('dest_dir')} for more control over downloaded files.")
     utils::download.file(url, tf, headers = c('User-Agent' = usr))
   }
   return(tf)
@@ -195,7 +195,7 @@ sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload =
 sp_get_codelist_viewer <- function(codelist_id, open = TRUE) {
   if(!(codelist_id %in% sp_codelists$id)) stop("Not a valid codelist ID")
   codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
-  usethis::ui_info("Building URL for codelist {usethis::ui_value(codelist_id)} - {usethis::ui_value(codelist_name)}")
+  ui_info("Building URL for codelist {ui_value(codelist_id)} - {ui_value(codelist_name)}")
   x <- stringr::str_glue("{sp_base_url}/datovy-katalog/ciselniky/prohlizec/{codelist_id}")
   if(open) utils::browseURL(x)
   return(x)
@@ -272,12 +272,12 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
   common_columns <- names(data)[names(data) %in% names(cl_data)]
   overlap <- length(common_columns)
   if (overlap > 1 & is.null(by)) {
-    usethis::ui_info(c("Joining on {overlap} columns: {stringr::str_c(common_columns, collapse = ', ')}.",
+    ui_info(c("Joining on {overlap} columns: {stringr::str_c(common_columns, collapse = ', ')}.",
                        "This may indicate a problem with the data.",
-                       "Set {usethis::ui_field('by')} if needed."))
-  } else if(overlap == 0) {usethis::ui_stop(c("No columns to join by.",
+                       "Set {ui_field('by')} if needed."))
+  } else if(overlap == 0) {ui_stop(c("No columns to join by.",
                                               "Are you sure you are merging the right codelist onto the right data?",
-                                              "Set {usethis::ui_field('by')} if needed."))}
+                                              "Set {ui_field('by')} if needed."))}
 
   slepit <- function(.x, .y) {
     # print(.x)
@@ -293,7 +293,7 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
     # print(codelist_filtered)
     slp <- suppressMessages(dplyr::left_join(.x, codelist_filtered, by = by))
     if(nrow(slp) != nrows_start) {
-      usethis::ui_stop(c("Something went wrong with matching the codelist to the data for period {this_period}.",
+      ui_stop(c("Something went wrong with matching the codelist to the data for period {this_period}.",
                          "Please inspect the dates on the codelist to make sure there are no duplicate items valid for one given date.",
                          "You may want to filter/edit the codelist manually and pass it to the add_codelist function as an object."))
     }
@@ -332,15 +332,15 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
 #' }
 
 sp_get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
-  if(!(codelist_id %in% sp_codelists$id)) usethis::ui_stop("Not a valid codelist ID")
+  if(!(codelist_id %in% sp_codelists$id)) ui_stop("Not a valid codelist ID")
   codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
-  if(!curl::has_internet()) usethis::ui_stop(c("No internet connection. Cannot continue. Retry when connected.",
+  if(!curl::has_internet()) ui_stop(c("No internet connection. Cannot continue. Retry when connected.",
                                                "If you need offline access to the data across R sessions, set the {ui_field('dest_dir')} parameter."))
-  usethis::ui_info("Building URL for codelist {usethis::ui_value(codelist_id)} - {usethis::ui_value(codelist_name)}")
+  ui_info("Building URL for codelist {ui_value(codelist_id)} - {ui_value(codelist_name)}")
   x <- paste(sp_base_url, "data/xml", paste0(codelist_id, ".xml"), sep = "/")
   if(check_if_exists) {
     iserror <- httr::http_error(x, httr::user_agent(usr))
-    if(iserror) usethis::ui_stop("Codelist XML for a codelist with this ID does not exist")
+    if(iserror) ui_stop("Codelist XML for a codelist with this ID does not exist")
   }
   return(x)
 }
