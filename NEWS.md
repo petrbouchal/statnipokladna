@@ -2,7 +2,7 @@
 
 ## BREAKING CHANGES
 
-* `sp_get_dataset()` no longer uzips the downloaded archive. It therefore returns that path to the downloaded zip file, not to the unzipped files. This is needed to support a more modular workflow (see below and `vignette("workflow", package = "statnipokladna")`).
+* `sp_get_dataset()` no longer unzips the downloaded archive. It therefore returns the path to the downloaded zip file, not to the unzipped files. This is needed to support a more modular workflow (see below and `vignette("workflow", package = "statnipokladna")`).
 
 ## Improvements
 
