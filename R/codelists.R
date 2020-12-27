@@ -48,6 +48,63 @@ sp_codelists <- tibble::tribble(~id, ~name,
 # stringi::stri_escape_unicode("xxx")
 # usethis::use_data(sp_codelists, overwrite = TRUE)
 
+sp_load_codelist <- function(file, n = NULL) {
+  xml_all <- xml2::read_xml(file)
+  usethis::ui_info("Processing codelist data")
+  if(grepl("ucjed", file)) usethis::ui_info("Large codelist: this will take a while...")
+  xml_children_all <- xml_all %>% xml2::xml_children()
+  xml_children <- if(is.null(n)) xml_children_all else xml_children_all[1:n]
+  nms <- xml2::xml_child(xml_all) %>% xml2::xml_children() %>% xml2::xml_name()
+
+  process_codelist <- function(x) {x %>% xml2::xml_children() %>%
+      xml2::xml_text() %>%
+      # as.character() %>%
+      t() %>%
+      # purrr::set_names(nms) %>%
+      as.data.frame() %>%
+      tibble::as_tibble(.name_repair = "minimal")}
+
+  xvals_raw <- purrr::map_df(xml_children, process_codelist)
+
+  # print(xvals_raw)
+
+  xvals <- xvals_raw %>%
+    purrr::set_names(nms) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), readr::parse_date) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::starts_with("kon_")), as.logical) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::matches("^vtab$")),
+                     ~stringr::str_pad(., 6, "left", "0")) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::matches("^vykaz$")),
+                     ~stringr::str_pad(., 3, "left", "0")) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::matches("^polvyk_order$")), as.numeric)
+
+  return(xvals)
+}
+
+sp_get_codelist_file <- function(codelist_id = NULL, url = NULL, dest_dir = NULL, redownload = FALSE) {
+  if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
+                                              default = tempdir())
+
+  td <- dest_dir
+  dir.create(td, showWarnings = FALSE, recursive = TRUE)
+
+  filename <- ifelse(is.null(url),
+                     paste0(codelist_id, ".xml"),
+                     stringr::str_extract(url, "[a-zA-Z]*\\.xml$"))
+
+  tf <- file.path(td, filename)
+  if(file.exists(tf) & !redownload) {
+    usethis::ui_info("Codelist file already in {usethis::ui_path(td)}, not downloading. Set {usethis::ui_code('redownload = TRUE')} if needed.")
+  } else {
+    if(is.null(url)) url <- sp_get_codelist_url(codelist_id)
+    usethis::ui_done("Storing codelist in {usethis::ui_path(td)}")
+    if(dest_dir == tempdir()) usethis::ui_info("Set {usethis::ui_field('dest_dir')} for more control over downloaded files.")
+    utils::download.file(url, tf, headers = c('User-Agent' = usr))
+  }
+  return(tf)
+}
+
+
 #' Get codelist
 #'
 #' Downloads and processes codelist identified by `codelist_id`. See `sp_codelists` for a list of
@@ -79,51 +136,10 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #' @family Core workflow
 
 sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload = FALSE) {
+  tf <- sp_get_codelist_file(codelist_id, dest_dir = dest_dir, redownload = redownload)
+  cl_parsed <- sp_load_codelist(tf, n)
+  return(cl_parsed)
 
-  if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
-                                              default = tempdir())
-
-  td <- dest_dir
-  dir.create(td, showWarnings = FALSE, recursive = TRUE)
-  tf <- file.path(td, paste0(codelist_id, ".xml"))
-  if(file.exists(tf) & !redownload) {
-    usethis::ui_info("Codelist file already in {usethis::ui_path(td)}, not downloading. Set {usethis::ui_code('redownload = TRUE')} if needed.")
-  } else {
-    url <- get_codelist_url(codelist_id)
-    usethis::ui_done("Storing codelist in {usethis::ui_path(td)}")
-    if(dest_dir == tempdir()) usethis::ui_info("Set {usethis::ui_field('dest_dir')} for more control over downloaded files.")
-    utils::download.file(url, tf, headers = c('User-Agent' = usr))
-  }
-  xml_all <- xml2::read_xml(tf)
-  usethis::ui_info("Processing codelist data")
-  if(codelist_id %in% c("ucjed")) usethis::ui_info("Large codelist: this will take a while...")
-  xml_children_all <- xml_all %>% xml2::xml_children()
-  xml_children <- if(is.null(n)) xml_children_all else xml_children_all[1:n]
-  nms <- xml2::xml_child(xml_all) %>% xml2::xml_children() %>% xml2::xml_name()
-
-  process_codelist <- function(x) {x %>% xml2::xml_children() %>%
-      xml2::xml_text() %>%
-      # as.character() %>%
-      t() %>%
-      # purrr::set_names(nms) %>%
-      as.data.frame() %>%
-      tibble::as_tibble(.name_repair = "minimal")}
-
-  xvals_raw <- purrr::map_df(xml_children, process_codelist)
-
-  # print(xvals_raw)
-
-  xvals <- xvals_raw %>%
-    purrr::set_names(nms) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), readr::parse_date) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::starts_with("kon_")), as.logical) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::matches("^vtab$")),
-                     ~stringr::str_pad(., 6, "left", "0")) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::matches("^vykaz$")),
-                     ~stringr::str_pad(., 3, "left", "0")) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::matches("^polvyk_order$")), as.numeric)
-
-  return(xvals)
 }
 
 #' Deprecated: Get codelist
@@ -286,13 +302,13 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
 }
 
 
-get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
+sp_get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
   if(!(codelist_id %in% sp_codelists$id)) usethis::ui_stop("Not a valid codelist ID")
   codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
   if(!curl::has_internet()) usethis::ui_stop(c("No internet connection. Cannot continue. Retry when connected.",
                                                "If you need offline access to the data across R sessions, set the {ui_field('dest_dir')} parameter."))
   usethis::ui_info("Building URL for codelist {usethis::ui_value(codelist_id)} - {usethis::ui_value(codelist_name)}")
-  x <- stringr::str_glue("{sp_base_url}/data/xml/{codelist_id}.xml")
+  x <- paste(sp_base_url, "data/xml", paste0(codelist_id, ".xml"), sep = "/")
   if(check_if_exists) {
     iserror <- httr::http_error(x, httr::user_agent(usr))
     if(iserror) usethis::ui_stop("Codelist XML for a codelist with this ID does not exist")
