@@ -88,20 +88,6 @@ sp_get_dataset_doc <- function(dataset_id, dest_dir = NULL, download = TRUE) {
   }
 }
 
-#' Deprecated: Get dataset documentation
-#'
-#' Deprecated, use `sp_get_dataset_doc()` instead.\cr\cr
-#' \lifecycle{deprecated}
-#'
-#' @inheritParams sp_get_dataset_doc
-#'
-#' @return a [tibble][tibble::tibble-package]
-#' @export
-get_dataset_doc <- function(dataset_id, dest_dir = ".", download = TRUE) {
-  lifecycle::deprecate_warn("0.5.2", "statnipokladna::get_dataset_doc()", "sp_get_dataset_doc()")
-  sp_get_dataset_doc(dataset_id = dataset_id, dest_dir = dest_dir, download = download)
-}
-
 
 #' Retrieve dataset from statnipokladna
 #'
@@ -179,6 +165,9 @@ sp_get_dataset <- function(dataset_id, year = 2018, month = 12,
   invisible(file_list)
 }
 
+# Deprecated --------------------------------------------------------------
+
+
 #' Deprecated: Retrieve and read dataset from statnipokladna
 #'
 #' Deprecated, use `sp_get_dataset()` instead.\cr\cr
@@ -194,4 +183,19 @@ get_dataset <- function(dataset_id, year = 2019, month = 12,
   lifecycle::deprecate_warn("0.5.2", "statnipokladna::get_dataset()", "sp_get_dataset()")
   sp_get_dataset(dataset_id = dataset_id, year = year, month = month,
                  dest_dir = dest_dir, redownload = redownload)
+}
+
+
+#' Deprecated: Get dataset documentation
+#'
+#' Deprecated, use `sp_get_dataset_doc()` instead.\cr\cr
+#' \lifecycle{deprecated}
+#'
+#' @inheritParams sp_get_dataset_doc
+#'
+#' @return a [tibble][tibble::tibble-package]
+#' @export
+get_dataset_doc <- function(dataset_id, dest_dir = ".", download = TRUE) {
+  lifecycle::deprecate_warn("0.5.2", "statnipokladna::get_dataset_doc()", "sp_get_dataset_doc()")
+  sp_get_dataset_doc(dataset_id = dataset_id, dest_dir = dest_dir, download = download)
 }

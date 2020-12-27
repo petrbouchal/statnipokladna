@@ -11,3 +11,14 @@ release_questions <- function() {
     "Have you re-rendered README.Rmd?"
   )
 }
+
+switch_minus <- function(string) {
+  swtch <- function(strg) {
+    r0 <- strg %>%
+      stringr::str_remove("-$")
+    return(stringr::str_c("-", r0))
+  }
+  rslt <- dplyr::if_else(grepl("-$", string),
+                         swtch(string), string)
+  return(rslt)
+}

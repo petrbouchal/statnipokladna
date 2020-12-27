@@ -142,23 +142,6 @@ sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload =
 
 }
 
-#' Deprecated: Get codelist
-#'
-#' Deprecated: use `sp_get_codelist()`\cr\cr
-#' \lifecycle{deprecated}
-#'
-#' @inheritParams sp_get_codelist
-#'
-#' @return A [tibble][tibble::tibble-package]
-#' @export
-#' @family Core workflow
-
-get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload = FALSE) {
-  lifecycle::deprecate_warn("0.5.2", "statnipokladna::get_codelist()", "sp_get_codelist()")
-  sp_get_codelist(codelist_id = codelist_id, n = n, dest_dir = dest_dir, redownload = redownload)
-}
-
-
 #' Get/open URL of codelist viewer
 #'
 #' Returns a URL for the online codelist browser in monitor.statnipokladna.cz and opens it in browser if open = TRUE.
@@ -176,17 +159,6 @@ sp_get_codelist_viewer <- function(codelist_id, open = TRUE) {
   x <- stringr::str_glue("{sp_base_url}/datovy-katalog/ciselniky/prohlizec/{codelist_id}")
   if(open) utils::browseURL(x)
   return(x)
-}
-
-switch_minus <- function(string) {
-  swtch <- function(strg) {
-    r0 <- strg %>%
-      stringr::str_remove("-$")
-    return(stringr::str_c("-", r0))
-  }
-  rslt <- dplyr::if_else(grepl("-$", string),
-                         swtch(string), string)
-  return(rslt)
 }
 
 
@@ -316,6 +288,10 @@ sp_get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
   return(x)
 }
 
+
+
+# Deprecated --------------------------------------------------------------
+
 #' Deprecated: Add codelist data to downloaded data
 #'
 #' Deprecated, use `sp_add_codelist()` instead.\cr\cr
@@ -332,4 +308,21 @@ add_codelist <- function(data, codelist = NULL, period_column = .data$period_vyk
   lifecycle::deprecate_warn("0.5.2", "statnipokladna::add_codelist()", "sp_add_codelist()")
   sp_add_codelist(data = data, codelist = codelist, period_column = period_column,
                   redownload = redownload, dest_dir = dest_dir)
+}
+
+
+#' Deprecated: Get codelist
+#'
+#' Deprecated: use `sp_get_codelist()`\cr\cr
+#' \lifecycle{deprecated}
+#'
+#' @inheritParams sp_get_codelist
+#'
+#' @return A [tibble][tibble::tibble-package]
+#' @export
+#' @family Core workflow
+
+get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload = FALSE) {
+  lifecycle::deprecate_warn("0.5.2", "statnipokladna::get_codelist()", "sp_get_codelist()")
+  sp_get_codelist(codelist_id = codelist_id, n = n, dest_dir = dest_dir, redownload = redownload)
 }
