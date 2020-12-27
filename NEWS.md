@@ -1,5 +1,9 @@
 # statnipokladna (development version)
 
+## BREAKING CHANGES
+
+* `sp_get_dataset()` no longer uzips the downloaded archive. It therefore returns that path to the downloaded zip file, not to the unzipped files. This is needed to support a more modular workflow (see below and `vignette("workflow", package = "statnipokladna")`).
+
 ## Improvements
 
 * better error messages around mismatches between table ID and file in archive
