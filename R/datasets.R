@@ -162,7 +162,7 @@ sp_get_dataset <- function(dataset_id, year = 2018, month = 12,
   if(!all(year %in% c(2010:lubridate::year(lubridate::today())))) stop("`Year` must be between 2010 and now.")
   month <- formatC(month, width = 2, format = "d", flag = "0")
 
-  years_months <- expand.grid(y = year, m = month)
+  years_months <- expand.grid(y = year, m = month, stringsAsFactors = F)
 
   get_one_dataset <- function(dataset_id, year, month, dest_dir, redownload) {
     td <- file.path(dest_dir, dataset_id, year, month)
