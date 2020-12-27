@@ -195,7 +195,7 @@ sp_load_table <- function(table_file, ico) {
 #'  | ZU_BEZUO | current | current period |  běžné účetní období |  - |
 #'
 #'
-#' @param table_id A table ID. See `id` column in `sp_tables` for a list of available codelists.
+#' @param table_id A table ID. See `id` column in `sp_tables` for a list of available tables
 #' @param year year, numeric, 2015-2018 for some datasets, 2010-2018 for others.
 #' Can be a vector of length > 1 (see Details for how to work with data across time periods.).
 #' @param month month, numeric. Must be 3, 6, 9 or 12. Can be a vector of length > 1 (see details).

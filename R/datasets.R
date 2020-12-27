@@ -100,7 +100,7 @@ sp_get_dataset_doc <- function(dataset_id, dest_dir = NULL, download = TRUE) {
 #' This has significant implications for how you get to usable full-year numbers or time series in different tables.
 #' See `vignette("statnipokladna")` for details on this.
 #'
-#' @param dataset_id A dataset ID. See `id` column in `sp_datasets` for a list of available codelists.
+#' @param dataset_id A dataset ID. See `id` column in `sp_datasets` for a list of available datasets
 #' @param year year, numeric vector of length <= 1 (can take multiple values), 2015-2019 for some datasets, 2010-2020 for others. Defaults to 2018.
 #' (see Details for how to work with data across time periods.)
 #' @param month month, numeric vector of length <= 1 (can take multiple values). Must be between 1 and 12. Defaults to 12.

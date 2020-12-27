@@ -13,7 +13,7 @@ sp_get_dataset(
 )
 }
 \arguments{
-\item{dataset_id}{A dataset ID. See \code{id} column in \code{sp_datasets} for a list of available codelists.}
+\item{dataset_id}{A dataset ID. See \code{id} column in \code{sp_datasets} for a list of available datasets}
 
 \item{year}{year, numeric vector of length <= 1 (can take multiple values), 2015-2019 for some datasets, 2010-2020 for others. Defaults to 2018.
 (see Details for how to work with data across time periods.)}
