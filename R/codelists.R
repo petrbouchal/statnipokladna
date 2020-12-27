@@ -48,6 +48,24 @@ sp_codelists <- tibble::tribble(~id, ~name,
 # stringi::stri_escape_unicode("xxx")
 # usethis::use_data(sp_codelists, overwrite = TRUE)
 
+
+#' Load codelist into a tibble from XML file
+#'
+#' This is normally called inside `sp_get_codelist()` but can be used separately if
+#' finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
+#'
+#' @param path Path to a file as returned by `sp_get_codelist_file()`
+#' @param n Number of rows to return. Default (NULL) means all. Useful for quickly inspecting a codelist.
+#'
+#' @return a [tibble][tibble::tibble-package]
+#' @family Detailed workflow
+#'
+#' @examples
+#' \donttest{
+#' cf <- sp_get_codelist_file("druhuj")
+#' sp_load_codelist(cf)
+#' }
+#' @export
 sp_load_codelist <- function(path, n = NULL) {
   xml_all <- xml2::read_xml(path)
   usethis::ui_info("Processing codelist data")
@@ -81,6 +99,28 @@ sp_load_codelist <- function(path, n = NULL) {
   return(xvals)
 }
 
+
+#' Download a codelist XML file
+#'
+#' This is normally called inside `sp_get_codelist()` but can be used separately if
+#' finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
+#'
+#' @param codelist_id A codelist ID. See `id` column in `sp_codelists` for a list of available codelists.
+#' @param url DESCRIPTION. Either this or `codelist_id` must be set. If both are set, `url` wins.
+#' @param dest_dir character. Directory in which downloaded files will be stored.
+#' If left unset, will use the `statnipokladna.dest_dir` option if the option is set, and `tempdir()` otherwise. Will be created if it does not exist.
+#' @param redownload Redownload even if file has already been downloaded? Defaults to FALSE.
+
+#'
+#' @return path to XML file; character vector of length one.
+#' @family Detailed workflow
+#' @examples
+#' \donttest{
+#' sp_get_codelist_file("druhuj")
+#' codelist_url <- sp_get_codelist_url("druhuj")
+#' sp_get_codelist_file(url = codelist_url)
+#' }
+#' @export
 sp_get_codelist_file <- function(codelist_id = NULL, url = NULL, dest_dir = NULL, redownload = FALSE) {
   if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
                                               default = tempdir())
@@ -273,6 +313,23 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
   return(slepeno)
 }
 
+
+
+#' Get URL of a given codelist
+#'
+#' This is normally called inside `sp_get_codelist()` but can be used separately if
+#' finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
+#'
+#' @param codelist_id DESCRIPTION.
+#' @param check_if_exists Whether to check that the URL works (HTTP 200).
+#'
+#' @return character vector of length one containing URL
+#' @examples
+#' \donttest{
+#' sp_get_codelist_url("ucjed", FALSE)
+#' sp_get_codelist_url("ucjed_wrong", FALSE) # works but returns invalid URL
+#' if(FALSE) sp_get_codelist_url("ucjed_wrong", TRUE) # fails, invalid codelist
+#' }
 
 sp_get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
   if(!(codelist_id %in% sp_codelists$id)) usethis::ui_stop("Not a valid codelist ID")

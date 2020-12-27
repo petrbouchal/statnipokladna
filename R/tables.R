@@ -38,6 +38,23 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
   dplyr::mutate_if(is.character, stringi::stri_unescape_unicode)
 # usethis::use_data(sp_tables, overwrite = TRUE)
 
+
+#' Get path to a CSV file containing a table.
+#'
+#' This is normally called inside `sp_get_table()` but can be used separately if
+#' finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
+#'
+#' @param table_id Table ID; see `id` column in `sp_tables` for a list of available codelists.
+#' @param dataset_path Path to downloaded dataset, as output by `sp_get_dataset()`
+#'
+#' @return Character vector of length one - a path.
+#' @family Detailed workflow
+#' @examples
+#' \donttest{
+#' ds <- sp_get_dataset("rozv", 2018, 12)
+#' sp_get_table_file("balance-sheet", ds)
+#' }
+#' @export
 sp_get_table_file <- function(table_id, dataset_path) {
   dd <- dirname(dataset_path)
   dslist <- utils::unzip(dataset_path, exdir = dd)
@@ -59,7 +76,24 @@ sp_get_table_file <- function(table_id, dataset_path) {
 }
 
 
+#' Load a statnipokladna table from a CSV file
+#'
+#' This is normally called inside `sp_get_table()` but can be used separately if
+#' finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
+#'
+#' @param path path to a CSV file, as output by `sp_get_table_file()`.
+#' @param ico Organisation ID to filter by, if supplied.
+#'
+#' @return a [tibble][tibble::tibble-package]. See help for `sp_get_table()` for a key to the columns.
+#' @family Detailed workflow
+#' @examples
+#' \donttest{
+#' ds <- sp_get_dataset("rozv", 2018, 12)
+#' tf <- sp_get_table_file("balance-sheet", ds)
+#' sp_load_table(tf)
+#' }
 sp_load_table <- function(path, ico = NULL) {
+
   usethis::ui_info("Reading data...")
   suppressWarnings(suppressMessages(
     dt <- readr::read_csv2(path, col_types = readr::cols(.default = readr::col_character()))))

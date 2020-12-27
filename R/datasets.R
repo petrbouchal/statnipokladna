@@ -30,6 +30,29 @@ sp_datasets <- sp_datasets_i %>% dplyr::select(.data$id, .data$name) %>%
   dplyr::mutate_if(is.character, stringi::stri_unescape_unicode)
 # usethis::use_data(sp_datasets, overwrite = TRUE)
 
+
+#' Get URL of dataset
+#'
+#' Useful for workflows where you want to keep track of URLs and intermediate files, rather
+#' than having all steps performed by one function.
+#'
+#' @param dataset_id Dataset ID. See `id` column in `sp_datasets` for a list of available codelists.
+#' @param year year, numeric vector of length <= 1 (can take multiple values), 2015-2019 for some datasets, 2010-2020 for others. Defaults to 2018.
+#' (see Details for how to work with data across time periods.)
+#' @param month month, numeric vector of length <= 1 (can take multiple values). Must be between 1 and 12. Defaults to 12.
+#' (see Details for how to work with data across time periods.)
+#' @param check_if_exists Whether to check that the URL works (HTTP 200).
+#'
+#' @return a character vector of length one, containing a URL
+#' @family Detailed workflow
+#' @examples
+#' \donttest{
+#' sp_get_dataset_url("finm", 2018, 6, FALSE)
+#' sp_get_dataset_url("finm", 2029, 6, FALSE) # works but returns invalid URL
+#' if(FALSE) sp_get_dataset_url("finm_wrong", 2018, 6, TRUE) # fails, invalid dataset ID
+#' if(FALSE) sp_get_dataset_url("finm", 2022, 6, TRUE) # fails, invalid time period
+#' }
+#' @export
 sp_get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists = TRUE) {
   if(!(dataset_id %in% sp_datasets_i$id)) usethis::ui_stop("Not a valid dataset ID")
   dataset_name <- sp_datasets_i[sp_datasets_i$id == dataset_id, "name"]

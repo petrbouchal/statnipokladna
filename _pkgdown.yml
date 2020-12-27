@@ -23,6 +23,10 @@ reference:
   desc:  Data frames containing IDs and other info on the things (files, data tables) you can fetch via statnipokladna.
   contents:
   - has_concept("Lists of available entities")
+- title: Detailed workflow
+  desc:  Functions for executing a more customisable workflow with finer grained control.
+  contents:
+  - has_concept("Detailed workflow")
 - title: Utilities
   desc:  Tools for working with the public budget database and this package.
   contents:
