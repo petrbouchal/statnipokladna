@@ -58,11 +58,11 @@ sp_get_table_file <- function(table_id, dataset_path) {
   return(table_file)
 }
 
-sp_load_table <- function(table_file, ico) {
 
+sp_load_table <- function(path, ico = NULL) {
   usethis::ui_info("Reading data...")
   suppressWarnings(suppressMessages(
-    dt <- readr::read_csv2(table_file, col_types = readr::cols(.default = readr::col_character()))))
+    dt <- readr::read_csv2(path, col_types = readr::cols(.default = readr::col_character()))))
   # print(head(dt))
   usethis::ui_info("Transforming data...")
   if(max(stringr::str_length(dt$`ZC_ICO:ZC_ICO`), na.rm = TRUE) == 10) {
