@@ -4,12 +4,15 @@
 
 * `sp_get_dataset()` no longer unzips the downloaded archive. It therefore returns the path to the downloaded zip file, not to the unzipped files. This is needed to support a more modular workflow (see below and `vignette("workflow", package = "statnipokladna")`).
 
-## Improvements
+## New features
 
 * the core functions have been rewritten into a more modular architecture and their constituent modules exported. This allows more fine-grained over workflow using lower-level functions to accommodate caching and reproducibility e.g. via {targets} or {drake}.
   * sp_get_[dataset|table|codelist] are now effectively wrappers around several lower-level functions
   * those previously using these core functions should see no change except for one breaking change in `sp_get_dataset()`.
   * the lower-level functions enable step-by-step workflows with transparency of intermediate steps (URLs, downloaded ZIP archives, pointers to specific CSV files, etc.) See `vignette("workflow", package = "statnipokladna")`
+
+## Improvements
+
 * better error messages around mismatches between table ID and file in archive
 * more informative errors when online files are not available
 
