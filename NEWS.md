@@ -7,6 +7,10 @@
 * upgrade dplyr dependency to aviod mysterious "unused argument" error in codelist functions
 * balance sheets of city districts can now be loaded for all years where they are available
 
+## Improvements
+
+* better error messages around mismatches between table ID and file in archive
+
 # statnipokladna 0.6.0
 
 ## Improvements

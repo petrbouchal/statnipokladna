@@ -166,7 +166,16 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
                           redownload = redownload)
     table_file <- dslist[stringr::str_detect(dslist,
                                              paste0(table_regex, "(_[0-9]*)?\\.(csv|CSV)"))]
-    stopifnot(length(table_file) == 1)
+    if(length(table_file) != 1) {
+      if (length(table_file) > 1) {
+        usethis::ui_stop(c("More than one CSV files in the archive match.",
+                           "You might want to report a bug at {usethis::ui_path('https://github.com/petrbouchal/statnipokladna/issues')}."))
+      }  else {
+        usethis::ui_stop(c("No CSV file inside the downloaded archive matches files needed for the table.",
+                           "You might want to report a bug at {usethis::ui_path('https://github.com/petrbouchal/statnipokladna/issues')}."))
+      }
+    }
+
     usethis::ui_info("Reading data...")
     suppressWarnings(suppressMessages(
       dt <- readr::read_csv2(table_file, col_types = readr::cols(.default = readr::col_character()))))
