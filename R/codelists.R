@@ -334,13 +334,10 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
 sp_get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
   if(!(codelist_id %in% sp_codelists$id)) ui_stop("Not a valid codelist ID")
   codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
-  if(!curl::has_internet()) ui_stop(c("No internet connection. Cannot continue. Retry when connected.",
-                                               "If you need offline access to the data across R sessions, set the {ui_field('dest_dir')} parameter."))
   ui_info("Building URL for codelist {ui_value(codelist_id)} - {ui_value(codelist_name)}")
   x <- paste(sp_base_url, "data/xml", paste0(codelist_id, ".xml"), sep = "/")
   if(check_if_exists) {
-    iserror <- httr::http_error(x, httr::user_agent(usr))
-    if(iserror) ui_stop("Codelist XML for a codelist with this ID does not exist")
+    check_online(x)
   }
   return(x)
 }

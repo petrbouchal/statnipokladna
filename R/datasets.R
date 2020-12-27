@@ -61,11 +61,8 @@ sp_get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exi
   ui_info("Building URL for dataset {ui_value(dataset_id)}: {ui_value(dataset_name)}, {ui_value(stringr::str_c(year,'-',month))}")
   x <- stringr::str_glue("{sp_base_url}/data/extrakty/csv/{dataset_dir}/{year}_{month}_Data_CSUIS_{toupper(dataset_id)}.zip")
   # print(x)
-  if(!curl::has_internet()) ui_stop(c("No internet connection. Cannot continue. Retry when connected.",
-                                               "If you need offline access to the data across R sessions, set the {ui_field('dest_dir')} parameter."))
   if(check_if_exists) {
-    iserror <- httr::http_error(x, httr::user_agent(usr))
-    if(iserror) ui_stop("File does not exist for this dataset and period combination.")
+    check_online(x)
   }
   doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
   ui_info("Get the dataset documentation at {ui_path(doc_url)}")
@@ -90,10 +87,9 @@ sp_get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exi
 #' }
 #' @export
 sp_get_dataset_doc <- function(dataset_id, dest_dir = NULL, download = TRUE) {
-  if(!curl::has_internet()) ui_stop(c("No internet connection. Cannot continue. Retry when connected."))
   if(!(dataset_id %in% sp_datasets_i$id)) ui_stop("Not a valid dataset ID")
   doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
-
+  check_online(doc_url)
   if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
                                               default = tempdir())
 

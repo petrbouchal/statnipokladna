@@ -11,6 +11,7 @@
   * those previously using these core functions should see no change except for one breaking change in `sp_get_dataset()`.
   * the lower-level functions enable step-by-step workflows with transparency of intermediate steps (URLs, downloaded ZIP archives, pointers to specific CSV files, etc.) See `vignette("workflow", package = "statnipokladna")`
 * better error messages around mismatches between table ID and file in archive
+* more informative errors when online files are not available
 
 ## Bug fixes
 
