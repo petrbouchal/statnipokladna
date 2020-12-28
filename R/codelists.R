@@ -327,7 +327,6 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
 #' @examples
 #' \donttest{
 #' sp_get_codelist_url("ucjed", FALSE)
-#' sp_get_codelist_url("ucjed_wrong", FALSE) # works but returns invalid URL
 #' if(FALSE) sp_get_codelist_url("ucjed_wrong", TRUE) # fails, invalid codelist
 #' }
 #' @export

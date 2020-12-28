@@ -21,7 +21,6 @@ finer-grained control of intermediate outputs is needed, e.g. in a {targets} wor
 \examples{
 \donttest{
 sp_get_codelist_url("ucjed", FALSE)
-sp_get_codelist_url("ucjed_wrong", FALSE) # works but returns invalid URL
 if(FALSE) sp_get_codelist_url("ucjed_wrong", TRUE) # fails, invalid codelist
 }
 }
