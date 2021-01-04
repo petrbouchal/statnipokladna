@@ -88,7 +88,8 @@ sp_load_codelist <- function(path, n = NULL) {
 
   xvals <- xvals_raw %>%
     purrr::set_names(nms) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), readr::parse_date) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")),
+                     ~lubridate::as_date(lubridate::parse_date_time(., orders = c("Ymd", "dmY")))) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::starts_with("kon_")), as.logical) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::matches("^vtab$")),
                      ~stringr::str_pad(., 6, "left", "0")) %>%
