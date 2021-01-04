@@ -21,3 +21,40 @@ test_that("all codelists exist", {
   expect(!any(purrr::map_lgl(sp_codelists$id, check_codelist_error)), "some codelist do not exist")
 })
 
+test_that("key codelists parse correctly", {
+
+  options(statnipokladna.dest_dir = NULL)
+
+  skip_on_cran()
+  key_codelist_names <- c("polozka", "paragraf", "polvyk", "paragraf_long")
+  key_codelists <- purrr::map(key_codelist_names,
+                              sp_get_codelist, redownload = T)
+
+  cl_is_df <- purrr::map_lgl(key_codelists, is.data.frame)
+  cl_has_complete_dates <- purrr::map_lgl(key_codelists,
+                                          function(x) {
+                                            complete_end <- all(!is.na(x$end_date))
+                                            complete_start<- all(!is.na(x$start_date))
+                                            return(all(complete_end, complete_start))
+                                          })
+
+  cl_has_sensible_dates <- purrr::map_lgl(key_codelists,
+                                                function(x) {
+                                                  df <- x %>%
+                                                    dplyr::filter(start_date < "1000-01-01" |
+                                                             end_date < "2000-01-01" |
+                                                             start_date > "2030-01-01")
+                                                  return(nrow(df) == 0)
+                                                })
+  cl_polozka <- key_codelists[[1]]
+  nrow_cl_polozka <- nrow(cl_polozka)
+  kon_cols <- c("kon_pol", "kon_rep", "kon_okr", "kon_kraj")
+
+
+  expect_true(all(cl_is_df))
+  expect_true(all(cl_has_complete_dates))
+  expect_true(all(cl_has_sensible_dates))
+  expect_true(all(kon_cols %in% names(cl_polozka)))
+  expect_true(nrow(cl_polozka %>%
+                     tidyr::drop_na(tidyselect::all_of(kon_cols))) == nrow_cl_polozka)
+})
