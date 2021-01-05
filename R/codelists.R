@@ -67,6 +67,7 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #' }
 #' @export
 sp_load_codelist <- function(path, n = NULL) {
+  stopifnot(file.exists(path))
   xml_all <- xml2::read_xml(path)
   ui_info("Processing codelist data")
   if(grepl("ucjed", path)) ui_info("Large codelist: this will take a while...")

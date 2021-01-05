@@ -56,6 +56,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #' }
 #' @export
 sp_get_table_file <- function(table_id, dataset_path) {
+  stopifnot(file.exists(dataset_path))
   dd <- dirname(dataset_path)
   dslist <- utils::unzip(dataset_path, exdir = dd)
 
