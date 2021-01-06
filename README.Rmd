@@ -144,7 +144,7 @@ local_budgets %>%
 Download a whole "výkaz" (dataset/data dump):
 
 ```{r}
-sp_get_dataset("finm") # dataset ID, see `sp_datasets`
+sp_get_dataset("finm", year = 2019) # dataset ID, see `sp_datasets`
 ```
 
 This will put the files in a temp directory.
