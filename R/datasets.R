@@ -139,13 +139,9 @@ sp_get_dataset_doc <- function(dataset_id, dest_dir = NULL, download = TRUE) {
 #' @export
 sp_get_dataset <- function(dataset_id, year, month = 12,
                            dest_dir = NULL, redownload = FALSE) {
-  if(interactive() == FALSE & (missing(year) | missing(month))) {
-    if(missing(year)) {
-      ui_warn("{ui_field('year')} not set. Using default of {ui_value(year)}.")
-
-    } else if(missing(month)) {
+  if(interactive() == FALSE & missing(month)) {
+    if(missing(month)) {
       ui_warn("{ui_field('month')} not set. Using default of {ui_value(month)}.")
-
     }
 
     ui_todo("Set period parameters explicitly for reproducibility as the defaults may change in the future to provide access to the latest data by default.")
