@@ -13,8 +13,6 @@ downloads](https://cranlogs.r-pkg.org/badges/grand-total/statnipokladna)](https:
 downloads](https://cranlogs.r-pkg.org/badges/last-month/statnipokladna)](https://CRAN.R-project.org/package=statnipokladna)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![Travis build
-status](https://travis-ci.org/petrbouchal/statnipokladna.svg?branch=master)](https://travis-ci.org/petrbouchal/statnipokladna)
 [![R build
 status](https://github.com/petrbouchal/statnipokladna/workflows/R-CMD-check/badge.svg)](https://github.com/petrbouchal/statnipokladna/actions)
 <!-- badges: end -->
