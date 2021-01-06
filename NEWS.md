@@ -17,6 +17,7 @@
 * better error messages around mismatches between table ID and file in archive
 * more informative errors when online files are not available
 * improve date parsing in `sp_get_codelist()` to handle inconsistent date formats in some codelists
+* faster loading of tables from previously downloaded and unzipped datasets
 
 ## Bug fixes
 

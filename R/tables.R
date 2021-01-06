@@ -46,6 +46,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #'
 #' @param table_id Table ID; see `id` column in `sp_tables` for a list of available codelists.
 #' @param dataset_path Path to downloaded dataset, as output by `sp_get_dataset()`
+#' @param reunzip Whether to overwrite existing CSV files by unzipping the archive downlaoded by `sp_get_dataset()`. Defaults to FALSE.
 #'
 #' @return Character vector of length one - a path.
 #' @family Detailed workflow
@@ -55,10 +56,14 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #' sp_get_table_file("balance-sheet", ds)
 #' }
 #' @export
-sp_get_table_file <- function(table_id, dataset_path) {
+sp_get_table_file <- function(table_id, dataset_path, reunzip = FALSE) {
   stopifnot(file.exists(dataset_path))
   dd <- dirname(dataset_path)
-  dslist <- utils::unzip(dataset_path, exdir = dd)
+  dslist <- list.files(dd, pattern = "*.CSV|*.csv", full.names = T)
+  if(length(dslist) == 0 | reunzip) {
+    usethis::ui_info("Unzipping...")
+    dslist <- utils::unzip(dataset_path, exdir = dd)
+  }
 
   table_regex <- paste0(sp_tables_i$file_regex[sp_tables_i$id == table_id])
 

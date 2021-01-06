@@ -4,12 +4,14 @@
 \alias{sp_get_table_file}
 \title{Get path to a CSV file containing a table.}
 \usage{
-sp_get_table_file(table_id, dataset_path)
+sp_get_table_file(table_id, dataset_path, reunzip = FALSE)
 }
 \arguments{
 \item{table_id}{Table ID; see \code{id} column in \code{sp_tables} for a list of available codelists.}
 
 \item{dataset_path}{Path to downloaded dataset, as output by \code{sp_get_dataset()}}
+
+\item{reunzip}{Whether to overwrite existing CSV files by unzipping the archive downlaoded by \code{sp_get_dataset()}. Defaults to FALSE.}
 }
 \value{
 Character vector of length one - a path.
