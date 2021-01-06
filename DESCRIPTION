@@ -37,7 +37,8 @@ Imports:
 Suggests: 
     knitr,
     rmarkdown,
-    testthat (>= 2.1.0)
+    testthat (>= 2.1.0),
+    tidyselect (>= 1.1.0)
 VignetteBuilder: 
     knitr
 RdMacros: 
