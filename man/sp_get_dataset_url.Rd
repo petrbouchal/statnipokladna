@@ -4,12 +4,12 @@
 \alias{sp_get_dataset_url}
 \title{Get URL of dataset}
 \usage{
-sp_get_dataset_url(dataset_id, year = 2018, month = 12, check_if_exists = TRUE)
+sp_get_dataset_url(dataset_id, year, month = 12, check_if_exists = TRUE)
 }
 \arguments{
 \item{dataset_id}{Dataset ID. See \code{id} column in \code{sp_datasets} for a list of available codelists.}
 
-\item{year}{year, numeric vector of length <= 1 (can take multiple values), 2015-2019 for some datasets, 2010-2020 for others. Defaults to 2018.
+\item{year}{year, numeric vector of length <= 1 (can take multiple values), 2015-2019 for some datasets, 2010-2020 for others.
 (see Details for how to work with data across time periods.)}
 
 \item{month}{month, numeric vector of length <= 1 (can take multiple values). Must be between 1 and 12. Defaults to 12.

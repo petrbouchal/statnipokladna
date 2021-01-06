@@ -4,13 +4,7 @@
 \alias{get_dataset}
 \title{Deprecated: Retrieve and read dataset from statnipokladna}
 \usage{
-get_dataset(
-  dataset_id,
-  year = 2019,
-  month = 12,
-  dest_dir = NULL,
-  redownload = FALSE
-)
+get_dataset(dataset_id, year, month = 12, dest_dir = NULL, redownload = FALSE)
 }
 \arguments{
 \item{dataset_id}{A dataset ID. See \code{id} column in \code{sp_datasets} for a list of available datasets}

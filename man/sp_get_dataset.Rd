@@ -6,7 +6,7 @@
 \usage{
 sp_get_dataset(
   dataset_id,
-  year = 2018,
+  year,
   month = 12,
   dest_dir = NULL,
   redownload = FALSE
@@ -42,7 +42,6 @@ See \code{vignette("statnipokladna")} for details on this.
 }
 \examples{
 \donttest{
-budget_latest <- sp_get_dataset("finm")
 budget_2018 <- sp_get_dataset("finm", 2018)
 budget_mid2018 <- sp_get_dataset("finm", 2018, 6)
 }

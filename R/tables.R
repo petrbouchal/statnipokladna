@@ -232,7 +232,7 @@ sp_load_table <- function(path, ico = NULL) {
 #'
 #'
 #' @param table_id A table ID. See `id` column in `sp_tables` for a list of available tables
-#' @param year year, numeric, 2015-2018 for some datasets, 2010-2018 for others.
+#' @param year year, numeric, 2015-2019 for some datasets, 2010-2020 for others.
 #' Can be a vector of length > 1 (see Details for how to work with data across time periods.).
 #' @param month month, numeric. Must be 3, 6, 9 or 12. Can be a vector of length > 1 (see details).
 #' @param ico ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See <http://monitor.statnipokladna.cz/datovy-katalog/prohlizec-ciselniku/ucjed> to look up ID of any org in the dataset.
@@ -244,7 +244,6 @@ sp_load_table <- function(path, ico = NULL) {
 #' @encoding UTF-8
 #' @examples
 #' \donttest{
-#' allorgs_latest <- sp_get_table("budget-central")
 #' allorgs_2018 <- sp_get_table("budget-central", 2018)
 #' allorgs_mid2018 <- sp_get_table("budget-central", 2018, 6)
 #' oneorg_multiyear <- sp_get_table("budget-central", 2017:2018, 12, ico = "00064581")
@@ -253,22 +252,19 @@ sp_load_table <- function(path, ico = NULL) {
 #' @export
 #' @family Core workflow
 #'
-sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
+sp_get_table <- function(table_id, year, month = 12, ico = NULL,
                       redownload = FALSE, dest_dir = NULL) {
   stopifnot(is.character(ico) | is.null(ico))
   if(interactive() == FALSE & (missing(year) | missing(month))) {
     if(missing(year)) {
-      ui_warn("{ui_field('year')} not set.
-                     Using default of {ui_value(year)}.")
+      ui_stop("{ui_field('year')} not set. Please set a value.")
 
     } else if(missing(month)) {
-      ui_warn("{ui_field('month')} not set.
-                     Using default of {ui_value(month)}.")
+      ui_warn("{ui_field('month')} not set. Using default of {ui_value(month)}.")
 
     }
 
-    ui_todo("Set period parameters explicitly for reproducibility as the defaults may change in the future
-                     to provide access to the latest data by default.")
+    ui_todo("Set period parameters explicitly for reproducibility as the defaults may change in the future to provide access to the latest data by default.")
   }
 
   if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
@@ -282,7 +278,7 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
   downloaded_datasets <- sp_get_dataset(dataset_id, year, month, dest_dir, redownload)
 
   return_table <- function(dataset_path, table_id, ico) {
-    table_file_path <- sp_get_table_file(table_id, dataset_path)
+    table_file_path <- sp_get_table_file(table_id, dataset_path, reunzip = redownload)
     tbl <- sp_load_table(table_file_path, ico)
     return(tbl)
   }
@@ -305,7 +301,7 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
 #'
 #' @return a [tibble][tibble::tibble-package]
 #' @export
-get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
+get_table <- function(table_id, year, month = 12, ico = NULL,
                       redownload = FALSE, dest_dir = NULL) {
   lifecycle::deprecate_warn("0.5.2", "statnipokladna::get_table()", "sp_get_table()")
 }

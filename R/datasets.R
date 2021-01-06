@@ -37,7 +37,7 @@ sp_datasets <- sp_datasets_i %>% dplyr::select(.data$id, .data$name) %>%
 #' than having all steps performed by one function.
 #'
 #' @param dataset_id Dataset ID. See `id` column in `sp_datasets` for a list of available codelists.
-#' @param year year, numeric vector of length <= 1 (can take multiple values), 2015-2019 for some datasets, 2010-2020 for others. Defaults to 2018.
+#' @param year year, numeric vector of length <= 1 (can take multiple values), 2015-2019 for some datasets, 2010-2020 for others.
 #' (see Details for how to work with data across time periods.)
 #' @param month month, numeric vector of length <= 1 (can take multiple values). Must be between 1 and 12. Defaults to 12.
 #' (see Details for how to work with data across time periods.)
@@ -53,7 +53,7 @@ sp_datasets <- sp_datasets_i %>% dplyr::select(.data$id, .data$name) %>%
 #' if(FALSE) sp_get_dataset_url("finm", 2022, 6, TRUE) # fails, invalid time period
 #' }
 #' @export
-sp_get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists = TRUE) {
+sp_get_dataset_url <- function(dataset_id, year, month = 12, check_if_exists = TRUE) {
   if(!(dataset_id %in% sp_datasets_i$id)) ui_stop("Not a valid dataset ID")
   dataset_name <- sp_datasets_i[sp_datasets_i$id == dataset_id, "name"]
   dataset_dir <- sp_datasets_i[sp_datasets_i$id == dataset_id, "dir"]
@@ -132,13 +132,12 @@ sp_get_dataset_doc <- function(dataset_id, dest_dir = NULL, download = TRUE) {
 #' @return character string with complete paths to downloaded ZIP archives.
 #' @examples
 #' \donttest{
-#' budget_latest <- sp_get_dataset("finm")
 #' budget_2018 <- sp_get_dataset("finm", 2018)
 #' budget_mid2018 <- sp_get_dataset("finm", 2018, 6)
 #' }
 #' @family Core workflow
 #' @export
-sp_get_dataset <- function(dataset_id, year = 2018, month = 12,
+sp_get_dataset <- function(dataset_id, year, month = 12,
                            dest_dir = NULL, redownload = FALSE) {
   if(interactive() == FALSE & (missing(year) | missing(month))) {
     if(missing(year)) {
@@ -198,7 +197,7 @@ sp_get_dataset <- function(dataset_id, year = 2018, month = 12,
 #' @return character (link) if download = TRUE, nothing otherwise.
 #' @family Utilities
 #' @export
-get_dataset <- function(dataset_id, year = 2019, month = 12,
+get_dataset <- function(dataset_id, year, month = 12,
                         dest_dir = NULL, redownload = FALSE) {
   lifecycle::deprecate_warn("0.5.2", "statnipokladna::get_dataset()", "sp_get_dataset()")
   sp_get_dataset(dataset_id = dataset_id, year = year, month = month,
