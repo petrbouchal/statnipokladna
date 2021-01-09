@@ -23,7 +23,7 @@
 #' }
 #' @family Lists of available entities
 #' @export
-sp_get_catalogue <- function() {
+sp_list_datasets <- function() {
 
   sparql_url <- "https://opendata.mfcr.cz/lod/sparql"
 

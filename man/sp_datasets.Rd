@@ -24,7 +24,7 @@ of the datasets.
 \seealso{
 Other Lists of available entities: 
 \code{\link{sp_codelists}},
-\code{\link{sp_get_catalogue}()},
+\code{\link{sp_list_datasets}()},
 \code{\link{sp_tables}}
 }
 \concept{Lists of available entities}

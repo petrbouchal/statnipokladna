@@ -25,7 +25,7 @@ to see more detailed descriptions. Note that tables do not correspond to the tab
 Other Lists of available entities: 
 \code{\link{sp_codelists}},
 \code{\link{sp_datasets}},
-\code{\link{sp_get_catalogue}()}
+\code{\link{sp_list_datasets}()}
 }
 \concept{Lists of available entities}
 \keyword{datasets}
