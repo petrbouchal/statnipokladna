@@ -249,9 +249,21 @@ statnipokladna::sp_get_dataset_doc("finm")
 You can get details of all the available tables in the `sp_tables` data
 frame; for datasets, see `sp_datasets`.
 
-## Workflow integration
+## Workflows and reproducibility
 
-TO DO - see `vignette("workflow", package = "statnipokladna")`
+The above examples present a simple all-in-one workflow, which is
+concise but can be too opaque when transparency and reproducibility
+matter. It is primarity aimed at workflows which prioritise updating
+data: every time the script is run, data is redownloaded, unless cached
+via the `dest_dir` parameter.
+
+In other situations, the priority might be to keep track of individual
+source files as they are downloaded from the data provider, or checking
+for changes at the data provider and keeping track of individual URLs
+from which the data was downloaded. For these situations, a workflow
+composed of lower-level functions is available, offering finer control
+of the steps. See the [workflow](/articles/workflow.html) vignette
+(`vignette("workflow", package = "statnipokladna")`).
 
 ## Background information
 
