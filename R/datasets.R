@@ -1,6 +1,6 @@
 
 sp_datasets_i <- tibble::tribble(~id, ~name, ~implemented, ~dir,
-                                 "finm", "FIN 2-12 M - Pln\\u011bn\\u00ed rozpo\\u010dtu M\\u0158O", F, "FinM",
+                                 "finm", "FIN 2-12 M - Pln\\u011bn\\u00ed rozpo\\u010dtu \\u00daSC", F, "FinM",
                                  "finu", "FIN 2-04 U - Pln\\u011bn\\u00ed rozpo\\u010dtu KAP, OSS a SF (2010 - 2014)", F, "FinU",
                                  "finsf", "FIN 2-04 U - Pln\\u011bn\\u00ed rozpo\\u010dtu SF", F, "FinSF",
                                  "misris", "FIN 1-12 OSS - Pln\\u011bn\\u00ed rozpo\\u010dtu KAP a OSS", F, "FinOSS",
@@ -8,8 +8,10 @@ sp_datasets_i <- tibble::tribble(~id, ~name, ~implemented, ~dir,
                                  "ppt", "P\\u0159ehled pen\\u011b\\u017en\\u00edch tok\\u016f", F, "PenezniToky",
                                  "pozvk", "P\\u0159ehled o zm\\u011bn\\u00e1ch vlastn\\u00edho kapit\\u00e1lu", F, "VlastniKapital",
                                  "pril", "P\\u0159\\u00edloha", F, "Priloha",
-                                 "vykzz", "V\\u00fdkaz zisk\\u016f a ztr\\u00e1t", F, "ZiskZtraty") %>%
-  dplyr::mutate(name = stringi::stri_unescape_unicode(.data$name)) %>%
+                                 "vykzz", "V\\u00fdkaz zisku a ztr\\u00e1ty", F, "ZiskZtraty") %>%
+  dplyr::mutate(
+    name = stringi::stri_unescape_unicode(.data$name),
+    name_catalogue = stringr::str_remove(.data$name, "FIN [0-9]\\-[0-9]{2} [A-Z]{1,3}\\s\\-\\s")) %>%
   dplyr::arrange(.data$id)
 # stringi::stri_escape_unicode("xxx")
 
