@@ -108,3 +108,67 @@ sp_list_datasets <- function() {
 # spd
 #
 # spd %>% group_by(ds_title) %>% slice_max(end)
+
+sp_list_codelists <- function() {
+
+  sparql_url <- "https://opendata.mfcr.cz/lod/sparql"
+
+  sparqlquery_datasets_byczso <- stringr::str_c("
+  PREFIX dct: <http://purl.org/dc/terms/>
+  PREFIX dcterm: <http://purl.org/dc/terms/>
+  PREFIX dcterms: <http://purl.org/dc/terms/>
+  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+  PREFIX purl: <http://purl.org/dc/terms/>
+  PREFIX dcat: <http://www.w3.org/ns/dcat#>
+  PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+  SELECT ?ds_iri ?dist_iri ?dl_url ?media_type ?ds_title ?schema
+WHERE
+{
+  {?ds_iri dct:isPartOf <https://opendata.mfcr.cz/lod/monitor/ciselniky> .
+    ?ds_iri purl:title ?ds_title . FILTER(LANG(?ds_title) = 'cs') . }
+
+  VALUES ?cat_iri {<https://opendata.mfcr.cz/lod/monitor/>}
+
+  {?ds_iri dcat:distribution ?dist_iri .
+    ?dist_iri dcat:accessURL ?dl_url .
+    OPTIONAL {?dist_iri dct:conformsTo ?schema .}
+    {?dist_iri dcat:mediaType ?media_type .}
+  }
+}
+LIMIT 2000") %>%
+    stringi::stri_unescape_unicode()
+
+  params = list(`default-graph-uri` = "",
+                query = sparqlquery_datasets_byczso,
+                # format = "application/sparql-results+json",
+                format = "text/csv",
+                timeout = 30000,
+                debug = "on",
+                run = "Run Query")
+  if(!curl::has_internet()) usethis::ui_stop(c("No internet connection. Cannot continue. Retry when connected."))
+  usethis::ui_info("Reading data from data.gov.cz")
+  cat_rslt <- httr::GET(sparql_url, query = params,
+                        # accept("application/sparql-results+json"),
+                        httr::user_agent(usr),
+                        httr::add_headers(c("Accept-Charset" = "utf-8")),
+                        httr::accept("text/csv;charset=UTF-8")) %>%
+    httr::stop_for_status()
+
+  # print(params$query)
+
+  if(httr::status_code(cat_rslt) > 200) {
+    print(httr::http_status(cat_rslt))
+    rslt <- httr::content(cat_rslt, as = "text")
+  } else
+    rslt <- cat_rslt %>% httr::content(as = "text")
+  rslt <- readr::read_csv(rslt, col_types = readr::cols(.default = "c"))
+  usethis::ui_done("Done downloading and reading data")
+  usethis::ui_info("Transforming data")
+  rslt <- rslt %>%
+    dplyr::mutate(filetype = stringr::str_extract(media_type, "(?<=/)[a-zA-Z]*$"),
+                  codelist_num = stringr::str_extract(ds_iri, "[0-9]{1,2}$")) %>%
+    dplyr::select(codelist_name = ds_title, codelist_num, url = dl_url, filetype, schema,
+                  codelist_id = ds_iri)
+  return(rslt)
+}
+
