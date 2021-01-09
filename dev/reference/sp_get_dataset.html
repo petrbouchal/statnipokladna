@@ -49,7 +49,7 @@
   <script src="../extra.js"></script>
 
 <meta property="og:title" content="Retrieve dataset from statnipokladna — sp_get_dataset" />
-<meta property="og:description" content="Downloads and unzips files for a given dataset." />
+<meta property="og:description" content="Downloads ZIP archives for a given dataset. If year or month have length &amp;gt; 1, gets all combinations." />
 <meta property="og:image" content="https://petrbouchal.xyz/statnipokladna/reference/figures/card.png" />
 <meta property="og:image:alt" content="statnipokladna: R package for using Czech public finance data (Monitor Státní pokladny)" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -94,7 +94,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -120,6 +120,9 @@
     <li>
       <a href="../articles/how-the-data-works.html">How the data works</a>
     </li>
+    <li>
+      <a href="../articles/workflow.html">statnipokladna workflows and reproducibility</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -129,13 +132,13 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/petrbouchal/statnipokladna/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://petrbouchal.xyz">
-    <span class="fa fa-asterisk fa-lg"></span>
+    <span class="fas fa-asterisk fa-lg"></span>
      
   </a>
 </li>
@@ -158,12 +161,12 @@
     </div>
 
     <div class="ref-description">
-    <p>Downloads and unzips files for a given dataset.</p>
+    <p>Downloads ZIP archives for a given dataset. If <code>year</code> or <code>month</code> have length &gt; 1, gets all combinations.</p>
     </div>
 
     <pre class="usage"><span class='fu'>sp_get_dataset</span><span class='op'>(</span>
   <span class='va'>dataset_id</span>,
-  year <span class='op'>=</span> <span class='fl'>2018</span>,
+  <span class='va'>year</span>,
   month <span class='op'>=</span> <span class='fl'>12</span>,
   dest_dir <span class='op'>=</span> <span class='cn'>NULL</span>,
   redownload <span class='op'>=</span> <span class='cn'>FALSE</span>
@@ -174,16 +177,16 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>dataset_id</th>
-      <td><p>A dataset ID. See <code>id</code> column in <code>sp_datasets</code> for a list of available codelists.</p></td>
+      <td><p>A dataset ID. See <code>id</code> column in <code>sp_datasets</code> for a list of available datasets</p></td>
     </tr>
     <tr>
       <th>year</th>
-      <td><p>year, numeric, 2015-2018 for some datasets, 2010-2019 for others. Defaults to 2018.
+      <td><p>year, numeric vector of length &lt;= 1 (can take multiple values), 2015-2019 for some datasets, 2010-2020 for others. Defaults to 2018.
 (see Details for how to work with data across time periods.)</p></td>
     </tr>
     <tr>
       <th>month</th>
-      <td><p>month, numeric. Must be between 1 and 12. Defaults to 12.
+      <td><p>month, numeric vector of length &lt;= 1 (can take multiple values). Must be between 1 and 12. Defaults to 12.
 (see Details for how to work with data across time periods.)</p></td>
     </tr>
     <tr>
@@ -199,11 +202,11 @@ If left unset, will use the <code>statnipokladna.dest_dir</code> option if the o
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>character string with complete paths to downloaded files.</p>
+    <p>character string with complete paths to downloaded ZIP archives.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Files are stored in a temp folder as determined by <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code> and further sorted into
-subdirectories by dataset, year and month. They persist per session to avoid redownloads.</p>
+    <p>Files are stored in a temp folder as determined by <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code> or the <code>dest_dir</code> param or the <code>statnipokladna.dest_dir</code> option.
+and further sorted into subdirectories by dataset, year and month. If saved to <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code> (the default), downloaded files per session to avoid redownloads.</p>
 <p>How data for different time periods is exported differs by dataset.
 This has significant implications for how you get to usable full-year numbers or time series in different tables.
 See <code><a href='../articles/statnipokladna.html'>vignette("statnipokladna")</a></code> for details on this.</p>
@@ -218,14 +221,9 @@ See <code><a href='../articles/statnipokladna.html'>vignette("statnipokladna")</
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='va'>budget_latest</span> <span class='op'>&lt;-</span> <span class='fu'>sp_get_dataset</span><span class='op'>(</span><span class='st'>"finm"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: <span style='color: #00BB00;'>year</span><span> not set.</span>
-#&gt; <span class='warning'>Using default of </span><span style='color: #0000BB;'>2018</span><span>.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BB0000;'>●</span><span> Set period parameters explicitly for reproducibility as the defaults may change in the future</span>
-#&gt; <span class='message'>  to provide access to the latest data by default.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Building URL for dataset </span><span style='color: #0000BB;'>'finm'</span><span>: </span><span style='color: #0000BB;'>FIN 2-12 M - Plnění rozpočtu MŘO</span><span>, </span><span style='color: #0000BB;'>'2018-12'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Get the dataset documentation at </span><span style='color: #0000BB;'>'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Storing downloaded archive in and extracting to </span><span style='color: #0000BB;'>'/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/RtmpOQxnAr/finm/2018/12/'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Set </span><span style='color: #00BB00;'>dest_dir</span><span> for more control over downloaded files.</span></div><div class='input'><span class='va'>budget_2018</span> <span class='op'>&lt;-</span> <span class='fu'>sp_get_dataset</span><span class='op'>(</span><span class='st'>"finm"</span>, <span class='fl'>2018</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: </span><span style='color: #00BB00;'>month</span><span> not set.</span>
-#&gt; <span class='warning'>Using default of </span><span style='color: #0000BB;'>12</span><span>.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BB0000;'>●</span><span> Set period parameters explicitly for reproducibility as the defaults may change in the future</span>
-#&gt; <span class='message'>  to provide access to the latest data by default.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Files already in /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpOQxnAr/finm/2018/12, not downloading. Set </span><span style='color: #555555;'>`redownload = TRUE`</span><span> if needed.</span></div><div class='input'><span class='va'>budget_mid2018</span> <span class='op'>&lt;-</span> <span class='fu'>sp_get_dataset</span><span class='op'>(</span><span class='st'>"finm"</span>, <span class='fl'>2018</span>, <span class='fl'>6</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Building URL for dataset </span><span style='color: #0000BB;'>'finm'</span><span>: </span><span style='color: #0000BB;'>FIN 2-12 M - Plnění rozpočtu MŘO</span><span>, </span><span style='color: #0000BB;'>'2018-06'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Get the dataset documentation at </span><span style='color: #0000BB;'>'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Storing downloaded archive in and extracting to </span><span style='color: #0000BB;'>'/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/RtmpOQxnAr/finm/2018/06/'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Set </span><span style='color: #00BB00;'>dest_dir</span><span> for more control over downloaded files.</span></div><div class='input'><span class='co'># }</span>
+<span class='va'>budget_2018</span> <span class='op'>&lt;-</span> <span class='fu'>sp_get_dataset</span><span class='op'>(</span><span class='st'>"finm"</span>, <span class='fl'>2018</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: <span style='color: #00BB00;'>month</span><span> not set. Using default of </span><span style='color: #0000BB;'>12</span><span>.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BB0000;'>●</span><span> Set period parameters explicitly for reproducibility as the defaults may change in the future to provide access to the latest data by default.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Building URL for dataset </span><span style='color: #0000BB;'>'finm'</span><span>: </span><span style='color: #0000BB;'>FIN 2-12 M - Plnění rozpočtu MŘO</span><span>, </span><span style='color: #0000BB;'>'2018-12'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Get the dataset documentation at </span><span style='color: #0000BB;'>'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Storing downloaded archive in and extracting to </span><span style='color: #0000BB;'>'/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/RtmpybVc5N/finm/2018/12/'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Set </span><span style='color: #00BB00;'>dest_dir</span><span> for more control over downloaded files.</span></div><div class='input'><span class='va'>budget_mid2018</span> <span class='op'>&lt;-</span> <span class='fu'>sp_get_dataset</span><span class='op'>(</span><span class='st'>"finm"</span>, <span class='fl'>2018</span>, <span class='fl'>6</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Building URL for dataset </span><span style='color: #0000BB;'>'finm'</span><span>: </span><span style='color: #0000BB;'>FIN 2-12 M - Plnění rozpočtu MŘO</span><span>, </span><span style='color: #0000BB;'>'2018-06'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Get the dataset documentation at </span><span style='color: #0000BB;'>'http:/monitor.statnipokladna.cz/data/struktura/finm.xlsx'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Storing downloaded archive in and extracting to </span><span style='color: #0000BB;'>'/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/RtmpybVc5N/finm/2018/06/'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Set </span><span style='color: #00BB00;'>dest_dir</span><span> for more control over downloaded files.</span></div><div class='input'><span class='co'># }</span>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

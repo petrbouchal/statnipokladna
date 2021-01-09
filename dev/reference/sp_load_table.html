@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get dataset documentation — sp_get_dataset_doc • statnipokladna</title>
+<title>Load a statnipokladna table from a CSV file — sp_load_table • statnipokladna</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +48,9 @@
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
 
-<meta property="og:title" content="Get dataset documentation — sp_get_dataset_doc" />
-<meta property="og:description" content="Downloads XLS file with dataset documentation, or opens link to this file in browser." />
+<meta property="og:title" content="Load a statnipokladna table from a CSV file — sp_load_table" />
+<meta property="og:description" content="This is normally called inside sp_get_table() but can be used separately if
+finer-grained control of intermediate outputs is needed, e.g. in a targets workflow." />
 <meta property="og:image" content="https://petrbouchal.xyz/statnipokladna/reference/figures/card.png" />
 <meta property="og:image:alt" content="statnipokladna: R package for using Czech public finance data (Monitor Státní pokladny)" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -155,48 +156,63 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get dataset documentation</h1>
-    <small class="dont-index">Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/R/datasets.R'><code>R/datasets.R</code></a></small>
-    <div class="hidden name"><code>sp_get_dataset_doc.Rd</code></div>
+    <h1>Load a statnipokladna table from a CSV file</h1>
+    <small class="dont-index">Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/R/tables.R'><code>R/tables.R</code></a></small>
+    <div class="hidden name"><code>sp_load_table.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Downloads XLS file with dataset documentation, or opens link to this file in browser.</p>
+    <p>This is normally called inside <code><a href='sp_get_table.html'>sp_get_table()</a></code> but can be used separately if
+finer-grained control of intermediate outputs is needed, e.g. in a targets workflow.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sp_get_dataset_doc</span><span class='op'>(</span><span class='va'>dataset_id</span>, dest_dir <span class='op'>=</span> <span class='cn'>NULL</span>, download <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>sp_load_table</span><span class='op'>(</span><span class='va'>path</span>, ico <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>dataset_id</th>
-      <td><p>dataset ID. See <code>sp_datasets</code>.</p></td>
+      <th>path</th>
+      <td><p>path to a CSV file, as output by <code><a href='sp_get_table_file.html'>sp_get_table_file()</a></code>.</p></td>
     </tr>
     <tr>
-      <th>dest_dir</th>
-      <td><p>character. Directory in which downloaded files will be stored.
-If left unset, will use the <code>statnipokladna.dest_dir</code> option if the option is set, and <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code> otherwise. Will be created if it does not exist.</p></td>
-    </tr>
-    <tr>
-      <th>download</th>
-      <td><p>Whether to download (the default) or open link in browser.</p></td>
+      <th>ico</th>
+      <td><p>Organisation ID to filter by, if supplied.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>(invisible) path to file if <code>download = TRUE</code>, URL otherwise</p>
+    <p>a <a href='https://tibble.tidyverse.org/reference/tibble-package.html'>tibble</a>. See help for <code><a href='sp_get_table.html'>sp_get_table()</a></code> for a key to the columns.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other Utilities: 
-<code><a href='get_dataset.html'>get_dataset</a>()</code>,
-<code><a href='sp_get_codelist_viewer.html'>sp_get_codelist_viewer</a>()</code></p></div>
+    <div class='dont-index'><p>Other Detailed workflow: 
+<code><a href='sp_get_codelist_file.html'>sp_get_codelist_file</a>()</code>,
+<code><a href='sp_get_dataset_url.html'>sp_get_dataset_url</a>()</code>,
+<code><a href='sp_get_table_file.html'>sp_get_table_file</a>()</code>,
+<code><a href='sp_load_codelist.html'>sp_load_codelist</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'>sp_get_dataset_doc</span><span class='op'>(</span><span class='st'>"finm"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'><span style='color: #BBBB00;'>ℹ</span><span> Getting dataset documentation from http://monitor.statnipokladna.cz/data/struktura/finm.xlsx</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> File downloaded to </span><span style='color: #0000BB;'>'/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/RtmpybVc5N/finm.xlsx'</span><span>.</span></div><div class='input'><span class='co'># }</span>
+<span class='va'>ds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='sp_get_dataset.html'>sp_get_dataset</a></span><span class='op'>(</span><span class='st'>"rozv"</span>, <span class='fl'>2018</span>, <span class='fl'>12</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'><span style='color: #BBBB00;'>ℹ</span><span> Files already in /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpybVc5N/rozv/2018/12, not downloading. Set </span><span style='color: #555555;'>`redownload = TRUE`</span><span> if needed.</span></div><div class='input'><span class='va'>tf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='sp_get_table_file.html'>sp_get_table_file</a></span><span class='op'>(</span><span class='st'>"balance-sheet"</span>, <span class='va'>ds</span><span class='op'>)</span>
+<span class='fu'>sp_load_table</span><span class='op'>(</span><span class='va'>tf</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Reading data...</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Transforming data...</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1,194,988 x 16</span><span>
+#&gt;    vykaz vtab  per_yr per_m ucjed ico   kapitola kraj  nuts  polvyk ZC_SYNUC
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   
+#&gt; </span><span style='color: #555555;'> 1</span><span> 001   0001… 2018   12    1000… 7508… </span><span style='color: #BB0000;'>NA</span><span>       CZ05  CZ05  C.III… 432     
+#&gt; </span><span style='color: #555555;'> 2</span><span> 001   0001… 2018   12    1000… 7508… </span><span style='color: #BB0000;'>NA</span><span>       CZ05  CZ05  D.     -       
+#&gt; </span><span style='color: #555555;'> 3</span><span> 001   0001… 2018   12    1000… 7508… </span><span style='color: #BB0000;'>NA</span><span>       CZ05  CZ05  D.I.   -       
+#&gt; </span><span style='color: #555555;'> 4</span><span> 001   0001… 2018   12    1000… 7508… </span><span style='color: #BB0000;'>NA</span><span>       CZ05  CZ05  D.I.1. 441     
+#&gt; </span><span style='color: #555555;'> 5</span><span> 001   0001… 2018   12    1000… 7508… </span><span style='color: #BB0000;'>NA</span><span>       CZ05  CZ05  D.II.  -       
+#&gt; </span><span style='color: #555555;'> 6</span><span> 001   0001… 2018   12    1000… 7508… </span><span style='color: #BB0000;'>NA</span><span>       CZ05  CZ05  D.II.… 451     
+#&gt; </span><span style='color: #555555;'> 7</span><span> 001   0001… 2018   12    1000… 7508… </span><span style='color: #BB0000;'>NA</span><span>       CZ05  CZ05  D.III. -       
+#&gt; </span><span style='color: #555555;'> 8</span><span> 001   0001… 2018   12    1000… 7508… </span><span style='color: #BB0000;'>NA</span><span>       CZ05  CZ05  D.III… 281     
+#&gt; </span><span style='color: #555555;'> 9</span><span> 001   0001… 2018   12    1000… 7508… </span><span style='color: #BB0000;'>NA</span><span>       CZ05  CZ05  D.III… 282     
+#&gt; </span><span style='color: #555555;'>10</span><span> 001   0001… 2018   12    1000… 7508… </span><span style='color: #BB0000;'>NA</span><span>       CZ05  CZ05  D.III… 283     
+#&gt; </span><span style='color: #555555;'># … with 1,194,978 more rows, and 5 more variables: current_gross </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   current_correction </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, current_net </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, previous_net </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,</span><span>
+#&gt; </span><span style='color: #555555;'>#   period_vykaz </span><span style='color: #555555;font-style: italic;'>&lt;date&gt;</span><span></div><div class='input'><span class='co'># }</span>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

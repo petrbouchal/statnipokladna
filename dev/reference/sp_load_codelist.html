@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Deprecated: Get codelist — get_codelist • statnipokladna</title>
+<title>Load codelist into a tibble from XML file — sp_load_codelist • statnipokladna</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,9 +48,9 @@
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
 
-<meta property="og:title" content="Deprecated: Get codelist — get_codelist" />
-<meta property="og:description" content="Deprecated: use sp_get_codelist()
-" />
+<meta property="og:title" content="Load codelist into a tibble from XML file — sp_load_codelist" />
+<meta property="og:description" content="This is normally called inside sp_get_codelist() but can be used separately if
+finer-grained control of intermediate outputs is needed, e.g. in a targets workflow." />
 <meta property="og:image" content="https://petrbouchal.xyz/statnipokladna/reference/figures/card.png" />
 <meta property="og:image:alt" content="statnipokladna: R package for using Czech public finance data (Monitor Státní pokladny)" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -156,52 +156,62 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Deprecated: Get codelist</h1>
+    <h1>Load codelist into a tibble from XML file</h1>
     <small class="dont-index">Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/R/codelists.R'><code>R/codelists.R</code></a></small>
-    <div class="hidden name"><code>get_codelist.Rd</code></div>
+    <div class="hidden name"><code>sp_load_codelist.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Deprecated: use <code><a href='sp_get_codelist.html'>sp_get_codelist()</a></code><br /><br />
-<img src='figures/lifecycle-deprecated.svg' alt='Deprecated lifecycle' /></p>
+    <p>This is normally called inside <code><a href='sp_get_codelist.html'>sp_get_codelist()</a></code> but can be used separately if
+finer-grained control of intermediate outputs is needed, e.g. in a targets workflow.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_codelist</span><span class='op'>(</span><span class='va'>codelist_id</span>, n <span class='op'>=</span> <span class='cn'>NULL</span>, dest_dir <span class='op'>=</span> <span class='cn'>NULL</span>, redownload <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>sp_load_codelist</span><span class='op'>(</span><span class='va'>path</span>, n <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>codelist_id</th>
-      <td><p>A codelist ID. See <code>id</code> column in <code>sp_codelists</code> for a list of available codelists.</p></td>
+      <th>path</th>
+      <td><p>Path to a file as returned by <code><a href='sp_get_codelist_file.html'>sp_get_codelist_file()</a></code></p></td>
     </tr>
     <tr>
       <th>n</th>
       <td><p>Number of rows to return. Default (NULL) means all. Useful for quickly inspecting a codelist.</p></td>
     </tr>
-    <tr>
-      <th>dest_dir</th>
-      <td><p>character. Directory in which downloaded files will be stored.
-If left unset, will use the <code>statnipokladna.dest_dir</code> option if the option is set, and <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code> otherwise. Will be created if it does not exist.</p></td>
-    </tr>
-    <tr>
-      <th>redownload</th>
-      <td><p>Redownload even if file has already been downloaded? Defaults to FALSE.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <a href='https://tibble.tidyverse.org/reference/tibble-package.html'>tibble</a></p>
+    <p>a <a href='https://tibble.tidyverse.org/reference/tibble-package.html'>tibble</a></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other Core workflow: 
-<code><a href='add_codelist.html'>add_codelist</a>()</code>,
-<code><a href='sp_add_codelist.html'>sp_add_codelist</a>()</code>,
-<code><a href='sp_get_codelist.html'>sp_get_codelist</a>()</code>,
-<code><a href='sp_get_dataset.html'>sp_get_dataset</a>()</code>,
-<code><a href='sp_get_table.html'>sp_get_table</a>()</code></p></div>
+    <div class='dont-index'><p>Other Detailed workflow: 
+<code><a href='sp_get_codelist_file.html'>sp_get_codelist_file</a>()</code>,
+<code><a href='sp_get_dataset_url.html'>sp_get_dataset_url</a>()</code>,
+<code><a href='sp_get_table_file.html'>sp_get_table_file</a>()</code>,
+<code><a href='sp_load_table.html'>sp_load_table</a>()</code></p></div>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='va'>cf</span> <span class='op'>&lt;-</span> <span class='fu'><a href='sp_get_codelist_file.html'>sp_get_codelist_file</a></span><span class='op'>(</span><span class='st'>"druhuj"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'><span style='color: #BBBB00;'>ℹ</span><span> Codelist file already in </span><span style='color: #0000BB;'>'/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/RtmpybVc5N/'</span><span>, not downloading. Set </span><span style='color: #555555;'>`redownload = TRUE`</span><span> if needed.</span></div><div class='input'><span class='fu'>sp_load_codelist</span><span class='op'>(</span><span class='va'>cf</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Processing codelist data</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 12 x 2</span><span>
+#&gt;    druhuj_id druhuj_nazev                            
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                   
+#&gt; </span><span style='color: #555555;'> 1</span><span> 1         OSS                                     
+#&gt; </span><span style='color: #555555;'> 2</span><span> 2         Státní fondy                            
+#&gt; </span><span style='color: #555555;'> 3</span><span> 3         Krajské úřady                           
+#&gt; </span><span style='color: #555555;'> 4</span><span> 4         Obce                                    
+#&gt; </span><span style='color: #555555;'> 5</span><span> 5         Dobrovolné svazky obcí                  
+#&gt; </span><span style='color: #555555;'> 6</span><span> 6         Regionální rady regionů soudržnosti     
+#&gt; </span><span style='color: #555555;'> 7</span><span> 7         Příspěvkové organizace                  
+#&gt; </span><span style='color: #555555;'> 8</span><span> 8         Zdravotní pojišťovny                    
+#&gt; </span><span style='color: #555555;'> 9</span><span> 17        Česká národní banka                     
+#&gt; </span><span style='color: #555555;'>10</span><span> 18        Další ÚJ sektoru VI dle přílohy č. 1.   
+#&gt; </span><span style='color: #555555;'>11</span><span> 19        Pozemkový fond                          
+#&gt; </span><span style='color: #555555;'>12</span><span> 30        Ost. subj. pro konsol. a vládní statist.</div><div class='input'><span class='co'># }</span>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

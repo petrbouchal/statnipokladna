@@ -95,7 +95,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -121,6 +121,9 @@
     <li>
       <a href="../articles/how-the-data-works.html">How the data works</a>
     </li>
+    <li>
+      <a href="../articles/workflow.html">statnipokladna workflows and reproducibility</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -130,13 +133,13 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/petrbouchal/statnipokladna/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://petrbouchal.xyz">
-    <span class="fa fa-asterisk fa-lg"></span>
+    <span class="fas fa-asterisk fa-lg"></span>
      
   </a>
 </li>
@@ -163,29 +166,23 @@
 <img src='figures/lifecycle-deprecated.svg' alt='Deprecated lifecycle' /></p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_dataset</span><span class='op'>(</span>
-  <span class='va'>dataset_id</span>,
-  year <span class='op'>=</span> <span class='fl'>2019</span>,
-  month <span class='op'>=</span> <span class='fl'>12</span>,
-  dest_dir <span class='op'>=</span> <span class='cn'>NULL</span>,
-  redownload <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_dataset</span><span class='op'>(</span><span class='va'>dataset_id</span>, <span class='va'>year</span>, month <span class='op'>=</span> <span class='fl'>12</span>, dest_dir <span class='op'>=</span> <span class='cn'>NULL</span>, redownload <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>dataset_id</th>
-      <td><p>A dataset ID. See <code>id</code> column in <code>sp_datasets</code> for a list of available codelists.</p></td>
+      <td><p>A dataset ID. See <code>id</code> column in <code>sp_datasets</code> for a list of available datasets</p></td>
     </tr>
     <tr>
       <th>year</th>
-      <td><p>year, numeric, 2015-2018 for some datasets, 2010-2019 for others. Defaults to 2018.
+      <td><p>year, numeric vector of length &lt;= 1 (can take multiple values), 2015-2019 for some datasets, 2010-2020 for others. Defaults to 2018.
 (see Details for how to work with data across time periods.)</p></td>
     </tr>
     <tr>
       <th>month</th>
-      <td><p>month, numeric. Must be between 1 and 12. Defaults to 12.
+      <td><p>month, numeric vector of length &lt;= 1 (can take multiple values). Must be between 1 and 12. Defaults to 12.
 (see Details for how to work with data across time periods.)</p></td>
     </tr>
     <tr>

@@ -96,7 +96,7 @@ Deprecated, use sp_get_table() instead. — get_table" />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -122,6 +122,9 @@ Deprecated, use sp_get_table() instead. — get_table" />
     <li>
       <a href="../articles/how-the-data-works.html">How the data works</a>
     </li>
+    <li>
+      <a href="../articles/workflow.html">statnipokladna workflows and reproducibility</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -131,13 +134,13 @@ Deprecated, use sp_get_table() instead. — get_table" />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/petrbouchal/statnipokladna/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://petrbouchal.xyz">
-    <span class="fa fa-asterisk fa-lg"></span>
+    <span class="fas fa-asterisk fa-lg"></span>
      
   </a>
 </li>
@@ -166,7 +169,7 @@ Deprecated, use <code>sp_get_table()</code> instead.</h1>
 
     <pre class="usage"><span class='fu'>get_table</span><span class='op'>(</span>
   <span class='va'>table_id</span>,
-  year <span class='op'>=</span> <span class='fl'>2018</span>,
+  <span class='va'>year</span>,
   month <span class='op'>=</span> <span class='fl'>12</span>,
   ico <span class='op'>=</span> <span class='cn'>NULL</span>,
   redownload <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -178,11 +181,11 @@ Deprecated, use <code>sp_get_table()</code> instead.</h1>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>table_id</th>
-      <td><p>A table ID. See <code>id</code> column in <code>sp_tables</code> for a list of available codelists.</p></td>
+      <td><p>A table ID. See <code>id</code> column in <code>sp_tables</code> for a list of available tables</p></td>
     </tr>
     <tr>
       <th>year</th>
-      <td><p>year, numeric, 2015-2018 for some datasets, 2010-2018 for others.
+      <td><p>year, numeric, 2015-2019 for some datasets, 2010-2020 for others.
 Can be a vector of length &gt; 1 (see Details for how to work with data across time periods.).</p></td>
     </tr>
     <tr>
