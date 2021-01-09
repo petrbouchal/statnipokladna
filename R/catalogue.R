@@ -93,12 +93,12 @@ sp_list_datasets <- function() {
   usethis::ui_done("Done downloading and reading data")
   usethis::ui_info("Transforming data")
   rslt <- rslt %>%
-    dplyr::mutate(media_type = stringr::str_extract(media_type, "(?<=/)[a-zA-Z]*$"),
+    dplyr::mutate(filetype = stringr::str_extract(media_type, "(?<=/)[a-zA-Z]*$"),
                   compression = stringr::str_extract(compression, "(?<=/)[a-zA-Z]*$")) %>%
-    dplyr::select(table = subds_title, dataset = ds_title,
-           start, end,
-           filetype = media_type, compression,
-           url = dl_url, doc, schema)
+    dplyr::select(dataset_edition = subds_title, dataset_name = ds_title,
+                  start, end,
+                  filetype, compression,
+                  url = dl_url, doc, schema)
   return(rslt)
 }
 
