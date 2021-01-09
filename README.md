@@ -231,10 +231,8 @@ Download a whole “výkaz” (dataset/data dump):
 
 ``` r
 sp_get_dataset("finm", year = 2019) # dataset ID, see `sp_datasets`
-#> Warning: month not set.
-#> Using default of 12.
-#> ● Set period parameters explicitly for reproducibility as the defaults may change in the future
-#>   to provide access to the latest data by default.
+#> Warning: month not set. Using default of 12.
+#> ● Set period parameters explicitly for reproducibility as the defaults may change in the future to provide access to the latest data by default.
 #> ℹ Files already in ~/sp_data/finm/2019/12, not downloading. Set `redownload = TRUE` if needed.
 ```
 
@@ -250,6 +248,10 @@ statnipokladna::sp_get_dataset_doc("finm")
 
 You can get details of all the available tables in the `sp_tables` data
 frame; for datasets, see `sp_datasets`.
+
+## Workflow integration
+
+TO DO - see `vignette("workflow", package = "statnipokladna")`
 
 ## Background information
 
