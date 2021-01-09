@@ -30,21 +30,42 @@ sp_datasets <- sp_datasets_i %>% dplyr::select(.data$id, .data$name) %>%
   dplyr::mutate_if(is.character, stringi::stri_unescape_unicode)
 # usethis::use_data(sp_datasets, overwrite = TRUE)
 
-get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists = TRUE) {
-  if(!(dataset_id %in% sp_datasets_i$id)) usethis::ui_stop("Not a valid dataset ID")
+
+#' Get URL of dataset
+#'
+#' Useful for workflows where you want to keep track of URLs and intermediate files, rather
+#' than having all steps performed by one function.
+#'
+#' @param dataset_id Dataset ID. See `id` column in `sp_datasets` for a list of available codelists.
+#' @param year year, numeric vector of length <= 1 (can take multiple values), 2015-2019 for some datasets, 2010-2020 for others.
+#' (see Details for how to work with data across time periods.)
+#' @param month month, numeric vector of length <= 1 (can take multiple values). Must be between 1 and 12. Defaults to 12.
+#' (see Details for how to work with data across time periods.)
+#' @param check_if_exists Whether to check that the URL works (HTTP 200).
+#'
+#' @return a character vector of length one, containing a URL
+#' @family Detailed workflow
+#' @examples
+#' \donttest{
+#' sp_get_dataset_url("finm", 2018, 6, FALSE)
+#' sp_get_dataset_url("finm", 2029, 6, FALSE) # works but returns invalid URL
+#' if(FALSE) sp_get_dataset_url("finm_wrong", 2018, 6, TRUE) # fails, invalid dataset ID
+#' if(FALSE) sp_get_dataset_url("finm", 2022, 6, TRUE) # fails, invalid time period
+#' }
+#' @export
+sp_get_dataset_url <- function(dataset_id, year, month = 12, check_if_exists = TRUE) {
+  if(!(dataset_id %in% sp_datasets_i$id)) ui_stop("Not a valid dataset ID")
   dataset_name <- sp_datasets_i[sp_datasets_i$id == dataset_id, "name"]
   dataset_dir <- sp_datasets_i[sp_datasets_i$id == dataset_id, "dir"]
-  usethis::ui_info("Building URL for dataset {usethis::ui_value(dataset_id)}: {usethis::ui_value(dataset_name)}, {usethis::ui_value(stringr::str_c(year,'-',month))}")
+  month <- formatC(month, width = 2, format = "d", flag = "0")
+  ui_info("Building URL for dataset {ui_value(dataset_id)}: {ui_value(dataset_name)}, {ui_value(stringr::str_c(year,'-',month))}")
   x <- stringr::str_glue("{sp_base_url}/data/extrakty/csv/{dataset_dir}/{year}_{month}_Data_CSUIS_{toupper(dataset_id)}.zip")
   # print(x)
-  if(!curl::has_internet()) usethis::ui_stop(c("No internet connection. Cannot continue. Retry when connected.",
-                                               "If you need offline access to the data across R sessions, set the {ui_field('dest_dir')} parameter."))
   if(check_if_exists) {
-    iserror <- httr::http_error(x, httr::user_agent(usr))
-    if(iserror) usethis::ui_stop("File does not exist for this dataset and period combination.")
+    check_online(x)
   }
   doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
-  usethis::ui_info("Get the dataset documentation at {usethis::ui_path(doc_url)}")
+  ui_info("Get the dataset documentation at {ui_path(doc_url)}")
   return(x)
 }
 
@@ -66,10 +87,9 @@ get_dataset_url <- function(dataset_id, year = 2018, month = 12, check_if_exists
 #' }
 #' @export
 sp_get_dataset_doc <- function(dataset_id, dest_dir = NULL, download = TRUE) {
-  if(!curl::has_internet()) usethis::ui_stop(c("No internet connection. Cannot continue. Retry when connected."))
-  if(!(dataset_id %in% sp_datasets_i$id)) usethis::ui_stop("Not a valid dataset ID")
+  if(!(dataset_id %in% sp_datasets_i$id)) ui_stop("Not a valid dataset ID")
   doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
-
+  check_online(doc_url)
   if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
                                               default = tempdir())
 
@@ -77,16 +97,106 @@ sp_get_dataset_doc <- function(dataset_id, dest_dir = NULL, download = TRUE) {
 
   if(!download) {
     utils::browseURL(doc_url)
-    usethis::ui_info("Link to file opened in browser. ({usethis::ui_path(doc_url)})")
+    ui_info("Link to file opened in browser. ({ui_path(doc_url)})")
     invisible(doc_url)
   } else {
     file_path <- file.path(dest_dir, stringr::str_glue("{dataset_id}.xlsx"))
-    usethis::ui_info("Getting dataset documentation from {doc_url}")
+    ui_info("Getting dataset documentation from {doc_url}")
     utils::download.file(doc_url, file_path, headers = c('User-Agent' = usr))
-    usethis::ui_info("File downloaded to {usethis::ui_path(file_path)}.")
+    ui_info("File downloaded to {ui_path(file_path)}.")
     invisible(file_path)
   }
 }
+
+
+#' Retrieve dataset from statnipokladna
+#'
+#' Downloads ZIP archives for a given dataset. If `year` or `month` have length > 1, gets all combinations.
+#'
+#' Files are stored in a temp folder as determined by `tempdir()` or the `dest_dir` param or the `statnipokladna.dest_dir` option.
+#' and further sorted into subdirectories by dataset, year and month. If saved to `tempdir()` (the default), downloaded files per session to avoid redownloads.
+#'
+#' How data for different time periods is exported differs by dataset.
+#' This has significant implications for how you get to usable full-year numbers or time series in different tables.
+#' See `vignette("statnipokladna")` for details on this.
+#'
+#' @param dataset_id A dataset ID. See `id` column in `sp_datasets` for a list of available datasets
+#' @param year year, numeric vector of length <= 1 (can take multiple values), 2015-2019 for some datasets, 2010-2020 for others. Defaults to 2018.
+#' (see Details for how to work with data across time periods.)
+#' @param month month, numeric vector of length <= 1 (can take multiple values). Must be between 1 and 12. Defaults to 12.
+#' (see Details for how to work with data across time periods.)
+#' @param dest_dir character. Directory in which downloaded files will be stored.
+#' If left unset, will use the `statnipokladna.dest_dir` option if the option is set, and `tempdir()` otherwise. Will be created if it does not exist.
+#' @param redownload Redownload even if file has already been downloaded? Defaults to FALSE.
+#'
+#' @return character string with complete paths to downloaded ZIP archives.
+#' @examples
+#' \donttest{
+#' budget_2018 <- sp_get_dataset("finm", 2018)
+#' budget_mid2018 <- sp_get_dataset("finm", 2018, 6)
+#' }
+#' @family Core workflow
+#' @export
+sp_get_dataset <- function(dataset_id, year, month = 12,
+                           dest_dir = NULL, redownload = FALSE) {
+  if(interactive() == FALSE & missing(month)) {
+    if(missing(month)) {
+      ui_warn("{ui_field('month')} not set. Using default of {ui_value(month)}.")
+    }
+
+    ui_todo("Set period parameters explicitly for reproducibility as the defaults may change in the future to provide access to the latest data by default.")
+  }
+
+  if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
+                                              default = tempdir())
+
+  if(!all(month %in% c(1:12))) stop("`Month` must be an integer from 1 to 12.")
+  if(!all(year %in% c(2010:lubridate::year(lubridate::today())))) stop("`Year` must be between 2010 and now.")
+  month <- formatC(month, width = 2, format = "d", flag = "0")
+
+  years_months <- expand.grid(y = year, m = month, stringsAsFactors = F)
+
+  get_one_dataset <- function(dataset_id, year, month, dest_dir, redownload) {
+    td <- file.path(dest_dir, dataset_id, year, month)
+    dir.create(td, showWarnings = FALSE, recursive = TRUE)
+    tf <- file.path(td, paste0(dataset_id, year, month, ".zip"))
+    if(file.exists(tf) & !redownload) {
+      ui_info("Files already in {td}, not downloading. Set {ui_code('redownload = TRUE')} if needed.")
+    } else {
+      dataset_url <- sp_get_dataset_url(dataset_id = dataset_id, year = year, month = month)
+      ui_done("Storing downloaded archive in and extracting to {ui_path(td)}")
+      if(dest_dir == tempdir()) ui_info("Set {ui_field('dest_dir')} for more control over downloaded files.")
+      utils::download.file(dataset_url, tf, headers = c('User-Agent' = usr))
+    }
+    return(tf)
+  }
+
+  file_list <- purrr::map2_chr(years_months$y, years_months$m,
+                               ~get_one_dataset(dataset_id, .x, .y, dest_dir = dest_dir,
+                                                redownload = redownload))
+  invisible(file_list)
+}
+
+# Deprecated --------------------------------------------------------------
+
+
+#' Deprecated: Retrieve and read dataset from statnipokladna
+#'
+#' Deprecated, use `sp_get_dataset()` instead.\cr\cr
+#' \lifecycle{deprecated}
+#'
+#' @inheritParams sp_get_dataset
+#'
+#' @return character (link) if download = TRUE, nothing otherwise.
+#' @family Utilities
+#' @export
+get_dataset <- function(dataset_id, year, month = 12,
+                        dest_dir = NULL, redownload = FALSE) {
+  lifecycle::deprecate_warn("0.5.2", "statnipokladna::get_dataset()", "sp_get_dataset()")
+  sp_get_dataset(dataset_id = dataset_id, year = year, month = month,
+                 dest_dir = dest_dir, redownload = redownload)
+}
+
 
 #' Deprecated: Get dataset documentation
 #'
@@ -100,90 +210,4 @@ sp_get_dataset_doc <- function(dataset_id, dest_dir = NULL, download = TRUE) {
 get_dataset_doc <- function(dataset_id, dest_dir = ".", download = TRUE) {
   lifecycle::deprecate_warn("0.5.2", "statnipokladna::get_dataset_doc()", "sp_get_dataset_doc()")
   sp_get_dataset_doc(dataset_id = dataset_id, dest_dir = dest_dir, download = download)
-}
-
-
-#' Retrieve dataset from statnipokladna
-#'
-#' Downloads and unzips files for a given dataset.
-#'
-#' Files are stored in a temp folder as determined by `tempdir()` and further sorted into
-#' subdirectories by dataset, year and month. They persist per session to avoid redownloads.
-#'
-#' How data for different time periods is exported differs by dataset.
-#' This has significant implications for how you get to usable full-year numbers or time series in different tables.
-#' See `vignette("statnipokladna")` for details on this.
-#'
-#' @param dataset_id A dataset ID. See `id` column in `sp_datasets` for a list of available codelists.
-#' @param year year, numeric, 2015-2018 for some datasets, 2010-2019 for others. Defaults to 2018.
-#' (see Details for how to work with data across time periods.)
-#' @param month month, numeric. Must be between 1 and 12. Defaults to 12.
-#' (see Details for how to work with data across time periods.)
-#' @param dest_dir character. Directory in which downloaded files will be stored.
-#' If left unset, will use the `statnipokladna.dest_dir` option if the option is set, and `tempdir()` otherwise. Will be created if it does not exist.
-#' @param redownload Redownload even if file has already been downloaded? Defaults to FALSE.
-#'
-#' @return character string with complete paths to downloaded files.
-#' @examples
-#' \donttest{
-#' budget_latest <- sp_get_dataset("finm")
-#' budget_2018 <- sp_get_dataset("finm", 2018)
-#' budget_mid2018 <- sp_get_dataset("finm", 2018, 6)
-#' }
-#' @family Core workflow
-#' @export
-sp_get_dataset <- function(dataset_id, year = 2018, month = 12,
-                           dest_dir = NULL, redownload = FALSE) {
-  if(interactive() == FALSE & (missing(year) | missing(month))) {
-    if(missing(year)) {
-      usethis::ui_warn("{usethis::ui_field('year')} not set.
-                     Using default of {usethis::ui_value(year)}.")
-
-    } else if(missing(month)) {
-      usethis::ui_warn("{usethis::ui_field('month')} not set.
-                     Using default of {usethis::ui_value(month)}.")
-
-    }
-
-    usethis::ui_todo("Set period parameters explicitly for reproducibility as the defaults may change in the future
-                     to provide access to the latest data by default.")
-  }
-
-  if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
-                                              default = tempdir())
-
-  if(!(month %in% c(1:12))) stop("`Month` must be an integer from 1 to 12.")
-  if(!(year %in% c(2010:lubridate::year(lubridate::today())))) stop("`Year` must be between 2010 and now.")
-  month <- formatC(month, width = 2, format = "d", flag = "0")
-  td <- file.path(dest_dir, dataset_id, year, month)
-  dir.create(td, showWarnings = FALSE, recursive = TRUE)
-  tf <- file.path(td, paste0(dataset_id, year, month, ".zip"))
-  if(file.exists(tf) & !redownload) {
-    usethis::ui_info("Files already in {td}, not downloading. Set {usethis::ui_code('redownload = TRUE')} if needed.")
-  } else {
-    dataset_url <- get_dataset_url(dataset_id = dataset_id, year = year, month = month)
-    usethis::ui_done("Storing downloaded archive in and extracting to {usethis::ui_path(td)}")
-    if(dest_dir == tempdir()) usethis::ui_info("Set {usethis::ui_field('dest_dir')} for more control over downloaded files.")
-    utils::download.file(dataset_url, tf, headers = c('User-Agent' = usr))
-    utils::unzip(tf, exdir = td)
-  }
-  file_list <- paste0(td, "/", list.files(td, pattern = "(csv|CSV)$"))
-  invisible(file_list)
-}
-
-#' Deprecated: Retrieve and read dataset from statnipokladna
-#'
-#' Deprecated, use `sp_get_dataset()` instead.\cr\cr
-#' \lifecycle{deprecated}
-#'
-#' @inheritParams sp_get_dataset
-#'
-#' @return character (link) if download = TRUE, nothing otherwise.
-#' @family Utilities
-#' @export
-get_dataset <- function(dataset_id, year = 2019, month = 12,
-                        dest_dir = NULL, redownload = FALSE) {
-  lifecycle::deprecate_warn("0.5.2", "statnipokladna::get_dataset()", "sp_get_dataset()")
-  sp_get_dataset(dataset_id = dataset_id, year = year, month = month,
-                 dest_dir = dest_dir, redownload = redownload)
 }

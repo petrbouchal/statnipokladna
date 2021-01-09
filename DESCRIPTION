@@ -35,9 +35,11 @@ Imports:
     utils (>= 3.6.0),
     xml2 (>= 1.2.2)
 Suggests: 
-    knitr,
+    knitr (>= 1.30),
+    ragg (>= 0.4.0),
     rmarkdown,
-    testthat (>= 2.1.0)
+    testthat (>= 2.1.0),
+    tidyselect (>= 1.1.0)
 VignetteBuilder: 
     knitr
 RdMacros: 

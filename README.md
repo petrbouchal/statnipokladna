@@ -13,8 +13,6 @@ downloads](https://cranlogs.r-pkg.org/badges/grand-total/statnipokladna)](https:
 downloads](https://cranlogs.r-pkg.org/badges/last-month/statnipokladna)](https://CRAN.R-project.org/package=statnipokladna)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![Travis build
-status](https://travis-ci.org/petrbouchal/statnipokladna.svg?branch=master)](https://travis-ci.org/petrbouchal/statnipokladna)
 [![R build
 status](https://github.com/petrbouchal/statnipokladna/workflows/R-CMD-check/badge.svg)](https://github.com/petrbouchal/statnipokladna/actions)
 <!-- badges: end -->
@@ -167,20 +165,20 @@ functional_categories <- sp_get_codelist("paragraf")
 
 ``` r
 functional_categories
-#> # A tibble: 552 x 7
-#>    paragraf skupina pododdil oddil paragraf_nazev          start_date end_date  
-#>    <chr>    <chr>   <chr>    <chr> <chr>                   <date>     <date>    
-#>  1 0000     0       0        0     Pro příjmy (technický … 1900-01-01 9999-12-31
-#>  2 1011     1       101      10    Udržování výrobního po… 1900-01-01 9999-12-31
-#>  3 1012     1       101      10    Podnikání a restruktur… 1900-01-01 9999-12-31
-#>  4 1013     1       101      10    Genetický potenciál ho… 1900-01-01 9999-12-31
-#>  5 1014     1       101      10    Ozdravování hospodářsk… 1900-01-01 9999-12-31
-#>  6 1019     1       101      10    Ostatní zemědělská a p… 1900-01-01 9999-12-31
-#>  7 1021     1       102      10    Organizace trhu s prod… 1900-01-01 9999-12-31
-#>  8 1022     1       102      10    Organizace trhu s výro… 1900-01-01 9999-12-31
-#>  9 1023     1       102      10    Organizace trhu s prod… 1900-01-01 9999-12-31
-#> 10 1024     1       102      10    Organizace trhu s výro… 1900-01-01 9999-12-31
-#> # … with 542 more rows
+#> # A tibble: 570 x 8
+#>    paragraf start_date end_date   nazev    skupina   oddil  pododdil   poznamka 
+#>    <chr>    <date>     <date>     <chr>    <chr>     <chr>  <chr>      <chr>    
+#>  1 0000     2010-01-01 9999-12-31 Pro pří… Příjmy    Příjmy Příjmy     Pro příj…
+#>  2 1011     2010-01-01 9999-12-31 Udržová… Zeměděls… Zeměd… Zemědělsk… Zeměděls…
+#>  3 1012     2010-01-01 9999-12-31 Podniká… Zeměděls… Zeměd… Zemědělsk… Podnikán…
+#>  4 1013     2010-01-01 9999-12-31 Genetic… Zeměděls… Zeměd… Zemědělsk… Genetick…
+#>  5 1014     2010-01-01 9999-12-31 Ozdravo… Zeměděls… Zeměd… Zemědělsk… Ozdrav.h…
+#>  6 1019     2010-01-01 9999-12-31 Ostatní… Zeměděls… Zeměd… Zemědělsk… Ostatní …
+#>  7 1021     2010-01-01 9999-12-31 Organiz… Zeměděls… Zeměd… Regulace … Regulace…
+#>  8 1022     2010-01-01 9999-12-31 Organiz… Zeměděls… Zeměd… Regulace … Org. trh…
+#>  9 1023     2010-01-01 9999-12-31 Organiz… Zeměděls… Zeměd… Regulace … Organiza…
+#> 10 1024     2010-01-01 9999-12-31 Organiz… Zeměděls… Zeměd… Regulace … Reg.trhu…
+#> # … with 560 more rows
 ```
 
 This contains all codes for this codelist, some of which are not valid
@@ -200,13 +198,12 @@ pass it as an object, provided that it has the right columns.
 local_budgets %>% 
   sp_add_codelist(functional_categories) %>% 
   sp_add_codelist("polozka")
-#> Warning: The `keep` argument of `group_map()` is deprecated as of dplyr 1.0.0.
-#> Please use the `.keep` argument instead.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_warnings()` to see where this warning was generated.
 #> ℹ Codelist file already in '~/sp_data/', not downloading. Set `redownload = TRUE` if needed.
 #> ℹ Processing codelist data
-#> # A tibble: 1,189,627 x 27
+#> ℹ Joining on 2 columns: polozka, poznamka.
+#>   This may indicate a problem with the data.
+#>   Set by if needed.
+#> # A tibble: 1,189,627 x 34
 #>    vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka
 #>    <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr> <chr>      <chr>    <chr>  
 #>  1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364   
@@ -219,25 +216,24 @@ local_budgets %>%
 #>  8 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1211   
 #>  9 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1332   
 #> 10 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1333   
-#> # … with 1,189,617 more rows, and 16 more variables: budget_adopted <dbl>,
+#> # … with 1,189,617 more rows, and 23 more variables: budget_adopted <dbl>,
 #> #   budget_amended <dbl>, budget_spending <dbl>, period_vykaz <date>,
-#> #   skupina <chr>, pododdil <chr>, oddil <chr>,
-#> #   functional_categories_paragraf_nazev <chr>,
 #> #   functional_categories_start_date <date>,
-#> #   functional_categories_end_date <date>, polozka_start_date <date>,
-#> #   polozka_end_date <date>, trida <chr>, seskupeni <chr>, podseskupeni <chr>,
-#> #   polozka_nazev <chr>
+#> #   functional_categories_end_date <date>, functional_categories_nazev <chr>,
+#> #   skupina <chr>, oddil <chr>, pododdil <chr>, poznamka <chr>,
+#> #   polozka_id <chr>, polozka_start_date <date>, polozka_end_date <date>,
+#> #   polozka_nazev <chr>, druh <chr>, trida <chr>, seskupeni <chr>,
+#> #   podseskupeni <chr>, kon_pol <lgl>, kon_okr <lgl>, kon_kraj <lgl>,
+#> #   kon_rep <lgl>
 ```
 
 Download a whole “výkaz” (dataset/data dump):
 
 ``` r
-sp_get_dataset("finm") # dataset ID, see `sp_datasets`
-#> Warning: Either year or month not set.
-#> Using defaults of 2018 and 12.
-#> ● Set these values explicitly for reproducibility as the defaults may change in the future
-#>   to provide access to the latest data by default.
-#> ℹ Files already in ~/sp_data/finm/2018/12, not downloading. Set `redownload = TRUE` if needed.
+sp_get_dataset("finm", year = 2019) # dataset ID, see `sp_datasets`
+#> Warning: month not set. Using default of 12.
+#> ● Set period parameters explicitly for reproducibility as the defaults may change in the future to provide access to the latest data by default.
+#> ℹ Files already in ~/sp_data/finm/2019/12, not downloading. Set `redownload = TRUE` if needed.
 ```
 
 This will put the files in a temp directory.
@@ -252,6 +248,22 @@ statnipokladna::sp_get_dataset_doc("finm")
 
 You can get details of all the available tables in the `sp_tables` data
 frame; for datasets, see `sp_datasets`.
+
+## Workflows and reproducibility
+
+The above examples present a simple all-in-one workflow, which is
+concise but can be too opaque when transparency and reproducibility
+matter. It is primarity aimed at workflows which prioritise updating
+data: every time the script is run, data is redownloaded, unless cached
+via the `dest_dir` parameter.
+
+In other situations, the priority might be to keep track of individual
+source files as they are downloaded from the data provider, or checking
+for changes at the data provider and keeping track of individual URLs
+from which the data was downloaded. For these situations, a workflow
+composed of lower-level functions is available, offering finer control
+of the steps. See the [workflow](/articles/workflow.html) vignette
+(`vignette("workflow", package = "statnipokladna")`).
 
 ## Background information
 

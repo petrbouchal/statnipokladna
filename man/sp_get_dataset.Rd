@@ -6,19 +6,19 @@
 \usage{
 sp_get_dataset(
   dataset_id,
-  year = 2018,
+  year,
   month = 12,
   dest_dir = NULL,
   redownload = FALSE
 )
 }
 \arguments{
-\item{dataset_id}{A dataset ID. See \code{id} column in \code{sp_datasets} for a list of available codelists.}
+\item{dataset_id}{A dataset ID. See \code{id} column in \code{sp_datasets} for a list of available datasets}
 
-\item{year}{year, numeric, 2015-2018 for some datasets, 2010-2019 for others. Defaults to 2018.
+\item{year}{year, numeric vector of length <= 1 (can take multiple values), 2015-2019 for some datasets, 2010-2020 for others. Defaults to 2018.
 (see Details for how to work with data across time periods.)}
 
-\item{month}{month, numeric. Must be between 1 and 12. Defaults to 12.
+\item{month}{month, numeric vector of length <= 1 (can take multiple values). Must be between 1 and 12. Defaults to 12.
 (see Details for how to work with data across time periods.)}
 
 \item{dest_dir}{character. Directory in which downloaded files will be stored.
@@ -27,14 +27,14 @@ If left unset, will use the \code{statnipokladna.dest_dir} option if the option 
 \item{redownload}{Redownload even if file has already been downloaded? Defaults to FALSE.}
 }
 \value{
-character string with complete paths to downloaded files.
+character string with complete paths to downloaded ZIP archives.
 }
 \description{
-Downloads and unzips files for a given dataset.
+Downloads ZIP archives for a given dataset. If \code{year} or \code{month} have length > 1, gets all combinations.
 }
 \details{
-Files are stored in a temp folder as determined by \code{tempdir()} and further sorted into
-subdirectories by dataset, year and month. They persist per session to avoid redownloads.
+Files are stored in a temp folder as determined by \code{tempdir()} or the \code{dest_dir} param or the \code{statnipokladna.dest_dir} option.
+and further sorted into subdirectories by dataset, year and month. If saved to \code{tempdir()} (the default), downloaded files per session to avoid redownloads.
 
 How data for different time periods is exported differs by dataset.
 This has significant implications for how you get to usable full-year numbers or time series in different tables.
@@ -42,7 +42,6 @@ See \code{vignette("statnipokladna")} for details on this.
 }
 \examples{
 \donttest{
-budget_latest <- sp_get_dataset("finm")
 budget_2018 <- sp_get_dataset("finm", 2018)
 budget_mid2018 <- sp_get_dataset("finm", 2018, 6)
 }

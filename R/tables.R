@@ -38,6 +38,121 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
   dplyr::mutate_if(is.character, stringi::stri_unescape_unicode)
 # usethis::use_data(sp_tables, overwrite = TRUE)
 
+
+#' Get path to a CSV file containing a table.
+#'
+#' This is normally called inside `sp_get_table()` but can be used separately if
+#' finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
+#'
+#' @param table_id Table ID; see `id` column in `sp_tables` for a list of available codelists.
+#' @param dataset_path Path to downloaded dataset, as output by `sp_get_dataset()`
+#' @param reunzip Whether to overwrite existing CSV files by unzipping the archive downlaoded by `sp_get_dataset()`. Defaults to FALSE.
+#'
+#' @return Character vector of length one - a path.
+#' @family Detailed workflow
+#' @examples
+#' \donttest{
+#' ds <- sp_get_dataset("rozv", 2018, 12)
+#' sp_get_table_file("balance-sheet", ds)
+#' }
+#' @export
+sp_get_table_file <- function(table_id, dataset_path, reunzip = FALSE) {
+  stopifnot(file.exists(dataset_path))
+  dd <- dirname(dataset_path)
+  dslist <- list.files(dd, pattern = "*.CSV|*.csv", full.names = T)
+  if(length(dslist) == 0 | reunzip) {
+    usethis::ui_info("Unzipping...")
+    dslist <- utils::unzip(dataset_path, exdir = dd)
+  }
+
+  table_regex <- paste0(sp_tables_i$file_regex[sp_tables_i$id == table_id])
+
+  table_file <- dslist[stringr::str_detect(dslist,
+                                           paste0(table_regex, "(_[0-9]*)?\\.(csv|CSV)"))]
+  if(length(table_file) != 1) {
+    if (length(table_file) > 1) {
+      ui_stop(c("More than one CSV files in the archive match.",
+                         "You might want to report a bug at {ui_path('https://github.com/petrbouchal/statnipokladna/issues')}."))
+    }  else {
+      ui_stop(c("No CSV file inside the downloaded archive matches files needed for the table.",
+                         "You might want to report a bug at {ui_path('https://github.com/petrbouchal/statnipokladna/issues')}."))
+    }
+  }
+  return(table_file)
+}
+
+
+#' Load a statnipokladna table from a CSV file
+#'
+#' This is normally called inside `sp_get_table()` but can be used separately if
+#' finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
+#'
+#' @param path path to a CSV file, as output by `sp_get_table_file()`.
+#' @param ico Organisation ID to filter by, if supplied.
+#'
+#' @return a [tibble][tibble::tibble-package]. See help for `sp_get_table()` for a key to the columns.
+#' @family Detailed workflow
+#' @examples
+#' \donttest{
+#' ds <- sp_get_dataset("rozv", 2018, 12)
+#' tf <- sp_get_table_file("balance-sheet", ds)
+#' sp_load_table(tf)
+#' }
+#' @export
+sp_load_table <- function(path, ico = NULL) {
+
+  ui_info("Reading data...")
+  suppressWarnings(suppressMessages(
+    dt <- readr::read_csv2(path, col_types = readr::cols(.default = readr::col_character()))))
+  # print(head(dt))
+  ui_info("Transforming data...")
+  if(max(stringr::str_length(dt$`ZC_ICO:ZC_ICO`), na.rm = TRUE) == 10) {
+    dt <- dplyr::mutate(dt, `ZC_ICO:ZC_ICO` = stringr::str_sub(.data$`ZC_ICO:ZC_ICO`, 3, 10))
+  }
+  if(!is.null(ico)) dt <- dt[dt$`ZC_ICO:ZC_ICO` %in% ico,]
+  dt <- dt %>%
+    purrr::set_names(stringr::str_remove(names(dt), "^[A-Z_0-9/]*:")) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::starts_with("ZU_")), ~switch_minus(.) %>% as.numeric(.)) %>%
+    tidyr::extract(.data$`0FISCPER`, c("per_yr", "per_m"), "([0-9]{4})0([0-9]{2})") %>%
+    dplyr::mutate(period_vykaz = lubridate::make_date(.data$per_yr, .data$per_m),
+                  period_vykaz = lubridate::make_date(.data$per_yr, .data$per_m,
+                                                      lubridate::days_in_month(.data$period_vykaz))) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), lubridate::dmy) %>%
+    dplyr::rename_all(dplyr::recode,
+                      ZCMMT_ITM = "polozka",
+                      ZC_VYKAZ = "vykaz",
+                      ZC_POLVYK = "polvyk",
+                      ZC_VTAB = "vtab",
+                      ZC_UCJED = "ucjed",
+                      ZFUNDS_CT = "finmisto",
+                      ZC_FUND = 'zdroj',
+                      `0FM_AREA` = "kapitola",
+                      ZC_ICO = "ico",
+                      ZC_KRAJ = "kraj",
+                      ZC_NUTS = "nuts",
+                      ZU_MONET = "previous_net",
+                      ZU_AOBTTO = "current_gross",
+                      ZU_AONET = "current_net",
+                      ZU_AOKORR = "current_correction",
+                      ZU_HLCIN = "previous_core",
+                      ZU_HOSCIN = "previous_economic",
+                      ZU_HLCIBO = "current_core",
+                      ZU_HCINBO = "current_economic",
+                      FUNC0AREA = "paragraf",
+                      ZU_ROZSCH = "budget_adopted",
+                      ZU_ROZPZM = "budget_amended",
+                      ZU_KROZP = "budget_final",
+                      ZU_ROZKZ = "budget_spending",
+                      ZU_STAVP = "before",
+                      ZU_STAVPO = "after",
+                      ZU_ZVYS = "increase",
+                      ZU_SNIZ = "decrease",
+                      ZU_BEZUO = "current",
+                      ZU_SYNUC = "synuc",
+                      `0FUNC_AREA` = "paragraf")
+  return(dt)
+}
+
 #' Get a statnipokladna table
 #'
 #' Cleans and loads a table. If needed, a dataset containing the table is downloaded.
@@ -121,8 +236,8 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #'  | ZU_BEZUO | current | current period |  běžné účetní období |  - |
 #'
 #'
-#' @param table_id A table ID. See `id` column in `sp_tables` for a list of available codelists.
-#' @param year year, numeric, 2015-2018 for some datasets, 2010-2018 for others.
+#' @param table_id A table ID. See `id` column in `sp_tables` for a list of available tables
+#' @param year year, numeric, 2015-2019 for some datasets, 2010-2020 for others.
 #' Can be a vector of length > 1 (see Details for how to work with data across time periods.).
 #' @param month month, numeric. Must be 3, 6, 9 or 12. Can be a vector of length > 1 (see details).
 #' @param ico ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See <http://monitor.statnipokladna.cz/datovy-katalog/prohlizec-ciselniku/ucjed> to look up ID of any org in the dataset.
@@ -134,7 +249,6 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #' @encoding UTF-8
 #' @examples
 #' \donttest{
-#' allorgs_latest <- sp_get_table("budget-central")
 #' allorgs_2018 <- sp_get_table("budget-central", 2018)
 #' allorgs_mid2018 <- sp_get_table("budget-central", 2018, 6)
 #' oneorg_multiyear <- sp_get_table("budget-central", 2017:2018, 12, ico = "00064581")
@@ -143,99 +257,45 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #' @export
 #' @family Core workflow
 #'
-sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
+sp_get_table <- function(table_id, year, month = 12, ico = NULL,
                       redownload = FALSE, dest_dir = NULL) {
   stopifnot(is.character(ico) | is.null(ico))
   if(interactive() == FALSE & (missing(year) | missing(month))) {
-    usethis::ui_warn("Either {usethis::ui_field('year')} or {usethis::ui_field('month')} not set.
-                     Using defaults of {usethis::ui_value(year)} and {usethis::ui_value(month)}.")
-    usethis::ui_todo("Set these values explicitly for reproducibility as the defaults may change in the future
-                     to provide access to the latest data by default.")
+    if(missing(year)) {
+      ui_stop("{ui_field('year')} not set. Please set a value.")
 
+    } else if(missing(month)) {
+      ui_warn("{ui_field('month')} not set. Using default of {ui_value(month)}.")
+
+    }
+
+    ui_todo("Set period parameters explicitly for reproducibility as the defaults may change in the future to provide access to the latest data by default.")
   }
 
   if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
                                               default = tempdir())
 
-  if(!(table_id %in% sp_tables_i$id)) usethis::ui_stop("Not a valid table id. Consult {usethis::ui_code('sp_tables')}.")
+  if(!(table_id %in% sp_tables_i$id)) ui_stop("Not a valid table id. Consult {ui_code('sp_tables')}.")
   dataset_id <- sp_tables_i$dataset_id[sp_tables_i$id == table_id]
   table_regex <- paste0(sp_tables_i$file_regex[sp_tables_i$id == table_id])
-  get_one_table <- function(dataset_id, year = year, month = month, dest_dir = dest_dir,
-                            redownload = redownload) {
-    dslist <- sp_get_dataset(dataset_id, year = year, month = month, dest_dir = dest_dir,
-                          redownload = redownload)
-    table_file <- dslist[stringr::str_detect(dslist,
-                                             paste0(table_regex, "(_[0-9]*)?\\.(csv|CSV)"))]
-    if(length(table_file) != 1) {
-      if (length(table_file) > 1) {
-        usethis::ui_stop(c("More than one CSV files in the archive match.",
-                           "You might want to report a bug at {usethis::ui_path('https://github.com/petrbouchal/statnipokladna/issues')}."))
-      }  else {
-        usethis::ui_stop(c("No CSV file inside the downloaded archive matches files needed for the table.",
-                           "You might want to report a bug at {usethis::ui_path('https://github.com/petrbouchal/statnipokladna/issues')}."))
-      }
-    }
+  years_months <- expand.grid(y = year, m = month, stringsAsFactors = F)
 
-    usethis::ui_info("Reading data...")
-    suppressWarnings(suppressMessages(
-      dt <- readr::read_csv2(table_file, col_types = readr::cols(.default = readr::col_character()))))
-    # print(head(dt))
-    usethis::ui_info("Transforming data...")
-    if(max(stringr::str_length(dt$`ZC_ICO:ZC_ICO`), na.rm = TRUE) == 10) {
-      dt <- dplyr::mutate(dt, `ZC_ICO:ZC_ICO` = stringr::str_sub(.data$`ZC_ICO:ZC_ICO`, 3, 10))
-    }
-    if(!is.null(ico)) dt <- dt[dt$`ZC_ICO:ZC_ICO` %in% ico,]
-    dt <- dt %>%
-      purrr::set_names(stringr::str_remove(names(dt), "^[A-Z_0-9/]*:")) %>%
-      dplyr::mutate_at(dplyr::vars(dplyr::starts_with("ZU_")), ~switch_minus(.) %>% as.numeric(.)) %>%
-      tidyr::extract(.data$`0FISCPER`, c("per_yr", "per_m"), "([0-9]{4})0([0-9]{2})") %>%
-      dplyr::mutate(period_vykaz = lubridate::make_date(.data$per_yr, .data$per_m),
-                    period_vykaz = lubridate::make_date(.data$per_yr, .data$per_m,
-                                                        lubridate::days_in_month(.data$period_vykaz))) %>%
-      dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), lubridate::dmy) %>%
-      dplyr::rename_all(dplyr::recode,
-                        ZCMMT_ITM = "polozka",
-                        ZC_VYKAZ = "vykaz",
-                        ZC_POLVYK = "polvyk",
-                        ZC_VTAB = "vtab",
-                        ZC_UCJED = "ucjed",
-                        ZFUNDS_CT = "finmisto",
-                        ZC_FUND = 'zdroj',
-                        `0FM_AREA` = "kapitola",
-                        ZC_ICO = "ico",
-                        ZC_KRAJ = "kraj",
-                        ZC_NUTS = "nuts",
-                        ZU_MONET = "previous_net",
-                        ZU_AOBTTO = "current_gross",
-                        ZU_AONET = "current_net",
-                        ZU_AOKORR = "current_correction",
-                        ZU_HLCIN = "previous_core",
-                        ZU_HOSCIN = "previous_economic",
-                        ZU_HLCIBO = "current_core",
-                        ZU_HCINBO = "current_economic",
-                        FUNC0AREA = "paragraf",
-                        ZU_ROZSCH = "budget_adopted",
-                        ZU_ROZPZM = "budget_amended",
-                        ZU_KROZP = "budget_final",
-                        ZU_ROZKZ = "budget_spending",
-                        ZU_STAVP = "before",
-                        ZU_STAVPO = "after",
-                        ZU_ZVYS = "increase",
-                        ZU_SNIZ = "decrease",
-                        ZU_BEZUO = "current",
-                        ZU_SYNUC = "synuc",
-                        `0FUNC_AREA` = "paragraf")
-    return(dt)
+  downloaded_datasets <- sp_get_dataset(dataset_id, year, month, dest_dir, redownload)
+
+  return_table <- function(dataset_path, table_id, ico) {
+    table_file_path <- sp_get_table_file(table_id, dataset_path, reunzip = redownload)
+    tbl <- sp_load_table(table_file_path, ico)
+    return(tbl)
   }
-  years_months <- expand.grid(y = year, m = month)
-  dt_fin <- purrr::map2_dfr(years_months$y, years_months$m,
-                            ~get_one_table(dataset_id, .x, .y, dest_dir = dest_dir,
-                                           redownload = redownload))
+
+  dt_fin <- purrr::map_dfr(downloaded_datasets, return_table, table_id, ico)
   # onyr <- c(2018) %>% purrr::map_dfr(~ sp_get_table(51101, year = ., month = 12))
   return(dt_fin)
 }
 # onyr <- c(2018) %>% purrr::map_dfr(~ sp_get_table(2, year = ., month = 12))
 # onyr <- c(2018) %>% purrr::map_dfr(~ sp_get_table(1, year = ., month = 12))
+
+# Deprecated --------------------------------------------------------------
 
 #' Deprecated: Get a statnipokladna table\cr\cr
 #' Deprecated, use `sp_get_table()` instead.
@@ -246,7 +306,7 @@ sp_get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
 #'
 #' @return a [tibble][tibble::tibble-package]
 #' @export
-get_table <- function(table_id, year = 2018, month = 12, ico = NULL,
+get_table <- function(table_id, year, month = 12, ico = NULL,
                       redownload = FALSE, dest_dir = NULL) {
   lifecycle::deprecate_warn("0.5.2", "statnipokladna::get_table()", "sp_get_table()")
 }

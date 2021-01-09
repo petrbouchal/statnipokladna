@@ -20,7 +20,6 @@ knitr::opts_chunk$set(
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/statnipokladna)](https://CRAN.R-project.org/package=statnipokladna)
 [![CRAN monthly downloads](https://cranlogs.r-pkg.org/badges/last-month/statnipokladna)](https://CRAN.R-project.org/package=statnipokladna)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![Travis build status](https://travis-ci.org/petrbouchal/statnipokladna.svg?branch=master)](https://travis-ci.org/petrbouchal/statnipokladna)
 [![R build status](https://github.com/petrbouchal/statnipokladna/workflows/R-CMD-check/badge.svg)](https://github.com/petrbouchal/statnipokladna/actions)
 <!-- badges: end -->
 
@@ -144,7 +143,7 @@ local_budgets %>%
 Download a whole "výkaz" (dataset/data dump):
 
 ```{r}
-sp_get_dataset("finm") # dataset ID, see `sp_datasets`
+sp_get_dataset("finm", year = 2019) # dataset ID, see `sp_datasets`
 ```
 
 This will put the files in a temp directory.
@@ -156,6 +155,17 @@ statnipokladna::sp_get_dataset_doc("finm")
 ```
 
 You can get details of all the available tables in the `sp_tables` data frame; for datasets, see `sp_datasets`.
+
+## Workflows and reproducibility
+
+The above examples present a simple all-in-one workflow, which is concise but can be too opaque when transparency and reproducibility matter. 
+It is primarity aimed at workflows which prioritise updating data: every time the script is run, data is redownloaded, unless cached via the `dest_dir` parameter.
+
+In other situations, the priority might be to keep track of individual source files as they are downloaded from the data provider, or checking for changes at the data provider and keeping track of individual URLs from which the data was downloaded.
+For these situations, a workflow composed of lower-level functions is available, offering finer control of the steps. See the [workflow](/articles/workflow.html) vignette (`vignette("workflow", package = "statnipokladna")`).
+
+
+
 
 ## Background information
 
