@@ -113,6 +113,8 @@ library(tarchetypes)
 
 tar_option_set(packages = c("dplyr", "statnipokladna"))
 
+# keep downloaded data in project directory
+options(statnipokladna.dest_dir = "sp_data")
 codelist_names <- c("druhuj", "poddruhuj", "nuts",
                     "paragraf", "paragraf_long",
                     "polozka", "polvyk")
