@@ -73,7 +73,7 @@ The workflow most suited for rigorous reproducibility will include the following
 
 {statnipokladna} has a set of lower-lever functions that allow you to proceed step by step, keeping track of intermediate data files, URLs and paths. 
 
-For data:
+For codelists:
 
 
 ```r
@@ -82,7 +82,7 @@ sp_cl_path <- sp_get_codelist_file(url = sp_cl_url)
 sp_cl <- sp_load_codelist(sp_cl_path)
 ```
 
-For a codelist:
+For data:
 
 
 
