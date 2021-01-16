@@ -148,7 +148,9 @@ tar_pipeline(targets_codelists)
 
 Note that we still keep `redownload` set to its default of `FALSE`. This means that when the upstream data changes (i.e. a request to the URL indicates that the file has changed on the server), the `sp_cl_url` target will run (thus notifying you of an upstream change) but the XML file in your `dest_dir` will not be overwritten. You can then choose to get an updated version of that codelist from the server by changing the `redownload` parameter.
 
-The targets workflow will also improve performance of codelist reading, since codelists will be stored in {targets}' fast datastore. In contrast, `sp_get_codelist()` must reread the XML time every time it is called, so even if the XML file has been downloaded previously, there is some overhead coming from the XML parsing.
+The targets workflow will also improve performance of codelist reading, since codelists will be stored in {targets}' fast datastore. In contrast, `sp_get_codelist()` must reread the XML file every time it is called, so even if the XML file had already been downloaded by previous function call, there is some overhead coming from the XML parsing.
+
+You could also use {targets} to track the more high-level workflow in part 2 above, but you would have less visiblity inside the targets workflow of intermediate URLs and files.
 
 For data files, the pipeline might look like this:
 
