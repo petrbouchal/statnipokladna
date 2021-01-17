@@ -156,3 +156,13 @@ In a more advanced approach, the branching logic in {targets} could be used to h
 ## Data storage
 
 TO DO when functions supporting arrow storage are in place.
+
+Fragments below:
+
+Instead of putting the data from all the tables across the time periods into a single data frame and then writing it on disk, we write each table into its own Arrow dataset and use Arrow's out-of-memory operations to merge and resave the dataset (which mostly means shuffling files from one place to another). This provides better performance (speed) and improved memory efficiency.
+
+Once you need to e.g. add codelists to your data, you will need it in memory (there are currently no dedicated functions to add codelist to an Arrow dataset), but Arrow allows you to efficiently filter rows and select columns before loading data into memory. You could also write your own logic for loading only parts of the data at a time and adding codelists, then resaving.
+
+### Reproducibility
+
+The Arrow-facing workflow currently offers only high-level functions. In {targets}, you can still track the resulting files in the Arrow dataset directory as a target. If you need finer-grained tracking of intermediate inputs (URLs, downloaded and unzipped data files), you will need to write the Arrow-facing logic yourself.
