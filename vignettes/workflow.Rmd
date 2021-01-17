@@ -139,9 +139,43 @@ targets_codelists <- list(
   # Rds or parquet files and track those via {targets}
 )
 
-# call tar_pipeline() to wrangle the targets together.
-tar_pipeline(targets_codelists)
+list(targets_codelists)
 ```
+
+And for data, it might look like this:
+
+(Note: still need a branching example here)
+
+```r
+
+library(targets)
+library(tarchetypes)
+
+# keep downloaded data in project directory
+options(statnipokladna.dest_dir = "sp_data")
+
+tar_option_set(packages = c("dplyr", "statnipokladna"))
+
+# Define targets
+targets_spdata <- list(
+  tar_target(d_year, 2019),
+  tar_target(d_month, 12),
+  tar_target(d_id, "rozv"),
+  tar_url(d_url, sp_get_dataset_url(d_id, d_year, d_month)),
+  tar_file(d_file, {is.character(d_url)
+    sp_get_dataset(d_id, d_year, d_month)}), # to make sure target runs whene data at URL changes
+  tar_target(table_file, sp_get_table_file("balance-sheet", d_file), format = "file"),
+  tar_target(table_praha, sp_load_table(table_file, "00064581"))
+  
+  # here, you might want to save the data to individual
+  # Rds or parquet files (or an Arrow dataset, see below) and track those via {targets}.
+)
+
+
+list(targets_spdata)
+
+```
+
 
 Note that we still keep `redownload` set to its default of `FALSE`. This means that when the upstream data changes (i.e. a request to the URL indicates that the file has changed on the server), the `sp_cl_url` target will run (thus notifying you of an upstream change) but the XML file in your `dest_dir` will not be overwritten. You can then choose to get an updated version of that codelist from the server by changing the `redownload` parameter.
 
