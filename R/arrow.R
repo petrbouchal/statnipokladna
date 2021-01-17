@@ -81,3 +81,33 @@ sp_create_arrow_dataset <- function(table_id, year, month, ..., dir = table_id,
               })
   return(unlist(paths))
 }
+
+sp_write_arrow <- function(table_id, year, month = 12, ico = NULL,
+                           redownload = FALSE, dest_dir = NULL,
+                           path, partitioning = c("vykaz_period", "vykaz_year", "vykaz_month"),
+                           format = c("parquet", "csv"),
+                           result = c("dataset", "dir", "files")) {
+  format = match.arg(format)
+  result = match.arg(result)
+
+  yearmon <- tidyr::crossing(yr = year, m = month)
+  print(yearmon)
+
+  arrow_dir <- marrow2_dir(.x = yearmon$yr, .y = yearmon$m,
+              .f = function(x, y) {sp_get_table(table_id = table_id, year = x,
+                                                month = y, ico = ico,
+                                                dest_dir = dest_dir,
+                                                redownload = redownload)},
+              .path = path, .partitioning = partitioning, .format = format)
+  rslt <- switch (result,
+    # this switch should be handled by calling different marrow_* functions
+    # once these are in place
+
+    # except for this option where we might want to input
+    # sp-specific partitioning params - or perhaps issue a message
+    # pointing the user to sp_read_arrow()
+    dataset = arrow::open_dataset(arrow_dir),
+    dir = arrow_dir,
+    files = list.files(arrow_dir, recursive = T, full.names = T),
+  )
+}
