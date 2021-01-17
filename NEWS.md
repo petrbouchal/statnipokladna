@@ -18,6 +18,7 @@
 * more informative errors when online files are not available
 * improve date parsing in `sp_get_codelist()` to handle inconsistent date formats in some codelists
 * faster loading of tables from previously downloaded and unzipped datasets
+* empty strings in codelists are now returned as NA
 
 ## Bug fixes
 
