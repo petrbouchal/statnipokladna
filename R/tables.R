@@ -279,8 +279,6 @@ sp_get_table <- function(table_id, year, month = 12, ico = NULL,
 
   if(!(table_id %in% sp_tables_i$id)) ui_stop("Not a valid table id. Consult {ui_code('sp_tables')}.")
   dataset_id <- sp_tables_i$dataset_id[sp_tables_i$id == table_id]
-  table_regex <- paste0(sp_tables_i$file_regex[sp_tables_i$id == table_id])
-  years_months <- expand.grid(y = year, m = month, stringsAsFactors = F)
 
   downloaded_datasets <- sp_get_dataset(dataset_id, year, month, dest_dir, redownload)
 
