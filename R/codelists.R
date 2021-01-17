@@ -97,7 +97,7 @@ sp_load_codelist <- function(path, n = NULL) {
     dplyr::mutate_at(dplyr::vars(dplyr::matches("^vykaz$")),
                      ~stringr::str_pad(., 3, "left", "0")) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::matches("^polvyk_order$")), as.numeric) %>%
-    dplyr::mutate(dplyr::across(dplyr::where(is.character), dplyr::na_if, ""))
+    dplyr::mutate(dplyr::across(tidyselect::where(is.character), dplyr::na_if, ""))
 
   return(xvals)
 }
