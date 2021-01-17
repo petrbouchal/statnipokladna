@@ -271,7 +271,7 @@ sp_get_table <- function(table_id, year, month = 12, ico = NULL,
 
     }
 
-    ui_todo("Set period parameters explicitly for reproducibility as the defaults may change in the future to provide access to the latest data by default.")
+    ui_todo("Set period parameters explicitly for reproducibility.")
   }
 
   if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
