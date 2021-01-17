@@ -177,12 +177,12 @@
 <li>keep track of when upstream files on the data provider’s online data store change (to monitor)</li>
 </ul>
 <p>{statnipokladna} has a set of lower-lever functions that allow you to proceed step by step, keeping track of intermediate data files, URLs and paths.</p>
-<p>For data:</p>
+<p>For codelists:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sp_cl_url</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sp_get_codelist_url.html">sp_get_codelist_url</a></span><span class="op">(</span><span class="st">"paragraf"</span><span class="op">)</span>
 <span class="va">sp_cl_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sp_get_codelist_file.html">sp_get_codelist_file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="va">sp_cl_url</span><span class="op">)</span>
 <span class="va">sp_cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sp_load_codelist.html">sp_load_codelist</a></span><span class="op">(</span><span class="va">sp_cl_path</span><span class="op">)</span></code></pre></div>
-<p>For a codelist:</p>
+<p>For data:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rozv_url</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sp_get_dataset_url.html">sp_get_dataset_url</a></span><span class="op">(</span><span class="st">"rozv"</span>, <span class="fl">2019</span>, <span class="fl">12</span>, 
                                check_if_exists <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
@@ -201,6 +201,8 @@
 
 <span class="fu">tar_option_set</span><span class="op">(</span>packages <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"dplyr"</span>, <span class="st">"statnipokladna"</span><span class="op">)</span><span class="op">)</span>
 
+<span class="co"># keep downloaded data in project directory</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>statnipokladna.dest_dir <span class="op">=</span> <span class="st">"sp_data"</span><span class="op">)</span>
 <span class="va">codelist_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"druhuj"</span>, <span class="st">"poddruhuj"</span>, <span class="st">"nuts"</span>,
                     <span class="st">"paragraf"</span>, <span class="st">"paragraf_long"</span>,
                     <span class="st">"polozka"</span>, <span class="st">"polvyk"</span><span class="op">)</span>
@@ -231,7 +233,8 @@
 <span class="co"># call tar_pipeline() to wrangle the targets together.</span>
 <span class="fu">tar_pipeline</span><span class="op">(</span><span class="va">targets_codelists</span><span class="op">)</span></code></pre></div>
 <p>Note that we still keep <code>redownload</code> set to its default of <code>FALSE</code>. This means that when the upstream data changes (i.e. a request to the URL indicates that the file has changed on the server), the <code>sp_cl_url</code> target will run (thus notifying you of an upstream change) but the XML file in your <code>dest_dir</code> will not be overwritten. You can then choose to get an updated version of that codelist from the server by changing the <code>redownload</code> parameter.</p>
-<p>The targets workflow will also improve performance of codelist reading, since codelists will be stored in {targets}’ fast datastore. In contrast, <code><a href="../reference/sp_get_codelist.html">sp_get_codelist()</a></code> must reread the XML time every time it is called, so even if the XML file has been downloaded previously, there is some overhead coming from the XML parsing.</p>
+<p>The targets workflow will also improve performance of codelist reading, since codelists will be stored in {targets}’ fast datastore. In contrast, <code><a href="../reference/sp_get_codelist.html">sp_get_codelist()</a></code> must reread the XML file every time it is called, so even if the XML file had already been downloaded by previous function call, there is some overhead coming from the XML parsing.</p>
+<p>You could also use {targets} to track the more high-level workflow in part 2 above, but you would have less visiblity inside the targets workflow of intermediate URLs and files.</p>
 <p>For data files, the pipeline might look like this:</p>
 <p>In a more advanced approach, the branching logic in {targets} could be used to handle the time periods as well.</p>
 </div>

@@ -169,6 +169,7 @@
 <li>
 <code><a href="../reference/sp_get_dataset.html">sp_get_dataset()</a></code> no longer unzips the downloaded archive. It therefore returns the path to the downloaded zip file, not to the unzipped files. This is needed to support a more modular workflow (see below and <code><a href="../articles/workflow.html">vignette("workflow", package = "statnipokladna")</a></code>).</li>
 <li>The <code>year</code> param in <code><a href="../reference/sp_get_table.html">sp_get_table()</a></code> and <code><a href="../reference/sp_get_dataset.html">sp_get_dataset()</a></code> now has no default. This is more sensible when there is no easy way to determine the latest available table/dataset and in any case better for reproducibility. The new <code><a href="../reference/sp_get_dataset_url.html">sp_get_dataset_url()</a></code> also has this updated behaviour.</li>
+<li>the column in budget-type tables (<code>budget-central</code>, <code>budget-local</code>) previously exported under the original name <code>0CI_TYPE</code> is now called <code>polozka_type</code>. Its meaning remains unclear so presumably this will not cause trouble to many users.</li>
 </ul>
 </div>
 <div id="new-features" class="section level2">
@@ -193,6 +194,7 @@
 <li>more informative errors when online files are not available</li>
 <li>improve date parsing in <code><a href="../reference/sp_get_codelist.html">sp_get_codelist()</a></code> to handle inconsistent date formats in some codelists</li>
 <li>faster loading of tables from previously downloaded and unzipped datasets</li>
+<li>empty strings in codelists are now returned as NA</li>
 </ul>
 </div>
 <div id="bug-fixes" class="section level2">
