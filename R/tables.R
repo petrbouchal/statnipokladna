@@ -127,6 +127,7 @@ sp_load_table <- function(path, ico = NULL) {
                       ZFUNDS_CT = "finmisto",
                       ZC_FUND = 'zdroj',
                       `0FM_AREA` = "kapitola",
+                      `0CI_TYPE` = "polozka_typ",
                       ZC_ICO = "ico",
                       ZC_KRAJ = "kraj",
                       ZC_NUTS = "nuts",
@@ -193,6 +194,7 @@ sp_load_table <- function(path, ico = NULL) {
 #'  | --- | --- | --- | --- | --- |
 #'  | ZCMMT_ITM | polozka |  item/line |  položka (druhové členění) | NB: polozka != polvyk |
 #'  | 0FM_AREA | kapitola | chapter  |  kapitola | - |
+#'  | 0CI_TYPE | polozka_type | item/line type  |  typ položky | - |
 #'  | FUNC0AREA | paragraf |  sector line | paragraf (odvětvové členění)  |  - |
 #'  | 0FUNC_AREA | paragraf |  sector line | paragraf (odvětvové členění)  |  - |
 #'  | ZU_ROZSCH | budget_adopted |  budget as originally adopted | schválený rozpočet  |  - |
