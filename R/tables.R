@@ -260,7 +260,7 @@ sp_load_table <- function(path, ico = NULL) {
 #' @family Core workflow
 #'
 sp_get_table <- function(table_id, year, month = 12, ico = NULL,
-                      redownload = FALSE, dest_dir = NULL) {
+                         redownload = FALSE, dest_dir = NULL) {
   stopifnot(is.character(ico) | is.null(ico))
   if(interactive() == FALSE & (missing(year) | missing(month))) {
     if(missing(year)) {
