@@ -49,6 +49,11 @@ sp_codelists <- tibble::tribble(~id, ~name,
 # usethis::use_data(sp_codelists, overwrite = TRUE)
 
 
+# https://stackoverflow.com/questions/62459736/how-do-i-use-tidyselect-where-in-a-custom-package
+# https://github.com/r-lib/tidyselect/issues/201
+# used below
+utils::globalVariables("where")
+
 #' Load codelist into a tibble from XML file
 #'
 #' This is normally called inside `sp_get_codelist()` but can be used separately if
@@ -97,7 +102,7 @@ sp_load_codelist <- function(path, n = NULL) {
     dplyr::mutate_at(dplyr::vars(dplyr::matches("^vykaz$")),
                      ~stringr::str_pad(., 3, "left", "0")) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::matches("^polvyk_order$")), as.numeric) %>%
-    dplyr::mutate(dplyr::across(tidyselect::where(is.character), dplyr::na_if, ""))
+    dplyr::mutate(dplyr::across(where(is.character), dplyr::na_if, ""))
 
   return(xvals)
 }
