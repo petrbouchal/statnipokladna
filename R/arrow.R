@@ -1,3 +1,5 @@
+# possibly pointless function, unless we want to enable writing CSV arrow datasets without arrow package
+
 write_to_arrow_dataset <- function(df, dir, ..., hive = TRUE, format = c("parquet", "csv")) {
   usethis::ui_info("Writing files...")
   format <- match.arg(format)
