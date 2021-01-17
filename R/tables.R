@@ -127,6 +127,7 @@ sp_load_table <- function(path, ico = NULL) {
                       ZFUNDS_CT = "finmisto",
                       ZC_FUND = 'zdroj',
                       `0FM_AREA` = "kapitola",
+                      `0CI_TYPE` = "polozka_typ",
                       ZC_ICO = "ico",
                       ZC_KRAJ = "kraj",
                       ZC_NUTS = "nuts",
@@ -193,6 +194,7 @@ sp_load_table <- function(path, ico = NULL) {
 #'  | --- | --- | --- | --- | --- |
 #'  | ZCMMT_ITM | polozka |  item/line |  položka (druhové členění) | NB: polozka != polvyk |
 #'  | 0FM_AREA | kapitola | chapter  |  kapitola | - |
+#'  | 0CI_TYPE | polozka_type | item/line type  |  typ položky | - |
 #'  | FUNC0AREA | paragraf |  sector line | paragraf (odvětvové členění)  |  - |
 #'  | 0FUNC_AREA | paragraf |  sector line | paragraf (odvětvové členění)  |  - |
 #'  | ZU_ROZSCH | budget_adopted |  budget as originally adopted | schválený rozpočet  |  - |
@@ -258,7 +260,7 @@ sp_load_table <- function(path, ico = NULL) {
 #' @family Core workflow
 #'
 sp_get_table <- function(table_id, year, month = 12, ico = NULL,
-                      redownload = FALSE, dest_dir = NULL) {
+                         redownload = FALSE, dest_dir = NULL) {
   stopifnot(is.character(ico) | is.null(ico))
   if(interactive() == FALSE & (missing(year) | missing(month))) {
     if(missing(year)) {
@@ -269,7 +271,7 @@ sp_get_table <- function(table_id, year, month = 12, ico = NULL,
 
     }
 
-    ui_todo("Set period parameters explicitly for reproducibility as the defaults may change in the future to provide access to the latest data by default.")
+    ui_todo("Set period parameters explicitly for reproducibility.")
   }
 
   if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",

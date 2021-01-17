@@ -4,6 +4,7 @@
 
 * `sp_get_dataset()` no longer unzips the downloaded archive. It therefore returns the path to the downloaded zip file, not to the unzipped files. This is needed to support a more modular workflow (see below and `vignette("workflow", package = "statnipokladna")`).
 * The `year` param in `sp_get_table()` and `sp_get_dataset()` now has no default. This is more sensible when there is no easy way to determine the latest available table/dataset and in any case better for reproducibility. The new `sp_get_dataset_url()` also has this updated behaviour.
+* the column in budget-type tables (`budget-central`, `budget-local`) previously exported under the original name `0CI_TYPE` is now called `polozka_type`. Its meaning remains unclear so presumably this will not cause trouble to many users. 
 
 ## New features
 
@@ -18,6 +19,7 @@
 * more informative errors when online files are not available
 * improve date parsing in `sp_get_codelist()` to handle inconsistent date formats in some codelists
 * faster loading of tables from previously downloaded and unzipped datasets
+* empty strings in codelists are now returned as NA
 
 ## Bug fixes
 

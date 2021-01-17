@@ -144,7 +144,7 @@ sp_get_dataset <- function(dataset_id, year, month = 12,
       ui_warn("{ui_field('month')} not set. Using default of {ui_value(month)}.")
     }
 
-    ui_todo("Set period parameters explicitly for reproducibility as the defaults may change in the future to provide access to the latest data by default.")
+    ui_todo("Set period parameters explicitly for reproducibility.")
   }
 
   if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
@@ -164,7 +164,7 @@ sp_get_dataset <- function(dataset_id, year, month = 12,
       ui_info("Files already in {td}, not downloading. Set {ui_code('redownload = TRUE')} if needed.")
     } else {
       dataset_url <- sp_get_dataset_url(dataset_id = dataset_id, year = year, month = month)
-      ui_done("Storing downloaded archive in and extracting to {ui_path(td)}")
+      ui_done("Storing downloaded archive in {ui_path(td)}")
       if(dest_dir == tempdir()) ui_info("Set {ui_field('dest_dir')} for more control over downloaded files.")
       utils::download.file(dataset_url, tf, headers = c('User-Agent' = usr))
     }

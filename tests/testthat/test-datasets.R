@@ -17,8 +17,9 @@ check_dataset_error <- function(dataset, year, month) {
 test_that("select downloads exist", {
   skip_on_cran()
   expect_type(purrr::map_chr(sp_datasets$id[sp_datasets$id != "finu"],
-                             sp_get_dataset_url), type = "character")
-  expect_type(sp_get_dataset_url("finm", 2012, "12"), "character")
+                             sp_get_dataset_url, year = 2015, month = 12),
+              type = "character")
+  expect_type(sp_get_dataset_url("finm", 2015, "12"), "character")
   expect_error(sp_get_dataset_url("finu")) # default dates should not work
   expect_error(sp_get_dataset_url("x"))
 })

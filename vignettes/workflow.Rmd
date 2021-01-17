@@ -7,21 +7,16 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE, comment = "#>", out.width = "100%",
-  fig.width = 7, fig.height = 4, dev = "ragg_png", dpi = 150,
-  fig.path = "workflow-vignette-",
-  message = FALSE, warning = FALSE, error = FALSE
-)
-```
 
-```{r setup}
+
+
+```r
 library(statnipokladna)
 # library(ggplot2)
 ```
 
-```{r plt}
+
+```r
 # plot(cars) # for testing figure file logic
 ```
 
@@ -78,22 +73,22 @@ The workflow most suited for rigorous reproducibility will include the following
 
 {statnipokladna} has a set of lower-lever functions that allow you to proceed step by step, keeping track of intermediate data files, URLs and paths. 
 
-For a codelist:
+For codelists:
 
-```{r}
+
+```r
 sp_cl_url <- sp_get_codelist_url("paragraf")
 sp_cl_path <- sp_get_codelist_file(url = sp_cl_url)
 sp_cl <- sp_load_codelist(sp_cl_path)
 ```
 
-For a table:
+For data:
 
-```{r}
-rozv_path_fn <- funtcion(dataset_id, year, month, url) {
-  sp_get_dataset("rozv", 2019, 12)
-  }
 
-rozv_url <- sp_get_dataset_url("rozv", 2019, 12) # for tracking URL if needed
+
+```r
+rozv_url <- sp_get_dataset_url("rozv", 2019, 12, 
+                               check_if_exists = T)
 rozv_path <- sp_get_dataset("rozv", 2019, 12)
 rozv_stat_path <- sp_get_table_file("balance-sheet", 
                                     rozv_path)
@@ -105,11 +100,9 @@ This should be complemented by setting the `statnipokladna.dest_dir` option in a
 
 Note that we keep `redownload` set to its default of `FALSE` to avoid being surprised by changes to the upstream data on the provider's server. (It is up to you whether to commit the downloaded data to version control - in the case of some core codelists, this would make sense.) 
 
-This step-by-step workflow is suitable for being turned into an explicit pipeline e.g. using the [{targets}](https://wlandau.github.io/targets/) framework.
+This step-by-step workflow is suitable for being turned into an explicit pipeline e.g. using the {targets} framework.
 
 Below is the content of a hypothetical `_targets.R` file that will allow you to keep track of the pipeline for using codelists, from initial function calls, via URLs to the resulting objects.
-
-> Note the {targets} package is in active development; this script works on the 0.0.9004 version ().
 
 ```r
 library(targets)
@@ -117,6 +110,8 @@ library(tarchetypes)
 
 tar_option_set(packages = c("dplyr", "statnipokladna"))
 
+# keep downloaded data in project directory
+options(statnipokladna.dest_dir = "sp_data")
 codelist_names <- c("druhuj", "poddruhuj", "nuts",
                     "paragraf", "paragraf_long",
                     "polozka", "polvyk")
@@ -144,17 +139,15 @@ targets_codelists <- list(
   # Rds or parquet files and track those via {targets}
 )
 
-targets_data <- list(
- tar_target()
-)
-
-# provide a list as output of the entire script
-list(targets_codelists, targets_data)
+# call tar_pipeline() to wrangle the targets together.
+tar_pipeline(targets_codelists)
 ```
 
 Note that we still keep `redownload` set to its default of `FALSE`. This means that when the upstream data changes (i.e. a request to the URL indicates that the file has changed on the server), the `sp_cl_url` target will run (thus notifying you of an upstream change) but the XML file in your `dest_dir` will not be overwritten. You can then choose to get an updated version of that codelist from the server by changing the `redownload` parameter.
 
-The targets workflow will also improve performance of codelist reading, since codelists will be stored in {targets}' fast datastore. In contrast, `sp_get_codelist()` must reread the XML time every time it is called, so even if the XML file has been downloaded previously, there is some overhead coming from the XML parsing.
+The targets workflow will also improve performance of codelist reading, since codelists will be stored in {targets}' fast datastore. In contrast, `sp_get_codelist()` must reread the XML file every time it is called, so even if the XML file had already been downloaded by previous function call, there is some overhead coming from the XML parsing.
+
+You could also use {targets} to track the more high-level workflow in part 2 above, but you would have less visiblity inside the targets workflow of intermediate URLs and files.
 
 For data files, the pipeline might look like this:
 

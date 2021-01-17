@@ -70,6 +70,7 @@ Data is processed in the following way:
    Original \tab Output \tab English \tab Czech \tab Note \cr
    ZCMMT_ITM \tab polozka \tab item/line \tab položka (druhové členění) \tab NB: polozka != polvyk \cr
    0FM_AREA \tab kapitola \tab chapter \tab kapitola \tab - \cr
+   0CI_TYPE \tab polozka_type \tab item/line type \tab typ položky \tab - \cr
    FUNC0AREA \tab paragraf \tab sector line \tab paragraf (odvětvové členění) \tab - \cr
    0FUNC_AREA \tab paragraf \tab sector line \tab paragraf (odvětvové členění) \tab - \cr
    ZU_ROZSCH \tab budget_adopted \tab budget as originally adopted \tab schválený rozpočet \tab - \cr
