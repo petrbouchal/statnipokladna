@@ -104,12 +104,26 @@
       "Repository": "CRAN",
       "Hash": "ff0becff7bfdfe3f75d29aff8f3172dd"
     },
+    "clipr": {
+      "Package": "clipr",
+      "Version": "0.7.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "08cf4045c149a0f0eaf405324c7495bd"
+    },
     "cpp11": {
       "Package": "cpp11",
       "Version": "0.2.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "c4c83167f43ca762a9fa998d4fead3ae"
+    },
+    "crayon": {
+      "Package": "crayon",
+      "Version": "1.3.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0d57bc8e27b7ba9e45dba825ebc0de6b"
     },
     "curl": {
       "Package": "curl",
@@ -181,6 +195,20 @@
       "Repository": "CRAN",
       "Hash": "b8cff1d1391fd1ad8b65877f4c7f2e53"
     },
+    "gh": {
+      "Package": "gh",
+      "Version": "1.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "89ea5998938d1ad55f035c8a86f96b74"
+    },
+    "git2r": {
+      "Package": "git2r",
+      "Version": "0.27.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "531a82d1beed1f545beb25f4f5945bf7"
+    },
     "glue": {
       "Package": "glue",
       "Version": "1.4.1",
@@ -215,6 +243,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "a525aba14184fec243f9eaec62fbed43"
+    },
+    "ini": {
+      "Package": "ini",
+      "Version": "0.3.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "6154ec2223172bce8162d4153cda21f7"
     },
     "jsonlite": {
       "Package": "jsonlite",
@@ -393,10 +428,10 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "0.9.3",
+      "Version": "0.12.5",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "c1a367437d8a8a44bec4b9d4974cb20c"
+      "Hash": "5c0cdb37f063c58cdab3c7e9fbb8bd2c"
     },
     "rlang": {
       "Package": "rlang",
@@ -495,6 +530,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "a4b9662282097d1033c60420dcb83350"
+    },
+    "usethis": {
+      "Package": "usethis",
+      "Version": "1.6.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "e1985f5a9985fea2e338fa7eb99018ca"
     },
     "utf8": {
       "Package": "utf8",
