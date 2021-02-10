@@ -2,7 +2,8 @@
 
 ## New features
 
-* `sp_get_catalogue()` returns a list of all currently available files for download along with their metadata (temporal coverage, URL), using the SPARQL endpoint at <https://opendata.mfcr.cz/lod/monitor>.
+* `sp_list_datasets()` returns a list of all currently available files for download along with their metadata (temporal coverage, URL), using the SPARQL endpoint at <https://opendata.mfcr.cz/lod/monitor>.
+* `sp_list_codelists()` returns a list of all currently available codelists, using the SPARQL endpoint at <https://opendata.mfcr.cz/lod/monitor>.
 
 ## Improvements
 
