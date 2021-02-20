@@ -123,8 +123,8 @@ Budget data has a special form: the available data files provide all sorts of br
 What this means is that to get a meaningful number, you need to do a lot of summarising. It also means that if you are only interested in, say, the capital spend of an organisation, you will need to:
 
 - filter for that orginsation by `ico`
-- `sp_add_codelist("polvyk")` for the "druhové členění", roughly meaning the capital x current breakdown
-- group at the right level of the `polvyk_` categorisation
+- `sp_add_codelist("polozka")` for the "druhové členění", roughly meaning the capital x current breakdown
+- group at the right level of the `polozka` categorisation
 - summarise
 
 Unless you are interested in further detail, you do not need to add any other codelists.
