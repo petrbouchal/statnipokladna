@@ -137,7 +137,7 @@ The budget datasets contain columns with monetary values at each phase of the bu
 
 If you are summing data across multiple organisations, you will need to take care of consolidation. Typically this concerns relations between levels of government, e.g. a region gives grants to municipalities which then spend them, and consolidation ensures you only count the money once as it flows outside the public sector.
 
-The metadata allowing consolidation is contained in the "polozka" codelist in columns `kon_*`. These are TRUE/FALSE and you consolidate data by excluding certain levels (i.e. filtering out items for which that `kon_*` column is TRUE). 
+The metadata allowing consolidation is contained in the "polozka" codelist in columns `kon_*`. These are TRUE/FALSE and you consolidate data by excluding certain levels (i.e. filtering out items for which that `kon_*` column is TRUE).
 
 This is necessary even for seemingly smaller entities, like some municipalities, if they have any organisations which they establish, like schools - because those report their own money. The correct way to get their budgetary figures is to filter for their geography, then summarise across all organisations included in that geography, and consolidate.
 
