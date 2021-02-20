@@ -185,6 +185,8 @@ You could also use {targets} to track the more high-level workflow in part 2 abo
 
 For data files, the pipeline might look like this:
 
+TODO
+
 In a more advanced approach, the branching logic in {targets} could be used to handle the time periods as well.
 
 ## Data storage
