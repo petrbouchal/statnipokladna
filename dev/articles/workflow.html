@@ -230,12 +230,41 @@
   <span class="co"># Rds or parquet files and track those via {targets}</span>
 <span class="op">)</span>
 
-<span class="co"># call tar_pipeline() to wrangle the targets together.</span>
-<span class="fu">tar_pipeline</span><span class="op">(</span><span class="va">targets_codelists</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">targets_codelists</span><span class="op">)</span></code></pre></div>
+<p>And for data, it might look like this:</p>
+<p>(Note: still need a branching example here)</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">targets</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">tarchetypes</span><span class="op">)</span>
+
+<span class="co"># keep downloaded data in project directory</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>statnipokladna.dest_dir <span class="op">=</span> <span class="st">"sp_data"</span><span class="op">)</span>
+
+<span class="fu">tar_option_set</span><span class="op">(</span>packages <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"dplyr"</span>, <span class="st">"statnipokladna"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="co"># Define targets</span>
+<span class="va">targets_spdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>
+  <span class="fu">tar_target</span><span class="op">(</span><span class="va">d_year</span>, <span class="fl">2019</span><span class="op">)</span>,
+  <span class="fu">tar_target</span><span class="op">(</span><span class="va">d_month</span>, <span class="fl">12</span><span class="op">)</span>,
+  <span class="fu">tar_target</span><span class="op">(</span><span class="va">d_id</span>, <span class="st">"rozv"</span><span class="op">)</span>,
+  <span class="fu">tar_url</span><span class="op">(</span><span class="va">d_url</span>, <span class="fu"><a href="../reference/sp_get_dataset_url.html">sp_get_dataset_url</a></span><span class="op">(</span><span class="va">d_id</span>, <span class="va">d_year</span>, <span class="va">d_month</span><span class="op">)</span><span class="op">)</span>,
+  <span class="fu">tar_file</span><span class="op">(</span><span class="va">d_file</span>, <span class="op">{</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">d_url</span><span class="op">)</span>
+    <span class="fu"><a href="../reference/sp_get_dataset.html">sp_get_dataset</a></span><span class="op">(</span><span class="va">d_id</span>, <span class="va">d_year</span>, <span class="va">d_month</span><span class="op">)</span><span class="op">}</span><span class="op">)</span>, <span class="co"># to make sure target runs when data at URL changes</span>
+  <span class="fu">tar_target</span><span class="op">(</span><span class="va">table_file</span>, <span class="fu"><a href="../reference/sp_get_table_file.html">sp_get_table_file</a></span><span class="op">(</span><span class="st">"balance-sheet"</span>, <span class="va">d_file</span><span class="op">)</span>, format <span class="op">=</span> <span class="st">"file"</span><span class="op">)</span>,
+  <span class="fu">tar_target</span><span class="op">(</span><span class="va">table_praha</span>, <span class="fu"><a href="../reference/sp_load_table.html">sp_load_table</a></span><span class="op">(</span><span class="va">table_file</span>, <span class="st">"00064581"</span><span class="op">)</span><span class="op">)</span>
+  
+  <span class="co"># here, you might want to save the data to individual</span>
+  <span class="co"># Rds or parquet files (or an Arrow dataset, see below) and track those via {targets}.</span>
+<span class="op">)</span>
+
+
+<span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">targets_spdata</span><span class="op">)</span></code></pre></div>
 <p>Note that we still keep <code>redownload</code> set to its default of <code>FALSE</code>. This means that when the upstream data changes (i.e. a request to the URL indicates that the file has changed on the server), the <code>sp_cl_url</code> target will run (thus notifying you of an upstream change) but the XML file in your <code>dest_dir</code> will not be overwritten. You can then choose to get an updated version of that codelist from the server by changing the <code>redownload</code> parameter.</p>
 <p>The targets workflow will also improve performance of codelist reading, since codelists will be stored in {targets}’ fast datastore. In contrast, <code><a href="../reference/sp_get_codelist.html">sp_get_codelist()</a></code> must reread the XML file every time it is called, so even if the XML file had already been downloaded by previous function call, there is some overhead coming from the XML parsing.</p>
 <p>You could also use {targets} to track the more high-level workflow in part 2 above, but you would have less visiblity inside the targets workflow of intermediate URLs and files.</p>
 <p>For data files, the pipeline might look like this:</p>
+<p>TODO</p>
 <p>In a more advanced approach, the branching logic in {targets} could be used to handle the time periods as well.</p>
 </div>
 </div>
@@ -257,7 +286,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Petr Bouchal.</p>
+  <p>Developed by <a href="https://petrbouchal.xyz">Petr Bouchal</a>.</p>
 </div>
 
 <div class="pkgdown">
