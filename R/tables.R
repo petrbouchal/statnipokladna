@@ -128,9 +128,16 @@ sp_load_table <- function(path, ico = NULL) {
                       ZC_FUND = 'zdroj',
                       `0FM_AREA` = "kapitola",
                       `0CI_TYPE` = "polozka_typ",
+                      `0PU_MEASURE` = "rozprog",
                       ZC_ICO = "ico",
                       ZC_KRAJ = "kraj",
                       ZC_NUTS = "nuts",
+                      ZC_LAU = "okres",
+                      ZC_PSUK = "psuk",
+                      ZC_UCRIS = "ucris",
+                      ZC_EDS = "eds",
+                      ZC_PVS = "pvs",
+                      ZC_ZREUZ = "ucelznak",
                       ZU_MONET = "previous_net",
                       ZU_AOBTTO = "current_gross",
                       ZU_AONET = "current_net",
@@ -144,6 +151,7 @@ sp_load_table <- function(path, ico = NULL) {
                       ZU_ROZPZM = "budget_amended",
                       ZU_KROZP = "budget_final",
                       ZU_ROZKZ = "budget_spending",
+                      ZU_OBLIG = "budget_oblig",
                       ZU_STAVP = "before",
                       ZU_STAVPO = "after",
                       ZU_ZVYS = "increase",
@@ -175,7 +183,7 @@ sp_load_table <- function(path, ico = NULL) {
 #'
 #' ## Correspondence between input and output columns
 #'
-#' **Shared**
+#' **Shared/multiple tables**
 #'
 #'| Original | Output | English | Czech | Note |
 #'  | --- | --- | --- | --- | --- |
@@ -187,6 +195,7 @@ sp_load_table <- function(path, ico = NULL) {
 #'  | ZC_FUND | zdroj | funding source | zdroj |  - |
 #'  | ZC_KRAJ | kraj | region | kraj |  - |
 #'  | ZC_NUTS | nuts | NUTS code | NUTS kód |  - |
+#'  | ZC_LAU | okres | NUTS code of LAU1 unit | LAU1 kód | - |
 #'
 #'  **Tables `budget-*`**
 #'
@@ -196,11 +205,30 @@ sp_load_table <- function(path, ico = NULL) {
 #'  | 0FM_AREA | kapitola | chapter  |  kapitola | - |
 #'  | 0CI_TYPE | polozka_type | item/line type  |  typ položky | - |
 #'  | FUNC0AREA | paragraf |  sector line | paragraf (odvětvové členění)  |  - |
+#'  | ZC_PVS | pvs | programme code | programové výdaje státu | post-2014 |
+#'  | ZC_EDS | eds | subsidy and proprty evidence | Evidenční dotační systém / správa majetku ve vlastnictví státu | post-2014, No codelist - perhaps external via http://www.edssmvs.cz/DocumentsList.aspx?Agenda=CEIS |
+#'  | ZC_UCRIS | ucris | purpose | Účel | post-2014, no codelist found |
 #'  | 0FUNC_AREA | paragraf |  sector line | paragraf (odvětvové členění)  |  - |
 #'  | ZU_ROZSCH | budget_adopted |  budget as originally adopted | schválený rozpočet  |  - |
 #'  | ZU_ROZPZM | budget_amended |  budget as amended throughout the year | rozpočet po změnách  |  - |
 #'  | ZU_KROZP | budget_final |  final budget |  konečný rozpočet | - |
+#'  | ZU_OBLIG | budget_oblig | ? | obligo | - |
 #'  | ZU_ROZKZ | budget_spending |  actual spending | skutečnost  |  - |
+#'
+#'  **Table `budget-indicators`**
+#'
+#'  | Original | Output | English | Czech | Note |
+#'  | ZC_PSUK | psuk | budgetary indicator | Závazný a průřezový indikátor | Use `psuk` codelist |
+#'
+#' **Table `budget-central-old-subsidies` **
+#'
+#'  | Original | Output | English | Czech | Note |
+#'  | ZC_ZREUZ | ucelznak | Purpose identifier | Účelový znak | - |
+#'
+#' **Table `budget-central-old-purpose-grants` **
+#'
+#'  | Original | Output | English | Czech | Note |
+#'  | 0PU_MEASURE | rozprog | Budgetary programme | Rozpočtový program | - |
 #'
 #'  **Tables `balance-sheet*`**
 #'

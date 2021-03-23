@@ -53,7 +53,7 @@ Data is processed in the following way:
 }
 \subsection{Correspondence between input and output columns}{
 
-\strong{Shared}\tabular{lllll}{
+\strong{Shared/multiple tables}\tabular{lllll}{
    Original \tab Output \tab English \tab Czech \tab Note \cr
    ZC_VTAB \tab vtab \tab table number \tab tabulka \tab - \cr
    ZC_UCJED \tab ucjed \tab accounting unit \tab účetní jednotka \tab NB: ucjed != ico; the two codes are different; ICO is universal, ucjed is specific to SP, and both denote an organisation. \cr
@@ -63,6 +63,7 @@ Data is processed in the following way:
    ZC_FUND \tab zdroj \tab funding source \tab zdroj \tab - \cr
    ZC_KRAJ \tab kraj \tab region \tab kraj \tab - \cr
    ZC_NUTS \tab nuts \tab NUTS code \tab NUTS kód \tab - \cr
+   ZC_LAU \tab okres \tab NUTS code of LAU1 unit \tab LAU1 kód \tab - \cr
 }
 
 
@@ -72,13 +73,32 @@ Data is processed in the following way:
    0FM_AREA \tab kapitola \tab chapter \tab kapitola \tab - \cr
    0CI_TYPE \tab polozka_type \tab item/line type \tab typ položky \tab - \cr
    FUNC0AREA \tab paragraf \tab sector line \tab paragraf (odvětvové členění) \tab - \cr
+   ZC_PVS \tab pvs \tab programme code \tab programové výdaje státu \tab post-2014 \cr
+   ZC_EDS \tab eds \tab subsidy and proprty evidence \tab Evidenční dotační systém / správa majetku ve vlastnictví státu \tab post-2014, No codelist - perhaps external via http://www.edssmvs.cz/DocumentsList.aspx?Agenda=CEIS \cr
+   ZC_UCRIS \tab ucris \tab purpose \tab Účel \tab post-2014, no codelist found \cr
    0FUNC_AREA \tab paragraf \tab sector line \tab paragraf (odvětvové členění) \tab - \cr
    ZU_ROZSCH \tab budget_adopted \tab budget as originally adopted \tab schválený rozpočet \tab - \cr
    ZU_ROZPZM \tab budget_amended \tab budget as amended throughout the year \tab rozpočet po změnách \tab - \cr
    ZU_KROZP \tab budget_final \tab final budget \tab konečný rozpočet \tab - \cr
+   ZU_OBLIG \tab budget_oblig \tab ? \tab obligo \tab - \cr
    ZU_ROZKZ \tab budget_spending \tab actual spending \tab skutečnost \tab - \cr
 }
 
+
+\strong{Table \code{budget-indicators}}
+
+| Original | Output | English | Czech | Note |
+| ZC_PSUK | psuk | budgetary indicator | Závazný a průřezový indikátor | Use \code{psuk} codelist |
+
+**Table \code{budget-central-old-subsidies} **
+
+| Original | Output | English | Czech | Note |
+| ZC_ZREUZ | ucelznak | Purpose identifier | Účelový znak | - |
+
+**Table \code{budget-central-old-purpose-grants} **
+
+| Original | Output | English | Czech | Note |
+| 0PU_MEASURE | rozprog | Budgetary programme | Rozpočtový program | - |
 
 \strong{Tables \verb{balance-sheet*}}\tabular{lllll}{
    Original \tab Output \tab English \tab Czech \tab Note \cr

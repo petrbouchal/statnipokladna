@@ -20,6 +20,7 @@
 * improve date parsing in `sp_get_codelist()` to handle inconsistent date formats in some codelists
 * faster loading of tables from previously downloaded and unzipped datasets
 * empty strings in codelists are now returned as NA
+* more columns are now properly named in the output so they can be linked to codelists, incl. columns related to programme spend and rifngfenced ('purpose'-marked) spend
 
 ## Bug fixes
 
