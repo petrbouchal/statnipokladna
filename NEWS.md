@@ -21,7 +21,7 @@
 * faster loading of tables from previously downloaded and unzipped datasets
 * empty strings in codelists are now returned as NA
 * more columns are now properly named in the output so they can be linked to codelists, incl. columns related to programme spend and rifngfenced ('purpose'-marked) spend
-* `rozprog` (programme spend ID) codelist is now recognised
+* `rozprog` (programme spend ID) as well as `nastroj` and `nastrojanal` codelists are now recognised
 
 ## Bug fixes
 

@@ -41,6 +41,8 @@ sp_codelists <- tibble::tribble(~id, ~name,
                                 "vykaz", "\\u010c\\u00edseln\\u00edk v\\u00fdkaz\\u016f a tabulek",
                                 "zazjedn", "Z\\u00e1znamov\\u00e1 jednotka (konsolida\\u010dn\\u00ed t\\u0159\\u00edd\\u011bn\\u00ed)",
                                 "zdroj", "Zdroj",
+                                "nastroj", "N\\u00e1stroj",
+                                "nastrojanal", "N\\u00e1stroj - analytika",
                                 "zdrojfin", "Zdroj financov\\u00e1n\\u00ed organizac\\u00ed",
                                 "zpodm", "Zp\\u016fsob odm\\u011b\\u0148ov\\u00e1n\\u00ed",
                                 "zuj", "Z\\u00e1kladn\\u00ed \\u00fazemn\\u00ed jednotka") %>%
