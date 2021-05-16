@@ -23,35 +23,24 @@ switch_minus <- function(string) {
   return(rslt)
 }
 
-
-
 check_online <- function(url) {
 
   if(!curl::has_internet()) ui_stop("No internet. Cannot continue; stopping.")
 
-  url <- as.character(url)
+  # https://stackoverflow.com/questions/52911812/check-if-url-exists-in-r
 
-  url_parsed <- httr::parse_url(url)
-  url_modified <- url_parsed
-  url_modified$path <- NULL
-  url_modified$query <- NULL
-  url_modified$params <- NULL
-  host <- httr::build_url(url_modified)
+  sHEAD <- purrr::safely(httr::HEAD)
+  hd <- sHEAD(url)
 
-  host_check <- !httr::http_error(host)
+  url_works <- !is.null(hd$result)
 
-  if (!host_check) {
-    host_resp <- httr::HEAD(host)
-    host_status <- httr::http_status(host_resp)
-    ui_stop("Host {ui_path(host)} not reachable or returns error on '/' (error {ui_value(host_status)}). Stopping.")
-  }
-
-  url_check <- !httr::http_error(url)
-
-  if (!url_check) {
-    url_resp <- httr::HEAD(url)
-    url_status <- httr::http_status(url_resp)
-    ui_stop("Resource {ui_path(url)} returns error {ui_value(url_status)}. Stopping.")
+  if (url_works) {
+    url_status <- httr::status_code(hd$result)
+    if(url_status > 200)
+    ui_stop("Resource {ui_path(url)} returns code {ui_value(url_status)}. Stopping.")
+  } else {
+    host <- httr::parse_url(url)[["hostname"]]
+    ui_stop("Host {ui_path(host)} not reachable. Stopping.")
   }
 
   return(TRUE)
