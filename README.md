@@ -12,7 +12,7 @@ downloads](https://cranlogs.r-pkg.org/badges/grand-total/statnipokladna)](https:
 [![CRAN monthly
 downloads](https://cranlogs.r-pkg.org/badges/last-month/statnipokladna)](https://CRAN.R-project.org/package=statnipokladna)
 [![Lifecycle:
-maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![R build
 status](https://github.com/petrbouchal/statnipokladna/workflows/R-CMD-check/badge.svg)](https://github.com/petrbouchal/statnipokladna/actions)
 <!-- badges: end -->
@@ -128,6 +128,10 @@ local_budgets <- sp_get_table(table_id = "budget-local", # table ID, see `sp_tab
 #> ℹ Files already in ~/sp_data/finm/2019/09, not downloading. Set `redownload = TRUE` if needed.
 #> ℹ Reading data...
 #> ℹ Transforming data...
+#> Warning: Problem with `mutate()` input `vykaz_date`.
+#> ℹ All formats failed to parse. No formats found.
+#> ℹ Input `vykaz_date` is `(function (..., quiet = FALSE, tz = NULL, locale = Sys.getlocale("LC_TIME"), ...`.
+#> Warning: All formats failed to parse. No formats found.
 ```
 
 The data is automatically downloaded to a temp directory, so it will be
@@ -142,16 +146,16 @@ It is a rather raw-looking data frame…
 ``` r
 head(local_budgets)
 #> # A tibble: 6 x 15
-#>   vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka
-#>   <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr> <chr>      <chr>    <chr>  
-#> 1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364   
-#> 2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909   
-#> 3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111   
-#> 4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112   
-#> 5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113   
-#> 6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121   
-#> # … with 4 more variables: budget_adopted <dbl>, budget_amended <dbl>,
-#> #   budget_spending <dbl>, period_vykaz <date>
+#>   vykaz vtab  vykaz_year vykaz_month ucjed ico   kraj  nuts  polozka_typ
+#>   <chr> <chr> <chr>      <chr>       <chr> <chr> <chr> <chr> <chr>      
+#> 1 051   0002… 2019       09          1000… 7508… CZ03  CZ03  3          
+#> 2 051   0002… 2019       09          1000… 7508… CZ03  CZ03  3          
+#> 3 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          
+#> 4 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          
+#> 5 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          
+#> 6 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          
+#> # … with 6 more variables: paragraf <chr>, polozka <chr>, budget_adopted <dbl>,
+#> #   budget_amended <dbl>, budget_spending <dbl>, vykaz_date <date>
 ```
 
 but it has been cleaned up, and can be enriched with any of the metadata
@@ -204,20 +208,21 @@ local_budgets %>%
 #>   This may indicate a problem with the data.
 #>   Set by if needed.
 #> # A tibble: 1,189,627 x 34
-#>    vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka
-#>    <chr> <chr> <chr>  <chr> <chr> <chr> <chr> <chr> <chr>      <chr>    <chr>  
-#>  1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364   
-#>  2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909   
-#>  3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111   
-#>  4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112   
-#>  5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113   
-#>  6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121   
-#>  7 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1122   
-#>  8 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1211   
-#>  9 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1332   
-#> 10 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1333   
-#> # … with 1,189,617 more rows, and 23 more variables: budget_adopted <dbl>,
-#> #   budget_amended <dbl>, budget_spending <dbl>, period_vykaz <date>,
+#>    vykaz vtab  vykaz_year vykaz_month ucjed ico   kraj  nuts  polozka_typ
+#>    <chr> <chr> <chr>      <chr>       <chr> <chr> <chr> <chr> <chr>      
+#>  1 051   0002… 2019       09          1000… 7508… CZ03  CZ03  3          
+#>  2 051   0002… 2019       09          1000… 7508… CZ03  CZ03  3          
+#>  3 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          
+#>  4 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          
+#>  5 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          
+#>  6 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          
+#>  7 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          
+#>  8 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          
+#>  9 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          
+#> 10 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          
+#> # … with 1,189,617 more rows, and 25 more variables: paragraf <chr>,
+#> #   polozka <chr>, budget_adopted <dbl>, budget_amended <dbl>,
+#> #   budget_spending <dbl>, vykaz_date <date>,
 #> #   functional_categories_start_date <date>,
 #> #   functional_categories_end_date <date>, functional_categories_nazev <chr>,
 #> #   skupina <chr>, oddil <chr>, pododdil <chr>, poznamka <chr>,
@@ -232,7 +237,7 @@ Download a whole “výkaz” (dataset/data dump):
 ``` r
 sp_get_dataset("finm", year = 2019) # dataset ID, see `sp_datasets`
 #> Warning: month not set. Using default of 12.
-#> ● Set period parameters explicitly for reproducibility as the defaults may change in the future to provide access to the latest data by default.
+#> ● Set period parameters explicitly for reproducibility.
 #> ℹ Files already in ~/sp_data/finm/2019/12, not downloading. Set `redownload = TRUE` if needed.
 ```
 
