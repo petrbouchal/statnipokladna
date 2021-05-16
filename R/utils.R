@@ -23,7 +23,7 @@ switch_minus <- function(string) {
   return(rslt)
 }
 
-check_online <- function(url) {
+check_online <- function(url, host_only = FALSE) {
 
   if(!curl::has_internet()) ui_stop("No internet. Cannot continue; stopping.")
 
@@ -36,12 +36,13 @@ check_online <- function(url) {
 
   if (url_works) {
     url_status <- httr::status_code(hd$result)
-    if(url_status > 200)
-    ui_stop("Resource {ui_path(url)} returns code {ui_value(url_status)}. Stopping.")
+    if(url_status > 299 & !host_only) {
+      ui_stop("Resource {ui_path(url)} returns code {ui_value(url_status)}. Stopping.")
+    }
   } else {
     host <- httr::parse_url(url)[["hostname"]]
     ui_stop("Host {ui_path(host)} not reachable. Stopping.")
   }
 
-  return(TRUE)
+  invisible(TRUE)
 }
