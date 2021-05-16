@@ -41,7 +41,7 @@ Nejsem rozpočtář ani účetní - tato data primárně používám k zodpovíd
 - při ověřování může taky pomoct např.
   - příloha vyhlášky o RUD ([2019](https://www.mfcr.cz/cs/legislativa/legislativni-dokumenty/2019/vyhlaska-c-219-2019-sb-36077))
   - státní závěrečné účty nejlépe z [webu sněmovny](https://www.psp.cz/sqw/tisky.sqw) (hledání "státního závěrečného účtu")
-  - údaje o výběru daní od Finanční správy:  ([tabulky](https://www.financnisprava.cz/cs/dane/kraje-a-obce/danove-prijmy-kraju-a-obci/prubeh-celostatniho-inkasa-sdilenych-dani-3735), [statistiky](https://www.financnisprava.cz/cs/dane/analyzy-a-statistiky/udaje-z-vyberu-dani))
+  - údaje o výběru daní od Finanční správy:  ([tabulky](https://www.financnisprava.cz/cs/dane/kraje-a-obce/danove-prijmy-kraju-a-obci), [statistiky](https://www.financnisprava.cz/cs/dane/analyzy-a-statistiky/udaje-z-vyberu-dani))
 
 ## Soustava prvků dostupných ze státní pokladny
 
