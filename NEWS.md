@@ -4,14 +4,14 @@
 
 * `sp_get_dataset()` no longer unzips the downloaded archive. It therefore returns the path to the downloaded zip file, not to the unzipped files. This is needed to support a more modular workflow (see below and `vignette("workflow", package = "statnipokladna")`).
 * The `year` param in `sp_get_table()` and `sp_get_dataset()` now has no default. This is more sensible when there is no easy way to determine the latest available table/dataset and in any case better for reproducibility. The new `sp_get_dataset_url()` also has this updated behaviour.
-* the column in budget-type tables (`budget-central`, `budget-local`) previously exported under the original name `0CI_TYPE` is now called `polozka_type`. Its meaning remains unclear so presumably this will not cause trouble to many users. 
+* the column in budget-type tables (`budget-central`, `budget-local`) previously returned under the original name `0CI_TYPE` is now called `polozka_type`. Its meaning remains unclear so presumably this will not cause trouble to many users. 
 * `sp_add_codelist()` no longer creates messy column names in the form of `[codelist name]_nazev_nazev`
 
 ## New features
 
-* the core functions have been rewritten into a more modular architecture and their constituent modules exported. This allows more fine-grained over workflow using lower-level functions to accommodate caching and reproducibility e.g. via {targets} or {drake}.
+* the core functions have been rewritten into a more modular architecture and their constituent modules exported. This allows more fine-grained control over workflows using lower-level functions to accommodate caching and reproducibility e.g. via {targets} or {drake}.
   * sp_get_[dataset|table|codelist] are now effectively wrappers around several lower-level functions
-  * those previously using these core functions should see no change except for one breaking change in `sp_get_dataset()`.
+  * those previously using these core functions should see no change except for one breaking change in `sp_get_dataset()` (see above).
   * the lower-level functions enable step-by-step workflows with transparency of intermediate steps (URLs, downloaded ZIP archives, pointers to specific CSV files, etc.) See `vignette("workflow", package = "statnipokladna")`
 
 ## Improvements
