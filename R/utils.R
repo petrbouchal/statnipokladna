@@ -8,7 +8,8 @@ openlinks <- function() {
 release_questions <- function() {
   c(
     "Have you run all examples?",
-    "Have you re-rendered README.Rmd?"
+    "Have you re-rendered README.Rmd?",
+    "Have you checked all URLs using `urlchecker::check_urls()`"
   )
 }
 
