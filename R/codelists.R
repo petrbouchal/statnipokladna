@@ -260,7 +260,7 @@ sp_get_codelist_viewer <- function(codelist_id, open = TRUE) {
 #'   sp_add_codelist(pol) %>%
 #'   sp_add_codelist(par)
 #' }
-sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_vykaz,
+sp_add_codelist <- function(data, codelist = NULL, period_column = .data$vykaz_date,
                             by = NULL,
                             redownload = FALSE,
                             dest_dir = NULL) {
@@ -366,7 +366,7 @@ sp_get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
 #' @return A [tibble][tibble::tibble-package] of same length as `data`, with added columns from `codelist`. See Details.
 #' @family Core workflow
 #' @export
-add_codelist <- function(data, codelist = NULL, period_column = .data$period_vykaz,
+add_codelist <- function(data, codelist = NULL, period_column = .data$vykaz_date,
                          redownload = FALSE,
                          dest_dir = NULL) {
   lifecycle::deprecate_warn("0.5.2", "statnipokladna::add_codelist()", "sp_add_codelist()")

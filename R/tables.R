@@ -113,10 +113,10 @@ sp_load_table <- function(path, ico = NULL) {
   dt <- dt %>%
     purrr::set_names(stringr::str_remove(names(dt), "^[A-Z_0-9/]*:")) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::starts_with("ZU_")), ~switch_minus(.) %>% as.numeric(.)) %>%
-    tidyr::extract(.data$`0FISCPER`, c("per_yr", "per_m"), "([0-9]{4})0([0-9]{2})") %>%
-    dplyr::mutate(period_vykaz = lubridate::make_date(.data$per_yr, .data$per_m),
-                  period_vykaz = lubridate::make_date(.data$per_yr, .data$per_m,
-                                                      lubridate::days_in_month(.data$period_vykaz))) %>%
+    tidyr::extract(.data$`0FISCPER`, c("vykaz_year", "vykaz_month"), "([0-9]{4})0([0-9]{2})") %>%
+    dplyr::mutate(vykaz_date = lubridate::make_date(.data$vykaz_year, .data$vykaz_month),
+                  vykaz_date = lubridate::make_date(.data$vykaz_year, .data$vykaz_month,
+                                                      lubridate::days_in_month(.data$vykaz_date))) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), lubridate::dmy) %>%
     dplyr::rename_all(dplyr::recode,
                       ZCMMT_ITM = "polozka",
@@ -177,7 +177,7 @@ sp_load_table <- function(path, ico = NULL) {
 #'
 #' - all columns are given names that are human-readable and facilitato add codelists
 #' - ICO (org. IDs) are normalised as in some datasets they are padded with leading zeros
-#' - a period, per_yr and per_m columns are created to identify the time period
+#' - a vykaz_date, vykaz_year and vykaz_month columns are created to identify the time period
 #' - value columns are transformed into numeric
 #' - other columns are left as character to avoid losing information
 #'
