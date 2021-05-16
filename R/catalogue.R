@@ -7,7 +7,7 @@ run_sparql_query <- function(query) {
                 timeout = 30000,
                 debug = "on",
                 run = "Run Query")
-  if(!curl::has_internet()) usethis::ui_stop(c("No internet connection. Cannot continue. Retry when connected."))
+  check_online(sparql_url, host_only = T)
   usethis::ui_info("Reading data from data.gov.cz")
   cat_rslt <- httr::GET(sparql_url, query = params,
                         # accept("application/sparql-results+json"),
@@ -84,12 +84,8 @@ sp_list_datasets <- function() {
   cat_rslt <- run_sparql_query(sparqlquery_datasets)
 
   # print(params$query)
+  rslt <- httr::content(cat_rslt, as = "text")
 
-  if(httr::status_code(cat_rslt) > 200) {
-    print(httr::http_status(cat_rslt))
-    rslt <- httr::content(cat_rslt, as = "text")
-  } else
-    rslt <- cat_rslt %>% httr::content(as = "text")
   rslt <- readr::read_csv(rslt, col_types = readr::cols(start = "D",
                                                         end = "D",
                                                         doc = "c",
