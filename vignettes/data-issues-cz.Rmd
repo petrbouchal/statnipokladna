@@ -45,7 +45,7 @@ knitr::opts_chunk$set(
 ## Co v datech není nebo jsem to nenašel
 
 - zdrojové třídění u rozpočtů samospráv - jen incidentálně jako součást reportu účelového financování
-- údaje o regulaci zaměstnanosti ve veřejném sektoru neboli rozpočtované a skutečné počty zaměstnanců a průměrné platy, ač se sledují a částečně zveřejňují ve státním závěrečném účtu, viz [petrbouchal/urednici2019](https://petrbouchal.github.io/urednici2019/) 
+- údaje o regulaci zaměstnanosti ve veřejném sektoru neboli rozpočtované a skutečné počty zaměstnanců a průměrné platy, ač se sledují a částečně zveřejňují ve státním závěrečném účtu, viz [petrbouchal/urednici2019](https://petrbouchal.xyz/urednici2019/) 
 - informace o tom, na jakém místě se peníze utratily (pokud vím, plošně se nesleduje, něco je v CEDRu a docela se to ví u eurofondů)
 
 ## Kde by bylo fajn mít lepší dokumentaci

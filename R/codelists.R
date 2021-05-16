@@ -31,14 +31,17 @@ sp_codelists <- tibble::tribble(~id, ~name,
                                 "polvkk", "Z\\u00e1vazn\\u00e9 ukazatele st\\u00e1tn\\u00edho rozpo\\u010dtu (Do 2014)",
                                 "psuk", "Z\\u00e1vazn\\u00e9 ukazatele st\\u00e1tn\\u00edho rozpo\\u010dtu (Od 2015)",
                                 "uctosnova", "Sm\\u011brn\\u00e1 \\u00fa\\u010dtov\\u00e1 osnova (polo\\u017eky \\u00fa\\u010detn\\u00edch v\\u00fdkaz\\u016f)",
-                                "typfinmista", "Typ finan\\u010dn\\u00edho m\\u00edsta",
+                                "rozprog", "Rozpo\\u010dtov\\u00fd program",
                                 "typorg", "Typ organizace",
+                                "typfinmista", "Typ finan\\u010dn\\u00edho m\\u00edst",
                                 "ucel", "\u00da\\u010del",
                                 "ucjed", "\\u00da\\u010detn\\u00ed jednotka",
                                 "ucelznak", "\\u00da\\u010delov\\u00fd znak",
                                 "vykaz", "\\u010c\\u00edseln\\u00edk v\\u00fdkaz\\u016f a tabulek",
                                 "zazjedn", "Z\\u00e1znamov\\u00e1 jednotka",
                                 "zdroj", "Zdroj",
+                                "nastroj", "N\\u00e1stroj",
+                                "nastrojanal", "N\\u00e1stroj - analytika",
                                 "zdrojfin", "Zdroj financov\\u00e1n\\u00ed organizac\\u00ed",
                                 "zpodm", "Zp\\u016fsob odm\\u011b\\u0148ov\\u00e1n\\u00ed",
                                 "zuj", "Z\\u00e1kladn\\u00ed \\u00fazemn\\u00ed jednotka") %>%
@@ -46,6 +49,111 @@ sp_codelists <- tibble::tribble(~id, ~name,
   dplyr::arrange(.data$id)
 # stringi::stri_escape_unicode("xxx")
 # usethis::use_data(sp_codelists, overwrite = TRUE)
+
+
+# https://stackoverflow.com/questions/62459736/how-do-i-use-tidyselect-where-in-a-custom-package
+# https://github.com/r-lib/tidyselect/issues/201
+# used below
+utils::globalVariables("where")
+
+#' Load codelist into a tibble from XML file
+#'
+#' This is normally called inside `sp_get_codelist()` but can be used separately if
+#' finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
+#'
+#' @param path Path to a file as returned by `sp_get_codelist_file()`
+#' @param n Number of rows to return. Default (NULL) means all. Useful for quickly inspecting a codelist.
+#'
+#' @return a [tibble][tibble::tibble-package]
+#' @family Detailed workflow
+#'
+#' @examples
+#' \donttest{
+#' cf <- sp_get_codelist_file("druhuj")
+#' sp_load_codelist(cf)
+#' }
+#' @export
+sp_load_codelist <- function(path, n = NULL) {
+  stopifnot(file.exists(path))
+  xml_all <- xml2::read_xml(path)
+  ui_info("Processing codelist data")
+  if(grepl("ucjed", path)) ui_info("Large codelist: this will take a while...")
+  xml_children_all <- xml_all %>% xml2::xml_children()
+  xml_children <- if(is.null(n)) xml_children_all else xml_children_all[1:n]
+  nms <- xml2::xml_child(xml_all) %>% xml2::xml_children() %>% xml2::xml_name()
+
+  process_codelist <- function(x) {x %>% xml2::xml_children() %>%
+      xml2::xml_text() %>%
+      # as.character() %>%
+      t() %>%
+      # purrr::set_names(nms) %>%
+      as.data.frame() %>%
+      tibble::as_tibble(.name_repair = "minimal")}
+
+  xvals_raw <- purrr::map_df(xml_children, process_codelist)
+
+  # print(xvals_raw)
+
+  xvals <- xvals_raw %>%
+    purrr::set_names(nms) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")),
+                     ~lubridate::as_date(lubridate::parse_date_time(., orders = c("Ymd", "dmY")))) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::starts_with("kon_")), as.logical) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::matches("^vtab$")),
+                     ~stringr::str_pad(., 6, "left", "0")) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::matches("^vykaz$")),
+                     ~stringr::str_pad(., 3, "left", "0")) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::matches("^polvyk_order$")), as.numeric) %>%
+    dplyr::mutate(dplyr::across(where(is.character), dplyr::na_if, ""))
+
+  return(xvals)
+}
+
+
+#' Download a codelist XML file
+#'
+#' This is normally called inside `sp_get_codelist()` but can be used separately if
+#' finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
+#'
+#' @param codelist_id A codelist ID. See `id` column in `sp_codelists` for a list of available codelists.
+#' @param url DESCRIPTION. Either this or `codelist_id` must be set. If both are set, `url` wins.
+#' @param dest_dir character. Directory in which downloaded files will be stored.
+#' If left unset, will use the `statnipokladna.dest_dir` option if the option is set, and `tempdir()` otherwise. Will be created if it does not exist.
+#' @param redownload Redownload even if file has already been downloaded? Defaults to FALSE.
+
+#'
+#' @return path to XML file; character vector of length one.
+#' @family Detailed workflow
+#' @examples
+#' \donttest{
+#' sp_get_codelist_file("druhuj")
+#' codelist_url <- sp_get_codelist_url("druhuj")
+#' sp_get_codelist_file(url = codelist_url)
+#' }
+#' @export
+sp_get_codelist_file <- function(codelist_id = NULL, url = NULL, dest_dir = NULL, redownload = FALSE) {
+  if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
+                                              default = tempdir())
+
+  td <- dest_dir
+  dir.create(td, showWarnings = FALSE, recursive = TRUE)
+
+  filename <- ifelse(is.null(url),
+                     paste0(codelist_id, ".xml"),
+                     stringr::str_extract(url, "[a-zA-Z]*\\.xml$"))
+
+  tf <- file.path(td, filename)
+  if(file.exists(tf) & !redownload) {
+    ui_info("Codelist file already in {ui_path(td)}, not downloading. Set {ui_code('redownload = TRUE')} if needed.")
+  } else {
+    if(is.null(url)) url <- sp_get_codelist_url(codelist_id)
+    ui_done("Storing codelist in {ui_path(td)}")
+    if(dest_dir == tempdir()) ui_info("Set {ui_field('dest_dir')} for more control over downloaded files.")
+    utils::download.file(url, tf, headers = c('User-Agent' = usr))
+  }
+  return(tf)
+}
+
 
 #' Get codelist
 #'
@@ -78,69 +186,11 @@ sp_codelists <- tibble::tribble(~id, ~name,
 #' @family Core workflow
 
 sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload = FALSE) {
+  tf <- sp_get_codelist_file(codelist_id, dest_dir = dest_dir, redownload = redownload)
+  cl_parsed <- sp_load_codelist(tf, n)
+  return(cl_parsed)
 
-  if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
-                                              default = tempdir())
-
-  td <- dest_dir
-  dir.create(td, showWarnings = FALSE, recursive = TRUE)
-  tf <- paste0(td, codelist_id, ".xml")
-  if(file.exists(tf) & !redownload) {
-    usethis::ui_info("Codelist file already in {usethis::ui_path(td)}, not downloading. Set {usethis::ui_code('redownload = TRUE')} if needed.")
-  } else {
-    url <- get_codelist_url(codelist_id)
-    usethis::ui_done("Storing codelist in {usethis::ui_path(td)}")
-    if(dest_dir == tempdir()) usethis::ui_info("Set {usethis::ui_field('dest_dir')} for more control over downloaded files.")
-    utils::download.file(url, tf, headers = c('User-Agent' = usr))
-  }
-  xml_all <- xml2::read_xml(tf)
-  usethis::ui_info("Processing codelist data")
-  if(codelist_id %in% c("ucjed")) usethis::ui_info("Large codelist: this will take a while...")
-  xml_children_all <- xml_all %>% xml2::xml_children()
-  xml_children <- if(is.null(n)) xml_children_all else xml_children_all[1:n]
-  nms <- xml2::xml_child(xml_all) %>% xml2::xml_children() %>% xml2::xml_name()
-
-  process_codelist <- function(x) {x %>% xml2::xml_children() %>%
-      xml2::xml_text() %>%
-      # as.character() %>%
-      t() %>%
-      # purrr::set_names(nms) %>%
-      as.data.frame() %>%
-      tibble::as_tibble(.name_repair = "minimal")}
-
-  xvals_raw <- purrr::map_df(xml_children, process_codelist)
-
-  # print(xvals_raw)
-
-  xvals <- xvals_raw %>%
-    purrr::set_names(nms) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), readr::parse_date) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::starts_with("kon_")), as.logical) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::matches("^vtab$")),
-                     ~stringr::str_pad(., 6, "left", "0")) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::matches("^vykaz$")),
-                     ~stringr::str_pad(., 3, "left", "0")) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::matches("^polvyk_order$")), as.numeric)
-
-  return(xvals)
 }
-
-#' Deprecated: Get codelist
-#'
-#' Deprecated: use `sp_get_codelist()`\cr\cr
-#' \lifecycle{deprecated}
-#'
-#' @inheritParams sp_get_codelist
-#'
-#' @return A [tibble][tibble::tibble-package]
-#' @export
-#' @family Core workflow
-
-get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload = FALSE) {
-  lifecycle::deprecate_warn("0.5.2", "statnipokladna::get_codelist()", "sp_get_codelist()")
-  sp_get_codelist(codelist_id = codelist_id, n = n, dest_dir = dest_dir, redownload = redownload)
-}
-
 
 #' Get/open URL of codelist viewer
 #'
@@ -155,21 +205,10 @@ get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload = FA
 sp_get_codelist_viewer <- function(codelist_id, open = TRUE) {
   if(!(codelist_id %in% sp_codelists$id)) stop("Not a valid codelist ID")
   codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
-  usethis::ui_info("Building URL for codelist {usethis::ui_value(codelist_id)} - {usethis::ui_value(codelist_name)}")
+  ui_info("Building URL for codelist {ui_value(codelist_id)} - {ui_value(codelist_name)}")
   x <- stringr::str_glue("{sp_base_url}/datovy-katalog/ciselniky/prohlizec/{codelist_id}")
   if(open) utils::browseURL(x)
   return(x)
-}
-
-switch_minus <- function(string) {
-  swtch <- function(strg) {
-    r0 <- strg %>%
-      stringr::str_remove("-$")
-    return(stringr::str_c("-", r0))
-  }
-  rslt <- dplyr::if_else(grepl("-$", string),
-                         swtch(string), string)
-  return(rslt)
 }
 
 
@@ -220,7 +259,7 @@ switch_minus <- function(string) {
 #'   sp_add_codelist(pol) %>%
 #'   sp_add_codelist(par)
 #' }
-sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_vykaz,
+sp_add_codelist <- function(data, codelist = NULL, period_column = .data$vykaz_date,
                             by = NULL,
                             redownload = FALSE,
                             dest_dir = NULL) {
@@ -243,12 +282,12 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
   common_columns <- names(data)[names(data) %in% names(cl_data)]
   overlap <- length(common_columns)
   if (overlap > 1 & is.null(by)) {
-    usethis::ui_info(c("Joining on {overlap} columns: {stringr::str_c(common_columns, collapse = ', ')}.",
+    ui_info(c("Joining on {overlap} columns: {stringr::str_c(common_columns, collapse = ', ')}.",
                        "This may indicate a problem with the data.",
-                       "Set {usethis::ui_field('by')} if needed."))
-  } else if(overlap == 0) {usethis::ui_stop(c("No columns to join by.",
+                       "Set {ui_field('by')} if needed."))
+  } else if(overlap == 0) {ui_stop(c("No columns to join by.",
                                               "Are you sure you are merging the right codelist onto the right data?",
-                                              "Set {usethis::ui_field('by')} if needed."))}
+                                              "Set {ui_field('by')} if needed."))}
 
   slepit <- function(.x, .y) {
     # print(.x)
@@ -259,12 +298,12 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
     codelist_filtered <- cl_data %>%
       dplyr::filter(.data$end_date >= this_period & .data$start_date <= this_period) %>%
       dplyr::rename_at(dplyr::vars(dplyr::ends_with("_date")), ~paste0(codelist_name, "_", .)) %>%
-      dplyr::rename_at(dplyr::vars(dplyr::ends_with("nazev")), ~paste0(codelist_name, "_", .))
+      dplyr::rename_at(dplyr::vars(dplyr::matches("^nazev$")), ~paste0(codelist_name, "_", .))
 
     # print(codelist_filtered)
     slp <- suppressMessages(dplyr::left_join(.x, codelist_filtered, by = by))
     if(nrow(slp) != nrows_start) {
-      usethis::ui_stop(c("Something went wrong with matching the codelist to the data for period {this_period}.",
+      ui_stop(c("Something went wrong with matching the codelist to the data for period {this_period}.",
                          "Please inspect the dates on the codelist to make sure there are no duplicate items valid for one given date.",
                          "You may want to filter/edit the codelist manually and pass it to the add_codelist function as an object."))
     }
@@ -275,7 +314,7 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
     slepeno <- data %>%
       dplyr::ungroup() %>%
       dplyr::group_by({{period_column}}) %>%
-      dplyr::group_map(slepit, keep = TRUE) %>%
+      dplyr::group_map(slepit, .keep = TRUE) %>%
       dplyr::bind_rows()
   } else {
     slepeno <- suppressMessages(data %>%
@@ -285,19 +324,36 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$period_
 }
 
 
-get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
-  if(!(codelist_id %in% sp_codelists$id)) usethis::ui_stop("Not a valid codelist ID")
+
+#' Get URL of a given codelist
+#'
+#' This is normally called inside `sp_get_codelist()` but can be used separately if
+#' finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
+#'
+#' @param codelist_id DESCRIPTION.
+#' @param check_if_exists Whether to check that the URL works (HTTP 200).
+#'
+#' @return character vector of length one containing URL
+#' @examples
+#' \donttest{
+#' sp_get_codelist_url("ucjed", FALSE)
+#' if(FALSE) sp_get_codelist_url("ucjed_wrong", TRUE) # fails, invalid codelist
+#' }
+#' @export
+sp_get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
+  if(!(codelist_id %in% sp_codelists$id)) ui_stop("Not a valid codelist ID")
   codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
-  if(!curl::has_internet()) usethis::ui_stop(c("No internet connection. Cannot continue. Retry when connected.",
-                                               "If you need offline access to the data across R sessions, set the {ui_field('dest_dir')} parameter."))
-  usethis::ui_info("Building URL for codelist {usethis::ui_value(codelist_id)} - {usethis::ui_value(codelist_name)}")
-  x <- stringr::str_glue("{sp_base_url}/data/xml/{codelist_id}.xml")
+  ui_info("Building URL for codelist {ui_value(codelist_id)} - {ui_value(codelist_name)}")
+  x <- paste(sp_base_url, "data/xml", paste0(codelist_id, ".xml"), sep = "/")
   if(check_if_exists) {
-    iserror <- httr::http_error(x)
-    if(iserror) usethis::ui_stop("Codelist XML for a codelist with this ID does not exist")
+    check_online(x)
   }
   return(x)
 }
+
+
+
+# Deprecated --------------------------------------------------------------
 
 #' Deprecated: Add codelist data to downloaded data
 #'
@@ -309,10 +365,27 @@ get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
 #' @return A [tibble][tibble::tibble-package] of same length as `data`, with added columns from `codelist`. See Details.
 #' @family Core workflow
 #' @export
-add_codelist <- function(data, codelist = NULL, period_column = .data$period_vykaz,
+add_codelist <- function(data, codelist = NULL, period_column = .data$vykaz_date,
                          redownload = FALSE,
                          dest_dir = NULL) {
   lifecycle::deprecate_warn("0.5.2", "statnipokladna::add_codelist()", "sp_add_codelist()")
   sp_add_codelist(data = data, codelist = codelist, period_column = period_column,
                   redownload = redownload, dest_dir = dest_dir)
+}
+
+
+#' Deprecated: Get codelist
+#'
+#' Deprecated: use `sp_get_codelist()`\cr\cr
+#' \lifecycle{deprecated}
+#'
+#' @inheritParams sp_get_codelist
+#'
+#' @return A [tibble][tibble::tibble-package]
+#' @export
+#' @family Core workflow
+
+get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload = FALSE) {
+  lifecycle::deprecate_warn("0.5.2", "statnipokladna::get_codelist()", "sp_get_codelist()")
+  sp_get_codelist(codelist_id = codelist_id, n = n, dest_dir = dest_dir, redownload = redownload)
 }

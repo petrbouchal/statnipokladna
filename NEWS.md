@@ -1,9 +1,27 @@
 # statnipokladna (development version)
 
+## BREAKING CHANGES
+
+* `sp_get_dataset()` no longer unzips the downloaded archive. It therefore returns the path to the downloaded zip file, not to the unzipped files. This is needed to support a more modular workflow (see below and `vignette("workflow", package = "statnipokladna")`).
+* The `year` param in `sp_get_table()` and `sp_get_dataset()` now has no default. This is more sensible when there is no easy way to determine the latest available table/dataset and in any case better for reproducibility. The new `sp_get_dataset_url()` also has this updated behaviour.
+* the columns signifying the time period of the result of `sp_get_table()` have been renamed for more clarity and consistency:
+  - `period_vykaz` to `vykaz_date` 
+  - `per_m` to `vykaz_month` 
+* `sp_add_codelist()` no longer creates messy column names in the form of `[codelist name]_nazev_nazev`
+  - `per_yr` to `vykaz_year` 
+
 ## New features
 
+* the core functions have been rewritten into a more modular architecture and their constituent modules exported. This allows more fine-grained control over workflows using lower-level functions to accommodate caching and reproducibility e.g. via {targets} or {drake}.
+
+  * sp_get_[dataset|table|codelist] are now effectively wrappers around several lower-level functions
+  * those previously using these core functions should see no change except for one breaking change in `sp_get_dataset()` (see above).
+  * the lower-level functions enable step-by-step workflows with transparency of intermediate steps (URLs, downloaded ZIP archives, pointers to specific CSV files, etc.) See `vignette("workflow", package = "statnipokladna")`
+
+* better error messages around mismatches between table ID and file in archive
 * `sp_list_datasets()` returns a list of all currently available files for download along with their metadata (temporal coverage, URL), using the SPARQL endpoint at <https://opendata.mfcr.cz/lod/monitor>.
 * `sp_list_codelists()` returns a list of all currently available codelists, using the SPARQL endpoint at <https://opendata.mfcr.cz/lod/monitor>.
+
 
 ## Improvements
 
@@ -15,6 +33,7 @@
 
 ## Bug fixes
 
+* adapt `sp_get_table()` to a new structure of some data dumps on the part of the data provider
 * `sp_get_codelist()` no longer issues a tibble-related warning
 * `sp_get_codelist()` now parses all dates correctly
 

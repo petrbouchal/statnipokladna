@@ -1,0 +1,161 @@
+---
+title: "statnipokladna workflows and reproducibility"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{statnipokladna workflows and reproducibility}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE, comment = "#>", out.width = "100%",
+  fig.width = 7, fig.height = 4, dev = "png", dpi = 150,
+  fig.path = "workflow-vignette-",
+  message = FALSE, warning = FALSE, error = FALSE
+)
+```
+
+```{r setup}
+library(statnipokladna)
+# library(ggplot2)
+```
+
+```{r plt}
+# plot(cars) # for testing figure file logic
+```
+
+## Reproducibility
+
+The high-level functions that form the core of {statnipokladna} lend themselves most easily to a workflow optimised for creating results based on the latest state of the data provided by the data published.
+
+Depending on your objectives, you might prefer a workflow geared for speed (minimising downloads) or for reproducibility (tracking where exactly data came from and when, and perhaps keeping copies of raw input data inside your project).
+
+This matters for two reasons. First, you might have different reproducibility needs. Second, you might want to hedge against undocumented changes made to the data structures
+
+### 1. High-level
+
+In this basic workflow, you use
+
+- `sp_get_table()`
+- `sp_get_codelist()`/`sp_add_codelist`
+
+without worrying about where the input data is downloaded to (i.e. the `dest_dir` parameter and the corresponding `statnipokladna.dest_dir` global option, together with the `redownload` parameter). 
+This means:
+
+- data files are downloaded to `tempdir()` and hence redownloaded in every new session
+- data files are not redownloaded unless you restart your R-session.
+- if any upstream data files change, you get the changes - this might update your analysis but also break it if the data provider has made an undocumented breaking change (which happens quite often.)
+
+That said, {statnipokladna} does not yet allow you to download the latest edition of a table (e.g. "get me the latest balance sheet for organisation X that is available"), so you will normally get the latest version of a given period's data, as opposed to getting the latest period's data. The latter option would be quite easy to script though. (Note that there is an unofficial API at <https://monitor.statnipokladna.cz/api/transakcni-data> and an official (but less convenient one) at <https://monitor.statnipokladna.cz/data/dataset.json> and also a linked-data endpoint at <https://opendata.mfcr.cz/> - these would allow you to programmatically identify the latest available time period for a given table/dataset, and this logic should over time make its way into {statnipokladna} as well.)
+
+### 2. High-level + project / shared data store
+
+Set `dest_dir` or the `statnipokladna.dest_dir` global option in your project-level or user-level `.Rprofile` to:
+
+a. a directory inside your project directory to keep per-project data across sessions
+b. a directory in your user home directory
+
+...and leave the `redownload` param at its default of `FALSE`.
+
+Both limit redownloading the same data.
+
+In the first scenario, you improve reproducibility at the expense of disk space and downloading the same data for each project.
+
+In the second scenario, you save disk space but are vulnerable to using outdated data downloaded earlier by one project in another project, or, if you occasionally change the `redownload` parameter, updating your "central" datastore and thus breaking your other project(s).
+
+*A good compromise might be storing codelists on a per-project basis and keeping the "transactional" data in a central per-machine location. This is because breaking changes upstream have most often been made to codelists, and these are also harder to recover from.*
+
+Especially when storing data locally inside a project, **you will want to keep track of package versions with {renv}**, as {statnipokladna} sometimes must introduce breaking changes to adapt to upstream changes made by the data provider.
+
+### 3. Keeping track of everything
+
+The workflow most suited for rigorous reproducibility will include the following principles:
+
+- store all input data files on a per-project basis
+- keep track of where they came from and when
+- keep track of when upstream files on the data provider's online data store change (to monitor)
+
+{statnipokladna} has a set of lower-lever functions that allow you to proceed step by step, keeping track of intermediate data files, URLs and paths. 
+
+For codelists:
+
+```{r}
+sp_cl_url <- sp_get_codelist_url("paragraf")
+sp_cl_path <- sp_get_codelist_file(url = sp_cl_url)
+sp_cl <- sp_load_codelist(sp_cl_path)
+```
+
+For data:
+
+
+```{r}
+rozv_url <- sp_get_dataset_url("rozv", 2019, 12, 
+                               check_if_exists = T)
+rozv_path <- sp_get_dataset("rozv", 2019, 12)
+rozv_stat_path <- sp_get_table_file("balance-sheet", 
+                                    rozv_path)
+
+rozv_stat <- sp_load_table(rozv_stat_path)
+```
+
+This should be complemented by setting the `statnipokladna.dest_dir` option in a project-level `.Rprofile` file to a directory inside the project, e.g. `options(statnipokladna.dest_dir = "sp-data")`.
+
+Note that we keep `redownload` set to its default of `FALSE` to avoid being surprised by changes to the upstream data on the provider's server. (It is up to you whether to commit the downloaded data to version control - in the case of some core codelists, this would make sense.) 
+
+This step-by-step workflow is suitable for being turned into an explicit pipeline e.g. using the {targets} framework.
+
+Below is the content of a hypothetical `_targets.R` file that will allow you to keep track of the pipeline for using codelists, from initial function calls, via URLs to the resulting objects.
+
+```r
+library(targets)
+library(tarchetypes)
+
+tar_option_set(packages = c("dplyr", "statnipokladna"))
+
+# keep downloaded data in project directory
+options(statnipokladna.dest_dir = "sp_data")
+codelist_names <- c("druhuj", "poddruhuj", "nuts",
+                    "paragraf", "paragraf_long",
+                    "polozka", "polvyk")
+
+targets_codelists <- list(
+  tar_target(codelists, codelist_names),
+  
+  # track changes at URL via {targets}/{tarchetypes}
+  
+  tar_url(sp_cl_urls, sp_get_codelist_url(codelists),
+          pattern = map(codelists)),
+  
+  # track changes to file: if deleted/changed, redownload it
+          
+  tar_file(sp_cl_paths, 
+           sp_get_codelist_file(url = sp_cl_urls),
+           pattern = map(sp_cl_urls)),
+  
+  # keep all codelists in one list tracked by {targets}:
+  
+  tar_fst_tbl(sp_cl, sp_load_codelist(sp_cl_paths),
+              pattern = map(sp_cl_paths), iteration = "list")
+              
+  # here, you might want to save the codelists to individual
+  # Rds or parquet files and track those via {targets}
+)
+
+# call tar_pipeline() to wrangle the targets together.
+tar_pipeline(targets_codelists)
+```
+
+Note that we still keep `redownload` set to its default of `FALSE`. This means that when the upstream data changes (i.e. a request to the URL indicates that the file has changed on the server), the `sp_cl_url` target will run (thus notifying you of an upstream change) but the XML file in your `dest_dir` will not be overwritten. You can then choose to get an updated version of that codelist from the server by changing the `redownload` parameter.
+
+The targets workflow will also improve performance of codelist reading, since codelists will be stored in {targets}' fast datastore. In contrast, `sp_get_codelist()` must reread the XML file every time it is called, so even if the XML file had already been downloaded by previous function call, there is some overhead coming from the XML parsing.
+
+You could also use {targets} to track the more high-level workflow in part 2 above, but you would have less visiblity inside the targets workflow of intermediate URLs and files.
+
+For data files, the pipeline might look like this:
+
+In a more advanced approach, the branching logic in {targets} could be used to handle the time periods as well.
+
+## Data storage
+
+TO DO when functions supporting arrow storage are in place.

@@ -32,7 +32,7 @@ How data for different time periods is exported differs by dataset. This has sig
 
 For budget datasets `finm` and `finu` (tables `budget-central-old*` and `budget-local*`) and all accounting reports, the data dump for month N will contain data describing what was reported at month M. The `period_vykaz` column will contain only one unique value. (For budget data, the `budget_adopted` column does not change throughout the year, but the others do. The `budget_spending` column contains spending up to month M.) To see time series of spending throughout a year, you need to download multiple datasets (with `sp_get_table()`). To get a full-year's spending, run `sp_get_table("table_id", year = "YYYY")` to get the 12th month.
 
-In the newer central budget reports, `budget-central` (dataset `misris`) and `budget-state-funds` (dataset `finsf`), data for month M will contain separate rows for spending *in* (not *up to*) each month of the year up to month M. To get cumulative spending up to month M in year Y, you need to only download the dataset for month M and then sum the rows in that table. To get a full-year's spending, run `sp_get_table("table_id", year = "YYYY")` to get the 12th month's release, containing data for all months, *then sum the values* across the months contained in the resulting data frame.
+In the newer central budget reports, `budget-central` (dataset `misris`) and `budget-state-funds` (dataset `finsf`), data for month M will contain separate rows for spending *in* (not *up to*) each month of the year up to month M. To get cumulative spending up to month M in year Y, you need to only download the dataset for month M and then sum the rows in that table. To get a full-year's spending, run `sp_get_table("table_id", year = "YYYY")` to get the 12th month's release, containing data for all months, *then sum the values* across the months contained in the resulting data frame. **If you need consolidation (i.e. summing up data from multiple organisations), you need to do this before summing anything up.**
 
 ### Types of data
 
@@ -123,8 +123,8 @@ Budget data has a special form: the available data files provide all sorts of br
 What this means is that to get a meaningful number, you need to do a lot of summarising. It also means that if you are only interested in, say, the capital spend of an organisation, you will need to:
 
 - filter for that orginsation by `ico`
-- `sp_add_codelist("polvyk")` for the "druhové členění", roughly meaning the capital x current breakdown
-- group at the right level of the `polvyk_` categorisation
+- `sp_add_codelist("polozka")` for the "druhové členění", roughly meaning the capital x current breakdown
+- group at the right level of the `polozka` categorisation
 - summarise
 
 Unless you are interested in further detail, you do not need to add any other codelists.
@@ -137,9 +137,11 @@ The budget datasets contain columns with monetary values at each phase of the bu
 
 If you are summing data across multiple organisations, you will need to take care of consolidation. Typically this concerns relations between levels of government, e.g. a region gives grants to municipalities which then spend them, and consolidation ensures you only count the money once as it flows outside the public sector.
 
-The metadata allowing consolidation is contained in the "polozka" codelist in columns `kon_*`. These are TRUE/FALSE and you consolidate data by excluding certain levels (i.e. filtering out items for which that `kon_*` column is TRUE). 
+The metadata allowing consolidation is contained in the "polozka" codelist in columns `kon_*`. These are TRUE/FALSE and you consolidate data by excluding certain levels (i.e. filtering out items for which that `kon_*` column is TRUE).
 
 This is necessary even for seemingly smaller entities, like some municipalities, if they have any organisations which they establish, like schools - because those report their own money. The correct way to get their budgetary figures is to filter for their geography, then summarise across all organisations included in that geography, and consolidate.
+
+> Note that for the more recent central budget data (dataset `misris`, table `budget=central`) you need to join the `polozka` codelist to the raw data (i.e. containing rows for individual months), not to a table that has been summed by year. 
 
 Once done, double check your sum with the figure published on the Monitor if available.
 

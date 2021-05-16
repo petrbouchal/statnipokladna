@@ -7,7 +7,7 @@ Deprecated, use \code{sp_get_table()} instead.}
 \usage{
 get_table(
   table_id,
-  year = 2018,
+  year,
   month = 12,
   ico = NULL,
   redownload = FALSE,
@@ -15,9 +15,9 @@ get_table(
 )
 }
 \arguments{
-\item{table_id}{A table ID. See \code{id} column in \code{sp_tables} for a list of available codelists.}
+\item{table_id}{A table ID. See \code{id} column in \code{sp_tables} for a list of available tables}
 
-\item{year}{year, numeric, 2015-2018 for some datasets, 2010-2018 for others.
+\item{year}{year, numeric, 2015-2019 for some datasets, 2010-2020 for others.
 Can be a vector of length > 1 (see Details for how to work with data across time periods.).}
 
 \item{month}{month, numeric. Must be 3, 6, 9 or 12. Can be a vector of length > 1 (see details).}
