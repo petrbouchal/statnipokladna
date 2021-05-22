@@ -29,7 +29,7 @@ This is normally called inside \code{sp_get_codelist()} but can be used separate
 finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
 }
 \examples{
-\donttest{
+\dontrun{
 sp_get_codelist_file("druhuj")
 codelist_url <- sp_get_codelist_url("druhuj")
 sp_get_codelist_file(url = codelist_url)

@@ -25,7 +25,7 @@ Useful for workflows where you want to keep track of URLs and intermediate files
 than having all steps performed by one function.
 }
 \examples{
-\donttest{
+\dontrun{
 sp_get_dataset_url("finm", 2018, 6, FALSE)
 sp_get_dataset_url("finm", 2029, 6, FALSE) # works but returns invalid URL
 if(FALSE) sp_get_dataset_url("finm_wrong", 2018, 6, TRUE) # fails, invalid dataset ID

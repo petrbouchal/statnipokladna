@@ -51,7 +51,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #' @return Character vector of length one - a path.
 #' @family Detailed workflow
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' ds <- sp_get_dataset("rozv", 2018, 12)
 #' sp_get_table_file("balance-sheet", ds)
 #' }
@@ -93,7 +93,7 @@ sp_get_table_file <- function(table_id, dataset_path, reunzip = FALSE) {
 #' @return a [tibble][tibble::tibble-package]. See help for `sp_get_table()` for a key to the columns.
 #' @family Detailed workflow
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' ds <- sp_get_dataset("rozv", 2018, 12)
 #' tf <- sp_get_table_file("balance-sheet", ds)
 #' sp_load_table(tf)
@@ -278,7 +278,7 @@ sp_load_table <- function(path, ico = NULL) {
 #' @return a [tibble][tibble::tibble-package]; see Details for key to the columns
 #' @encoding UTF-8
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' allorgs_2018 <- sp_get_table("budget-central", 2018)
 #' allorgs_mid2018 <- sp_get_table("budget-central", 2018, 6)
 #' oneorg_multiyear <- sp_get_table("budget-central", 2017:2018, 12, ico = "00064581")

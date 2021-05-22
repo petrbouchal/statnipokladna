@@ -33,6 +33,7 @@
 * `sp_get_dataset_doc()` now creates `dest_dir` if it does not exist, as advertised in the documentation 
 * upgrade dplyr dependency to aviod mysterious "unused argument" error in codelist functions
 * balance sheets of city districts can now be loaded for all years where they are available
+* examples are now safe to run on CRAN
 
 # statnipokladna 0.6.0
 

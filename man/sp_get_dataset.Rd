@@ -41,7 +41,7 @@ This has significant implications for how you get to usable full-year numbers or
 See \code{vignette("statnipokladna")} for details on this.
 }
 \examples{
-\donttest{
+\dontrun{
 budget_2018 <- sp_get_dataset("finm", 2018)
 budget_mid2018 <- sp_get_dataset("finm", 2018, 6)
 }

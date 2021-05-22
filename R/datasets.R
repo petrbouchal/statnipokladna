@@ -46,7 +46,7 @@ sp_datasets <- sp_datasets_i %>% dplyr::select(.data$id, .data$name) %>%
 #' @return a character vector of length one, containing a URL
 #' @family Detailed workflow
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' sp_get_dataset_url("finm", 2018, 6, FALSE)
 #' sp_get_dataset_url("finm", 2029, 6, FALSE) # works but returns invalid URL
 #' if(FALSE) sp_get_dataset_url("finm_wrong", 2018, 6, TRUE) # fails, invalid dataset ID
@@ -82,7 +82,7 @@ sp_get_dataset_url <- function(dataset_id, year, month = 12, check_if_exists = T
 #' @return (invisible) path to file if `download = TRUE`, URL otherwise
 #' @family Utilities
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' sp_get_dataset_doc("finm")
 #' }
 #' @export
@@ -131,7 +131,7 @@ sp_get_dataset_doc <- function(dataset_id, dest_dir = NULL, download = TRUE) {
 #'
 #' @return character string with complete paths to downloaded ZIP archives.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' budget_2018 <- sp_get_dataset("finm", 2018)
 #' budget_mid2018 <- sp_get_dataset("finm", 2018, 6)
 #' }

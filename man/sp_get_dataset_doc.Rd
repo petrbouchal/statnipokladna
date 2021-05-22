@@ -21,7 +21,7 @@ If left unset, will use the \code{statnipokladna.dest_dir} option if the option 
 Downloads XLS file with dataset documentation, or opens link to this file in browser.
 }
 \examples{
-\donttest{
+\dontrun{
 sp_get_dataset_doc("finm")
 }
 }

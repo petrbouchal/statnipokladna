@@ -19,7 +19,7 @@ This is normally called inside \code{sp_get_table()} but can be used separately 
 finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
 }
 \examples{
-\donttest{
+\dontrun{
 ds <- sp_get_dataset("rozv", 2018, 12)
 tf <- sp_get_table_file("balance-sheet", ds)
 sp_load_table(tf)

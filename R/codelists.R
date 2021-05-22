@@ -69,7 +69,7 @@ utils::globalVariables("where")
 #' @family Detailed workflow
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' cf <- sp_get_codelist_file("druhuj")
 #' sp_load_codelist(cf)
 #' }
@@ -126,7 +126,7 @@ sp_load_codelist <- function(path, n = NULL) {
 #' @return path to XML file; character vector of length one.
 #' @family Detailed workflow
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' sp_get_codelist_file("druhuj")
 #' codelist_url <- sp_get_codelist_url("druhuj")
 #' sp_get_codelist_file(url = codelist_url)
@@ -180,7 +180,7 @@ sp_get_codelist_file <- function(codelist_id = NULL, url = NULL, dest_dir = NULL
 #'
 #' @return a [tibble][tibble::tibble-package]
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' sp_get_codelist("paragraf")
 #' }
 #' @export
@@ -248,7 +248,7 @@ sp_get_codelist_viewer <- function(codelist_id, open = TRUE) {
 #' @family Core workflow
 #' @export
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' sp_get_table("budget-central", 2017) %>%
 #'   sp_add_codelist("polozka") %>%
 #'   sp_add_codelist("paragraf")
@@ -336,7 +336,7 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$vykaz_d
 #'
 #' @return character vector of length one containing URL
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' sp_get_codelist_url("ucjed", FALSE)
 #' if(FALSE) sp_get_codelist_url("ucjed_wrong", TRUE) # fails, invalid codelist
 #' }

@@ -19,7 +19,7 @@ This is normally called inside \code{sp_get_codelist()} but can be used separate
 finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
 }
 \examples{
-\donttest{
+\dontrun{
 sp_get_codelist_url("ucjed", FALSE)
 if(FALSE) sp_get_codelist_url("ucjed_wrong", TRUE) # fails, invalid codelist
 }

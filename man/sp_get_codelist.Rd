@@ -35,7 +35,7 @@ Codelist XML files are stored in a temporary directory as determined by \code{te
 and persist per session to avoid redownloads.
 }
 \examples{
-\donttest{
+\dontrun{
 sp_get_codelist("paragraf")
 }
 }

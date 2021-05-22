@@ -137,7 +137,7 @@ Data is processed in the following way:
 }
 }
 \examples{
-\donttest{
+\dontrun{
 allorgs_2018 <- sp_get_table("budget-central", 2018)
 allorgs_mid2018 <- sp_get_table("budget-central", 2018, 6)
 oneorg_multiyear <- sp_get_table("budget-central", 2017:2018, 12, ico = "00064581")
