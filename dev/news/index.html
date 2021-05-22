@@ -169,7 +169,19 @@
 <li>
 <code><a href="../reference/sp_get_dataset.html">sp_get_dataset()</a></code> no longer unzips the downloaded archive. It therefore returns the path to the downloaded zip file, not to the unzipped files. This is needed to support a more modular workflow (see below and <code><a href="../articles/workflow.html">vignette("workflow", package = "statnipokladna")</a></code>).</li>
 <li>The <code>year</code> param in <code><a href="../reference/sp_get_table.html">sp_get_table()</a></code> and <code><a href="../reference/sp_get_dataset.html">sp_get_dataset()</a></code> now has no default. This is more sensible when there is no easy way to determine the latest available table/dataset and in any case better for reproducibility. The new <code><a href="../reference/sp_get_dataset_url.html">sp_get_dataset_url()</a></code> also has this updated behaviour.</li>
-<li>the column in budget-type tables (<code>budget-central</code>, <code>budget-local</code>) previously exported under the original name <code>0CI_TYPE</code> is now called <code>polozka_type</code>. Its meaning remains unclear so presumably this will not cause trouble to many users.</li>
+<li>the columns signifying the time period of the result of <code><a href="../reference/sp_get_table.html">sp_get_table()</a></code> have been renamed for more clarity and consistency:
+<ul>
+<li>
+<code>period_vykaz</code> to <code>vykaz_date</code>
+</li>
+<li>
+<code>per_m</code> to <code>vykaz_month</code>
+</li>
+<li>
+<code>per_yr</code> to <code>vykaz_year</code>
+</li>
+</ul>
+</li>
 <li>
 <code><a href="../reference/sp_add_codelist.html">sp_add_codelist()</a></code> no longer creates messy column names in the form of <code>[codelist name]_nazev_nazev</code>
 </li>
@@ -179,10 +191,10 @@
 <h2 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New features</h2>
 <ul>
-<li>the core functions have been rewritten into a more modular architecture and their constituent modules exported. This allows more fine-grained over workflow using lower-level functions to accommodate caching and reproducibility e.g. via {targets} or {drake}.
+<li>the core functions have been rewritten into a more modular architecture and their constituent modules exported. This allows more fine-grained control over workflows using lower-level functions to accommodate caching and reproducibility e.g. via {targets} or {drake}.
 <ul>
 <li>sp_get_[dataset|table|codelist] are now effectively wrappers around several lower-level functions</li>
-<li>those previously using these core functions should see no change except for one breaking change in <code><a href="../reference/sp_get_dataset.html">sp_get_dataset()</a></code>.</li>
+<li>those previously using these core functions should see no change except for one breaking change in <code><a href="../reference/sp_get_dataset.html">sp_get_dataset()</a></code> (see above).</li>
 <li>the lower-level functions enable step-by-step workflows with transparency of intermediate steps (URLs, downloaded ZIP archives, pointers to specific CSV files, etc.) See <code><a href="../articles/workflow.html">vignette("workflow", package = "statnipokladna")</a></code>
 </li>
 </ul>
@@ -212,6 +224,7 @@
 <code><a href="../reference/sp_get_dataset_doc.html">sp_get_dataset_doc()</a></code> now creates <code>dest_dir</code> if it does not exist, as advertised in the documentation</li>
 <li>upgrade dplyr dependency to aviod mysterious “unused argument” error in codelist functions</li>
 <li>balance sheets of city districts can now be loaded for all years where they are available</li>
+<li>examples are now safe to run on CRAN</li>
 </ul>
 </div>
 </div>
