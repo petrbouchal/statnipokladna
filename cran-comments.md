@@ -1,24 +1,28 @@
 ## New minor version
 
-This version includes several minor improvements and bug fixes and a single new feature: an option can be set to store data dumps downloaded from the external source in a custom directory so as to avoid redownloading them later. By default, `tempdir()` is used and the user has to actively set a parameter or option for the package to store any data outside working or temporary directories.
+This version includes several improvements and bug fixes and fixes an issue flagged up by CRAN around accessing remote resources.
 
 ## Test environments
 
-* local MacOS installation, R 4.0.3
-* win-builder, R 4.0.3
-* win (devel on r-hub)
+* local MacOS installation, R 4.0.4
+* win-builder, R 4.1
 * fedora-clang gfortran (devel on r-hub)
+* Ubuntu (release on r-hub)
+* Win (release on r-hub)
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 notes on win-devel:
+0 errors | 0 warnings | 2 notes on win-devel:
 
 Found the following (possibly) invalid URLs:
-  URL: data.gov.cz
-    From: README.md
-    Status: Error
-    Message: libcurl error code 35:
-      	schannel: next InitializeSecurityContext failed: SEC_E_ILLEGAL_MESSAGE (0x80090326) - This error usually occurs when a fatal SSL/TLS alert is received (e.g. handshake failed).
+  Namespace in Imports field not imported from: 'tidyselect'
+  All declared Imports should be used.
+  
+Response from maintainer: tidyselect is in fact used via an import in codelists.R (`utils::globalVariables("where")`).
+
+Note: found 52 marked UTF-8 strings
+
+Response from maintainer: this is a result of non-ASCII characters in a data object which are needed to align data descriptors inside the package with those assigned by the data provider in the Czech locale.
 
 ## Reverse dependencies
 
