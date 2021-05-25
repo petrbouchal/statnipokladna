@@ -267,8 +267,9 @@ source files as they are downloaded from the data provider, or checking
 for changes at the data provider and keeping track of individual URLs
 from which the data was downloaded. For these situations, a workflow
 composed of lower-level functions is available, offering finer control
-of the steps. See the [workflow](/articles/workflow.html) vignette
-(`vignette("workflow", package = "statnipokladna")`).
+of the steps. See the
+[workflow](https://petrbouchal.xyz/statnipokladna/articles/workflow.html)
+vignette (`vignette("workflow", package = "statnipokladna")`).
 
 ## Background information
 
