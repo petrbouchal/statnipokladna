@@ -123,11 +123,6 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/petrbouchal/statnipokladna">statnipokladna</a></span><span class="op">)</span>
-<span class="co"># library(ggplot2)</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># plot(cars) # for testing figure file logic</span></code></pre></div>
 <div id="reproducibility" class="section level2">
 <h2 class="hasAnchor">
 <a href="#reproducibility" class="anchor"></a>Reproducibility</h2>
@@ -178,12 +173,12 @@
 </ul>
 <p>{statnipokladna} has a set of lower-lever functions that allow you to proceed step by step, keeping track of intermediate data files, URLs and paths.</p>
 <p>For codelists:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sp_cl_url</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sp_get_codelist_url.html">sp_get_codelist_url</a></span><span class="op">(</span><span class="st">"paragraf"</span><span class="op">)</span>
 <span class="va">sp_cl_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sp_get_codelist_file.html">sp_get_codelist_file</a></span><span class="op">(</span>url <span class="op">=</span> <span class="va">sp_cl_url</span><span class="op">)</span>
 <span class="va">sp_cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sp_load_codelist.html">sp_load_codelist</a></span><span class="op">(</span><span class="va">sp_cl_path</span><span class="op">)</span></code></pre></div>
 <p>For data:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rozv_url</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sp_get_dataset_url.html">sp_get_dataset_url</a></span><span class="op">(</span><span class="st">"rozv"</span>, <span class="fl">2019</span>, <span class="fl">12</span>, 
                                check_if_exists <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
 <span class="va">rozv_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sp_get_dataset.html">sp_get_dataset</a></span><span class="op">(</span><span class="st">"rozv"</span>, <span class="fl">2019</span>, <span class="fl">12</span><span class="op">)</span>
@@ -195,7 +190,7 @@
 <p>Note that we keep <code>redownload</code> set to its default of <code>FALSE</code> to avoid being surprised by changes to the upstream data on the provider’s server. (It is up to you whether to commit the downloaded data to version control - in the case of some core codelists, this would make sense.)</p>
 <p>This step-by-step workflow is suitable for being turned into an explicit pipeline e.g. using the {targets} framework.</p>
 <p>Below is the content of a hypothetical <code>_targets.R</code> file that will allow you to keep track of the pipeline for using codelists, from initial function calls, via URLs to the resulting objects.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">targets</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">tarchetypes</span><span class="op">)</span>
 
@@ -233,7 +228,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">targets_codelists</span><span class="op">)</span></code></pre></div>
 <p>And for data, it might look like this:</p>
 <p>(Note: still need a branching example here)</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">targets</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">tarchetypes</span><span class="op">)</span>
