@@ -43,7 +43,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
       </span>
     </div>
 
@@ -51,7 +51,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -77,6 +77,9 @@
     <li>
       <a href="articles/how-the-data-works.html">How the data works</a>
     </li>
+    <li>
+      <a href="articles/workflow.html">statnipokladna workflows and reproducibility</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -86,13 +89,13 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/petrbouchal/statnipokladna/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://petrbouchal.xyz">
-    <span class="fa fa-asterisk fa-lg"></span>
+    <span class="fas fa-asterisk fa-lg"></span>
      
   </a>
 </li>
@@ -193,22 +196,26 @@
                            month <span class="op">=</span> <span class="fl">9</span><span class="op">)</span>
 <span class="co">#&gt; ℹ Files already in ~/sp_data/finm/2019/09, not downloading. Set `redownload = TRUE` if needed.</span>
 <span class="co">#&gt; ℹ Reading data...</span>
-<span class="co">#&gt; ℹ Transforming data...</span></code></pre></div>
+<span class="co">#&gt; ℹ Transforming data...</span>
+<span class="co">#&gt; Warning: Problem with `mutate()` input `vykaz_date`.</span>
+<span class="co">#&gt; ℹ All formats failed to parse. No formats found.</span>
+<span class="co">#&gt; ℹ Input `vykaz_date` is `(function (..., quiet = FALSE, tz = NULL, locale = Sys.getlocale("LC_TIME"), ...`.</span>
+<span class="co">#&gt; Warning: All formats failed to parse. No formats found.</span></code></pre></div>
 <p>The data is automatically downloaded to a temp directory, so it will be reused by future calls to <code><a href="reference/sp_get_table.html">sp_get_table()</a></code> made in the same session, unless you set <code>force_redownload = TRUE</code>. You set the <code>dest_dir</code> parameter e.g. to <code>"."</code>, a directory will be created in your current working directory and the data will be downloaded into it so that it can persist across sessions.</p>
 <p>It is a rather raw-looking data frame…</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">local_budgets</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 6 x 15</span>
-<span class="co">#&gt;   vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka</span>
-<span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;  </span>
-<span class="co">#&gt; 1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364   </span>
-<span class="co">#&gt; 2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909   </span>
-<span class="co">#&gt; 3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111   </span>
-<span class="co">#&gt; 4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112   </span>
-<span class="co">#&gt; 5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113   </span>
-<span class="co">#&gt; 6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121   </span>
-<span class="co">#&gt; # … with 4 more variables: budget_adopted &lt;dbl&gt;, budget_amended &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   budget_spending &lt;dbl&gt;, period_vykaz &lt;date&gt;</span></code></pre></div>
+<span class="co">#&gt;   vykaz vtab  vykaz_year vykaz_month ucjed ico   kraj  nuts  polozka_typ</span>
+<span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      </span>
+<span class="co">#&gt; 1 051   0002… 2019       09          1000… 7508… CZ03  CZ03  3          </span>
+<span class="co">#&gt; 2 051   0002… 2019       09          1000… 7508… CZ03  CZ03  3          </span>
+<span class="co">#&gt; 3 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          </span>
+<span class="co">#&gt; 4 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          </span>
+<span class="co">#&gt; 5 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          </span>
+<span class="co">#&gt; 6 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          </span>
+<span class="co">#&gt; # … with 6 more variables: paragraf &lt;chr&gt;, polozka &lt;chr&gt;, budget_adopted &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   budget_amended &lt;dbl&gt;, budget_spending &lt;dbl&gt;, vykaz_date &lt;date&gt;</span></code></pre></div>
 <p>but it has been cleaned up, and can be enriched with any of the metadata codelists:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">functional_categories</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sp_get_codelist.html">sp_get_codelist</a></span><span class="op">(</span><span class="st">"paragraf"</span><span class="op">)</span>
@@ -216,20 +223,20 @@
 <span class="co">#&gt; ℹ Processing codelist data</span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">functional_categories</span>
-<span class="co">#&gt; # A tibble: 552 x 7</span>
-<span class="co">#&gt;    paragraf skupina pododdil oddil paragraf_nazev          start_date end_date  </span>
-<span class="co">#&gt;    &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;                   &lt;date&gt;     &lt;date&gt;    </span>
-<span class="co">#&gt;  1 0000     0       0        0     Pro příjmy (technický … 1900-01-01 9999-12-31</span>
-<span class="co">#&gt;  2 1011     1       101      10    Udržování výrobního po… 1900-01-01 9999-12-31</span>
-<span class="co">#&gt;  3 1012     1       101      10    Podnikání a restruktur… 1900-01-01 9999-12-31</span>
-<span class="co">#&gt;  4 1013     1       101      10    Genetický potenciál ho… 1900-01-01 9999-12-31</span>
-<span class="co">#&gt;  5 1014     1       101      10    Ozdravování hospodářsk… 1900-01-01 9999-12-31</span>
-<span class="co">#&gt;  6 1019     1       101      10    Ostatní zemědělská a p… 1900-01-01 9999-12-31</span>
-<span class="co">#&gt;  7 1021     1       102      10    Organizace trhu s prod… 1900-01-01 9999-12-31</span>
-<span class="co">#&gt;  8 1022     1       102      10    Organizace trhu s výro… 1900-01-01 9999-12-31</span>
-<span class="co">#&gt;  9 1023     1       102      10    Organizace trhu s prod… 1900-01-01 9999-12-31</span>
-<span class="co">#&gt; 10 1024     1       102      10    Organizace trhu s výro… 1900-01-01 9999-12-31</span>
-<span class="co">#&gt; # … with 542 more rows</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 570 x 8</span>
+<span class="co">#&gt;    paragraf start_date end_date   nazev    skupina   oddil  pododdil   poznamka </span>
+<span class="co">#&gt;    &lt;chr&gt;    &lt;date&gt;     &lt;date&gt;     &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;    </span>
+<span class="co">#&gt;  1 0000     2010-01-01 9999-12-31 Pro pří… Příjmy    Příjmy Příjmy     Pro příj…</span>
+<span class="co">#&gt;  2 1011     2010-01-01 9999-12-31 Udržová… Zeměděls… Zeměd… Zemědělsk… Zeměděls…</span>
+<span class="co">#&gt;  3 1012     2010-01-01 9999-12-31 Podniká… Zeměděls… Zeměd… Zemědělsk… Podnikán…</span>
+<span class="co">#&gt;  4 1013     2010-01-01 9999-12-31 Genetic… Zeměděls… Zeměd… Zemědělsk… Genetick…</span>
+<span class="co">#&gt;  5 1014     2010-01-01 9999-12-31 Ozdravo… Zeměděls… Zeměd… Zemědělsk… Ozdrav.h…</span>
+<span class="co">#&gt;  6 1019     2010-01-01 9999-12-31 Ostatní… Zeměděls… Zeměd… Zemědělsk… Ostatní …</span>
+<span class="co">#&gt;  7 1021     2010-01-01 9999-12-31 Organiz… Zeměděls… Zeměd… Regulace … Regulace…</span>
+<span class="co">#&gt;  8 1022     2010-01-01 9999-12-31 Organiz… Zeměděls… Zeměd… Regulace … Org. trh…</span>
+<span class="co">#&gt;  9 1023     2010-01-01 9999-12-31 Organiz… Zeměděls… Zeměd… Regulace … Organiza…</span>
+<span class="co">#&gt; 10 1024     2010-01-01 9999-12-31 Organiz… Zeměděls… Zeměd… Regulace … Reg.trhu…</span>
+<span class="co">#&gt; # … with 560 more rows</span></code></pre></div>
 <p>This contains all codes for this codelist, some of which are not valid for the time period of our core data. The function <code><a href="reference/add_codelist.html">add_codelist()</a></code> resolves this automatically.</p>
 <p>As you can see below, you can</p>
 <ul>
@@ -241,41 +248,40 @@
 <code class="sourceCode R"><span class="va">local_budgets</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/sp_add_codelist.html">sp_add_codelist</a></span><span class="op">(</span><span class="va">functional_categories</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/sp_add_codelist.html">sp_add_codelist</a></span><span class="op">(</span><span class="st">"polozka"</span><span class="op">)</span>
-<span class="co">#&gt; Warning: The `keep` argument of `group_map()` is deprecated as of dplyr 1.0.0.</span>
-<span class="co">#&gt; Please use the `.keep` argument instead.</span>
-<span class="co">#&gt; This warning is displayed once every 8 hours.</span>
-<span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span>
 <span class="co">#&gt; ℹ Codelist file already in '~/sp_data/', not downloading. Set `redownload = TRUE` if needed.</span>
 <span class="co">#&gt; ℹ Processing codelist data</span>
-<span class="co">#&gt; # A tibble: 1,189,627 x 27</span>
-<span class="co">#&gt;    vykaz vtab  per_yr per_m ucjed ico   kraj  nuts  `0CI_TYPE` paragraf polozka</span>
-<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;  </span>
-<span class="co">#&gt;  1 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5364   </span>
-<span class="co">#&gt;  2 051   0002… 2019   09    1000… 7508… CZ03  CZ03  3          6409     5909   </span>
-<span class="co">#&gt;  3 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1111   </span>
-<span class="co">#&gt;  4 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1112   </span>
-<span class="co">#&gt;  5 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1113   </span>
-<span class="co">#&gt;  6 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1121   </span>
-<span class="co">#&gt;  7 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1122   </span>
-<span class="co">#&gt;  8 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1211   </span>
-<span class="co">#&gt;  9 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1332   </span>
-<span class="co">#&gt; 10 051   0001… 2019   09    1000… 0006… CZ010 CZ01… 2          0000     1333   </span>
-<span class="co">#&gt; # … with 1,189,617 more rows, and 16 more variables: budget_adopted &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   budget_amended &lt;dbl&gt;, budget_spending &lt;dbl&gt;, period_vykaz &lt;date&gt;,</span>
-<span class="co">#&gt; #   skupina &lt;chr&gt;, pododdil &lt;chr&gt;, oddil &lt;chr&gt;,</span>
-<span class="co">#&gt; #   functional_categories_paragraf_nazev &lt;chr&gt;,</span>
+<span class="co">#&gt; ℹ Joining on 2 columns: polozka, poznamka.</span>
+<span class="co">#&gt;   This may indicate a problem with the data.</span>
+<span class="co">#&gt;   Set by if needed.</span>
+<span class="co">#&gt; # A tibble: 1,189,627 x 34</span>
+<span class="co">#&gt;    vykaz vtab  vykaz_year vykaz_month ucjed ico   kraj  nuts  polozka_typ</span>
+<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      </span>
+<span class="co">#&gt;  1 051   0002… 2019       09          1000… 7508… CZ03  CZ03  3          </span>
+<span class="co">#&gt;  2 051   0002… 2019       09          1000… 7508… CZ03  CZ03  3          </span>
+<span class="co">#&gt;  3 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          </span>
+<span class="co">#&gt;  4 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          </span>
+<span class="co">#&gt;  5 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          </span>
+<span class="co">#&gt;  6 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          </span>
+<span class="co">#&gt;  7 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          </span>
+<span class="co">#&gt;  8 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          </span>
+<span class="co">#&gt;  9 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          </span>
+<span class="co">#&gt; 10 051   0001… 2019       09          1000… 0006… CZ010 CZ01… 2          </span>
+<span class="co">#&gt; # … with 1,189,617 more rows, and 25 more variables: paragraf &lt;chr&gt;,</span>
+<span class="co">#&gt; #   polozka &lt;chr&gt;, budget_adopted &lt;dbl&gt;, budget_amended &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   budget_spending &lt;dbl&gt;, vykaz_date &lt;date&gt;,</span>
 <span class="co">#&gt; #   functional_categories_start_date &lt;date&gt;,</span>
-<span class="co">#&gt; #   functional_categories_end_date &lt;date&gt;, polozka_start_date &lt;date&gt;,</span>
-<span class="co">#&gt; #   polozka_end_date &lt;date&gt;, trida &lt;chr&gt;, seskupeni &lt;chr&gt;, podseskupeni &lt;chr&gt;,</span>
-<span class="co">#&gt; #   polozka_nazev &lt;chr&gt;</span></code></pre></div>
+<span class="co">#&gt; #   functional_categories_end_date &lt;date&gt;, functional_categories_nazev &lt;chr&gt;,</span>
+<span class="co">#&gt; #   skupina &lt;chr&gt;, oddil &lt;chr&gt;, pododdil &lt;chr&gt;, poznamka &lt;chr&gt;,</span>
+<span class="co">#&gt; #   polozka_id &lt;chr&gt;, polozka_start_date &lt;date&gt;, polozka_end_date &lt;date&gt;,</span>
+<span class="co">#&gt; #   polozka_nazev &lt;chr&gt;, druh &lt;chr&gt;, trida &lt;chr&gt;, seskupeni &lt;chr&gt;,</span>
+<span class="co">#&gt; #   podseskupeni &lt;chr&gt;, kon_pol &lt;lgl&gt;, kon_okr &lt;lgl&gt;, kon_kraj &lt;lgl&gt;,</span>
+<span class="co">#&gt; #   kon_rep &lt;lgl&gt;</span></code></pre></div>
 <p>Download a whole “výkaz” (dataset/data dump):</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/sp_get_dataset.html">sp_get_dataset</a></span><span class="op">(</span><span class="st">"finm"</span><span class="op">)</span> <span class="co"># dataset ID, see `sp_datasets`</span>
-<span class="co">#&gt; Warning: Either year or month not set.</span>
-<span class="co">#&gt; Using defaults of 2018 and 12.</span>
-<span class="co">#&gt; ● Set these values explicitly for reproducibility as the defaults may change in the future</span>
-<span class="co">#&gt;   to provide access to the latest data by default.</span>
-<span class="co">#&gt; ℹ Files already in ~/sp_data/finm/2018/12, not downloading. Set `redownload = TRUE` if needed.</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="reference/sp_get_dataset.html">sp_get_dataset</a></span><span class="op">(</span><span class="st">"finm"</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span> <span class="co"># dataset ID, see `sp_datasets`</span>
+<span class="co">#&gt; Warning: month not set. Using default of 12.</span>
+<span class="co">#&gt; • Set period parameters explicitly for reproducibility.</span>
+<span class="co">#&gt; ℹ Files already in ~/sp_data/finm/2019/12, not downloading. Set `redownload = TRUE` if needed.</span></code></pre></div>
 <p>This will put the files in a temp directory.</p>
 <p>Then look at its documentation:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -283,6 +289,12 @@
 <span class="co">#&gt; ℹ Getting dataset documentation from http://monitor.statnipokladna.cz/data/struktura/finm.xlsx</span>
 <span class="co">#&gt; ℹ File downloaded to '~/sp_data/finm.xlsx'.</span></code></pre></div>
 <p>You can get details of all the available tables in the <code>sp_tables</code> data frame; for datasets, see <code>sp_datasets</code>.</p>
+</div>
+<div id="workflows-and-reproducibility" class="section level2">
+<h2 class="hasAnchor">
+<a href="#workflows-and-reproducibility" class="anchor"></a>Workflows and reproducibility</h2>
+<p>The above examples present a simple all-in-one workflow, which is concise but can be too opaque when transparency and reproducibility matter. It is primarity aimed at workflows which prioritise updating data: every time the script is run, data is redownloaded, unless cached via the <code>dest_dir</code> parameter.</p>
+<p>In other situations, the priority might be to keep track of individual source files as they are downloaded from the data provider, or checking for changes at the data provider and keeping track of individual URLs from which the data was downloaded. For these situations, a workflow composed of lower-level functions is available, offering finer control of the steps. See the <a href="https://petrbouchal.xyz/statnipokladna/articles/workflow.html">workflow</a> vignette (<code><a href="articles/workflow.html">vignette("workflow", package = "statnipokladna")</a></code>).</p>
 </div>
 <div id="background-information" class="section level2">
 <h2 class="hasAnchor">
@@ -374,7 +386,8 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Petr Bouchal <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-0471-716X" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>
+<a href="https://petrbouchal.xyz">Petr Bouchal</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-0471-716X" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
@@ -384,8 +397,7 @@
 <li><a href="https://CRAN.R-project.org/package=statnipokladna"><img src="https://www.r-pkg.org/badges/version/statnipokladna" alt="CRAN status"></a></li>
 <li><a href="https://CRAN.R-project.org/package=statnipokladna"><img src="https://cranlogs.r-pkg.org/badges/grand-total/statnipokladna" alt="CRAN downloads"></a></li>
 <li><a href="https://CRAN.R-project.org/package=statnipokladna"><img src="https://cranlogs.r-pkg.org/badges/last-month/statnipokladna" alt="CRAN monthly downloads"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
-<li><a href="https://travis-ci.org/petrbouchal/statnipokladna"><img src="https://travis-ci.org/petrbouchal/statnipokladna.svg?branch=master" alt="Travis build status"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
 <li><a href="https://github.com/petrbouchal/statnipokladna/actions"><img src="https://github.com/petrbouchal/statnipokladna/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 </ul>
 </div>
@@ -394,7 +406,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Petr Bouchal.</p>
+  <p>Developed by <a href="https://petrbouchal.xyz">Petr Bouchal</a>.</p>
 </div>
 
 <div class="pkgdown">

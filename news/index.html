@@ -85,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -119,6 +119,9 @@
     <li>
       <a href="../articles/how-the-data-works.html">How the data works</a>
     </li>
+    <li>
+      <a href="../articles/workflow.html">statnipokladna workflows and reproducibility</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -128,13 +131,13 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/petrbouchal/statnipokladna/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://petrbouchal.xyz">
-    <span class="fa fa-asterisk fa-lg"></span>
+    <span class="fas fa-asterisk fa-lg"></span>
      
   </a>
 </li>
@@ -155,13 +158,83 @@
       <small>Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="statnipokladna-070" class="section level1">
+<h1 class="page-header" data-toc-text="0.7.0">
+<a href="#statnipokladna-070" class="anchor"></a>statnipokladna 0.7.0<small> Unreleased </small>
+</h1>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>BREAKING CHANGES</h2>
+<ul>
+<li>
+<code><a href="../reference/sp_get_dataset.html">sp_get_dataset()</a></code> no longer unzips the downloaded archive. It therefore returns the path to the downloaded zip file, not to the unzipped files. This is needed to support a more modular workflow (see below and <code><a href="../articles/workflow.html">vignette("workflow", package = "statnipokladna")</a></code>).</li>
+<li>The <code>year</code> param in <code><a href="../reference/sp_get_table.html">sp_get_table()</a></code> and <code><a href="../reference/sp_get_dataset.html">sp_get_dataset()</a></code> now has no default. This is more sensible when there is no easy way to determine the latest available table/dataset and in any case better for reproducibility. The new <code><a href="../reference/sp_get_dataset_url.html">sp_get_dataset_url()</a></code> also has this updated behaviour.</li>
+<li>the columns signifying the time period of the result of <code><a href="../reference/sp_get_table.html">sp_get_table()</a></code> have been renamed for more clarity and consistency:
+<ul>
+<li>
+<code>period_vykaz</code> to <code>vykaz_date</code>
+</li>
+<li>
+<code>per_m</code> to <code>vykaz_month</code>
+</li>
+<li>
+<code>per_yr</code> to <code>vykaz_year</code>
+</li>
+</ul>
+</li>
+<li>
+<code><a href="../reference/sp_add_codelist.html">sp_add_codelist()</a></code> no longer creates messy column names in the form of <code>[codelist name]_nazev_nazev</code>
+</li>
+</ul>
+</div>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
+<ul>
+<li>the core functions have been rewritten into a more modular architecture and their constituent modules exported. This allows more fine-grained control over workflows using lower-level functions to accommodate caching and reproducibility e.g. via {targets} or {drake}.
+<ul>
+<li>sp_get_[dataset|table|codelist] are now effectively wrappers around several lower-level functions</li>
+<li>those previously using these core functions should see no change except for one breaking change in <code><a href="../reference/sp_get_dataset.html">sp_get_dataset()</a></code> (see above).</li>
+<li>the lower-level functions enable step-by-step workflows with transparency of intermediate steps (URLs, downloaded ZIP archives, pointers to specific CSV files, etc.) See <code><a href="../articles/workflow.html">vignette("workflow", package = "statnipokladna")</a></code>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="improvements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#improvements" class="anchor"></a>Improvements</h2>
+<ul>
+<li>better error messages around mismatches between table ID and file in archive</li>
+<li>more informative errors when online files are not available</li>
+<li>improve date parsing in <code><a href="../reference/sp_get_codelist.html">sp_get_codelist()</a></code> to handle inconsistent date formats in some codelists</li>
+<li>faster loading of tables from previously downloaded and unzipped datasets</li>
+<li>empty strings in codelists are now returned as NA</li>
+<li>more columns are now properly named in the output so they can be linked to codelists, incl. columns related to programme spend and rifngfenced (‘purpose’-marked) spend</li>
+<li>
+<code>rozprog</code> (programme spend ID) as well as <code>nastroj</code> and <code>nastrojanal</code> codelists are now recognised</li>
+</ul>
+</div>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>when setting <code>dest_dir</code> in <code>sp_get_*()</code> functions, files are now put into the right directory even if <code>dest_dir</code> does not contain a trailing slash</li>
+<li>
+<code><a href="../reference/sp_get_dataset_doc.html">sp_get_dataset_doc()</a></code> now creates <code>dest_dir</code> if it does not exist, as advertised in the documentation</li>
+<li>upgrade dplyr dependency to aviod mysterious “unused argument” error in codelist functions</li>
+<li>balance sheets of city districts can now be loaded for all years where they are available</li>
+<li>examples are now safe to run on CRAN</li>
+</ul>
+</div>
+</div>
     <div id="statnipokladna-060" class="section level1">
 <h1 class="page-header" data-toc-text="0.6.0">
 <a href="#statnipokladna-060" class="anchor"></a>statnipokladna 0.6.0<small> 2020-11-10 </small>
 </h1>
-<div id="improvements" class="section level2">
+<div id="improvements-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#improvements" class="anchor"></a>Improvements</h2>
+<a href="#improvements-1" class="anchor"></a>Improvements</h2>
 <ul>
 <li>directory for downloading raw data and documentation in all <code>sp_get_*()</code> functions can now be set in the option <code>statnipokladna.dest_dir</code>. Set this at the beginning of your script or once per session, or in your <code>.Rprofile</code> (e.g. <code>setOption(statnipokladna.dest_dir = "~/sp_data")</code> for cross-session storage or <code>setOption(statnipokladna.dest_dir = "sp_data")</code> for storing all data downloaded by statnipokladna in an <code>sp_data</code> subfolder of the current project.)</li>
 <li>downloaded data is no longer nested in a <code>statnipokladna</code> directory inside <code>dest_dir</code>.</li>
@@ -171,9 +244,9 @@
 <code><a href="../reference/sp_get_dataset.html">sp_get_dataset()</a></code> and <code><a href="../reference/sp_get_dataset_doc.html">sp_get_dataset_doc()</a></code> now return their outputs invisibly and provide better messages</li>
 </ul>
 </div>
-<div id="bug-fixes" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>adapt <code><a href="../reference/sp_get_table.html">sp_get_table()</a></code> to a new structure of some data dumps on the part of the data provider</li>
 <li>
@@ -192,9 +265,9 @@
 <h1 class="page-header" data-toc-text="0.5.7">
 <a href="#statnipokladna-057" class="anchor"></a>statnipokladna 0.5.7<small> 2020-04-12 </small>
 </h1>
-<div id="bug-fixes-1" class="section level2">
+<div id="bug-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>adapt to new URL scheme for data exports at statnipokladna.cz, fixes <a href='https://github.com/petrbouchal/statnipokladna/issues/74'>#74</a></li>
 <li>simple codelists with no <code>*_date</code> columns now work in <code><a href="../reference/sp_add_codelist.html">sp_add_codelist()</a></code>, fixes <a href='https://github.com/petrbouchal/statnipokladna/issues/66'>#66</a></li>
@@ -307,9 +380,9 @@
 <h1 class="page-header" data-toc-text="0.5.1">
 <a href="#statnipokladna-051" class="anchor"></a>statnipokladna 0.5.1<small> Unreleased </small>
 </h1>
-<div id="improvements-1" class="section level2">
+<div id="improvements-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#improvements-1" class="anchor"></a>Improvements</h2>
+<a href="#improvements-2" class="anchor"></a>Improvements</h2>
 <ul>
 <li>
 <code><a href="../reference/get_table.html">get_table()</a></code> now provides access to changes-in-equity data (přehled o změnách vlastního kapitálu, use <code>"changes-in-equity"</code> table id) and cash flow statements (přehled o peněžních tocích, use <code>"cash-flow"</code> id)</li>
@@ -320,16 +393,16 @@
 <h1 class="page-header" data-toc-text="0.5.0">
 <a href="#statnipokladna-050" class="anchor"></a>statnipokladna 0.5.0<small> Unreleased </small>
 </h1>
-<div id="new-features" class="section level2">
+<div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
+<a href="#new-features-1" class="anchor"></a>New features</h2>
 <ul>
 <li>all functions downloading data now have <code>dest_dir</code> parameter which allows you to store the downloaded files anywhere, not just in temp dir; this in effect enables cross-session storage and avoids unnecessary redownloads</li>
 </ul>
 </div>
-<div id="improvements-2" class="section level2">
+<div id="improvements-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#improvements-2" class="anchor"></a>Improvements</h2>
+<a href="#improvements-3" class="anchor"></a>Improvements</h2>
 <ul>
 <li>adapt month parameter check to upgrade in the published data which now contains monthly releases for some reports</li>
 <li>argument <code>force_redownload</code> in <code>get_[table|dataset|codelist]()</code> renamed to <code>redownload</code>
@@ -361,24 +434,24 @@
 <h1 class="page-header" data-toc-text="0.4.0">
 <a href="#statnipokladna-040" class="anchor"></a>statnipokladna 0.4.0<small> Unreleased </small>
 </h1>
-<div id="breaking-changes" class="section level2">
+<div id="breaking-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>value columns (previously starting with ZU_) now renamed to human-readable English names</li>
 </ul>
 </div>
-<div id="new-features-1" class="section level2">
+<div id="new-features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-1" class="anchor"></a>New features</h2>
+<a href="#new-features-2" class="anchor"></a>New features</h2>
 <ul>
 <li>all key tables, except state funds (FINSF) now included in sp_tables and thus available in <code><a href="../reference/get_table.html">get_table()</a></code>
 </li>
 </ul>
 </div>
-<div id="improvements-3" class="section level2">
+<div id="improvements-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#improvements-3" class="anchor"></a>Improvements</h2>
+<a href="#improvements-4" class="anchor"></a>Improvements</h2>
 <ul>
 <li>improved documentation - added details to explain what each function assumes and does</li>
 <li>updated README</li>
@@ -393,17 +466,17 @@
 <h1 class="page-header" data-toc-text="0.3.0">
 <a href="#statnipokladna-030" class="anchor"></a>statnipokladna 0.3.0<small> Unreleased </small>
 </h1>
-<div id="breaking-changes-1" class="section level2">
+<div id="breaking-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-2" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>the <code>ico</code> parameter in <code><a href="../reference/get_table.html">get_table()</a></code> now directly follows the key parameters; this will break cases where the function was called with unnamed parameters but will make use more straighforward.</li>
 <li>the <code>table_id</code> parameter in <code><a href="../reference/get_table.html">get_table()</a></code> is now a human-readable alphanumeric code, not a meaningless number. This will break all uses of get_table but make future use more sensible.</li>
 </ul>
 </div>
-<div id="new-features-2" class="section level2">
+<div id="new-features-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-2" class="anchor"></a>New features</h2>
+<a href="#new-features-3" class="anchor"></a>New features</h2>
 <ul>
 <li>new <code><a href="../reference/add_codelist.html">add_codelist()</a></code> function for joining codelists to core financial data</li>
 <li>
@@ -413,9 +486,9 @@
 <li>filtering using <code>ico</code> parameter in <code><a href="../reference/get_table.html">get_table()</a></code> now works</li>
 </ul>
 </div>
-<div id="improvements-4" class="section level2">
+<div id="improvements-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#improvements-4" class="anchor"></a>Improvements</h2>
+<a href="#improvements-5" class="anchor"></a>Improvements</h2>
 <ul>
 <li>updated table of tables (now covers all key tables, includes notes)</li>
 <li>
@@ -504,7 +577,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Petr Bouchal.</p>
+  <p>Developed by <a href='https://petrbouchal.xyz'>Petr Bouchal</a>.</p>
 </div>
 
 <div class="pkgdown">

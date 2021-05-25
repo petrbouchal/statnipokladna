@@ -43,7 +43,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
       </span>
     </div>
 
@@ -51,7 +51,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -77,6 +77,9 @@
     <li>
       <a href="../articles/how-the-data-works.html">How the data works</a>
     </li>
+    <li>
+      <a href="../articles/workflow.html">statnipokladna workflows and reproducibility</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -86,13 +89,13 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/petrbouchal/statnipokladna/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://petrbouchal.xyz">
-    <span class="fa fa-asterisk fa-lg"></span>
+    <span class="fas fa-asterisk fa-lg"></span>
      
   </a>
 </li>
@@ -106,8 +109,7 @@
 
       
 
-      </header><script src="statnipokladna_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="statnipokladna_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="statnipokladna_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="statnipokladna_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Getting started with statnipokladna</h1>
@@ -135,7 +137,7 @@
 <a href="#exports-and-time-periods" class="anchor"></a>Exports and time periods</h5>
 <p>How data for different time periods is exported differs by dataset. This has significant implications for how you get to usable full-year numbers or time series in different tables.</p>
 <p>For budget datasets <code>finm</code> and <code>finu</code> (tables <code>budget-central-old*</code> and <code>budget-local*</code>) and all accounting reports, the data dump for month N will contain data describing what was reported at month M. The <code>period_vykaz</code> column will contain only one unique value. (For budget data, the <code>budget_adopted</code> column does not change throughout the year, but the others do. The <code>budget_spending</code> column contains spending up to month M.) To see time series of spending throughout a year, you need to download multiple datasets (with <code><a href="../reference/sp_get_table.html">sp_get_table()</a></code>). To get a full-year’s spending, run <code><a href="../reference/sp_get_table.html">sp_get_table("table_id", year = "YYYY")</a></code> to get the 12th month.</p>
-<p>In the newer central budget reports, <code>budget-central</code> (dataset <code>misris</code>) and <code>budget-state-funds</code> (dataset <code>finsf</code>), data for month M will contain separate rows for spending <em>in</em> (not <em>up to</em>) each month of the year up to month M. To get cumulative spending up to month M in year Y, you need to only download the dataset for month M and then sum the rows in that table. To get a full-year’s spending, run <code><a href="../reference/sp_get_table.html">sp_get_table("table_id", year = "YYYY")</a></code> to get the 12th month’s release, containing data for all months, <em>then sum the values</em> across the months contained in the resulting data frame.</p>
+<p>In the newer central budget reports, <code>budget-central</code> (dataset <code>misris</code>) and <code>budget-state-funds</code> (dataset <code>finsf</code>), data for month M will contain separate rows for spending <em>in</em> (not <em>up to</em>) each month of the year up to month M. To get cumulative spending up to month M in year Y, you need to only download the dataset for month M and then sum the rows in that table. To get a full-year’s spending, run <code><a href="../reference/sp_get_table.html">sp_get_table("table_id", year = "YYYY")</a></code> to get the 12th month’s release, containing data for all months, <em>then sum the values</em> across the months contained in the resulting data frame. <strong>If you need consolidation (i.e. summing up data from multiple organisations), you need to do this before summing anything up.</strong></p>
 </div>
 </div>
 <div id="types-of-data" class="section level3">
@@ -212,8 +214,8 @@
 <li>filter for that orginsation by <code>ico</code>
 </li>
 <li>
-<code><a href="../reference/sp_add_codelist.html">sp_add_codelist("polvyk")</a></code> for the “druhové členění”, roughly meaning the capital x current breakdown</li>
-<li>group at the right level of the <code>polvyk_</code> categorisation</li>
+<code><a href="../reference/sp_add_codelist.html">sp_add_codelist("polozka")</a></code> for the “druhové členění”, roughly meaning the capital x current breakdown</li>
+<li>group at the right level of the <code>polozka</code> categorisation</li>
 <li>summarise</li>
 </ul>
 <p>Unless you are interested in further detail, you do not need to add any other codelists.</p>
@@ -225,6 +227,9 @@
 <p>If you are summing data across multiple organisations, you will need to take care of consolidation. Typically this concerns relations between levels of government, e.g. a region gives grants to municipalities which then spend them, and consolidation ensures you only count the money once as it flows outside the public sector.</p>
 <p>The metadata allowing consolidation is contained in the “polozka” codelist in columns <code>kon_*</code>. These are TRUE/FALSE and you consolidate data by excluding certain levels (i.e. filtering out items for which that <code>kon_*</code> column is TRUE).</p>
 <p>This is necessary even for seemingly smaller entities, like some municipalities, if they have any organisations which they establish, like schools - because those report their own money. The correct way to get their budgetary figures is to filter for their geography, then summarise across all organisations included in that geography, and consolidate.</p>
+<blockquote>
+<p>Note that for the more recent central budget data (dataset <code>misris</code>, table <code>budget=central</code>) you need to join the <code>polozka</code> codelist to the raw data (i.e. containing rows for individual months), not to a table that has been summed by year.</p>
+</blockquote>
 <p>Once done, double check your sum with the figure published on the Monitor if available.</p>
 </div>
 </div>
@@ -270,7 +275,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Petr Bouchal.</p>
+  <p>Developed by <a href="https://petrbouchal.xyz">Petr Bouchal</a>.</p>
 </div>
 
 <div class="pkgdown">

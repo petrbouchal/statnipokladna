@@ -85,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -119,6 +119,9 @@
     <li>
       <a href="../articles/how-the-data-works.html">How the data works</a>
     </li>
+    <li>
+      <a href="../articles/workflow.html">statnipokladna workflows and reproducibility</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -128,13 +131,13 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/petrbouchal/statnipokladna/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://petrbouchal.xyz">
-    <span class="fa fa-asterisk fa-lg"></span>
+    <span class="fas fa-asterisk fa-lg"></span>
      
   </a>
 </li>
@@ -245,6 +248,49 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
+          <h2 id="section-detailed-workflow" class="hasAnchor"><a href="#section-detailed-workflow" class="anchor"></a>Detailed workflow</h2>
+          <p class="section-desc"><p>Functions for executing a more customisable workflow with finer grained control.</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="sp_get_codelist_file.html">sp_get_codelist_file()</a></code> </p>
+        </td>
+        <td><p>Download a codelist XML file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sp_get_dataset_url.html">sp_get_dataset_url()</a></code> </p>
+        </td>
+        <td><p>Get URL of dataset</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sp_get_table_file.html">sp_get_table_file()</a></code> </p>
+        </td>
+        <td><p>Get path to a CSV file containing a table.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sp_load_codelist.html">sp_load_codelist()</a></code> </p>
+        </td>
+        <td><p>Load codelist into a tibble from XML file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sp_load_table.html">sp_load_table()</a></code> </p>
+        </td>
+        <td><p>Load a statnipokladna table from a CSV file</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
           <h2 id="section-utilities" class="hasAnchor"><a href="#section-utilities" class="anchor"></a>Utilities</h2>
           <p class="section-desc"><p>Tools for working with the public budget database and this package.</p></p>
         </th>
@@ -281,7 +327,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Petr Bouchal.</p>
+  <p>Developed by <a href='https://petrbouchal.xyz'>Petr Bouchal</a>.</p>
 </div>
 
 <div class="pkgdown">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Deprecated: Get dataset documentation — get_dataset_doc • statnipokladna</title>
+<title>Get path to a CSV file containing a table. — sp_get_table_file • statnipokladna</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,9 +48,9 @@
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
 
-<meta property="og:title" content="Deprecated: Get dataset documentation — get_dataset_doc" />
-<meta property="og:description" content="Deprecated, use sp_get_dataset_doc() instead.
-" />
+<meta property="og:title" content="Get path to a CSV file containing a table. — sp_get_table_file" />
+<meta property="og:description" content="This is normally called inside sp_get_table() but can be used separately if
+finer-grained control of intermediate outputs is needed, e.g. in a targets workflow." />
 <meta property="og:image" content="https://petrbouchal.xyz/statnipokladna/reference/figures/card.png" />
 <meta property="og:image:alt" content="statnipokladna: R package for using Czech public finance data (Monitor Státní pokladny)" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -156,40 +156,52 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Deprecated: Get dataset documentation</h1>
-    <small class="dont-index">Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/R/datasets.R'><code>R/datasets.R</code></a></small>
-    <div class="hidden name"><code>get_dataset_doc.Rd</code></div>
+    <h1>Get path to a CSV file containing a table.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/petrbouchal/statnipokladna/blob/master/R/tables.R'><code>R/tables.R</code></a></small>
+    <div class="hidden name"><code>sp_get_table_file.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Deprecated, use <code><a href='sp_get_dataset_doc.html'>sp_get_dataset_doc()</a></code> instead.<br /><br />
-<a href='https://lifecycle.r-lib.org/articles/stages.html#deprecated'><img src='figures/lifecycle-deprecated.svg' alt='[Deprecated]' /></a></p>
+    <p>This is normally called inside <code><a href='sp_get_table.html'>sp_get_table()</a></code> but can be used separately if
+finer-grained control of intermediate outputs is needed, e.g. in a targets workflow.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_dataset_doc</span><span class='op'>(</span><span class='va'>dataset_id</span>, dest_dir <span class='op'>=</span> <span class='st'>"."</span>, download <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>sp_get_table_file</span><span class='op'>(</span><span class='va'>table_id</span>, <span class='va'>dataset_path</span>, reunzip <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>dataset_id</th>
-      <td><p>dataset ID. See <code>sp_datasets</code>.</p></td>
+      <th>table_id</th>
+      <td><p>Table ID; see <code>id</code> column in <code>sp_tables</code> for a list of available codelists.</p></td>
     </tr>
     <tr>
-      <th>dest_dir</th>
-      <td><p>character. Directory in which downloaded files will be stored.
-If left unset, will use the <code>statnipokladna.dest_dir</code> option if the option is set, and <code><a href='https://rdrr.io/r/base/tempfile.html'>tempdir()</a></code> otherwise. Will be created if it does not exist.</p></td>
+      <th>dataset_path</th>
+      <td><p>Path to downloaded dataset, as output by <code><a href='sp_get_dataset.html'>sp_get_dataset()</a></code></p></td>
     </tr>
     <tr>
-      <th>download</th>
-      <td><p>Whether to download (the default) or open link in browser.</p></td>
+      <th>reunzip</th>
+      <td><p>Whether to overwrite existing CSV files by unzipping the archive downlaoded by <code><a href='sp_get_dataset.html'>sp_get_dataset()</a></code>. Defaults to FALSE.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a <a href='https://tibble.tidyverse.org/reference/tibble-package.html'>tibble</a></p>
+    <p>Character vector of length one - a path.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p>Other Detailed workflow: 
+<code><a href='sp_get_codelist_file.html'>sp_get_codelist_file</a>()</code>,
+<code><a href='sp_get_dataset_url.html'>sp_get_dataset_url</a>()</code>,
+<code><a href='sp_load_codelist.html'>sp_load_codelist</a>()</code>,
+<code><a href='sp_load_table.html'>sp_load_table</a>()</code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>ds</span> <span class='op'>&lt;-</span> <span class='fu'><a href='sp_get_dataset.html'>sp_get_dataset</a></span><span class='op'>(</span><span class='st'>"rozv"</span>, <span class='fl'>2018</span>, <span class='fl'>12</span><span class='op'>)</span>
+<span class='fu'>sp_get_table_file</span><span class='op'>(</span><span class='st'>"balance-sheet"</span>, <span class='va'>ds</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

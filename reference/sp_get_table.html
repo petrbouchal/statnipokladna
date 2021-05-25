@@ -86,7 +86,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.0</span>
       </span>
     </div>
 
@@ -94,7 +94,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -120,6 +120,9 @@
     <li>
       <a href="../articles/how-the-data-works.html">How the data works</a>
     </li>
+    <li>
+      <a href="../articles/workflow.html">statnipokladna workflows and reproducibility</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -129,13 +132,13 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/petrbouchal/statnipokladna/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://petrbouchal.xyz">
-    <span class="fa fa-asterisk fa-lg"></span>
+    <span class="fas fa-asterisk fa-lg"></span>
      
   </a>
 </li>
@@ -163,7 +166,7 @@
 
     <pre class="usage"><span class='fu'>sp_get_table</span><span class='op'>(</span>
   <span class='va'>table_id</span>,
-  year <span class='op'>=</span> <span class='fl'>2018</span>,
+  <span class='va'>year</span>,
   month <span class='op'>=</span> <span class='fl'>12</span>,
   ico <span class='op'>=</span> <span class='cn'>NULL</span>,
   redownload <span class='op'>=</span> <span class='cn'>FALSE</span>,
@@ -175,11 +178,11 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>table_id</th>
-      <td><p>A table ID. See <code>id</code> column in <code>sp_tables</code> for a list of available codelists.</p></td>
+      <td><p>A table ID. See <code>id</code> column in <code>sp_tables</code> for a list of available tables</p></td>
     </tr>
     <tr>
       <th>year</th>
-      <td><p>year, numeric, 2015-2018 for some datasets, 2010-2018 for others.
+      <td><p>year, numeric, 2015-2019 for some datasets, 2010-2020 for others.
 Can be a vector of length &gt; 1 (see Details for how to work with data across time periods.).</p></td>
     </tr>
     <tr>
@@ -214,14 +217,14 @@ See <code><a href='../articles/statnipokladna.html'>vignette("statnipokladna")</
 <p>Data is processed in the following way:</p><ul>
 <li><p>all columns are given names that are human-readable and facilitato add codelists</p></li>
 <li><p>ICO (org. IDs) are normalised as in some datasets they are padded with leading zeros</p></li>
-<li><p>a period, per_yr and per_m columns are created to identify the time period</p></li>
+<li><p>a vykaz_date, vykaz_year and vykaz_month columns are created to identify the time period</p></li>
 <li><p>value columns are transformed into numeric</p></li>
 <li><p>other columns are left as character to avoid losing information</p></li>
 </ul>
 <h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Correspondence between input and output columns</h3>
 
 
-<p><strong>Shared</strong></p><table class='table'>
+<p><strong>Shared/multiple tables</strong></p><table class='table'>
 <tr><td>Original</td><td>Output</td><td>English</td><td>Czech</td><td>Note</td></tr>
 <tr><td>ZC_VTAB</td><td>vtab</td><td>table number</td><td>tabulka</td><td>-</td></tr>
 <tr><td>ZC_UCJED</td><td>ucjed</td><td>accounting unit</td><td>účetní jednotka</td><td>NB: ucjed != ico; the two codes are different; ICO is universal, ucjed is specific to SP, and both denote an organisation.</td></tr>
@@ -231,6 +234,7 @@ See <code><a href='../articles/statnipokladna.html'>vignette("statnipokladna")</
 <tr><td>ZC_FUND</td><td>zdroj</td><td>funding source</td><td>zdroj</td><td>-</td></tr>
 <tr><td>ZC_KRAJ</td><td>kraj</td><td>region</td><td>kraj</td><td>-</td></tr>
 <tr><td>ZC_NUTS</td><td>nuts</td><td>NUTS code</td><td>NUTS kód</td><td>-</td></tr>
+<tr><td>ZC_LAU</td><td>okres</td><td>NUTS code of LAU1 unit</td><td>LAU1 kód</td><td>-</td></tr>
 </table>
 
 
@@ -239,16 +243,30 @@ See <code><a href='../articles/statnipokladna.html'>vignette("statnipokladna")</
 <tr><td>Original</td><td>Output</td><td>English</td><td>Czech</td><td>Note</td></tr>
 <tr><td>ZCMMT_ITM</td><td>polozka</td><td>item/line</td><td>položka (druhové členění)</td><td>NB: polozka != polvyk</td></tr>
 <tr><td>0FM_AREA</td><td>kapitola</td><td>chapter</td><td>kapitola</td><td>-</td></tr>
+<tr><td>0CI_TYPE</td><td>polozka_type</td><td>item/line type</td><td>typ položky</td><td>-</td></tr>
 <tr><td>FUNC0AREA</td><td>paragraf</td><td>sector line</td><td>paragraf (odvětvové členění)</td><td>-</td></tr>
+<tr><td>ZC_PVS</td><td>pvs</td><td>programme code</td><td>programové výdaje státu</td><td>post-2014</td></tr>
+<tr><td>ZC_EDS</td><td>eds</td><td>subsidy and proprty evidence</td><td>Evidenční dotační systém / správa majetku ve vlastnictví státu</td><td>post-2014, No codelist - perhaps external via http://www.edssmvs.cz/DocumentsList.aspx?Agenda=CEIS</td></tr>
+<tr><td>ZC_UCRIS</td><td>ucris</td><td>purpose</td><td>Účel</td><td>post-2014, no codelist found</td></tr>
 <tr><td>0FUNC_AREA</td><td>paragraf</td><td>sector line</td><td>paragraf (odvětvové členění)</td><td>-</td></tr>
 <tr><td>ZU_ROZSCH</td><td>budget_adopted</td><td>budget as originally adopted</td><td>schválený rozpočet</td><td>-</td></tr>
 <tr><td>ZU_ROZPZM</td><td>budget_amended</td><td>budget as amended throughout the year</td><td>rozpočet po změnách</td><td>-</td></tr>
 <tr><td>ZU_KROZP</td><td>budget_final</td><td>final budget</td><td>konečný rozpočet</td><td>-</td></tr>
+<tr><td>ZU_OBLIG</td><td>budget_oblig</td><td>?</td><td>obligo</td><td>-</td></tr>
 <tr><td>ZU_ROZKZ</td><td>budget_spending</td><td>actual spending</td><td>skutečnost</td><td>-</td></tr>
 </table>
 
 
 
+<p><strong>Table <code>budget-indicators</code></strong></p>
+<p>| Original | Output | English | Czech | Note |
+| ZC_PSUK | psuk | budgetary indicator | Závazný a průřezový indikátor | Use <code>psuk</code> codelist |</p>
+<p>**Table <code>budget-central-old-subsidies</code> **</p>
+<p>| Original | Output | English | Czech | Note |
+| ZC_ZREUZ | ucelznak | Purpose identifier | Účelový znak | - |</p>
+<p>**Table <code>budget-central-old-purpose-grants</code> **</p>
+<p>| Original | Output | English | Czech | Note |
+| 0PU_MEASURE | rozprog | Budgetary programme | Rozpočtový program | - |</p>
 <p><strong>Tables <code>balance-sheet*</code></strong></p><table class='table'>
 <tr><td>Original</td><td>Output</td><td>English</td><td>Czech</td><td>Note</td></tr>
 <tr><td>ZC_POLVYK</td><td>polvyk</td><td>item/line</td><td>položka výkazu</td><td>-</td></tr>
@@ -299,18 +317,13 @@ See <code><a href='../articles/statnipokladna.html'>vignette("statnipokladna")</
 <code><a href='sp_get_dataset.html'>sp_get_dataset</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='va'>allorgs_latest</span> <span class='op'>&lt;-</span> <span class='fu'>sp_get_table</span><span class='op'>(</span><span class='st'>"budget-central"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Either <span style='color: #00BB00;'>year</span><span> or </span><span style='color: #00BB00;'>month</span><span> not set.</span>
-#&gt; <span class='warning'>Using defaults of </span><span style='color: #0000BB;'>2018</span><span> and </span><span style='color: #0000BB;'>12</span><span>.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BB0000;'>●</span><span> Set these values explicitly for reproducibility as the defaults may change in the future</span>
-#&gt; <span class='message'>  to provide access to the latest data by default.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Building URL for dataset </span><span style='color: #0000BB;'>'misris'</span><span>: </span><span style='color: #0000BB;'>FIN 1-12 OSS - Plnění rozpočtu KAP a OSS</span><span>, </span><span style='color: #0000BB;'>'2018-12'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Get the dataset documentation at </span><span style='color: #0000BB;'>'http:/monitor.statnipokladna.cz/data/struktura/misris.xlsx'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Storing downloaded archive in and extracting to </span><span style='color: #0000BB;'>'/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/RtmpAySwTC/misris/2018/12/'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Set </span><span style='color: #00BB00;'>dest_dir</span><span> for more control over downloaded files.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Reading data...</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Transforming data...</span></div><div class='input'><span class='va'>allorgs_2018</span> <span class='op'>&lt;-</span> <span class='fu'>sp_get_table</span><span class='op'>(</span><span class='st'>"budget-central"</span>, <span class='fl'>2018</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Either </span><span style='color: #00BB00;'>year</span><span> or </span><span style='color: #00BB00;'>month</span><span> not set.</span>
-#&gt; <span class='warning'>Using defaults of </span><span style='color: #0000BB;'>2018</span><span> and </span><span style='color: #0000BB;'>12</span><span>.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BB0000;'>●</span><span> Set these values explicitly for reproducibility as the defaults may change in the future</span>
-#&gt; <span class='message'>  to provide access to the latest data by default.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Files already in /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpAySwTC/misris/2018/12, not downloading. Set </span><span style='color: #555555;'>`redownload = TRUE`</span><span> if needed.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Reading data...</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Transforming data...</span></div><div class='input'><span class='va'>allorgs_mid2018</span> <span class='op'>&lt;-</span> <span class='fu'>sp_get_table</span><span class='op'>(</span><span class='st'>"budget-central"</span>, <span class='fl'>2018</span>, <span class='fl'>6</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Building URL for dataset </span><span style='color: #0000BB;'>'misris'</span><span>: </span><span style='color: #0000BB;'>FIN 1-12 OSS - Plnění rozpočtu KAP a OSS</span><span>, </span><span style='color: #0000BB;'>'2018-06'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Get the dataset documentation at </span><span style='color: #0000BB;'>'http:/monitor.statnipokladna.cz/data/struktura/misris.xlsx'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Storing downloaded archive in and extracting to </span><span style='color: #0000BB;'>'/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/RtmpAySwTC/misris/2018/06/'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Set </span><span style='color: #00BB00;'>dest_dir</span><span> for more control over downloaded files.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Reading data...</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Transforming data...</span></div><div class='input'><span class='va'>oneorg_multiyear</span> <span class='op'>&lt;-</span> <span class='fu'>sp_get_table</span><span class='op'>(</span><span class='st'>"budget-central"</span>, <span class='fl'>2017</span><span class='op'>:</span><span class='fl'>2018</span>, <span class='fl'>12</span>, ico <span class='op'>=</span> <span class='st'>"00064581"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Files already in /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpAySwTC/misris/2017/12, not downloading. Set </span><span style='color: #555555;'>`redownload = TRUE`</span><span> if needed.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Reading data...</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Transforming data...</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Files already in /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpAySwTC/misris/2018/12, not downloading. Set </span><span style='color: #555555;'>`redownload = TRUE`</span><span> if needed.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Reading data...</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Transforming data...</span></div><div class='input'><span class='va'>oneorg_multihalfyears</span> <span class='op'>&lt;-</span> <span class='fu'>sp_get_table</span><span class='op'>(</span><span class='st'>"budget-central"</span>, <span class='fl'>2017</span><span class='op'>:</span><span class='fl'>2018</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>6</span>, <span class='fl'>12</span><span class='op'>)</span>, ico <span class='op'>=</span> <span class='st'>"00064581"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Building URL for dataset </span><span style='color: #0000BB;'>'misris'</span><span>: </span><span style='color: #0000BB;'>FIN 1-12 OSS - Plnění rozpočtu KAP a OSS</span><span>, </span><span style='color: #0000BB;'>'2017-06'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Get the dataset documentation at </span><span style='color: #0000BB;'>'http:/monitor.statnipokladna.cz/data/struktura/misris.xlsx'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Storing downloaded archive in and extracting to </span><span style='color: #0000BB;'>'/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/RtmpAySwTC/misris/2017/06/'</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Set </span><span style='color: #00BB00;'>dest_dir</span><span> for more control over downloaded files.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Reading data...</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Transforming data...</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Files already in /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpAySwTC/misris/2018/06, not downloading. Set </span><span style='color: #555555;'>`redownload = TRUE`</span><span> if needed.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Reading data...</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Transforming data...</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Files already in /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpAySwTC/misris/2017/12, not downloading. Set </span><span style='color: #555555;'>`redownload = TRUE`</span><span> if needed.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Reading data...</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Transforming data...</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Files already in /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpAySwTC/misris/2018/12, not downloading. Set </span><span style='color: #555555;'>`redownload = TRUE`</span><span> if needed.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Reading data...</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BBBB00;'>ℹ</span><span> Transforming data...</span></div><div class='input'><span class='co'># }</span>
-</div></span></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>allorgs_2018</span> <span class='op'>&lt;-</span> <span class='fu'>sp_get_table</span><span class='op'>(</span><span class='st'>"budget-central"</span>, <span class='fl'>2018</span><span class='op'>)</span>
+<span class='va'>allorgs_mid2018</span> <span class='op'>&lt;-</span> <span class='fu'>sp_get_table</span><span class='op'>(</span><span class='st'>"budget-central"</span>, <span class='fl'>2018</span>, <span class='fl'>6</span><span class='op'>)</span>
+<span class='va'>oneorg_multiyear</span> <span class='op'>&lt;-</span> <span class='fu'>sp_get_table</span><span class='op'>(</span><span class='st'>"budget-central"</span>, <span class='fl'>2017</span><span class='op'>:</span><span class='fl'>2018</span>, <span class='fl'>12</span>, ico <span class='op'>=</span> <span class='st'>"00064581"</span><span class='op'>)</span>
+<span class='va'>oneorg_multihalfyears</span> <span class='op'>&lt;-</span> <span class='fu'>sp_get_table</span><span class='op'>(</span><span class='st'>"budget-central"</span>, <span class='fl'>2017</span><span class='op'>:</span><span class='fl'>2018</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>6</span>, <span class='fl'>12</span><span class='op'>)</span>, ico <span class='op'>=</span> <span class='st'>"00064581"</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -322,7 +335,7 @@ See <code><a href='../articles/statnipokladna.html'>vignette("statnipokladna")</
 
       <footer>
       <div class="copyright">
-  <p>Developed by Petr Bouchal.</p>
+  <p>Developed by <a href='https://petrbouchal.xyz'>Petr Bouchal</a>.</p>
 </div>
 
 <div class="pkgdown">
