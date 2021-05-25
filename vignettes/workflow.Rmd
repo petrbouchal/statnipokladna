@@ -7,19 +7,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-
-
-
-```r
-library(statnipokladna)
-# library(ggplot2)
-```
-
-
-```r
-# plot(cars) # for testing figure file logic
-```
-
 ## Reproducibility
 
 The high-level functions that form the core of {statnipokladna} lend themselves most easily to a workflow optimised for creating results based on the latest state of the data provided by the data published.
