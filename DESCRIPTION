@@ -37,6 +37,7 @@ Imports:
     xml2 (>= 1.2.2)
 Suggests: 
     knitr (>= 1.30),
+    markdown (>= 1.1),
     ragg (>= 0.4.0),
     rmarkdown,
     testthat (>= 2.1.0)
