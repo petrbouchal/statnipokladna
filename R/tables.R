@@ -117,7 +117,6 @@ sp_load_table <- function(path, ico = NULL) {
     dplyr::mutate(vykaz_date = lubridate::make_date(.data$vykaz_year, .data$vykaz_month),
                   vykaz_date = lubridate::make_date(.data$vykaz_year, .data$vykaz_month,
                                                       lubridate::days_in_month(.data$vykaz_date))) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), lubridate::dmy) %>%
     dplyr::rename_all(dplyr::recode,
                       ZCMMT_ITM = "polozka",
                       ZC_VYKAZ = "vykaz",

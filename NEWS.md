@@ -1,5 +1,9 @@
 # statnipokladna (development version)
 
+## Bug fixes
+
+* fixed a bug in `sp_load_table()` which caused the `vykaz_date` column in its output to come be all-NA
+
 # statnipokladna 0.7.0
 
 ## BREAKING CHANGES
