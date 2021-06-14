@@ -114,6 +114,7 @@ sp_load_table <- function(path, ico = NULL) {
     purrr::set_names(stringr::str_remove(names(dt), "^[A-Z_0-9/]*:")) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::starts_with("ZU_")), ~switch_minus(.) %>% as.numeric(.)) %>%
     tidyr::extract(.data$`0FISCPER`, c("vykaz_year", "vykaz_month"), "([0-9]{4})0([0-9]{2})") %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), lubridate::dmy) %>%
     dplyr::mutate(vykaz_date = lubridate::make_date(.data$vykaz_year, .data$vykaz_month),
                   vykaz_date = lubridate::make_date(.data$vykaz_year, .data$vykaz_month,
                                                       lubridate::days_in_month(.data$vykaz_date))) %>%
