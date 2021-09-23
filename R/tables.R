@@ -13,7 +13,12 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
                                0,           0,          "budget-central-old",     "finu_budget",  "finu",      "FINU101",    "Pln\\u011bn\\u00ed rozpo\\u010dtu \\u00fast\\u0159edn\\u011b \\u0159\\u00edzen\\u00fdch organizac\\u00ed do 2014", "pre-2015 only",
                                0,           0,          "budget-central-old-purpose-grants",     "finu_ucel",  "finu",      "FINU107",   "\\u00da\\u010delov\\u00e9 financov\\u00e1n\\u00ed - poskytnut\\u00e9 prost\\u0159edky", "pre-2015 only",
                                0,           0,          "budget-central-old-subsidies",     "finu_dotace",  "finu",      "FINU108",    "Dota\\u010dn\\u00ed financov\\u00e1n\\u00ed - poskytnut\\u00e9 prost\\u0159edky", "pre-2015 only",
-                               0,           0,          "budget-central",     "misris",      "misris",    "/MIS-RIS",    "Pln\\u011bn\\u00ed rozpo\\u010dtu \\u00fast\\u0159edn\\u011b \\u0159\\u00edzen\\u00fdch organizac\\u00ed od 2015", "post-2015 only") %>%
+                               0,           0,          "budget-central",     "misris",      "misris",    "/MIS-RIS",    "Pln\\u011bn\\u00ed rozpo\\u010dtu \\u00fast\\u0159edn\\u011b \\u0159\\u00edzen\\u00fdch organizac\\u00ed od 2015", "post-2014 only",
+                               0,           0,          "budget-statefunds",     "finsf_budget",      "finsf",    "FINSF01",    "Pln\\u011bn\\u00ed rozpo\\u010dtu st\\u00e1tn\\u00edch fond\\u016f (\\u010c\\u00e1st I a II: p\\u0159\\u00edjmy a v\\u00fddaje)", "post-2014 only",
+                               0,           0,          "profit-and-loss-statefunds",     "finsf_vykzz",      "finsf",    "FINSF02",    "Pln\\u011bn\\u00ed rozpo\\u010dtu st\\u00e1tn\\u00edch fond\\u016f (\\u010c\\u00e1st III: v\\u00fdkaz zisk\\u016f a ztr\\u00e1t)", "post-2014 only",
+                               0,           0,          "cash-flow-statefunds",     "finsf_cashflow",      "finsf",    "FINSF03",    "Pln\\u011bn\\u00ed rozpo\\u010dtu st\\u00e1tn\\u00edch fond\\u016f (\\u010c\\u00e1st IV: p\\u0159ehled pen\\u011b\\u017en\\u00edch tok\\u016f)", "post-2014 only",
+                               0,           0,          "budget-statefunds-purposegrants",     "finsf_ucel",      "finsf",    "FINSF04",    "Pln\\u011bn\\u00ed rozpo\\u010dtu st\\u00e1tn\\u00edch fond\\u016f (\\u010c\\u00e1st IX: dota\\u010dn\\u00ed financov\\u00e1n\\u00ed - poskytnut\\u00e9 prost\\u0159edky)", "post-2014 only"
+                               ) %>%
   dplyr::mutate_if(is.double, as.integer) %>%
   dplyr::arrange(.data$id)
 # stringi::stri_escape_unicode("xxx")

@@ -3,6 +3,7 @@
 ## Bug fixes
 
 * fixed a bug in `sp_load_table()` which caused the `vykaz_date` column in its output to come be all-NA
+* loading data on state funds now works, IDs and details are newly listed in `sp_tables`
 
 # statnipokladna 0.7.0
 
