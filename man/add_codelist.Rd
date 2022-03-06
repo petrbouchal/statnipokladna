@@ -29,7 +29,9 @@ A \link[tibble:tibble-package]{tibble} of same length as \code{data}, with added
 }
 \description{
 Deprecated, use \code{sp_add_codelist()} instead.\cr\cr
-\lifecycle{deprecated}
+}
+\details{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
 \seealso{
 Other Core workflow: 

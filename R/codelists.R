@@ -360,7 +360,8 @@ sp_get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
 #' Deprecated: Add codelist data to downloaded data
 #'
 #' Deprecated, use `sp_add_codelist()` instead.\cr\cr
-#' \lifecycle{deprecated}
+#'
+#' `r lifecycle::badge("deprecated")`
 #'
 #' @inheritParams sp_add_codelist
 #'
@@ -379,7 +380,8 @@ add_codelist <- function(data, codelist = NULL, period_column = .data$vykaz_date
 #' Deprecated: Get codelist
 #'
 #' Deprecated: use `sp_get_codelist()`\cr\cr
-#' \lifecycle{deprecated}
+#'
+#' `r lifecycle::badge("deprecated")`
 #'
 #' @inheritParams sp_get_codelist
 #'

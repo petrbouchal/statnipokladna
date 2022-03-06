@@ -21,7 +21,9 @@ A \link[tibble:tibble-package]{tibble}
 }
 \description{
 Deprecated: use \code{sp_get_codelist()}\cr\cr
-\lifecycle{deprecated}
+}
+\details{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
 \seealso{
 Other Core workflow: 
