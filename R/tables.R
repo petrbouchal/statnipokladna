@@ -76,11 +76,11 @@ sp_get_table_file <- function(table_id, dataset_path, reunzip = FALSE) {
                                            paste0(table_regex, "(_[0-9]*)?\\.(csv|CSV)"))]
   if(length(table_file) != 1) {
     if (length(table_file) > 1) {
-      ui_stop(c("More than one CSV files in the archive match.",
-                         "You might want to report a bug at {ui_path('https://github.com/petrbouchal/statnipokladna/issues')}."))
+      cli::cli_abort(c(x = "More than one CSV files in the archive match.",
+                       i = "You might want to report a bug at {.url https://github.com/petrbouchal/statnipokladna/issues}."))
     }  else {
-      ui_stop(c("No CSV file inside the downloaded archive matches files needed for the table.",
-                         "You might want to report a bug at {ui_path('https://github.com/petrbouchal/statnipokladna/issues')}."))
+      cli::cli_abort(c(x = "No CSV file inside the downloaded archive matches files needed for the table.",
+                       i = "You might want to report a bug at {. url https://github.com/petrbouchal/statnipokladna/issues'}."))
     }
   }
   return(table_file)
@@ -297,20 +297,19 @@ sp_get_table <- function(table_id, year, month = 12, ico = NULL,
   stopifnot(is.character(ico) | is.null(ico))
   if(interactive() == FALSE & (missing(year) | missing(month))) {
     if(missing(year)) {
-      ui_stop("{ui_field('year')} not set. Please set a value.")
+      cli::cli_abort(c(x = "{.var year} not set. Please set a value."))
 
     } else if(missing(month)) {
-      ui_warn("{ui_field('month')} not set. Using default of {ui_value(month)}.")
+      cli::cli_alert_warning("{.var month} not set. Using default of {.value {month}}.")
 
     }
-
-    ui_todo("Set period parameters explicitly for reproducibility.")
+    if(!interactive()) cli::cli_inform("Set period parameters explicitly for reproducibility.")
   }
 
   if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
                                               default = tempdir())
 
-  if(!(table_id %in% sp_tables_i$id)) ui_stop("Not a valid table id. Consult {ui_code('sp_tables')}.")
+  if(!(table_id %in% sp_tables_i$id)) cli::cli_abort("Not a valid table id. Consult {.code sp_tables}.")
   dataset_id <- sp_tables_i$dataset_id[sp_tables_i$id == table_id]
 
   downloaded_datasets <- sp_get_dataset(dataset_id, year, month, dest_dir, redownload)

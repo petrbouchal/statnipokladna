@@ -54,18 +54,18 @@ sp_datasets <- sp_datasets_i %>% dplyr::select(.data$id, .data$name) %>%
 #' }
 #' @export
 sp_get_dataset_url <- function(dataset_id, year, month = 12, check_if_exists = TRUE) {
-  if(!(dataset_id %in% sp_datasets_i$id)) ui_stop("Not a valid dataset ID")
+  if(!(dataset_id %in% sp_datasets_i$id)) cli::cli_abort("Not a valid dataset ID")
   dataset_name <- sp_datasets_i[sp_datasets_i$id == dataset_id, "name"]
   dataset_dir <- sp_datasets_i[sp_datasets_i$id == dataset_id, "dir"]
   month <- formatC(month, width = 2, format = "d", flag = "0")
-  ui_info("Building URL for dataset {ui_value(dataset_id)}: {ui_value(dataset_name)}, {ui_value(stringr::str_c(year,'-',month))}")
+  # cli::cli_inform("Building URL for dataset {.value {dataset_id}}: {.value {dataset_name}}, {.value {year}-{month}}")
   x <- stringr::str_glue("{sp_base_url}/data/extrakty/csv/{dataset_dir}/{year}_{month}_Data_CSUIS_{toupper(dataset_id)}.zip")
   # print(x)
   if(check_if_exists) {
     check_online(x)
   }
-  doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
-  ui_info("Get the dataset documentation at {ui_path(doc_url)}")
+  # doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
+  # ui_info("Get the dataset documentation at {ui_path(doc_url)}")
   return(x)
 }
 
@@ -87,7 +87,8 @@ sp_get_dataset_url <- function(dataset_id, year, month = 12, check_if_exists = T
 #' }
 #' @export
 sp_get_dataset_doc <- function(dataset_id, dest_dir = NULL, download = TRUE) {
-  if(!(dataset_id %in% sp_datasets_i$id)) ui_stop("Not a valid dataset ID")
+  if(!(dataset_id %in% sp_datasets_i$id)) cli::cli_abort(c(x = "Not a valid dataset ID",
+                                                           i = "see {.var sp_datasets}"))
   doc_url <- stringr::str_glue("{sp_base_url}/data/struktura/{dataset_id}.xlsx")
   check_online(doc_url)
   if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
@@ -97,13 +98,13 @@ sp_get_dataset_doc <- function(dataset_id, dest_dir = NULL, download = TRUE) {
 
   if(!download) {
     utils::browseURL(doc_url)
-    ui_info("Link to file opened in browser. ({ui_path(doc_url)})")
+    cli::cli_alert_info("Link to file opened in browser. ({.url {doc_url}})")
     invisible(doc_url)
   } else {
     file_path <- file.path(dest_dir, stringr::str_glue("{dataset_id}.xlsx"))
-    ui_info("Getting dataset documentation from {doc_url}")
+    cli::cli_alert_info("Getting dataset documentation from {.url {doc_url}}")
     utils::download.file(doc_url, file_path, headers = c('User-Agent' = usr))
-    ui_info("File downloaded to {ui_path(file_path)}.")
+    cli::cli_alert_info("File downloaded to {.path {file_path}}.")
     invisible(file_path)
   }
 }
@@ -141,17 +142,16 @@ sp_get_dataset <- function(dataset_id, year, month = 12,
                            dest_dir = NULL, redownload = FALSE) {
   if(interactive() == FALSE & missing(month)) {
     if(missing(month)) {
-      ui_warn("{ui_field('month')} not set. Using default of {ui_value(month)}.")
+      cli::cli_alert_warning("{.var month} not set. Using default of {.value {month}}.")
     }
-
-    ui_todo("Set period parameters explicitly for reproducibility.")
   }
 
   if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
                                               default = tempdir())
 
-  if(!all(month %in% c(1:12))) stop("`Month` must be an integer from 1 to 12.")
-  if(!all(year %in% c(2010:lubridate::year(lubridate::today())))) stop("`Year` must be between 2010 and now.")
+  if(!all(month %in% c(1:12))) stop("{.var month} must be an integer from 1 to 12.")
+  thisyr <- lubridate::year(lubridate::today())
+  if(!all(year %in% c(2010:lubridate::year(lubridate::today()))) | missing(year)) cli::cli_abort("{.var year} must be between 2010 and {thisyr}")
   month <- formatC(month, width = 2, format = "d", flag = "0")
 
   years_months <- expand.grid(y = year, m = month, stringsAsFactors = F)
@@ -161,11 +161,12 @@ sp_get_dataset <- function(dataset_id, year, month = 12,
     dir.create(td, showWarnings = FALSE, recursive = TRUE)
     tf <- file.path(td, paste0(dataset_id, year, month, ".zip"))
     if(file.exists(tf) & !redownload) {
-      ui_info("Files already in {td}, not downloading. Set {ui_code('redownload = TRUE')} if needed.")
+      cli::cli_alert_info(c(i = "Files already in {.path {td}}, not downloading"))
+      cli::cli_li(c(i = "Set {.code redownload = TRUE} if needed."))
     } else {
       dataset_url <- sp_get_dataset_url(dataset_id = dataset_id, year = year, month = month)
-      ui_done("Storing downloaded archive in {ui_path(td)}")
-      if(dest_dir == tempdir()) ui_info("Set {ui_field('dest_dir')} for more control over downloaded files.")
+      cli::cli_alert_success("Storing downloaded archive in {.path {td}}")
+      if(dest_dir == tempdir()) cli::cli_li("Set {.var dest_dir} for more control over downloaded files.")
       utils::download.file(dataset_url, tf, headers = c('User-Agent' = usr))
     }
     return(tf)

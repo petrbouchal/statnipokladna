@@ -25,7 +25,7 @@ switch_minus <- function(string) {
 
 check_online <- function(url) {
 
-  if(!curl::has_internet()) ui_stop("No internet. Cannot continue; stopping.")
+  if(!curl::has_internet()) cli::cli_abort("No internet. Cannot continue; stopping.")
 
   # https://stackoverflow.com/questions/52911812/check-if-url-exists-in-r
 
@@ -37,10 +37,10 @@ check_online <- function(url) {
   if (url_works) {
     url_status <- httr::status_code(hd$result)
     if(url_status > 200)
-    ui_stop("Resource {ui_path(url)} returns code {ui_value(url_status)}. Stopping.")
+    cli::cli_abort("Resource {.url {url}} returns code {.value {url_status}}. Stopping.")
   } else {
     host <- httr::parse_url(url)[["hostname"]]
-    ui_stop("Host {ui_path(host)} not reachable. Stopping.")
+    cli::cli_abort("Host {.url {host}} not reachable. Stopping.")
   }
 
   return(TRUE)

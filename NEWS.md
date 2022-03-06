@@ -1,5 +1,9 @@
 # statnipokladna (development version)
 
+## Minor improvements
+
+* switched messaging to {cli} package, dropping the {usethis} dependency
+
 ## Bug fixes
 
 * fixed a bug in `sp_load_table()` which caused the `vykaz_date` column in its output to come be all-NA
