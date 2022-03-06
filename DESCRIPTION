@@ -14,6 +14,7 @@ BugReports: https://github.com/petrbouchal/statnipokladna/issues
 Depends: 
     R (>= 3.5.0)
 Imports: 
+    cli,
     curl (>= 4.3),
     dplyr (>= 1.0.0),
     httr (>= 1.4.1),

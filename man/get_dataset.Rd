@@ -25,6 +25,8 @@ character (link) if download = TRUE, nothing otherwise.
 }
 \description{
 Deprecated, use \code{sp_get_dataset()} instead.\cr\cr
-\lifecycle{deprecated}
+}
+\details{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
 \keyword{internal}

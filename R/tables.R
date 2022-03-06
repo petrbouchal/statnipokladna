@@ -334,7 +334,7 @@ sp_get_table <- function(table_id, year, month = 12, ico = NULL,
 #' Deprecated: Get a statnipokladna table\cr\cr
 #' Deprecated, use `sp_get_table()` instead.
 #'
-#' \lifecycle{deprecated}
+#' `r lifecycle::badge("deprecated")`
 #'
 #' @inheritParams sp_get_table
 #'

@@ -184,7 +184,8 @@ sp_get_dataset <- function(dataset_id, year, month = 12,
 #' Deprecated: Retrieve and read dataset from statnipokladna
 #'
 #' Deprecated, use `sp_get_dataset()` instead.\cr\cr
-#' \lifecycle{deprecated}
+#'
+#' `r lifecycle::badge("deprecated")`
 #'
 #' @inheritParams sp_get_dataset
 #'
@@ -202,7 +203,8 @@ get_dataset <- function(dataset_id, year, month = 12,
 #' Deprecated: Get dataset documentation
 #'
 #' Deprecated, use `sp_get_dataset_doc()` instead.\cr\cr
-#' \lifecycle{deprecated}
+#'
+#' `r lifecycle::badge("deprecated")`
 #'
 #' @inheritParams sp_get_dataset_doc
 #'

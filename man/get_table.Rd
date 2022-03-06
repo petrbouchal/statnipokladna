@@ -33,5 +33,5 @@ If left unset, will use the \code{statnipokladna.dest_dir} option if the option 
 a \link[tibble:tibble-package]{tibble}
 }
 \description{
-\lifecycle{deprecated}
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 }
