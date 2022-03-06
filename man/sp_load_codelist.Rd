@@ -27,6 +27,7 @@ sp_load_codelist(cf)
 \seealso{
 Other Detailed workflow: 
 \code{\link{sp_get_codelist_file}()},
+\code{\link{sp_get_codelist_url}()},
 \code{\link{sp_get_dataset_url}()},
 \code{\link{sp_get_table_file}()},
 \code{\link{sp_load_table}()}

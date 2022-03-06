@@ -19,7 +19,6 @@ Returns a URL for the online codelist browser in monitor.statnipokladna.cz and o
 }
 \seealso{
 Other Utilities: 
-\code{\link{get_dataset}()},
 \code{\link{sp_get_dataset_doc}()}
 }
 \concept{Utilities}

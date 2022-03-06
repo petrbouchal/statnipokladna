@@ -153,3 +153,4 @@ Other Core workflow:
 \code{\link{sp_get_dataset}()}
 }
 \concept{Core workflow}
+\keyword{internal}

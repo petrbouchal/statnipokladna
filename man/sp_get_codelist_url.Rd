@@ -24,3 +24,12 @@ sp_get_codelist_url("ucjed", FALSE)
 if(FALSE) sp_get_codelist_url("ucjed_wrong", TRUE) # fails, invalid codelist
 }
 }
+\seealso{
+Other Detailed workflow: 
+\code{\link{sp_get_codelist_file}()},
+\code{\link{sp_get_dataset_url}()},
+\code{\link{sp_get_table_file}()},
+\code{\link{sp_load_codelist}()},
+\code{\link{sp_load_table}()}
+}
+\concept{Detailed workflow}

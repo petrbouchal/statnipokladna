@@ -280,6 +280,8 @@ sp_load_table <- function(path, ico = NULL) {
 #' If left unset, will use the `statnipokladna.dest_dir` option if the option is set, and `tempdir()` otherwise. Will be created if it does not exist.
 #' @param redownload Redownload even if recent file present? Defaults to FALSE.
 #'
+#' @keywords internal
+#'
 #' @return a [tibble][tibble::tibble-package]; see Details for key to the columns
 #' @encoding UTF-8
 #' @examples

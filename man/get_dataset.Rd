@@ -27,9 +27,4 @@ character (link) if download = TRUE, nothing otherwise.
 Deprecated, use \code{sp_get_dataset()} instead.\cr\cr
 \lifecycle{deprecated}
 }
-\seealso{
-Other Utilities: 
-\code{\link{sp_get_codelist_viewer}()},
-\code{\link{sp_get_dataset_doc}()}
-}
-\concept{Utilities}
+\keyword{internal}

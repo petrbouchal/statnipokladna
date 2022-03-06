@@ -27,7 +27,6 @@ sp_get_dataset_doc("finm")
 }
 \seealso{
 Other Utilities: 
-\code{\link{get_dataset}()},
 \code{\link{sp_get_codelist_viewer}()}
 }
 \concept{Utilities}

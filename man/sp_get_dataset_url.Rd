@@ -35,6 +35,7 @@ if(FALSE) sp_get_dataset_url("finm", 2022, 6, TRUE) # fails, invalid time period
 \seealso{
 Other Detailed workflow: 
 \code{\link{sp_get_codelist_file}()},
+\code{\link{sp_get_codelist_url}()},
 \code{\link{sp_get_table_file}()},
 \code{\link{sp_load_codelist}()},
 \code{\link{sp_load_table}()}
