@@ -333,6 +333,8 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$vykaz_d
 #' @param codelist_id DESCRIPTION.
 #' @param check_if_exists Whether to check that the URL works (HTTP 200).
 #'
+#' @family Detailed workflow
+#'
 #' @return character vector of length one containing URL
 #' @examples
 #' \dontrun{
