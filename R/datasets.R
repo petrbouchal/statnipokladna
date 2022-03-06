@@ -190,7 +190,7 @@ sp_get_dataset <- function(dataset_id, year, month = 12,
 #' @inheritParams sp_get_dataset
 #'
 #' @return character (link) if download = TRUE, nothing otherwise.
-#' @noRd
+#' @keywords internal
 #' @export
 get_dataset <- function(dataset_id, year, month = 12,
                         dest_dir = NULL, redownload = FALSE) {
@@ -208,6 +208,7 @@ get_dataset <- function(dataset_id, year, month = 12,
 #'
 #' @inheritParams sp_get_dataset_doc
 #'
+#' @keywords internal
 #' @return a [tibble][tibble::tibble-package]
 #' @export
 get_dataset_doc <- function(dataset_id, dest_dir = ".", download = TRUE) {
