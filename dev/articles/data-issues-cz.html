@@ -32,6 +32,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -51,19 +53,13 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/statnipokladna.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -89,13 +85,13 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/petrbouchal/statnipokladna/">
+  <a href="https://github.com/petrbouchal/statnipokladna/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://petrbouchal.xyz">
+  <a href="https://petrbouchal.xyz" class="external-link">
     <span class="fa fa-asterisk fa-lg"></span>
      
   </a>
@@ -116,49 +112,49 @@
       <h1 data-toc-skip>Známé datové zádrhele</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/petrbouchal/statnipokladna/blob/master/vignettes/data-issues-cz.Rmd"><code>vignettes/data-issues-cz.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/petrbouchal/statnipokladna/blob/HEAD/vignettes/data-issues-cz.Rmd" class="external-link"><code>vignettes/data-issues-cz.Rmd</code></a></small>
       <div class="hidden name"><code>data-issues-cz.Rmd</code></div>
 
     </div>
 
     
     
-<div id="známé-datové-zádrhele-a-nekonzistence" class="section level2">
-<h2 class="hasAnchor">
-<a href="#zn%C3%A1m%C3%A9-datov%C3%A9-z%C3%A1drhele-a-nekonzistence" class="anchor"></a>Známé datové zádrhele a nekonzistence</h2>
+<div class="section level2">
+<h2 id="známé-datové-zádrhele-a-nekonzistence">Známé datové zádrhele a nekonzistence<a class="anchor" aria-label="anchor" href="#zn%C3%A1m%C3%A9-datov%C3%A9-z%C3%A1drhele-a-nekonzistence"></a>
+</h2>
 <ul>
 <li>v některých souborech jsou záporná čísla zapsaná tak, že minus je na konci, takže většina parserů sloupec načte jako text a převod na číslo běžným způsobem nefunguje</li>
 <li><del>některé CSV soubory jsou oddělované čárkou (a obsahují desetinnou tečku), jiné středníkem (s desetinnou čárkou)</del></li>
 <li>u číselníků je třeba myslet na to, že můžou obsahovat duplicitní položky (např. stejný kód, jiný název), z nichž každá platí v jiném časovém období - pokud se to neodfiltruje, můžou při napojení JOINem vznikat duplicity.</li>
 </ul>
-<div id="doplněno-28--11--2019" class="section level3">
-<h3 class="hasAnchor">
-<a href="#dopln%C4%9Bno-28--11--2019" class="anchor"></a>Doplněno 28. 11. 2019:</h3>
+<div class="section level3">
+<h3 id="doplněno-28--11--2019">Doplněno 28. 11. 2019:<a class="anchor" aria-label="anchor" href="#dopln%C4%9Bno-28--11--2019"></a>
+</h3>
 <ul>
 <li>v číselnících mohou být dvě stejné položky platné v jeden moment, tj. i po profiltrování přes datum (příklad položka 1381 v číselníku položek) - možná je to metodicky správně, ale rozhodně neintuitivní a je potřeba to ošetřit při napojování číselníků</li>
 <li>[poznámka o URL číselníků a prohlížečů odstraněna: už nerelevantní (URL prohlížečů už mají jinou logiku)]</li>
 <li>názvy sloupců označující fáze rozpočtového cyklu (ZU_ROZ*) se liší mezi obcemi (výkaz FINM) a státem (výkaz FINU) - není to chyba, ale je to třeba vědět</li>
 </ul>
 </div>
-<div id="doplněno-28--2--2020" class="section level3">
-<h3 class="hasAnchor">
-<a href="#dopln%C4%9Bno-28--2--2020" class="anchor"></a>Doplněno 28. 2. 2020:</h3>
+<div class="section level3">
+<h3 id="doplněno-28--2--2020">Doplněno 28. 2. 2020:<a class="anchor" aria-label="anchor" href="#dopln%C4%9Bno-28--2--2020"></a>
+</h3>
 <ul>
 <li>v číselníku účelových znaků je položka 27983, což je část OP Doprava pro Prahu v roce 2015/16, označena platností začínající po roce 2200.</li>
 <li>v datech obcí se v roce 2015 vyskytují příjmy s účelovými znaky norských fondů 95028/95528, ačkoli tato položka číselníku platí až od roku 2016.</li>
 <li>ID položky v datech FINM_2017 doplnění na délku 5 o leading zero, která v XML číselníku není</li>
 </ul>
 </div>
-<div id="doplněno-13--12--2019" class="section level3">
-<h3 class="hasAnchor">
-<a href="#dopln%C4%9Bno-13--12--2019" class="anchor"></a>Doplněno 13. 12. 2019:</h3>
+<div class="section level3">
+<h3 id="doplněno-13--12--2019">Doplněno 13. 12. 2019:<a class="anchor" aria-label="anchor" href="#dopln%C4%9Bno-13--12--2019"></a>
+</h3>
 <ul>
 <li>čistě rozpočtářský poznatek: jsou v Česku obce - mj. Praha - které své příjmy z vlastní činnosti, prodeje majetku a podobných věcí nerozpočtují, ale považují je za část své hospodářské činnosti; v Praze je to dáno statutem. Tyto příjmy se pak do rozpočtu dostávají jako transfer v položce 4131 “Převody z vlastních fondů hospodářské (podnikatelské) činnosti”. Není tedy rozumné srovnávat příjmy z vlastní činnosti aj. nebo z transferů mezi obcemi, pokud nevíme, jak to která obec rozpočtově a účetně vykazuje; srovnání může jít líp před výkaz zisků a ztrát než přes rozpočet, je to ale v mnohém hrubší.</li>
 </ul>
 </div>
-<div id="doplněno-20--1--2019" class="section level3">
-<h3 class="hasAnchor">
-<a href="#dopln%C4%9Bno-20--1--2019" class="anchor"></a>Doplněno 20. 1. 2019</h3>
+<div class="section level3">
+<h3 id="doplněno-20--1--2019">Doplněno 20. 1. 2019<a class="anchor" aria-label="anchor" href="#dopln%C4%9Bno-20--1--2019"></a>
+</h3>
 <ul>
 <li>CSV soubory jsou pojmenované jinak v letech 2010-12 (bez datumu v názvu)</li>
 <li>IČO v souborech 2010-12 je “obohaceno” o dvě nuly na začátku</li>
@@ -166,19 +162,19 @@
 </ul>
 </div>
 </div>
-<div id="co-v-datech-není-nebo-jsem-to-nenašel" class="section level2">
-<h2 class="hasAnchor">
-<a href="#co-v-datech-nen%C3%AD-nebo-jsem-to-nena%C5%A1el" class="anchor"></a>Co v datech není nebo jsem to nenašel</h2>
+<div class="section level2">
+<h2 id="co-v-datech-není-nebo-jsem-to-nenašel">Co v datech není nebo jsem to nenašel<a class="anchor" aria-label="anchor" href="#co-v-datech-nen%C3%AD-nebo-jsem-to-nena%C5%A1el"></a>
+</h2>
 <ul>
 <li>zdrojové třídění u rozpočtů samospráv - jen incidentálně jako součást reportu účelového financování</li>
-<li>údaje o regulaci zaměstnanosti ve veřejném sektoru neboli rozpočtované a skutečné počty zaměstnanců a průměrné platy, ač se sledují a částečně zveřejňují ve státním závěrečném účtu, viz <a href="https://petrbouchal.xyz/urednici2019/">petrbouchal/urednici2019</a>
+<li>údaje o regulaci zaměstnanosti ve veřejném sektoru neboli rozpočtované a skutečné počty zaměstnanců a průměrné platy, ač se sledují a částečně zveřejňují ve státním závěrečném účtu, viz <a href="https://petrbouchal.xyz/urednici2019/" class="external-link">petrbouchal/urednici2019</a>
 </li>
 <li>informace o tom, na jakém místě se peníze utratily (pokud vím, plošně se nesleduje, něco je v CEDRu a docela se to ví u eurofondů)</li>
 </ul>
 </div>
-<div id="kde-by-bylo-fajn-mít-lepší-dokumentaci" class="section level2">
-<h2 class="hasAnchor">
-<a href="#kde-by-bylo-fajn-m%C3%ADt-lep%C5%A1%C3%AD-dokumentaci" class="anchor"></a>Kde by bylo fajn mít lepší dokumentaci</h2>
+<div class="section level2">
+<h2 id="kde-by-bylo-fajn-mít-lepší-dokumentaci">Kde by bylo fajn mít lepší dokumentaci<a class="anchor" aria-label="anchor" href="#kde-by-bylo-fajn-m%C3%ADt-lep%C5%A1%C3%AD-dokumentaci"></a>
+</h2>
 <ul>
 <li>v balíku ROZVAHA nejsou zdokumentované jednotlivé soubory: v excelové dokumentaci je jen ROZV.csv, v balíku ale ROZV[MC]?[1-2].csv; u …MC… jde asi o městské části Prahy, ale není to zjevné (toto se týká jen roku 2018).</li>
 </ul>
@@ -196,11 +192,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://petrbouchal.xyz">Petr Bouchal</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://petrbouchal.xyz" class="external-link">Petr Bouchal</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -208,6 +206,8 @@
 
   
 
+
+  
 
   </body>
 </html>

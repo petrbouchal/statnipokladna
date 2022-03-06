@@ -1,5 +1,5 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1
+pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   data-issues-cz: data-issues-cz.html
@@ -7,7 +7,7 @@ articles:
   how-the-data-works: how-the-data-works.html
   statnipokladna: statnipokladna.html
   workflow: workflow.html
-last_built: 2021-09-23T08:46Z
+last_built: 2022-03-06T12:23Z
 urls:
   reference: https://petrbouchal.xyz/statnipokladna/reference
   article: https://petrbouchal.xyz/statnipokladna/articles
