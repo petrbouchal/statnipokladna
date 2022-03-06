@@ -2,10 +2,7 @@ Package: statnipokladna
 Title: Use Data from the Czech Public Finance Database
 Version: 0.7.0.9000
 Authors@R: 
-    person(given = "Petr",
-           family = "Bouchal",
-           role = c("aut", "cre"),
-           email = "pbouchal@gmail.com",
+    person("Petr", "Bouchal", , "pbouchal@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-0471-716X"))
 Description: Get programmatic access to data from the Czech public
     budgeting and accounting database, Státní pokladna
@@ -21,7 +18,7 @@ Imports:
     dplyr (>= 1.0.0),
     httr (>= 1.4.1),
     jsonlite,
-    lifecycle,
+    lifecycle (>= 1.0.1),
     lubridate (>= 1.7.4),
     magrittr,
     purrr (>= 0.3.2),
@@ -42,8 +39,6 @@ Suggests:
     testthat (>= 2.1.0)
 VignetteBuilder: 
     knitr
-RdMacros: 
-    lifecycle
 Encoding: UTF-8
 Language: en
 LazyData: true
