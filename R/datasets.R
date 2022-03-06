@@ -190,7 +190,7 @@ sp_get_dataset <- function(dataset_id, year, month = 12,
 #' @inheritParams sp_get_dataset
 #'
 #' @return character (link) if download = TRUE, nothing otherwise.
-#' @keywords internal
+#' @noRd
 #' @export
 get_dataset <- function(dataset_id, year, month = 12,
                         dest_dir = NULL, redownload = FALSE) {

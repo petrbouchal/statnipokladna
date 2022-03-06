@@ -338,6 +338,8 @@ sp_get_table <- function(table_id, year, month = 12, ico = NULL,
 #'
 #' @inheritParams sp_get_table
 #'
+#' @noRd
+#'
 #' @return a [tibble][tibble::tibble-package]
 #' @export
 get_table <- function(table_id, year, month = 12, ico = NULL,
