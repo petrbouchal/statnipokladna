@@ -66,7 +66,6 @@ sp_get_table_file <- function(table_id, dataset_path, reunzip = FALSE) {
   dd <- dirname(dataset_path)
   dslist <- list.files(dd, pattern = "*.CSV|*.csv", full.names = T)
   if(length(dslist) == 0 | reunzip) {
-    usethis::ui_info("Unzipping...")
     dslist <- utils::unzip(dataset_path, exdir = dd)
   }
 
@@ -106,11 +105,9 @@ sp_get_table_file <- function(table_id, dataset_path, reunzip = FALSE) {
 #' @export
 sp_load_table <- function(path, ico = NULL) {
 
-  ui_info("Reading data...")
   suppressWarnings(suppressMessages(
     dt <- readr::read_csv2(path, col_types = readr::cols(.default = readr::col_character()))))
   # print(head(dt))
-  ui_info("Transforming data...")
   if(max(stringr::str_length(dt$`ZC_ICO:ZC_ICO`), na.rm = TRUE) == 10) {
     dt <- dplyr::mutate(dt, `ZC_ICO:ZC_ICO` = stringr::str_sub(.data$`ZC_ICO:ZC_ICO`, 3, 10))
   }
