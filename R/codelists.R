@@ -204,7 +204,8 @@ sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload =
 #' @family Utilities
 #' @keywords internal
 sp_get_codelist_viewer <- function(codelist_id, open = TRUE) {
-  if(!(codelist_id %in% sp_codelists$id)) stop("Not a valid codelist ID")
+  if(!is.character(codelist_id) | length(codelist_id) > 1) cli::cli_abort("Codelist ID must be a character vector of length one.")
+  if(!(codelist_id %in% sp_codelists$id)) cli::cli_abort("Not a valid codelist ID")
   codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
   cli::cli_alert_info("Building URL for codelist {.value {codelist_id}} - {.value {codelist_name}}")
   x <- stringr::str_glue("{sp_base_url}/datovy-katalog/ciselniky/prohlizec/{codelist_id}")
@@ -343,6 +344,7 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$vykaz_d
 #' }
 #' @export
 sp_get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
+  if(!is.character(codelist_id) | length(codelist_id) > 1) cli::cli_abort("Codelist ID must be a character vector of length one.")
   if(!(codelist_id %in% sp_codelists$id)) cli::cli_abort("Not a valid codelist ID")
   codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
   # cli::cli_alert_info("Building URL for codelist {.value {codelist_id}} - {.value {codelist_name}}")
