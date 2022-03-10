@@ -3,6 +3,7 @@
 ## Minor improvements
 
 * switched messaging to {cli} package, dropping the {usethis} dependency
+* improve naming of output columns (additional column code translated into readable scheme)
 
 ## Bug fixes
 

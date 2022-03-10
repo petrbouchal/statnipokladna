@@ -153,6 +153,7 @@ sp_load_table <- function(path, ico = NULL) {
                       ZU_ROZPZM = "budget_amended",
                       ZU_KROZP = "budget_final",
                       ZU_ROZKZ = "budget_spending",
+                      ZU_ROZKZM = "budget_spending",
                       ZU_OBLIG = "budget_oblig",
                       ZU_STAVP = "before",
                       ZU_STAVPO = "after",
