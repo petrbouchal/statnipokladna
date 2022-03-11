@@ -79,7 +79,7 @@ sp_get_table_file <- function(table_id, dataset_path, reunzip = FALSE) {
                        i = "You might want to report a bug at {.url https://github.com/petrbouchal/statnipokladna/issues}."))
     }  else {
       cli::cli_abort(c(x = "No CSV file inside the downloaded archive matches files needed for the table.",
-                       i = "You might want to report a bug at {. url https://github.com/petrbouchal/statnipokladna/issues'}."))
+                       i = "You might want to report a bug at {.url https://github.com/petrbouchal/statnipokladna/issues}."))
     }
   }
   return(table_file)
