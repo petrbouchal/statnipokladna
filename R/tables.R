@@ -38,8 +38,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #'   \item{\code{note}}{character Note.}
 #' }
 #' @family Lists of available entities
-"sp_tables" <- sp_tables_i %>% dplyr::select(.data$id, .data$dataset_id,
-                                             .data$czech_name, .data$note) %>%
+"sp_tables" <- sp_tables_i %>% dplyr::select("id", "dataset_id", "czech_name", "note") %>%
   dplyr::mutate_if(is.character, stringi::stri_unescape_unicode)
 # usethis::use_data(sp_tables, overwrite = TRUE)
 
