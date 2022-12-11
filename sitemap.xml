@@ -1,7 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://petrbouchal.xyz/statnipokladna/404.html</loc>
+  </url>
+  <url>
+    <loc>https://petrbouchal.xyz/statnipokladna/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>https://petrbouchal.xyz/statnipokladna/CONTRIBUTING.html</loc>
+  </url>
+  <url>
+    <loc>https://petrbouchal.xyz/statnipokladna/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://petrbouchal.xyz/statnipokladna/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://petrbouchal.xyz/statnipokladna/articles/data-issues-cz.html</loc>
+  </url>
+  <url>
+    <loc>https://petrbouchal.xyz/statnipokladna/articles/how-the-data-works-cz.html</loc>
+  </url>
+  <url>
+    <loc>https://petrbouchal.xyz/statnipokladna/articles/how-the-data-works.html</loc>
+  </url>
+  <url>
+    <loc>https://petrbouchal.xyz/statnipokladna/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://petrbouchal.xyz/statnipokladna/articles/statnipokladna.html</loc>
+  </url>
+  <url>
+    <loc>https://petrbouchal.xyz/statnipokladna/articles/workflow.html</loc>
+  </url>
+  <url>
+    <loc>https://petrbouchal.xyz/statnipokladna/authors.html</loc>
+  </url>
+  <url>
     <loc>https://petrbouchal.xyz/statnipokladna/index.html</loc>
+  </url>
+  <url>
+    <loc>https://petrbouchal.xyz/statnipokladna/news/index.html</loc>
   </url>
   <url>
     <loc>https://petrbouchal.xyz/statnipokladna/reference/add_codelist.html</loc>
@@ -17,6 +56,9 @@
   </url>
   <url>
     <loc>https://petrbouchal.xyz/statnipokladna/reference/get_table.html</loc>
+  </url>
+  <url>
+    <loc>https://petrbouchal.xyz/statnipokladna/reference/index.html</loc>
   </url>
   <url>
     <loc>https://petrbouchal.xyz/statnipokladna/reference/pipe.html</loc>
@@ -65,20 +107,5 @@
   </url>
   <url>
     <loc>https://petrbouchal.xyz/statnipokladna/reference/sp_tables.html</loc>
-  </url>
-  <url>
-    <loc>https://petrbouchal.xyz/statnipokladna/articles/data-issues-cz.html</loc>
-  </url>
-  <url>
-    <loc>https://petrbouchal.xyz/statnipokladna/articles/how-the-data-works-cz.html</loc>
-  </url>
-  <url>
-    <loc>https://petrbouchal.xyz/statnipokladna/articles/how-the-data-works.html</loc>
-  </url>
-  <url>
-    <loc>https://petrbouchal.xyz/statnipokladna/articles/statnipokladna.html</loc>
-  </url>
-  <url>
-    <loc>https://petrbouchal.xyz/statnipokladna/articles/workflow.html</loc>
   </url>
 </urlset>
