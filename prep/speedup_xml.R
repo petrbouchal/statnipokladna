@@ -2,7 +2,7 @@ library(xml2)
 library(tictoc)
 
 tic()
-dt <- xml2::read_xml("http://monitor.statnipokladna.cz/data/polvyk.xml")
+dt <- xml2::read_xml("https://monitor.statnipokladna.cz/data/polvyk.xml")
 toc()
 
 nms <- dt %>% xml_children() %>% purrr::pluck(1) %>% purrr::map(function(x) x %>% xml2::xml_children() %>% xml2::xml_name())

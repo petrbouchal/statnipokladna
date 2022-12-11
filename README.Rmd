@@ -74,7 +74,7 @@ See the [Get started](https://petrbouchal.xyz/statnipokladna/articles/statnipokl
 
 See also [Background information] below.
 
-## How does this compare to the [official analytical interface](http://monitor.statnipokladna.cz/)?
+## How does this compare to the [official analytical interface](https://monitor.statnipokladna.cz/)?
 
 - no limit on the number of data points
 - no limits on the number of organisations, unlike the official interface which forces you to use a filter on some tables
@@ -177,7 +177,7 @@ A subset of this information is in the [Get started](https://petrbouchal.xyz/sta
 
 There is also a log of various data gotchas I discovered, also in Czech only, stored in the [data issues vignette](https://petrbouchal.xyz/statnipokladna/articles/data-issues-cz.html).
 
-A basic glossary of some of the terms used in the data sets is at <http://monitor.statnipokladna.cz/metodika/>.
+A basic glossary of some of the terms used in the data sets is at <https://monitor.statnipokladna.cz/metodika/>.
 
 ### Note
 
@@ -199,7 +199,7 @@ Not created or endorsed by the Czech Ministry of Finance, who produce the data -
 - [National Open Data Catalogue](https://data.gov.cz/)
 - [KNOD](https://github.com/kokes/knod) by Ondřej Kokeš for an overview of public data
 - [Hlídač státu](https://www.hlidacstatu.cz/) by @michalblaha for easy (web and API) access to a large suite of transparency-focused datasets and their integration (public disclosures of contracts, tenders, political contributions...)
-- [CEDR](https://cedr.mfcr.cz/) for a database of public subsidies, incl. to public bodies
+- CEDR for a database of public subsidies, incl. to public bodies
 
 ## Acknowledgments
 

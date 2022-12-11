@@ -22,7 +22,7 @@ Can be a vector of length > 1 (see Details for how to work with data across time
 
 \item{month}{month, numeric. Must be 3, 6, 9 or 12. Can be a vector of length > 1 (see details).}
 
-\item{ico}{ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See \url{http://monitor.statnipokladna.cz/datovy-katalog/prohlizec-ciselniku/ucjed} to look up ID of any org in the dataset.}
+\item{ico}{ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See \url{https://monitor.statnipokladna.cz/datovy-katalog/prohlizec-ciselniku/ucjed} to look up ID of any org in the dataset.}
 
 \item{redownload}{Redownload even if recent file present? Defaults to FALSE.}
 
@@ -74,7 +74,7 @@ Data is processed in the following way:
    0CI_TYPE \tab polozka_type \tab item/line type \tab typ položky \tab - \cr
    FUNC0AREA \tab paragraf \tab sector line \tab paragraf (odvětvové členění) \tab - \cr
    ZC_PVS \tab pvs \tab programme code \tab programové výdaje státu \tab post-2014 \cr
-   ZC_EDS \tab eds \tab subsidy and proprty evidence \tab Evidenční dotační systém / správa majetku ve vlastnictví státu \tab post-2014, No codelist - perhaps external via http://www.edssmvs.cz/DocumentsList.aspx?Agenda=CEIS \cr
+   ZC_EDS \tab eds \tab subsidy and proprty evidence \tab Evidenční dotační systém / správa majetku ve vlastnictví státu \tab post-2014, No codelist - perhaps external via https://www.edssmvs.cz/DocumentsList.aspx?Agenda=CEIS \cr
    ZC_UCRIS \tab ucris \tab purpose \tab Účel \tab post-2014, no codelist found \cr
    0FUNC_AREA \tab paragraf \tab sector line \tab paragraf (odvětvové členění) \tab - \cr
    ZU_ROZSCH \tab budget_adopted \tab budget as originally adopted \tab schválený rozpočet \tab - \cr

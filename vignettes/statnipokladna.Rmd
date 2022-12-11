@@ -167,7 +167,7 @@ In addition, there are some kinds of information which are held in other dataset
 
 - public employment and more detailed data on public organisations' payroll costs; this is contained in a separate closed system and partially published in the State Accounts (Státní závěrečný účet).
 - information on subsidies, held in the CEDR database
-- data on European subsidies, held [in open data published by the Ministry of Regional Development](http://data.mmr.cz/dataset?license_id=odc-by&tags=esif)
+- data on European subsidies, held [in open data published by the Ministry of Regional Development](https://data.gov.cz/datov%C3%A9-sady?poskytovatel=https%3A%2F%2Frpp-opendata.egon.gov.cz%2Fodrpp%2Fzdroj%2Forg%C3%A1n-ve%C5%99ejn%C3%A9-moci%2F66002222)
 
 As far as I am aware, there is no consistent dataset on the geographical breakdown of public/state spending by place of actual spend.
 
