@@ -39,6 +39,6 @@ sp_get_monitoring <- function(ico, period = "1812") {
 
   moni_enriched <- moni %>%
     dplyr::left_join(moni %>%
-                       dplyr::filter(.data$name == .data$pocobyv_unescaped) %>%
-                       dplyr::select(.data$ico, pop = "value"))
+                       dplyr::filter("name" == "pocobyv_unescaped") %>%
+                       dplyr::select("ico", "pop" = "value"))
 }
