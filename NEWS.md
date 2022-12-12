@@ -1,4 +1,4 @@
-# statnipokladna (development version)
+# statnipokladna 0.7.2
 
 # statnipokladna 0.7.1
 
