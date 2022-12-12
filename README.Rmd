@@ -199,7 +199,7 @@ Not created or endorsed by the Czech Ministry of Finance, who produce the data -
 - [National Open Data Catalogue](https://data.gov.cz/)
 - [KNOD](https://github.com/kokes/knod) by Ondřej Kokeš for an overview of public data
 - [Hlídač státu](https://www.hlidacstatu.cz/) by @michalblaha for easy (web and API) access to a large suite of transparency-focused datasets and their integration (public disclosures of contracts, tenders, political contributions...)
-- CEDR for a database of public subsidies, incl. to public bodies
+- CEDR (Centrální registr dotací) for a database of public subsidies, incl. to public bodies
 
 ## Acknowledgments
 

@@ -124,7 +124,7 @@ Get data from a particular part (file) of a dataset (“výkaz”):
 local_budgets <- sp_get_table(table_id = "budget-local", # table ID, see `sp_tables`
                            year = 2019,
                            month = 9)
-#> ✔ Storing downloaded archive in ']8;;file:///var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/finm/2019/09/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/finm/2019/09]8;;'
+#> ✔ Storing downloaded archive in ']8;;file:///var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/finm/2019/09/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/finm/2019/09]8;;'
 #> • Set `dest_dir` for more control over downloaded files.
 ```
 
@@ -157,7 +157,7 @@ codelists:
 
 ``` r
 functional_categories <- sp_get_codelist("paragraf")
-#> ℹ Storing codelist in ']8;;file:///var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z]8;;'
+#> ℹ Storing codelist in ']8;;file:///var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z]8;;'
 #> ℹ Set `dest_dir` for more control over downloaded files.
 ```
 
@@ -196,7 +196,7 @@ pass it as an object, provided that it has the right columns.
 local_budgets %>% 
   sp_add_codelist(functional_categories) %>% 
   sp_add_codelist("polozka")
-#> ℹ Storing codelist in ']8;;file:///var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z]8;;'
+#> ℹ Storing codelist in ']8;;file:///var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z]8;;'
 #> ℹ Set `dest_dir` for more control over downloaded files.
 #> ℹ Joining on 2 columns: polozka, poznamka.This may indicate a problem with the data.Set `by` if needed.
 #> # A tibble: 1,189,627 × 34
@@ -226,7 +226,7 @@ Download a whole “výkaz” (dataset/data dump):
 ``` r
 sp_get_dataset("finm", year = 2019) # dataset ID, see `sp_datasets`
 #> ! `month` not set. Using default of 12.
-#> ✔ Storing downloaded archive in ']8;;file:///var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/finm/2019/12/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/finm/2019/12]8;;'
+#> ✔ Storing downloaded archive in ']8;;file:///var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/finm/2019/12/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/finm/2019/12]8;;'
 #> • Set `dest_dir` for more control over downloaded files.
 ```
 
@@ -236,8 +236,8 @@ Then look at its documentation:
 
 ``` r
 statnipokladna::sp_get_dataset_doc("finm")
-#> ℹ Getting dataset documentation from <]8;;https://monitor.statnipokladna.cz/data/struktura/finm.xlsxhttps://monitor.statnipokladna.cz/data/struktura/finm.xlsx]8;;>
-#> ℹ File downloaded to ']8;;file:///var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/finm.xlsx/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/finm.xlsx]8;;'.
+#> ℹ Getting dataset documentation from <]8;;https://monitor.statnipokladna.cz/data/struktura/finm.xlsxhttps://monitor.statnipokladna.cz/data/struktura/finm.xlsx]8;;>
+#> ℹ File downloaded to ']8;;file:///var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/finm.xlsx/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/finm.xlsx]8;;'.
 ```
 
 You can get details of all the available tables in the `sp_tables` data
