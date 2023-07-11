@@ -76,26 +76,12 @@ utils::globalVariables("where")
 #' @export
 sp_load_codelist <- function(path, n = NULL) {
   stopifnot(file.exists(path))
-  if(grepl("ucjed", path)) cli::cli_alert_info("Large codelist: this will take a while...")
-  xml_all <- xml2::read_xml(path)
-  xml_children_all <- xml_all %>% xml2::xml_children()
-  xml_children <- if(is.null(n)) xml_children_all else xml_children_all[1:n]
-  nms <- xml2::xml_child(xml_all) %>% xml2::xml_children() %>% xml2::xml_name()
 
-  process_codelist <- function(x) {x %>% xml2::xml_children() %>%
-      xml2::xml_text() %>%
-      # as.character() %>%
-      t() %>%
-      # purrr::set_names(nms) %>%
-      as.data.frame() %>%
-      tibble::as_tibble(.name_repair = "minimal")}
-
-  xvals_raw <- purrr::map_df(xml_children, process_codelist)
+  xvals_raw <- readr::read_csv2(path)
 
   # print(xvals_raw)
 
   xvals <- xvals_raw %>%
-    purrr::set_names(nms) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")),
                      ~lubridate::as_date(lubridate::parse_date_time(., orders = c("Ymd", "dmY")))) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::starts_with("kon_")), as.logical) %>%
@@ -348,7 +334,7 @@ sp_get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
   if(!(codelist_id %in% sp_codelists$id)) cli::cli_abort("Not a valid codelist ID")
   codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
   # cli::cli_alert_info("Building URL for codelist {.value {codelist_id}} - {.value {codelist_name}}")
-  x <- paste(sp_base_url, "data/xml", paste0(codelist_id, ".xml"), sep = "/")
+  x <- paste(sp_base_url, "data/csv", paste0("CIS_", toupper(codelist_id), ".CSV"), sep = "/")
   if(check_if_exists) {
     check_online(x)
   }
