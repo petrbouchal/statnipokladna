@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/statnipokladna)](https://CRAN.R-project.org/package=statnipokladna)
 [![CRAN monthly downloads](https://cranlogs.r-pkg.org/badges/last-month/statnipokladna)](https://CRAN.R-project.org/package=statnipokladna)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-[![R build status](https://github.com/petrbouchal/statnipokladna/workflows/R-CMD-check/badge.svg)](https://github.com/petrbouchal/statnipokladna/actions)
+[![R-CMD-check](https://github.com/petrbouchal/statnipokladna/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/petrbouchal/statnipokladna/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of statnipokladna is to provide programmatic access to open data from the Státní pokladna system. Státní pokladna is a comprehensive budgeting, reporting and accounting system for Czech public organisations. This package provides user-friendly ways to access the open data from that system available at <https://monitor.statnipokladna.cz>. The vignettes in the package also provide an introduction to the underlying data.

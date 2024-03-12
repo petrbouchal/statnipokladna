@@ -13,8 +13,7 @@ downloads](https://cranlogs.r-pkg.org/badges/grand-total/statnipokladna)](https:
 downloads](https://cranlogs.r-pkg.org/badges/last-month/statnipokladna)](https://CRAN.R-project.org/package=statnipokladna)
 [![Lifecycle:
 maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-[![R build
-status](https://github.com/petrbouchal/statnipokladna/workflows/R-CMD-check/badge.svg)](https://github.com/petrbouchal/statnipokladna/actions)
+[![R-CMD-check](https://github.com/petrbouchal/statnipokladna/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/petrbouchal/statnipokladna/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of statnipokladna is to provide programmatic access to open
@@ -124,7 +123,7 @@ Get data from a particular part (file) of a dataset (“výkaz”):
 local_budgets <- sp_get_table(table_id = "budget-local", # table ID, see `sp_tables`
                            year = 2019,
                            month = 9)
-#> ✔ Storing downloaded archive in ']8;;file:///var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/finm/2019/09/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/finm/2019/09]8;;'
+#> ✔ Storing downloaded archive in '/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpoP6RVe/finm/2019/09'
 #> • Set `dest_dir` for more control over downloaded files.
 ```
 
@@ -148,7 +147,7 @@ head(local_budgets)
 #> 4 051   000100 2019       09          1000017768 000645… CZ010 CZ01… 2          
 #> 5 051   000100 2019       09          1000017768 000645… CZ010 CZ01… 2          
 #> 6 051   000100 2019       09          1000017768 000645… CZ010 CZ01… 2          
-#> # … with 6 more variables: paragraf <chr>, polozka <chr>, budget_adopted <dbl>,
+#> # ℹ 6 more variables: paragraf <chr>, polozka <chr>, budget_adopted <dbl>,
 #> #   budget_amended <dbl>, budget_spending <dbl>, vykaz_date <date>
 ```
 
@@ -157,7 +156,7 @@ codelists:
 
 ``` r
 functional_categories <- sp_get_codelist("paragraf")
-#> ℹ Storing codelist in ']8;;file:///var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z]8;;'
+#> ℹ Storing codelist in '/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpoP6RVe'
 #> ℹ Set `dest_dir` for more control over downloaded files.
 ```
 
@@ -176,7 +175,7 @@ functional_categories
 #>  8 1022     2010-01-01 9999-12-31 Organizace tr… Zemědě… Země… Regulac… Org. tr…
 #>  9 1023     2010-01-01 9999-12-31 Organizace tr… Zemědě… Země… Regulac… Organiz…
 #> 10 1024     2010-01-01 9999-12-31 Organizace tr… Zemědě… Země… Regulac… Reg.trh…
-#> # … with 831 more rows
+#> # ℹ 831 more rows
 ```
 
 This contains all codes for this codelist, some of which are not valid
@@ -196,7 +195,7 @@ pass it as an object, provided that it has the right columns.
 local_budgets %>% 
   sp_add_codelist(functional_categories) %>% 
   sp_add_codelist("polozka")
-#> ℹ Storing codelist in ']8;;file:///var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z]8;;'
+#> ℹ Storing codelist in '/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpoP6RVe'
 #> ℹ Set `dest_dir` for more control over downloaded files.
 #> ℹ Joining on 2 columns: polozka, poznamka.This may indicate a problem with the data.Set `by` if needed.
 #> # A tibble: 1,189,627 × 34
@@ -212,9 +211,9 @@ local_budgets %>%
 #>  8 051   000100 2019       09          1000017768 00064… CZ010 CZ01… 2          
 #>  9 051   000100 2019       09          1000017768 00064… CZ010 CZ01… 2          
 #> 10 051   000100 2019       09          1000017768 00064… CZ010 CZ01… 2          
-#> # … with 1,189,617 more rows, and 25 more variables: paragraf <chr>,
-#> #   polozka <chr>, budget_adopted <dbl>, budget_amended <dbl>,
-#> #   budget_spending <dbl>, vykaz_date <date>,
+#> # ℹ 1,189,617 more rows
+#> # ℹ 25 more variables: paragraf <chr>, polozka <chr>, budget_adopted <dbl>,
+#> #   budget_amended <dbl>, budget_spending <dbl>, vykaz_date <date>,
 #> #   functional_categories_start_date <date>,
 #> #   functional_categories_end_date <date>, functional_categories_nazev <chr>,
 #> #   skupina <chr>, oddil <chr>, pododdil <chr>, poznamka <chr>,
@@ -226,7 +225,7 @@ Download a whole “výkaz” (dataset/data dump):
 ``` r
 sp_get_dataset("finm", year = 2019) # dataset ID, see `sp_datasets`
 #> ! `month` not set. Using default of 12.
-#> ✔ Storing downloaded archive in ']8;;file:///var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/finm/2019/12/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/finm/2019/12]8;;'
+#> ✔ Storing downloaded archive in '/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpoP6RVe/finm/2019/12'
 #> • Set `dest_dir` for more control over downloaded files.
 ```
 
@@ -236,8 +235,8 @@ Then look at its documentation:
 
 ``` r
 statnipokladna::sp_get_dataset_doc("finm")
-#> ℹ Getting dataset documentation from <]8;;https://monitor.statnipokladna.cz/data/struktura/finm.xlsxhttps://monitor.statnipokladna.cz/data/struktura/finm.xlsx]8;;>
-#> ℹ File downloaded to ']8;;file:///var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/finm.xlsx/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpQjt91Z/finm.xlsx]8;;'.
+#> ℹ Getting dataset documentation from <https://monitor.statnipokladna.cz/data/struktura/finm.xlsx>
+#> ℹ File downloaded to '/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpoP6RVe/finm.xlsx'.
 ```
 
 You can get details of all the available tables in the `sp_tables` data
@@ -315,7 +314,8 @@ maintaining the application.
   (web and API) access to a large suite of transparency-focused datasets
   and their integration (public disclosures of contracts, tenders,
   political contributions…)
-- CEDR for a database of public subsidies, incl. to public bodies
+- CEDR (Centrální registr dotací) for a database of public subsidies,
+  incl. to public bodies
 
 ## Acknowledgments
 
