@@ -1,3 +1,7 @@
+# statnipokladna (development version)
+
+* `sp_get_table()` can now handle CSV files with non-standard header rows in the format '"Výkaz"ZC_VYKAZ:ZC_VYKAZ"', fixes #94
+
 # statnipokladna 0.7.2
 
 # statnipokladna 0.7.1

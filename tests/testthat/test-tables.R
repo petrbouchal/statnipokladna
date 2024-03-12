@@ -9,3 +9,7 @@ test_that("List of tables make sense", {
 test_that("get_table works", {
   expect_error(sp_get_table("blah", "2012", "12"))
 })
+
+test_that("get_table works with newer files", {
+  expect_gt(nrow(sp_get_table("budget-local", "2022", "12")), 1000)
+})
