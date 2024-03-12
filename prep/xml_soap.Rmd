@@ -11,7 +11,7 @@ monitor.statnipokladna.cz/xsd/monitor.wsdl
 
 ```{r setup}
 library(httr)
-library(htmltidy)
+# library(htmltidy)
 ```
 
 ```{r, fig.height=1000}
