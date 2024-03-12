@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.2.9000</span>
       </span>
     </div>
 
@@ -77,14 +77,23 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="development version" id="statnipokladna-development-version">statnipokladna (development version)<a class="anchor" aria-label="anchor" href="#statnipokladna-development-version"></a></h2>
+<ul><li>
+<code><a href="../reference/sp_get_table.html">sp_get_table()</a></code> can now handle CSV files with non-standard header rows in the format ‘“Výkaz”ZC_VYKAZ:ZC_VYKAZ”’, fixes <a href="https://github.com/petrbouchal/statnipokladna/issues/94" class="external-link">#94</a></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.7.2" id="statnipokladna-072">statnipokladna 0.7.2<small>2022-12-12</small><a class="anchor" aria-label="anchor" href="#statnipokladna-072"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.7.1" id="statnipokladna-071">statnipokladna 0.7.1<a class="anchor" aria-label="anchor" href="#statnipokladna-071"></a></h2>
 <div class="section level3">
-<h3 id="minor-improvements-development-version">Minor improvements<a class="anchor" aria-label="anchor" href="#minor-improvements-development-version"></a></h3>
+<h3 id="minor-improvements-0-7-1">Minor improvements<a class="anchor" aria-label="anchor" href="#minor-improvements-0-7-1"></a></h3>
 <ul><li>switched messaging to {cli} package, dropping the {usethis} dependency</li>
 <li>improve naming of output columns (additional column code translated into readable scheme)</li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-development-version">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
-<ul><li>fixed a bug in <code><a href="../reference/sp_load_table.html">sp_load_table()</a></code> which caused the <code>vykaz_date</code> column in its output to come be all-NA</li>
+<h3 id="bug-fixes-0-7-1">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-7-1"></a></h3>
+<ul><li>fixed a bug in <code><a href="../reference/sp_load_table.html">sp_load_table()</a></code> which caused the <code>vykaz_date</code> column in its output to be all <code>NA</code>
+</li>
 <li>loading data on state funds now works, IDs and details are newly listed in <code>sp_tables</code>
 </li>
 </ul></div>
@@ -371,7 +380,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

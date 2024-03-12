@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.2.9000</span>
       </span>
     </div>
 
@@ -81,22 +81,31 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_dataset_doc</span><span class="op">(</span><span class="va">dataset_id</span>, dest_dir <span class="op">=</span> <span class="st">"."</span>, download <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_dataset_doc</span><span class="op">(</span><span class="va">dataset_id</span>, dest_dir <span class="op">=</span> <span class="st">"."</span>, download <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>dataset_id</dt>
 <dd><p>dataset ID. See <code>sp_datasets</code>.</p></dd>
+
+
 <dt>dest_dir</dt>
 <dd><p>character. Directory in which downloaded files will be stored.
 If left unset, will use the <code>statnipokladna.dest_dir</code> option if the option is set, and <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> otherwise. Will be created if it does not exist.</p></dd>
+
+
 <dt>download</dt>
 <dd><p>Whether to download (the default) or open link in browser.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a></p>
+    
+
+<p>a <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a></p>
+
+
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -115,7 +124,7 @@ If left unset, will use the <code>statnipokladna.dest_dir</code> option if the o
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -19,7 +19,7 @@ Deprecated, use sp_get_table() instead. — get_table"><meta property="og:descri
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.2.9000</span>
       </span>
     </div>
 
@@ -84,36 +84,51 @@ Deprecated, use <code>sp_get_table()</code> instead.</h1>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_table</span><span class="op">(</span>
-  <span class="va">table_id</span>,
-  <span class="va">year</span>,
-  month <span class="op">=</span> <span class="fl">12</span>,
-  ico <span class="op">=</span> <span class="cn">NULL</span>,
-  redownload <span class="op">=</span> <span class="cn">FALSE</span>,
-  dest_dir <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_table</span><span class="op">(</span></span>
+<span>  <span class="va">table_id</span>,</span>
+<span>  <span class="va">year</span>,</span>
+<span>  month <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>  ico <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  redownload <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  dest_dir <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>table_id</dt>
 <dd><p>A table ID. See <code>id</code> column in <code>sp_tables</code> for a list of available tables</p></dd>
+
+
 <dt>year</dt>
 <dd><p>year, numeric, 2015-2019 for some datasets, 2010-2020 for others.
 Can be a vector of length &gt; 1 (see Details for how to work with data across time periods.).</p></dd>
+
+
 <dt>month</dt>
 <dd><p>month, numeric. Must be 3, 6, 9 or 12. Can be a vector of length &gt; 1 (see details).</p></dd>
+
+
 <dt>ico</dt>
-<dd><p>ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See <a href="http://monitor.statnipokladna.cz/datovy-katalog/prohlizec-ciselniku/ucjed" class="external-link">http://monitor.statnipokladna.cz/datovy-katalog/prohlizec-ciselniku/ucjed</a> to look up ID of any org in the dataset.</p></dd>
+<dd><p>ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See <a href="https://monitor.statnipokladna.cz/datovy-katalog/prohlizec-ciselniku/ucjed" class="external-link">https://monitor.statnipokladna.cz/datovy-katalog/prohlizec-ciselniku/ucjed</a> to look up ID of any org in the dataset.</p></dd>
+
+
 <dt>redownload</dt>
 <dd><p>Redownload even if recent file present? Defaults to FALSE.</p></dd>
+
+
 <dt>dest_dir</dt>
 <dd><p>character. Directory in which downloaded files will be stored.
 If left unset, will use the <code>statnipokladna.dest_dir</code> option if the option is set, and <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> otherwise. Will be created if it does not exist.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a></p>
+    
+
+<p>a <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a></p>
+
+
     </div>
 
   </div>
@@ -128,7 +143,7 @@ If left unset, will use the <code>statnipokladna.dest_dir</code> option if the o
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

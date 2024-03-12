@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.2.9000</span>
       </span>
     </div>
 
@@ -81,36 +81,49 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">sp_get_table</span><span class="op">(</span>
-  <span class="va">table_id</span>,
-  <span class="va">year</span>,
-  month <span class="op">=</span> <span class="fl">12</span>,
-  ico <span class="op">=</span> <span class="cn">NULL</span>,
-  redownload <span class="op">=</span> <span class="cn">FALSE</span>,
-  dest_dir <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sp_get_table</span><span class="op">(</span></span>
+<span>  <span class="va">table_id</span>,</span>
+<span>  <span class="va">year</span>,</span>
+<span>  month <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>  ico <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  redownload <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  dest_dir <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>table_id</dt>
 <dd><p>A table ID. See <code>id</code> column in <code>sp_tables</code> for a list of available tables</p></dd>
+
+
 <dt>year</dt>
 <dd><p>year, numeric, 2015-2019 for some datasets, 2010-2020 for others.
 Can be a vector of length &gt; 1 (see Details for how to work with data across time periods.).</p></dd>
+
+
 <dt>month</dt>
 <dd><p>month, numeric. Must be 3, 6, 9 or 12. Can be a vector of length &gt; 1 (see details).</p></dd>
+
+
 <dt>ico</dt>
-<dd><p>ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See <a href="http://monitor.statnipokladna.cz/datovy-katalog/prohlizec-ciselniku/ucjed" class="external-link">http://monitor.statnipokladna.cz/datovy-katalog/prohlizec-ciselniku/ucjed</a> to look up ID of any org in the dataset.</p></dd>
+<dd><p>ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See <a href="https://monitor.statnipokladna.cz/datovy-katalog/prohlizec-ciselniku/ucjed" class="external-link">https://monitor.statnipokladna.cz/datovy-katalog/prohlizec-ciselniku/ucjed</a> to look up ID of any org in the dataset.</p></dd>
+
+
 <dt>redownload</dt>
 <dd><p>Redownload even if recent file present? Defaults to FALSE.</p></dd>
+
+
 <dt>dest_dir</dt>
 <dd><p>character. Directory in which downloaded files will be stored.
 If left unset, will use the <code>statnipokladna.dest_dir</code> option if the option is set, and <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> otherwise. Will be created if it does not exist.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a>; see Details for key to the columns</p>
+    
+
+<p>a <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a>; see Details for key to the columns</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -128,7 +141,7 @@ See <code><a href="../articles/statnipokladna.html">vignette("statnipokladna")</
 <h3 id="correspondence-between-input-and-output-columns">Correspondence between input and output columns<a class="anchor" aria-label="anchor" href="#correspondence-between-input-and-output-columns"></a></h3>
 
 
-<p><strong>Shared/multiple tables</strong></p><table class="table table"><tr><td>Original</td><td>Output</td><td>English</td><td>Czech</td><td>Note</td></tr><tr><td>ZC_VTAB</td><td>vtab</td><td>table number</td><td>tabulka</td><td>-</td></tr><tr><td>ZC_UCJED</td><td>ucjed</td><td>accounting unit</td><td>účetní jednotka</td><td>NB: ucjed != ico; the two codes are different; ICO is universal, ucjed is specific to SP, and both denote an organisation.</td></tr><tr><td>ZC_VYKAZ</td><td>vykaz</td><td>report number</td><td>výkaz</td><td>-</td></tr><tr><td>ZFUNDS_CT</td><td>finmisto</td><td>accounting centre</td><td>finanční místo</td><td>either kapitola or "organizační složka státu" (core state org)</td></tr><tr><td>ZC_ICO</td><td>ico</td><td>org ID</td><td>IČO</td><td>see ucjed</td></tr><tr><td>ZC_FUND</td><td>zdroj</td><td>funding source</td><td>zdroj</td><td>-</td></tr><tr><td>ZC_KRAJ</td><td>kraj</td><td>region</td><td>kraj</td><td>-</td></tr><tr><td>ZC_NUTS</td><td>nuts</td><td>NUTS code</td><td>NUTS kód</td><td>-</td></tr><tr><td>ZC_LAU</td><td>okres</td><td>NUTS code of LAU1 unit</td><td>LAU1 kód</td><td>-</td></tr></table><p><strong>Tables <code>budget-*</code></strong></p><table class="table table"><tr><td>Original</td><td>Output</td><td>English</td><td>Czech</td><td>Note</td></tr><tr><td>ZCMMT_ITM</td><td>polozka</td><td>item/line</td><td>položka (druhové členění)</td><td>NB: polozka != polvyk</td></tr><tr><td>0FM_AREA</td><td>kapitola</td><td>chapter</td><td>kapitola</td><td>-</td></tr><tr><td>0CI_TYPE</td><td>polozka_type</td><td>item/line type</td><td>typ položky</td><td>-</td></tr><tr><td>FUNC0AREA</td><td>paragraf</td><td>sector line</td><td>paragraf (odvětvové členění)</td><td>-</td></tr><tr><td>ZC_PVS</td><td>pvs</td><td>programme code</td><td>programové výdaje státu</td><td>post-2014</td></tr><tr><td>ZC_EDS</td><td>eds</td><td>subsidy and proprty evidence</td><td>Evidenční dotační systém / správa majetku ve vlastnictví státu</td><td>post-2014, No codelist - perhaps external via http://www.edssmvs.cz/DocumentsList.aspx?Agenda=CEIS</td></tr><tr><td>ZC_UCRIS</td><td>ucris</td><td>purpose</td><td>Účel</td><td>post-2014, no codelist found</td></tr><tr><td>0FUNC_AREA</td><td>paragraf</td><td>sector line</td><td>paragraf (odvětvové členění)</td><td>-</td></tr><tr><td>ZU_ROZSCH</td><td>budget_adopted</td><td>budget as originally adopted</td><td>schválený rozpočet</td><td>-</td></tr><tr><td>ZU_ROZPZM</td><td>budget_amended</td><td>budget as amended throughout the year</td><td>rozpočet po změnách</td><td>-</td></tr><tr><td>ZU_KROZP</td><td>budget_final</td><td>final budget</td><td>konečný rozpočet</td><td>-</td></tr><tr><td>ZU_OBLIG</td><td>budget_oblig</td><td>?</td><td>obligo</td><td>-</td></tr><tr><td>ZU_ROZKZ</td><td>budget_spending</td><td>actual spending</td><td>skutečnost</td><td>-</td></tr></table><p><strong>Table <code>budget-indicators</code></strong></p>
+<p><strong>Shared/multiple tables</strong></p><table class="table table"><tr><td>Original</td><td>Output</td><td>English</td><td>Czech</td><td>Note</td></tr><tr><td>ZC_VTAB</td><td>vtab</td><td>table number</td><td>tabulka</td><td>-</td></tr><tr><td>ZC_UCJED</td><td>ucjed</td><td>accounting unit</td><td>účetní jednotka</td><td>NB: ucjed != ico; the two codes are different; ICO is universal, ucjed is specific to SP, and both denote an organisation.</td></tr><tr><td>ZC_VYKAZ</td><td>vykaz</td><td>report number</td><td>výkaz</td><td>-</td></tr><tr><td>ZFUNDS_CT</td><td>finmisto</td><td>accounting centre</td><td>finanční místo</td><td>either kapitola or "organizační složka státu" (core state org)</td></tr><tr><td>ZC_ICO</td><td>ico</td><td>org ID</td><td>IČO</td><td>see ucjed</td></tr><tr><td>ZC_FUND</td><td>zdroj</td><td>funding source</td><td>zdroj</td><td>-</td></tr><tr><td>ZC_KRAJ</td><td>kraj</td><td>region</td><td>kraj</td><td>-</td></tr><tr><td>ZC_NUTS</td><td>nuts</td><td>NUTS code</td><td>NUTS kód</td><td>-</td></tr><tr><td>ZC_LAU</td><td>okres</td><td>NUTS code of LAU1 unit</td><td>LAU1 kód</td><td>-</td></tr></table><p><strong>Tables <code>budget-*</code></strong></p><table class="table table"><tr><td>Original</td><td>Output</td><td>English</td><td>Czech</td><td>Note</td></tr><tr><td>ZCMMT_ITM</td><td>polozka</td><td>item/line</td><td>položka (druhové členění)</td><td>NB: polozka != polvyk</td></tr><tr><td>0FM_AREA</td><td>kapitola</td><td>chapter</td><td>kapitola</td><td>-</td></tr><tr><td>0CI_TYPE</td><td>polozka_type</td><td>item/line type</td><td>typ položky</td><td>-</td></tr><tr><td>FUNC0AREA</td><td>paragraf</td><td>sector line</td><td>paragraf (odvětvové členění)</td><td>-</td></tr><tr><td>ZC_PVS</td><td>pvs</td><td>programme code</td><td>programové výdaje státu</td><td>post-2014</td></tr><tr><td>ZC_EDS</td><td>eds</td><td>subsidy and proprty evidence</td><td>Evidenční dotační systém / správa majetku ve vlastnictví státu</td><td>post-2014, No codelist - perhaps external via https://www.edssmvs.cz/DocumentsList.aspx?Agenda=CEIS</td></tr><tr><td>ZC_UCRIS</td><td>ucris</td><td>purpose</td><td>Účel</td><td>post-2014, no codelist found</td></tr><tr><td>0FUNC_AREA</td><td>paragraf</td><td>sector line</td><td>paragraf (odvětvové členění)</td><td>-</td></tr><tr><td>ZU_ROZSCH</td><td>budget_adopted</td><td>budget as originally adopted</td><td>schválený rozpočet</td><td>-</td></tr><tr><td>ZU_ROZPZM</td><td>budget_amended</td><td>budget as amended throughout the year</td><td>rozpočet po změnách</td><td>-</td></tr><tr><td>ZU_KROZP</td><td>budget_final</td><td>final budget</td><td>konečný rozpočet</td><td>-</td></tr><tr><td>ZU_OBLIG</td><td>budget_oblig</td><td>?</td><td>obligo</td><td>-</td></tr><tr><td>ZU_ROZKZ</td><td>budget_spending</td><td>actual spending</td><td>skutečnost</td><td>-</td></tr></table><p><strong>Table <code>budget-indicators</code></strong></p>
 <p>| Original | Output | English | Czech | Note |
 | ZC_PSUK | psuk | budgetary indicator | Závazný a průřezový indikátor | Use <code>psuk</code> codelist |</p>
 <p>**Table <code>budget-central-old-subsidies</code> **</p>
@@ -152,12 +165,12 @@ See <code><a href="../articles/statnipokladna.html">vignette("statnipokladna")</
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">allorgs_2018</span> <span class="op">&lt;-</span> <span class="fu">sp_get_table</span><span class="op">(</span><span class="st">"budget-central"</span>, <span class="fl">2018</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">allorgs_mid2018</span> <span class="op">&lt;-</span> <span class="fu">sp_get_table</span><span class="op">(</span><span class="st">"budget-central"</span>, <span class="fl">2018</span>, <span class="fl">6</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">oneorg_multiyear</span> <span class="op">&lt;-</span> <span class="fu">sp_get_table</span><span class="op">(</span><span class="st">"budget-central"</span>, <span class="fl">2017</span><span class="op">:</span><span class="fl">2018</span>, <span class="fl">12</span>, ico <span class="op">=</span> <span class="st">"00064581"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">oneorg_multihalfyears</span> <span class="op">&lt;-</span> <span class="fu">sp_get_table</span><span class="op">(</span><span class="st">"budget-central"</span>, <span class="fl">2017</span><span class="op">:</span><span class="fl">2018</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">12</span><span class="op">)</span>, ico <span class="op">=</span> <span class="st">"00064581"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">allorgs_2018</span> <span class="op">&lt;-</span> <span class="fu">sp_get_table</span><span class="op">(</span><span class="st">"budget-central"</span>, <span class="fl">2018</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">allorgs_mid2018</span> <span class="op">&lt;-</span> <span class="fu">sp_get_table</span><span class="op">(</span><span class="st">"budget-central"</span>, <span class="fl">2018</span>, <span class="fl">6</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">oneorg_multiyear</span> <span class="op">&lt;-</span> <span class="fu">sp_get_table</span><span class="op">(</span><span class="st">"budget-central"</span>, <span class="fl">2017</span><span class="op">:</span><span class="fl">2018</span>, <span class="fl">12</span>, ico <span class="op">=</span> <span class="st">"00064581"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">oneorg_multihalfyears</span> <span class="op">&lt;-</span> <span class="fu">sp_get_table</span><span class="op">(</span><span class="st">"budget-central"</span>, <span class="fl">2017</span><span class="op">:</span><span class="fl">2018</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">12</span><span class="op">)</span>, ico <span class="op">=</span> <span class="st">"00064581"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -172,7 +185,7 @@ See <code><a href="../articles/statnipokladna.html">vignette("statnipokladna")</
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

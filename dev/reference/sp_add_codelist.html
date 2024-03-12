@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.7.2.9000</span>
       </span>
     </div>
 
@@ -81,35 +81,48 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">sp_add_codelist</span><span class="op">(</span>
-  <span class="va">data</span>,
-  codelist <span class="op">=</span> <span class="cn">NULL</span>,
-  period_column <span class="op">=</span> <span class="va">.data</span><span class="op">$</span><span class="va">vykaz_date</span>,
-  by <span class="op">=</span> <span class="cn">NULL</span>,
-  redownload <span class="op">=</span> <span class="cn">FALSE</span>,
-  dest_dir <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">sp_add_codelist</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  codelist <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  period_column <span class="op">=</span> <span class="va">.data</span><span class="op">$</span><span class="va">vykaz_date</span>,</span>
+<span>  by <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  redownload <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  dest_dir <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p>a data frame returned by <code><a href="sp_get_table.html">sp_get_table()</a></code>.</p></dd>
+
+
 <dt>codelist</dt>
 <dd><p>The codelist to add. Either a character vector of length one (see <code>sp_tables</code> for possible values), or a data frame returned by <code><a href="sp_get_codelist.html">sp_get_codelist()</a></code>.</p></dd>
+
+
 <dt>period_column</dt>
 <dd><p>Unquoted column name of column identifying the data period in <code>data</code>. Leave to default if you have not changed the <code>data</code> object returned by <code><a href="sp_get_table.html">sp_get_table()</a></code>.</p></dd>
+
+
 <dt>by</dt>
 <dd><p>character. Columns by which to join the codelist. Same form as for <code>dplyr::left_join()``.</code>.</p></dd>
+
+
 <dt>redownload</dt>
 <dd><p>Redownload even if file has already been downloaded? Defaults to FALSE.</p></dd>
+
+
 <dt>dest_dir</dt>
 <dd><p>character. Directory in which downloaded files will be stored.
 If left unset, will use the <code>statnipokladna.dest_dir</code> option if the option is set, and <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code> otherwise. Will be created if it does not exist.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> of same length as <code>data</code>, with added columns from <code>codelist</code>. See Details.</p>
+    
+
+<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> of same length as <code>data</code>, with added columns from <code>codelist</code>. See Details.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -140,18 +153,18 @@ it manually using <code>dplyr</code>.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu"><a href="sp_get_table.html">sp_get_table</a></span><span class="op">(</span><span class="st">"budget-central"</span>, <span class="fl">2017</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">sp_add_codelist</span><span class="op">(</span><span class="st">"polozka"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">sp_add_codelist</span><span class="op">(</span><span class="st">"paragraf"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">pol</span> <span class="op">&lt;-</span> <span class="fu"><a href="sp_get_codelist.html">sp_get_codelist</a></span><span class="op">(</span><span class="st">"paragraf"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">par</span> <span class="op">&lt;-</span> <span class="fu"><a href="sp_get_codelist.html">sp_get_codelist</a></span><span class="op">(</span><span class="st">"polozka"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="sp_get_table.html">sp_get_table</a></span><span class="op">(</span><span class="st">"budget-central"</span>, <span class="fl">2017</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">sp_add_codelist</span><span class="op">(</span><span class="va">pol</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
-<span class="r-in">  <span class="fu">sp_add_codelist</span><span class="op">(</span><span class="va">par</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="sp_get_table.html">sp_get_table</a></span><span class="op">(</span><span class="st">"budget-central"</span>, <span class="fl">2017</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">sp_add_codelist</span><span class="op">(</span><span class="st">"polozka"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">sp_add_codelist</span><span class="op">(</span><span class="st">"paragraf"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">pol</span> <span class="op">&lt;-</span> <span class="fu"><a href="sp_get_codelist.html">sp_get_codelist</a></span><span class="op">(</span><span class="st">"paragraf"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">par</span> <span class="op">&lt;-</span> <span class="fu"><a href="sp_get_codelist.html">sp_get_codelist</a></span><span class="op">(</span><span class="st">"polozka"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="sp_get_table.html">sp_get_table</a></span><span class="op">(</span><span class="st">"budget-central"</span>, <span class="fl">2017</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">sp_add_codelist</span><span class="op">(</span><span class="va">pol</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">sp_add_codelist</span><span class="op">(</span><span class="va">par</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -166,7 +179,7 @@ it manually using <code>dplyr</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
