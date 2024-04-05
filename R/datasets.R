@@ -194,7 +194,7 @@ sp_get_dataset <- function(dataset_id, year, month = 12,
 #' @export
 get_dataset <- function(dataset_id, year, month = 12,
                         dest_dir = NULL, redownload = FALSE) {
-  lifecycle::deprecate_warn("0.5.2", "statnipokladna::get_dataset()", "sp_get_dataset()")
+  lifecycle::deprecate_stop("0.5.2", "statnipokladna::get_dataset()", "sp_get_dataset()")
   sp_get_dataset(dataset_id = dataset_id, year = year, month = month,
                  dest_dir = dest_dir, redownload = redownload)
 }
@@ -212,6 +212,6 @@ get_dataset <- function(dataset_id, year, month = 12,
 #' @return a [tibble][tibble::tibble-package]
 #' @export
 get_dataset_doc <- function(dataset_id, dest_dir = ".", download = TRUE) {
-  lifecycle::deprecate_warn("0.5.2", "statnipokladna::get_dataset_doc()", "sp_get_dataset_doc()")
+  lifecycle::deprecate_stop("0.5.2", "statnipokladna::get_dataset_doc()", "sp_get_dataset_doc()")
   sp_get_dataset_doc(dataset_id = dataset_id, dest_dir = dest_dir, download = download)
 }

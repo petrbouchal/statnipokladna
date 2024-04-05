@@ -1,5 +1,7 @@
 # statnipokladna (development version)
 
+* hard-deprecate functions with old naming scheme (those not starting with `sp_`); they will be removed in the next release
+
 # statnipokladna 0.7.3
 
 * `sp_get_table()` can now handle CSV files with non-standard header rows in the format '"Výkaz"ZC_VYKAZ:ZC_VYKAZ"', fixes #94
