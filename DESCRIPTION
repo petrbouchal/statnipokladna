@@ -1,6 +1,6 @@
 Package: statnipokladna
 Title: Use Data from the Czech Public Finance Database
-Version: 0.7.2.9000
+Version: 0.7.3
 Authors@R: 
     person("Petr", "Bouchal", , "pbouchal@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-0471-716X"))
