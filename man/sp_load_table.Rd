@@ -16,7 +16,7 @@ a \link[tibble:tibble-package]{tibble}. See help for \code{sp_get_table()} for a
 }
 \description{
 This is normally called inside \code{sp_get_table()} but can be used separately if
-finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
+finer-grained control of intermediate outputs is needed, e.g. in a \code{{targets}} workflow.
 }
 \examples{
 \dontrun{

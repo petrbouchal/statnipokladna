@@ -60,7 +60,7 @@ utils::globalVariables("where")
 #' Load codelist into a tibble from XML file
 #'
 #' This is normally called inside `sp_get_codelist()` but can be used separately if
-#' finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
+#' finer-grained control of intermediate outputs is needed, e.g. in a `{targets}` workflow.
 #'
 #' @param path Path to a file as returned by `sp_get_codelist_file()`
 #' @param n Number of rows to return. Default (NULL) means all. Useful for quickly inspecting a codelist.
@@ -113,7 +113,7 @@ sp_load_codelist <- function(path, n = NULL) {
 #' Download a codelist XML file
 #'
 #' This is normally called inside `sp_get_codelist()` but can be used separately if
-#' finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
+#' finer-grained control of intermediate outputs is needed, e.g. in a `{targets}` workflow.
 #'
 #' @param codelist_id A codelist ID. See `id` column in `sp_codelists` for a list of available codelists.
 #' @param url DESCRIPTION. Either this or `codelist_id` must be set. If both are set, `url` wins.
@@ -329,7 +329,7 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$vykaz_d
 #' Get URL of a given codelist
 #'
 #' This is normally called inside `sp_get_codelist()` but can be used separately if
-#' finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
+#' finer-grained control of intermediate outputs is needed, e.g. in a `{targets}` workflow.
 #'
 #' @param codelist_id DESCRIPTION.
 #' @param check_if_exists Whether to check that the URL works (HTTP 200).

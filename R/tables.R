@@ -46,7 +46,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #' Get path to a CSV file containing a table.
 #'
 #' This is normally called inside `sp_get_table()` but can be used separately if
-#' finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
+#' finer-grained control of intermediate outputs is needed, e.g. in a `{targets}` workflow.
 #'
 #' @param table_id Table ID; see `id` column in `sp_tables` for a list of available codelists.
 #' @param dataset_path Path to downloaded dataset, as output by `sp_get_dataset()`
@@ -88,7 +88,7 @@ sp_get_table_file <- function(table_id, dataset_path, reunzip = FALSE) {
 #' Load a statnipokladna table from a CSV file
 #'
 #' This is normally called inside `sp_get_table()` but can be used separately if
-#' finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
+#' finer-grained control of intermediate outputs is needed, e.g. in a `{targets}` workflow.
 #'
 #' @param path path to a CSV file, as output by `sp_get_table_file()`.
 #' @param ico Organisation ID to filter by, if supplied.

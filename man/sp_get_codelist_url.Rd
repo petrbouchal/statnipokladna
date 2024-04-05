@@ -16,7 +16,7 @@ character vector of length one containing URL
 }
 \description{
 This is normally called inside \code{sp_get_codelist()} but can be used separately if
-finer-grained control of intermediate outputs is needed, e.g. in a {targets} workflow.
+finer-grained control of intermediate outputs is needed, e.g. in a \code{{targets}} workflow.
 }
 \examples{
 \dontrun{
