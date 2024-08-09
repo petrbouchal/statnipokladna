@@ -1,7 +1,7 @@
 # statnipokladna (development version)
 
 * hard-deprecate functions with old naming scheme (those not starting with `sp_`); they will be removed in the next release
-* add `isektor` as available codelist
+* add `isektor` and `nace` as available codelists
 * minor fix to messages
 
 # statnipokladna 0.7.3
