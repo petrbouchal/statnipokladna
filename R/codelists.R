@@ -284,12 +284,10 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$vykaz_d
   common_columns <- names(data)[names(data) %in% names(cl_data)]
   overlap <- length(common_columns)
   if (overlap > 1 & is.null(by)) {
-    cli::cli_alert_info(c("Joining on {.value {overlap}} columns: {.value {stringr::str_c(common_columns, collapse = ', ')}}.",
-                          "This may indicate a problem with the data.",
-                          "Set {.var by} if needed."))
   } else if(overlap == 0) {cli::cli_abort(c(x = "No columns to join by.",
                                             "{cli::symbol$pointer} Are you sure you are merging the right codelist onto the right data?",
                                             i = "Set {.value by} if needed."))}
+    cli::cli_alert_info("Joining on {.value {overlap}} columns: {.value {stringr::str_c(common_columns, collapse = ', ')}}. This may indicate a problem with the data. Set {.var by} if needed.", wrap = TRUE)
 
   slepit <- function(.x, .y) {
     # print(.x)
