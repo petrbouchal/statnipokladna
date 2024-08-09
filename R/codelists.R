@@ -20,6 +20,7 @@ sp_codelists <- tibble::tribble(~id, ~name,
                                 "druhuj", "Druh \\u00fa\\u010detn\\u00ed jednotky",
                                 "finmisto", "Finan\\u010dn\\u00ed m\\u00edsto (kapitoly, OSS)",
                                 "forma", "Forma \\u00fa\\u010detn\\u00ed jednotky",
+                                "isektor", "Institucion\\u00e1lní sektor organizace",
                                 "kapitola", "Kapitola rozpo\\u010detu",
                                 "katobyv", "Kategorie po\\u010dtu obyvatel",
                                 "nuts", "Klasifikace \\u00fazemn\\u00edch statistick\\u00fdch jednotek NUTS",
@@ -144,8 +145,7 @@ sp_get_codelist_file <- function(codelist_id = NULL, url = NULL, dest_dir = NULL
 
   tf <- file.path(td, filename)
   if(file.exists(tf) & !redownload) {
-    cli::cli_alert_info(c(i = "Codelist file already in {.path {td}}, not downloading",
-                          i = "Set {.code redownload = TRUE} if needed."))
+    cli::cli_alert_info("Codelist file already in {.path {td}}, not downloading. Set {.code redownload = TRUE} if needed.")
   } else {
     if(is.null(url)) url <- sp_get_codelist_url(codelist_id)
     cli::cli_alert_info("Storing codelist in {.path {td}}")
