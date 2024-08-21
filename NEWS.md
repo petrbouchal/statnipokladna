@@ -1,3 +1,5 @@
+# statnipokladna (development version)
+
 # statnipokladna 0.7.4
 
 * hard-deprecate functions with old naming scheme (those not starting with `sp_`); they will be removed in the next release
