@@ -146,8 +146,6 @@ oneorg_multihalfyears <- sp_get_table("budget-central", 2017:2018, c(6, 12), ico
 }
 \seealso{
 Other Core workflow: 
-\code{\link{add_codelist}()},
-\code{\link{get_codelist}()},
 \code{\link{sp_add_codelist}()},
 \code{\link{sp_get_codelist}()},
 \code{\link{sp_get_dataset}()}

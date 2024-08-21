@@ -334,20 +334,3 @@ sp_get_table <- function(table_id, year, month = 12, ico = NULL,
 # onyr <- c(2018) %>% purrr::map_dfr(~ sp_get_table(2, year = ., month = 12))
 # onyr <- c(2018) %>% purrr::map_dfr(~ sp_get_table(1, year = ., month = 12))
 
-# Deprecated --------------------------------------------------------------
-
-#' Deprecated: Get a statnipokladna table\cr\cr
-#' Deprecated, use `sp_get_table()` instead.
-#'
-#' `r lifecycle::badge("deprecated")`
-#'
-#' @inheritParams sp_get_table
-#'
-#' @keywords internal
-#'
-#' @return a [tibble][tibble::tibble-package]
-#' @export
-get_table <- function(table_id, year, month = 12, ico = NULL,
-                      redownload = FALSE, dest_dir = NULL) {
-  lifecycle::deprecate_stop("0.5.2", "statnipokladna::get_table()", "sp_get_table()")
-}

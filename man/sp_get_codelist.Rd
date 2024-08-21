@@ -41,8 +41,6 @@ sp_get_codelist("paragraf")
 }
 \seealso{
 Other Core workflow: 
-\code{\link{add_codelist}()},
-\code{\link{get_codelist}()},
 \code{\link{sp_add_codelist}()},
 \code{\link{sp_get_dataset}()},
 \code{\link{sp_get_table}()}

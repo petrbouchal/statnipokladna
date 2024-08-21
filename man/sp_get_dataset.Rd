@@ -48,8 +48,6 @@ budget_mid2018 <- sp_get_dataset("finm", 2018, 6)
 }
 \seealso{
 Other Core workflow: 
-\code{\link{add_codelist}()},
-\code{\link{get_codelist}()},
 \code{\link{sp_add_codelist}()},
 \code{\link{sp_get_codelist}()},
 \code{\link{sp_get_table}()}
