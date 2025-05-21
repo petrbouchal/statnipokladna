@@ -15,6 +15,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
                                0,           0,          "budget-central-old-subsidies",     "finu_dotace",  "finu",      "FINU108",    "Dota\\u010dn\\u00ed financov\\u00e1n\\u00ed - poskytnut\\u00e9 prost\\u0159edky", "pre-2015 only",
                                0,           0,          "budget-central",     "misris",      "misris",    "/MIS-RIS",    "Pln\\u011bn\\u00ed rozpo\\u010dtu \\u00fast\\u0159edn\\u011b \\u0159\\u00edzen\\u00fdch organizac\\u00ed od 2015", "post-2014 only",
                                0,           0,          "budget-statefunds",     "finsf_budget",      "finsf",    "FINSF01",    "Pln\\u011bn\\u00ed rozpo\\u010dtu st\\u00e1tn\\u00edch fond\\u016f (\\u010c\\u00e1st I a II: p\\u0159\\u00edjmy a v\\u00fddaje)", "post-2014 only",
+                               0,           55,         "budget-contributory",     "finspo_budget",      "finspo",    "SPO",    "Pln\\u011bn\\u00ed rozpo\\u010dtu st\\u00e1tn\\u00edch p\\u0159\\u00edsp\\u011bvkov\\u00fdch organizac\\u00ed", "post-2014 only",
                                0,           0,          "profit-and-loss-statefunds",     "finsf_vykzz",      "finsf",    "FINSF02",    "Pln\\u011bn\\u00ed rozpo\\u010dtu st\\u00e1tn\\u00edch fond\\u016f (\\u010c\\u00e1st III: v\\u00fdkaz zisk\\u016f a ztr\\u00e1t)", "post-2014 only",
                                0,           0,          "cash-flow-statefunds",     "finsf_cashflow",      "finsf",    "FINSF03",    "Pln\\u011bn\\u00ed rozpo\\u010dtu st\\u00e1tn\\u00edch fond\\u016f (\\u010c\\u00e1st IV: p\\u0159ehled pen\\u011b\\u017en\\u00edch tok\\u016f)", "post-2014 only",
                                0,           0,          "budget-statefunds-purposegrants",     "finsf_ucel",      "finsf",    "FINSF04",    "Pln\\u011bn\\u00ed rozpo\\u010dtu st\\u00e1tn\\u00edch fond\\u016f (\\u010c\\u00e1st IX: dota\\u010dn\\u00ed financov\\u00e1n\\u00ed - poskytnut\\u00e9 prost\\u0159edky)", "post-2014 only"
@@ -107,7 +108,7 @@ sp_load_table <- function(path, ico = NULL) {
   suppressWarnings(suppressMessages(
     dt <- readr::read_csv2(path, col_types = readr::cols(.default = readr::col_character()))))
 
-  dt_new_names <- stringr::str_remove_all(names(dt), "\"[A-\\u017da-\\u017e\\s\\-\\./]*\"") |>
+  dt_new_names <- stringr::str_remove_all(names(dt), "\"[A-\\u017da-\\u017e\\s\\-\\./]*\"\\+") |>
     stringr::str_remove_all("/BIC/")
 
   dt <- dt %>%
@@ -120,7 +121,7 @@ sp_load_table <- function(path, ico = NULL) {
   if(!is.null(ico)) dt <- dt[dt$`ZC_ICO:ZC_ICO` %in% ico,]
 
   dt <- dt |>
-    purrr::set_names(stringr::str_remove(names(dt), "^[A-Z_0-9/]*:")) %>%
+    purrr::set_names(stringr::str_remove(names(dt), "^.*?:")) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::starts_with("ZU_")), ~switch_minus(.) %>% as.numeric(.)) %>%
     tidyr::extract(.data$`0FISCPER`, c("vykaz_year", "vykaz_month"), "([0-9]{4})0([0-9]{2})") %>%
     dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")), lubridate::dmy) %>%
@@ -166,8 +167,11 @@ sp_load_table <- function(path, ico = NULL) {
                       ZU_STAVPO = "after",
                       ZU_ZVYS = "increase",
                       ZU_SNIZ = "decrease",
+                      ZU_SKVMR = "budget_spending_lastyr",
                       ZU_BEZUO = "current",
                       ZU_SYNUC = "synuc",
+                      ZU_SSVN1 = "budget_outlook_nplus1",
+                      ZU_SSVN2 = "budget_outlook_nplus2",
                       `0FUNC_AREA` = "paragraf")
   return(dt)
 }

@@ -1,6 +1,7 @@
 # statnipokladna (development version)
 
 * removed exported functions not named in the `sp_*()` convention; these have been deprecated in previous versions.
+* added Státní příspěvkové organizace budget return to list of tables and datasets (#77)
 
 # statnipokladna 0.7.4
 
