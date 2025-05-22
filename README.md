@@ -21,7 +21,7 @@ data from the Státní pokladna system. Státní pokladna is a comprehensive
 budgeting, reporting and accounting system for Czech public
 organisations. This package provides user-friendly ways to access the
 open data from that system available at
-<https://monitor.statnipokladna.cz>. The vignettes in the package also
+<https://monitor.statnipokladna.gov.cz>. The vignettes in the package also
 provide an introduction to the underlying data.
 
 ## Installation
@@ -80,7 +80,7 @@ vignette for background on the underlying data.
 
 See also [Background information](#background-information) below.
 
-## How does this compare to the [official analytical interface](https://monitor.statnipokladna.cz/)?
+## How does this compare to the [official analytical interface](https://monitor.statnipokladna.gov.cz/)?
 
 - no limit on the number of data points
 - no limits on the number of organisations, unlike the official
@@ -235,7 +235,7 @@ Then look at its documentation:
 
 ``` r
 statnipokladna::sp_get_dataset_doc("finm")
-#> ℹ Getting dataset documentation from <https://monitor.statnipokladna.cz/data/struktura/finm.xlsx>
+#> ℹ Getting dataset documentation from <https://monitor.statnipokladna.gov.cz/data/struktura/finm.xlsx>
 #> ℹ File downloaded to '/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpoP6RVe/finm.xlsx'.
 ```
 
@@ -280,7 +280,7 @@ only, stored in the [data issues
 vignette](https://petrbouchal.xyz/statnipokladna/articles/data-issues-cz.html).
 
 A basic glossary of some of the terms used in the data sets is at
-<https://monitor.statnipokladna.cz/metodika/>.
+<https://monitor.statnipokladna.gov.cz/metodika/>.
 
 ### Note
 

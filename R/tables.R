@@ -28,7 +28,7 @@ sp_tables_i <- tibble::tribble(~table_num, ~report_num, ~id,   ~table_code,   ~d
 #' List of available tables (PARTIAL)
 #'
 #' Contains IDs and names of all available tables that can be
-#' retrieved by sp_get_table. Look inside the XLS documentation for each dataset at <https://monitor.statnipokladna.cz/datovy-katalog/transakcni-data>
+#' retrieved by sp_get_table. Look inside the XLS documentation for each dataset at <https://monitor.statnipokladna.gov.cz/datovy-katalog/transakcni-data>
 #' to see more detailed descriptions. Note that tables do not correspond to the tabulka/`vtab` attribute of the tables, they represent files inside datasets.
 #'
 #' @format A data frame with 2 rows and 4 variables:
@@ -284,7 +284,7 @@ sp_load_table <- function(path, ico = NULL) {
 #' @param year year, numeric, 2015-2019 for some datasets, 2010-2020 for others.
 #' Can be a vector of length > 1 (see Details for how to work with data across time periods.).
 #' @param month month, numeric. Must be 3, 6, 9 or 12. Can be a vector of length > 1 (see details).
-#' @param ico ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See <https://monitor.statnipokladna.cz/datovy-katalog/prohlizec-ciselniku/ucjed> to look up ID of any org in the dataset.
+#' @param ico ID(s) of org to return, character of length one or more. If unset, returns all orgs. ID not checked for correctness/existence. See <https://monitor.statnipokladna.gov.cz/datovy-katalog/prohlizec-ciselniku/ucjed> to look up ID of any org in the dataset.
 #' @param dest_dir character. Directory in which downloaded files will be stored.
 #' If left unset, will use the `statnipokladna.dest_dir` option if the option is set, and `tempdir()` otherwise. Will be created if it does not exist.
 #' @param redownload Redownload even if recent file present? Defaults to FALSE.

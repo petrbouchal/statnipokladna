@@ -4,13 +4,13 @@
 #' Contains IDs and names of all (most) available codelists that can be retrieved by sp_get_codelist.
 #'
 #' The `id` is to be used as the `codelist_id` parameter in `sp_get_codelist`.
-#' See <https://monitor.statnipokladna.cz/datovy-katalog/ciselniky> for a more detailed
+#' See <https://monitor.statnipokladna.gov.cz/datovy-katalog/ciselniky> for a more detailed
 #' descriptions and a GUI for exploring the lists.
 #'
 #' @format A data frame with 27 rows and 2 variables:
 #' \describe{
 #'   \item{\code{id}}{character. ID, used as `codelist_id` argument in `sp_get_codelist`.}
-#'   \item{\code{name}}{character. Short name, mostly corresponds to title used on statnipokladna.cz.}
+#'   \item{\code{name}}{character. Short name, mostly corresponds to title used on statnipokladna.gov.cz.}
 #' }
 #' @family Lists of available entities
 sp_codelists <- tibble::tribble(~id, ~name,
@@ -196,7 +196,7 @@ sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload =
 
 #' Get/open URL of codelist viewer
 #'
-#' Returns a URL for the online codelist browser in monitor.statnipokladna.cz and opens it in browser if open = TRUE.
+#' Returns a URL for the online codelist browser in monitor.statnipokladna.gov.cz and opens it in browser if open = TRUE.
 #'
 #' @param codelist_id A codelist ID. See `id` column in `sp_codelists` for a list of available codelists.
 #' @param open Whether to open URL in browser. Defaults to TRUE.

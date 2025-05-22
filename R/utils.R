@@ -1,8 +1,8 @@
 
 openlinks <- function() {
-  utils::browseURL("https://monitor.statnipokladna.cz/datovy-katalog/transakcni-data")
-  utils::browseURL("https://monitor.statnipokladna.cz/datovy-katalog/ciselniky")
-  utils::browseURL("https://monitor.statnipokladna.cz/")
+  utils::browseURL("https://monitor.statnipokladna.gov.cz/datovy-katalog/transakcni-data")
+  utils::browseURL("https://monitor.statnipokladna.gov.cz/datovy-katalog/ciselniky")
+  utils::browseURL("https://monitor.statnipokladna.gov.cz/")
 }
 
 release_questions <- function() {

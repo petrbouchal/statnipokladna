@@ -6,7 +6,7 @@ library(dplyr)
 library(tidyr)
 
 
-td <- GET("https://monitor.statnipokladna.cz/api/transakcni-data?aktivni=true",accept_json()) %>%
+td <- GET("https://monitor.statnipokladna.gov.cz/api/transakcni-data?aktivni=true",accept_json()) %>%
   content(as = "text") %>%
   fromJSON()
 

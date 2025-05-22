@@ -20,11 +20,11 @@ This vignette provides background on the data that `statnipokladna` provides acc
 
 ### The nature of the data
 
-The data published on <https://monitor.statnipokladna.cz/datovy-katalog/> are exports from a much larger database used by Státní pokladna (SP), a comprehensive budgeting and financial/accounting reporting system for most Czech public organisations.
+The data published on <https://monitor.statnipokladna.gov.cz/datovy-katalog/> are exports from a much larger database used by Státní pokladna (SP), a comprehensive budgeting and financial/accounting reporting system for most Czech public organisations.
 
 In some ways the data is a secondary product not always dogfooded by the data maintainers, so sometimes (though not often) there are small inconsistencies on formats and content.
 
-Several datasets are not published in open data but are available in the [analytical tool](https://monitor.statnipokladna.cz/analyza/#) (only in Czech) or the web-based overviews. This relates to data on budget preparation and budgetary responsibility, respectively.
+Several datasets are not published in open data but are available in the [analytical tool](https://monitor.statnipokladna.gov.cz/analyza/#) (only in Czech) or the web-based overviews. This relates to data on budget preparation and budgetary responsibility, respectively.
 
 ##### Exports and time periods {.bs-callout .bs-callout-red}
 
@@ -56,7 +56,7 @@ Note also that there are two kinds of codelists: some can be joined to core data
 Currently the package cannot handle the latter type automatically, so you need to save the output of `sp_get_codelist()` into an object and joit it yourself using `dplyr`.
 
 
-You can see the list of available codelists at https://monitor.statnipokladna.cz/datovy-katalog/ciselniky and in `sp_codelists`.
+You can see the list of available codelists at https://monitor.statnipokladna.gov.cz/datovy-katalog/ciselniky and in `sp_codelists`.
 When I refer to codelists below, I use the ID which you can supply as the `"codelist_id"` parameter to `sp_add_codelist()`.
 
 The codelist that you will generally want for comparing organisations is called "ucjed"; this contains metadata on all organisations covered by the data. It is huge so you will want to store it somewhere after you have retrieved (and processed and filtered if relevant.)
@@ -110,7 +110,7 @@ Generally:
 - starting from 2020 local (municipal) budget data is published monthly
 - accounting data is published quarterly; for some organisations such as city districts this only happens annually at year end.
 
-See the list of currently available data releases at https://monitor.statnipokladna.cz/datovy-katalog/transakcni-data.
+See the list of currently available data releases at https://monitor.statnipokladna.gov.cz/datovy-katalog/transakcni-data.
 
 A ZIP file is published for each time period of each data dump. `sp_get_table()` handles this for you and returns one long data frame containing data for all time periods in the `year` or `month` parameters. In the resulting data frame, the `per*` columns mark the time period of the return.
 
@@ -157,7 +157,7 @@ As noted above, not all open data dumps from SP can currently be processed by `s
 
 ## What is not published in open data
 
-As note above, some data available on the web presentation or analysis tool at <https://monitor.statnipokladna.cz/> are not accessible in a documented way as open data:
+As note above, some data available on the web presentation or analysis tool at <https://monitor.statnipokladna.gov.cz/> are not accessible in a documented way as open data:
 
 - budget preparation - available in the analytical tool
 - budget monitoring and budget responsibility indicators

@@ -18,7 +18,7 @@ sp_tables
 }
 \description{
 Contains IDs and names of all available tables that can be
-retrieved by sp_get_table. Look inside the XLS documentation for each dataset at \url{https://monitor.statnipokladna.cz/datovy-katalog/transakcni-data}
+retrieved by sp_get_table. Look inside the XLS documentation for each dataset at \url{https://monitor.statnipokladna.gov.cz/datovy-katalog/transakcni-data}
 to see more detailed descriptions. Note that tables do not correspond to the tabulka/\code{vtab} attribute of the tables, they represent files inside datasets.
 }
 \seealso{

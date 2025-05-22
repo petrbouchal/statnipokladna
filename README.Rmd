@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/petrbouchal/statnipokladna/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/petrbouchal/statnipokladna/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of statnipokladna is to provide programmatic access to open data from the Státní pokladna system. Státní pokladna is a comprehensive budgeting, reporting and accounting system for Czech public organisations. This package provides user-friendly ways to access the open data from that system available at <https://monitor.statnipokladna.cz>. The vignettes in the package also provide an introduction to the underlying data.
+The goal of statnipokladna is to provide programmatic access to open data from the Státní pokladna system. Státní pokladna is a comprehensive budgeting, reporting and accounting system for Czech public organisations. This package provides user-friendly ways to access the open data from that system available at <https://monitor.statnipokladna.gov.cz>. The vignettes in the package also provide an introduction to the underlying data.
 
 ## Installation
 
@@ -74,7 +74,7 @@ See the [Get started](https://petrbouchal.xyz/statnipokladna/articles/statnipokl
 
 See also [Background information] below.
 
-## How does this compare to the [official analytical interface](https://monitor.statnipokladna.cz/)?
+## How does this compare to the [official analytical interface](https://monitor.statnipokladna.gov.cz/)?
 
 - no limit on the number of data points
 - no limits on the number of organisations, unlike the official interface which forces you to use a filter on some tables
@@ -177,7 +177,7 @@ A subset of this information is in the [Get started](https://petrbouchal.xyz/sta
 
 There is also a log of various data gotchas I discovered, also in Czech only, stored in the [data issues vignette](https://petrbouchal.xyz/statnipokladna/articles/data-issues-cz.html).
 
-A basic glossary of some of the terms used in the data sets is at <https://monitor.statnipokladna.cz/metodika/>.
+A basic glossary of some of the terms used in the data sets is at <https://monitor.statnipokladna.gov.cz/metodika/>.
 
 ### Note
 

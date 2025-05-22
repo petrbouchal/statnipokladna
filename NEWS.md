@@ -1,7 +1,8 @@
 # statnipokladna (development version)
 
-* removed exported functions not named in the `sp_*()` convention; these have been deprecated in previous versions.
 * added Státní příspěvkové organizace budget return to list of tables and datasets (#77)
+* switched to new statnipokladna.gov.cz domain
+* removed exported functions not named in the `sp_*()` convention; these have been deprecated in previous versions.
 
 # statnipokladna 0.7.4
 
@@ -89,7 +90,7 @@ Functions with names not starting with `sp_` are deprecated and emit a warning. 
 
 ## Bug fixes
 
-* adapt to new URL scheme for data exports at statnipokladna.cz, fixes #74
+* adapt to new URL scheme for data exports at statnipokladna.gov.cz, fixes #74
 * simple codelists with no `*_date` columns now work in `sp_add_codelist()`, fixes #66
 
 ## Minor improvements

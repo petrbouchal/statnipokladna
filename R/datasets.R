@@ -18,7 +18,7 @@ sp_datasets_i <- tibble::tribble(~id, ~name, ~implemented, ~dir,
 #'
 #' Contains IDs and names of all available datasets that can be retrieved by get_dataset.
 #'
-#' See <https://monitor.statnipokladna.cz/datovy-katalog/transakcni-data> for a more detailed descriptions
+#' See <https://monitor.statnipokladna.gov.cz/datovy-katalog/transakcni-data> for a more detailed descriptions
 #' of the datasets.
 #'
 #' @format A data frame with 9 rows and 3 variables:

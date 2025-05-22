@@ -3,10 +3,10 @@ title: "R Notebook"
 output: html_notebook
 ---
 
-http://monitor.statnipokladna.cz/xsd/monitorTypes.xsd
-http://monitor.statnipokladna.cz/2019/monitorws/
-http://monitor.statnipokladna.cz/xsd/monitorFin204U.xsd
-monitor.statnipokladna.cz/xsd/monitor.wsdl
+http://monitor.statnipokladna.gov.cz/xsd/monitorTypes.xsd
+http://monitor.statnipokladna.gov.cz/2019/monitorws/
+http://monitor.statnipokladna.gov.cz/xsd/monitorFin204U.xsd
+monitor.statnipokladna.gov.cz/xsd/monitor.wsdl
 
 
 ```{r setup}
@@ -15,7 +15,7 @@ library(httr)
 ```
 
 ```{r, fig.height=1000}
-read_xml("http://monitor.statnipokladna.cz/xsd/monitor.wsdl") %>% 
+read_xml("http://monitor.statnipokladna.gov.cz/xsd/monitor.wsdl") %>% 
   xml_view()
 ```
 
@@ -32,7 +32,7 @@ rqst_body
 
 
 ```{r}
-url = "http://monitor.statnipokladna.cz/2019/monitorws/"
+url = "http://monitor.statnipokladna.gov.cz/2019/monitorws/"
 
 rspns <- POST(url, body = rqst_body) %>%
   content()
