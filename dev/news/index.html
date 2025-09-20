@@ -77,8 +77,10 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="development version" id="statnipokladna-development-version">statnipokladna (development version)<a class="anchor" aria-label="anchor" href="#statnipokladna-development-version"></a></h2>
-<ul><li>removed exported functions not named in the <code>sp_*()</code> convention; these have been deprecated in previous versions.</li>
-<li>added Státní příspěvkové organizace budget return to list of tables and datasets (<a href="https://github.com/petrbouchal/statnipokladna/issues/77" class="external-link">#77</a>)</li>
+<ul><li>added Státní příspěvkové organizace budget return to list of tables and datasets (<a href="https://github.com/petrbouchal/statnipokladna/issues/77" class="external-link">#77</a>)</li>
+<li>switched to new statnipokladna.gov.cz domain</li>
+<li>removed exported functions not named in the <code>sp_*()</code> convention; these have been deprecated in previous versions.</li>
+<li>fixed column naming warnings in budget-local and possibly other datasets</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.7.4" id="statnipokladna-074">statnipokladna 0.7.4<small>2024-08-21</small><a class="anchor" aria-label="anchor" href="#statnipokladna-074"></a></h2>
@@ -190,7 +192,7 @@
 <h2 class="page-header" data-toc-text="0.5.7" id="statnipokladna-057">statnipokladna 0.5.7<small>2020-04-12</small><a class="anchor" aria-label="anchor" href="#statnipokladna-057"></a></h2>
 <div class="section level3">
 <h3 id="bug-fixes-0-5-7">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-5-7"></a></h3>
-<ul><li>adapt to new URL scheme for data exports at statnipokladna.cz, fixes <a href="https://github.com/petrbouchal/statnipokladna/issues/74" class="external-link">#74</a></li>
+<ul><li>adapt to new URL scheme for data exports at statnipokladna.gov.cz, fixes <a href="https://github.com/petrbouchal/statnipokladna/issues/74" class="external-link">#74</a></li>
 <li>simple codelists with no <code>*_date</code> columns now work in <code><a href="../reference/sp_add_codelist.html">sp_add_codelist()</a></code>, fixes <a href="https://github.com/petrbouchal/statnipokladna/issues/66" class="external-link">#66</a></li>
 </ul></div>
 <div class="section level3">
@@ -392,7 +394,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>
