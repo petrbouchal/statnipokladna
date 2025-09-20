@@ -108,7 +108,7 @@ sp_load_table <- function(path, ico = NULL) {
   suppressWarnings(suppressMessages(
     dt <- readr::read_csv2(path, col_types = readr::cols(.default = readr::col_character()))))
 
-  dt_new_names <- stringr::str_remove_all(names(dt), "\"[A-\\u017da-\\u017e\\s\\-\\./]*\"\\+") |>
+  dt_new_names <- stringr::str_remove_all(names(dt), '^"[^"]+"') |>
     stringr::str_remove_all("/BIC/")
 
   dt <- dt %>%

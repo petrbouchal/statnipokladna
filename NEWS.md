@@ -3,6 +3,8 @@
 * added Státní příspěvkové organizace budget return to list of tables and datasets (#77)
 * switched to new statnipokladna.gov.cz domain
 * removed exported functions not named in the `sp_*()` convention; these have been deprecated in previous versions.
+* fixed column naming warnings in budget-local and possibly other datasets (#104)
+* add dependency on 4 4.1 to allow using native pipe and pass CRAN checks 
 
 # statnipokladna 0.7.4
 
