@@ -11,5 +11,6 @@ test_that("get_table works", {
 })
 
 test_that("get_table works with newer files", {
+  skip_on_cran()
   expect_gt(nrow(sp_get_table("budget-local", "2022", "12")), 1000)
 })

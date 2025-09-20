@@ -11,6 +11,7 @@ test_that("get_dataset breaks on nonsense", {
 })
 
 check_dataset_error <- function(dataset, year, month) {
+  skip_on_cran()
   url <- sp_get_dataset_url(dataset, year, month)
 }
 
