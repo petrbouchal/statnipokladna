@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.5</span>
       </span>
     </div>
 
@@ -117,15 +117,15 @@ and it is easy to make mistakes and end up with wrong numbers.</p>
 <div class="section level3">
 <h3 id="the-nature-of-the-data">The nature of the data<a class="anchor" aria-label="anchor" href="#the-nature-of-the-data"></a>
 </h3>
-<p>The data published on <a href="https://monitor.statnipokladna.cz/datovy-katalog/" class="external-link uri">https://monitor.statnipokladna.cz/datovy-katalog/</a> are
-exports from a much larger database used by Státní pokladna (SP), a
+<p>The data published on <a href="https://monitor.statnipokladna.gov.cz/datovy-katalog/" class="external-link uri">https://monitor.statnipokladna.gov.cz/datovy-katalog/</a>
+are exports from a much larger database used by Státní pokladna (SP), a
 comprehensive budgeting and financial/accounting reporting system for
 most Czech public organisations.</p>
 <p>In some ways the data is a secondary product not always dogfooded by
 the data maintainers, so sometimes (though not often) there are small
 inconsistencies on formats and content.</p>
 <p>Several datasets are not published in open data but are available in
-the <a href="https://monitor.statnipokladna.cz/analyza/#" class="external-link">analytical
+the <a href="https://monitor.statnipokladna.gov.cz/analyza/#" class="external-link">analytical
 tool</a> (only in Czech) or the web-based overviews. This relates to
 data on budget preparation and budgetary responsibility,
 respectively.</p>
@@ -201,7 +201,7 @@ some items in that codelist. Currently the package cannot handle the
 latter type automatically, so you need to save the output of
 <code><a href="../reference/sp_get_codelist.html">sp_get_codelist()</a></code> into an object and joit it yourself using
 <code>dplyr</code>.</p>
-<p>You can see the list of available codelists at <a href="https://monitor.statnipokladna.cz/datovy-katalog/ciselniky" class="external-link uri">https://monitor.statnipokladna.cz/datovy-katalog/ciselniky</a>
+<p>You can see the list of available codelists at <a href="https://monitor.statnipokladna.gov.cz/datovy-katalog/ciselniky" class="external-link uri">https://monitor.statnipokladna.gov.cz/datovy-katalog/ciselniky</a>
 and in <code>sp_codelists</code>. When I refer to codelists below, I use
 the ID which you can supply as the <code>"codelist_id"</code> parameter
 to <code><a href="../reference/sp_add_codelist.html">sp_add_codelist()</a></code>.</p>
@@ -306,7 +306,7 @@ monthly</li>
 <li>accounting data is published quarterly; for some organisations such
 as city districts this only happens annually at year end.</li>
 </ul>
-<p>See the list of currently available data releases at <a href="https://monitor.statnipokladna.cz/datovy-katalog/transakcni-data" class="external-link uri">https://monitor.statnipokladna.cz/datovy-katalog/transakcni-data</a>.</p>
+<p>See the list of currently available data releases at <a href="https://monitor.statnipokladna.gov.cz/datovy-katalog/transakcni-data" class="external-link uri">https://monitor.statnipokladna.gov.cz/datovy-katalog/transakcni-data</a>.</p>
 <p>A ZIP file is published for each time period of each data dump.
 <code><a href="../reference/sp_get_table.html">sp_get_table()</a></code> handles this for you and returns one long
 data frame containing data for all time periods in the <code>year</code>
@@ -399,8 +399,8 @@ for a list of those which can be.</p>
 <h2 id="what-is-not-published-in-open-data">What is not published in open data<a class="anchor" aria-label="anchor" href="#what-is-not-published-in-open-data"></a>
 </h2>
 <p>As note above, some data available on the web presentation or
-analysis tool at <a href="https://monitor.statnipokladna.cz/" class="external-link uri">https://monitor.statnipokladna.cz/</a> are not accessible in
-a documented way as open data:</p>
+analysis tool at <a href="https://monitor.statnipokladna.gov.cz/" class="external-link uri">https://monitor.statnipokladna.gov.cz/</a> are not
+accessible in a documented way as open data:</p>
 <ul>
 <li>budget preparation - available in the analytical tool</li>
 <li>budget monitoring and budget responsibility indicators</li>
@@ -439,7 +439,7 @@ spend.</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer>

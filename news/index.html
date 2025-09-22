@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.5</span>
       </span>
     </div>
 
@@ -76,7 +76,15 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.7.4" id="statnipokladna-074">statnipokladna 0.7.4<a class="anchor" aria-label="anchor" href="#statnipokladna-074"></a></h2>
+<h2 class="page-header" data-toc-text="0.7.5" id="statnipokladna-075">statnipokladna 0.7.5<a class="anchor" aria-label="anchor" href="#statnipokladna-075"></a></h2>
+<ul><li>added Státní příspěvkové organizace budget return to list of tables and datasets (<a href="https://github.com/petrbouchal/statnipokladna/issues/77" class="external-link">#77</a>)</li>
+<li>switched to new statnipokladna.gov.cz domain</li>
+<li>removed exported functions not named in the <code>sp_*()</code> convention; these have been deprecated in previous versions.</li>
+<li>fixed column naming warnings in budget-local and possibly other datasets (<a href="https://github.com/petrbouchal/statnipokladna/issues/104" class="external-link">#104</a>)</li>
+<li>add dependency on 4 4.1 to allow using native pipe and pass CRAN checks</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="0.7.4" id="statnipokladna-074">statnipokladna 0.7.4<small>2024-08-21</small><a class="anchor" aria-label="anchor" href="#statnipokladna-074"></a></h2>
 <ul><li>hard-deprecate functions with old naming scheme (those not starting with <code>sp_</code>); they will be removed in the next release</li>
 <li>add <code>isektor</code> and <code>nace</code> as available codelists</li>
 <li>minor fix to messages</li>
@@ -185,7 +193,7 @@
 <h2 class="page-header" data-toc-text="0.5.7" id="statnipokladna-057">statnipokladna 0.5.7<small>2020-04-12</small><a class="anchor" aria-label="anchor" href="#statnipokladna-057"></a></h2>
 <div class="section level3">
 <h3 id="bug-fixes-0-5-7">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-5-7"></a></h3>
-<ul><li>adapt to new URL scheme for data exports at statnipokladna.cz, fixes <a href="https://github.com/petrbouchal/statnipokladna/issues/74" class="external-link">#74</a></li>
+<ul><li>adapt to new URL scheme for data exports at statnipokladna.gov.cz, fixes <a href="https://github.com/petrbouchal/statnipokladna/issues/74" class="external-link">#74</a></li>
 <li>simple codelists with no <code>*_date</code> columns now work in <code><a href="../reference/sp_add_codelist.html">sp_add_codelist()</a></code>, fixes <a href="https://github.com/petrbouchal/statnipokladna/issues/66" class="external-link">#66</a></li>
 </ul></div>
 <div class="section level3">
@@ -261,7 +269,7 @@
 <div class="section level3">
 <h3 id="improvements-0-5-1">Improvements<a class="anchor" aria-label="anchor" href="#improvements-0-5-1"></a></h3>
 <ul><li>
-<code><a href="../reference/get_table.html">get_table()</a></code> now provides access to changes-in-equity data (přehled o změnách vlastního kapitálu, use <code>"changes-in-equity"</code> table id) and cash flow statements (přehled o peněžních tocích, use <code>"cash-flow"</code> id)</li>
+<code>get_table()</code> now provides access to changes-in-equity data (přehled o změnách vlastního kapitálu, use <code>"changes-in-equity"</code> table id) and cash flow statements (přehled o peněžních tocích, use <code>"cash-flow"</code> id)</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -282,12 +290,12 @@
 <h2 class="page-header" data-toc-text="0.4.2" id="statnipokladna-042">statnipokladna 0.4.2<a class="anchor" aria-label="anchor" href="#statnipokladna-042"></a></h2>
 <ul><li>added examples to documentation</li>
 <li>
-<code><a href="../reference/get_table.html">get_table()</a></code> now fully documents the columns in its output, see <code><a href="../reference/get_table.html">help("get_table")</a></code>
+<code>get_table()</code> now fully documents the columns in its output, see <code>help("get_table")</code>
 </li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.4.1" id="statnipokladna-041">statnipokladna 0.4.1<a class="anchor" aria-label="anchor" href="#statnipokladna-041"></a></h2>
-<ul><li>fixed bug where <code><a href="../reference/get_codelist.html">get_codelist()</a></code> did not create the right temp directory</li>
+<ul><li>fixed bug where <code>get_codelist()</code> did not create the right temp directory</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.4.0" id="statnipokladna-040">statnipokladna 0.4.0<a class="anchor" aria-label="anchor" href="#statnipokladna-040"></a></h2>
@@ -297,7 +305,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="new-features-0-4-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-4-0"></a></h3>
-<ul><li>all key tables, except state funds (FINSF) now included in sp_tables and thus available in <code><a href="../reference/get_table.html">get_table()</a></code>
+<ul><li>all key tables, except state funds (FINSF) now included in sp_tables and thus available in <code>get_table()</code>
 </li>
 </ul></div>
 <div class="section level3">
@@ -306,7 +314,7 @@
 <li>updated README</li>
 <li>fixed issue so package now also handles pre-2014 data</li>
 <li>minor improvement to messages</li>
-<li>speed improvement to data processing by <code><a href="../reference/get_table.html">get_table()</a></code> when <code>ico</code> is set</li>
+<li>speed improvement to data processing by <code>get_table()</code> when <code>ico</code> is set</li>
 <li>codelists downloaded by <code>*_codelist()</code> are now stored in tempdir</li>
 </ul></div>
 </div>
@@ -314,28 +322,28 @@
 <h2 class="page-header" data-toc-text="0.3.0" id="statnipokladna-030">statnipokladna 0.3.0<a class="anchor" aria-label="anchor" href="#statnipokladna-030"></a></h2>
 <div class="section level3">
 <h3 id="breaking-changes-0-3-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-3-0"></a></h3>
-<ul><li>the <code>ico</code> parameter in <code><a href="../reference/get_table.html">get_table()</a></code> now directly follows the key parameters; this will break cases where the function was called with unnamed parameters but will make use more straighforward.</li>
-<li>the <code>table_id</code> parameter in <code><a href="../reference/get_table.html">get_table()</a></code> is now a human-readable alphanumeric code, not a meaningless number. This will break all uses of get_table but make future use more sensible.</li>
+<ul><li>the <code>ico</code> parameter in <code>get_table()</code> now directly follows the key parameters; this will break cases where the function was called with unnamed parameters but will make use more straighforward.</li>
+<li>the <code>table_id</code> parameter in <code>get_table()</code> is now a human-readable alphanumeric code, not a meaningless number. This will break all uses of get_table but make future use more sensible.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="new-features-0-3-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-3-0"></a></h3>
-<ul><li>new <code><a href="../reference/add_codelist.html">add_codelist()</a></code> function for joining codelists to core financial data</li>
+<ul><li>new <code>add_codelist()</code> function for joining codelists to core financial data</li>
 <li>
-<code><a href="../reference/get_codelist.html">get_codelist()</a></code> gains <code>n</code> parameter, allowing only a limited number of rows of a codelist to be retrieved (to save time)</li>
+<code>get_codelist()</code> gains <code>n</code> parameter, allowing only a limited number of rows of a codelist to be retrieved (to save time)</li>
 <li>
-<code><a href="../reference/get_codelist.html">get_codelist()</a></code> has a new paramater which opens the online codelist viewer</li>
-<li>filtering using <code>ico</code> parameter in <code><a href="../reference/get_table.html">get_table()</a></code> now works</li>
+<code>get_codelist()</code> has a new paramater which opens the online codelist viewer</li>
+<li>filtering using <code>ico</code> parameter in <code>get_table()</code> now works</li>
 </ul></div>
 <div class="section level3">
 <h3 id="improvements-0-3-0">Improvements<a class="anchor" aria-label="anchor" href="#improvements-0-3-0"></a></h3>
 <ul><li>updated table of tables (now covers all key tables, includes notes)</li>
 <li>
-<code><a href="../reference/get_codelist.html">get_codelist()</a></code> now returns a codelist df ready to join to core data</li>
+<code>get_codelist()</code> now returns a codelist df ready to join to core data</li>
 </ul></div>
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.3" id="statnipokladna-023">statnipokladna 0.2.3<a class="anchor" aria-label="anchor" href="#statnipokladna-023"></a></h2>
-<ul><li>handle transformation of consolidation columns in <code><a href="../reference/get_codelist.html">get_codelist()</a></code>
+<ul><li>handle transformation of consolidation columns in <code>get_codelist()</code>
 </li>
 </ul></div>
     <div class="section level2">
@@ -351,10 +359,10 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.2.0" id="statnipokladna-020">statnipokladna 0.2.0<a class="anchor" aria-label="anchor" href="#statnipokladna-020"></a></h2>
-<ul><li>new <code><a href="../reference/get_dataset.html">get_dataset()</a></code> function for retrieving files</li>
-<li>new <code><a href="../reference/get_table.html">get_table()</a></code> function for loading data - <strong>only experimental</strong>
+<ul><li>new <code>get_dataset()</code> function for retrieving files</li>
+<li>new <code>get_table()</code> function for loading data - <strong>only experimental</strong>
 </li>
-<li>new <code><a href="../reference/get_dataset_doc.html">get_dataset_doc()</a></code> function for accessing/downloading official documentation for each dataset</li>
+<li>new <code>get_dataset_doc()</code> function for accessing/downloading official documentation for each dataset</li>
 <li>exported data frames with descriptions of available tables, datasets and codelists</li>
 <li>minor updates to data vignette</li>
 </ul></div>
@@ -365,7 +373,7 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.0" id="statnipokladna-010">statnipokladna 0.1.0<a class="anchor" aria-label="anchor" href="#statnipokladna-010"></a></h2>
-<ul><li>exported <code><a href="../reference/get_codelist.html">get_codelist()</a></code>
+<ul><li>exported <code>get_codelist()</code>
 </li>
 <li>added vignette explaining the underlying open data</li>
 </ul></div>
@@ -387,7 +395,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>
