@@ -1,4 +1,4 @@
-# statnipokladna (development version)
+# statnipokladna 0.7.5
 
 * added Státní příspěvkové organizace budget return to list of tables and datasets (#77)
 * switched to new statnipokladna.gov.cz domain
