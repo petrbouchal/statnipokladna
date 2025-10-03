@@ -1,4 +1,4 @@
-# statnipokladna (development version)
+# statnipokladna 0.7.6
 
 * fix remaining URLs that moved to gov.cz
 
