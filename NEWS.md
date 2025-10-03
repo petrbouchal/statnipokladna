@@ -1,5 +1,7 @@
 # statnipokladna (development version)
 
+* fix remaining URLs that moved to gov.cz
+
 # statnipokladna 0.7.5
 
 * added Státní příspěvkové organizace budget return to list of tables and datasets (#77)
