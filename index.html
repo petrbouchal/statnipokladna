@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">statnipokladna</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.7.4</span>
       </span>
     </div>
 
@@ -106,7 +106,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of statnipokladna is to provide programmatic access to open data from the Státní pokladna system. Státní pokladna is a comprehensive budgeting, reporting and accounting system for Czech public organisations. This package provides user-friendly ways to access the open data from that system available at <a href="https://monitor.statnipokladna.gov.cz" class="external-link uri">https://monitor.statnipokladna.gov.cz</a>. The vignettes in the package also provide an introduction to the underlying data.</p>
+<p>The goal of statnipokladna is to provide programmatic access to open data from the Státní pokladna system. Státní pokladna is a comprehensive budgeting, reporting and accounting system for Czech public organisations. This package provides user-friendly ways to access the open data from that system available at <a href="https://monitor.statnipokladna.cz" class="external-link uri">https://monitor.statnipokladna.cz</a>. The vignettes in the package also provide an introduction to the underlying data.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -150,7 +150,7 @@
 <p>See also <a href="#background-information">Background information</a> below.</p>
 </div>
 <div class="section level2">
-<h2 id="how-does-this-compare-to-the-official-analytical-interface">How does this compare to the <a href="https://monitor.statnipokladna.gov.cz/" class="external-link">official analytical interface</a>?<a class="anchor" aria-label="anchor" href="#how-does-this-compare-to-the-official-analytical-interface"></a>
+<h2 id="how-does-this-compare-to-the-official-analytical-interface">How does this compare to the <a href="https://monitor.statnipokladna.cz/" class="external-link">official analytical interface</a>?<a class="anchor" aria-label="anchor" href="#how-does-this-compare-to-the-official-analytical-interface"></a>
 </h2>
 <ul>
 <li>no limit on the number of data points</li>
@@ -221,7 +221,7 @@
 <span><span class="co">#&gt;  9 1023     2010-01-01 9999-12-31 Organizace tr… Zemědě… Země… Regulac… Organiz…</span></span>
 <span><span class="co">#&gt; 10 1024     2010-01-01 9999-12-31 Organizace tr… Zemědě… Země… Regulac… Reg.trh…</span></span>
 <span><span class="co">#&gt; # ℹ 831 more rows</span></span></code></pre></div>
-<p>This contains all codes for this codelist, some of which are not valid for the time period of our core data. The function <code>add_codelist()</code> resolves this automatically.</p>
+<p>This contains all codes for this codelist, some of which are not valid for the time period of our core data. The function <code><a href="reference/add_codelist.html">add_codelist()</a></code> resolves this automatically.</p>
 <p>As you can see below, you can</p>
 <ul>
 <li>add multiple codelists in one pipe</li>
@@ -265,7 +265,7 @@
 <p>Then look at its documentation:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">statnipokladna</span><span class="fu">::</span><span class="fu"><a href="reference/sp_get_dataset_doc.html">sp_get_dataset_doc</a></span><span class="op">(</span><span class="st">"finm"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ℹ Getting dataset documentation from &lt;https://monitor.statnipokladna.gov.cz/data/struktura/finm.xlsx&gt;</span></span>
+<span><span class="co">#&gt; ℹ Getting dataset documentation from &lt;https://monitor.statnipokladna.cz/data/struktura/finm.xlsx&gt;</span></span>
 <span><span class="co">#&gt; ℹ File downloaded to '/var/folders/fr/6f85xds52pq7g55fpmk4z7f80000gn/T//RtmpoP6RVe/finm.xlsx'.</span></span></code></pre></div>
 <p>You can get details of all the available tables in the <code>sp_tables</code> data frame; for datasets, see <code>sp_datasets</code>.</p>
 </div>
@@ -282,7 +282,7 @@
 <p>See the <a href="https://petrbouchal.xyz/statnipokladna/articles/how-the-data-works-cz.html">“How the data works”</a> vignette (in Czech only, the terminology is impossible to translate) for an overview of the structure of the data on which this package draws. This also contains some notes useful for interpreting the data.</p>
 <p>A subset of this information is in the <a href="https://petrbouchal.xyz/statnipokladna/articles/statnipokladna.html">Get started</a> vignette.</p>
 <p>There is also a log of various data gotchas I discovered, also in Czech only, stored in the <a href="https://petrbouchal.xyz/statnipokladna/articles/data-issues-cz.html">data issues vignette</a>.</p>
-<p>A basic glossary of some of the terms used in the data sets is at <a href="https://monitor.statnipokladna.gov.cz/metodika/" class="external-link uri">https://monitor.statnipokladna.gov.cz/metodika/</a>.</p>
+<p>A basic glossary of some of the terms used in the data sets is at <a href="https://monitor.statnipokladna.cz/metodika/" class="external-link uri">https://monitor.statnipokladna.cz/metodika/</a>.</p>
 <div class="section level3">
 <h3 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a>
 </h3>
