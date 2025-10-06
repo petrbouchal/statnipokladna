@@ -1,4 +1,4 @@
-# statnipokladna (development version)
+# statnipokladna 0.7.7
 
 * fix 302 redirect for URLs in vignette to avoid CRAN NOTE
 
