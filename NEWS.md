@@ -1,5 +1,7 @@
 # statnipokladna (development version)
 
+* fix 302 redirect for URLs in vignette to avoid CRAN NOTE
+
 # statnipokladna 0.7.6
 
 * fix remaining URLs that moved to gov.cz
