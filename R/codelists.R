@@ -1,4 +1,3 @@
-
 #' List of available codelists
 #'
 #' Contains IDs and names of all (most) available codelists that can be retrieved by sp_get_codelist.
@@ -13,46 +12,47 @@
 #'   \item{\code{name}}{character. Short name, mostly corresponds to title used on statnipokladna.gov.cz.}
 #' }
 #' @family Lists of available entities
-sp_codelists <- tibble::tribble(~id, ~name,
-                                "aktorg", "Aktivn\\u00ed organizace",
-                                "cofog", "Klasifikace funkc\\u00ed vl\\u00e1dn\\u00edch instituc\\u00ed COFOG",
-                                "druhrizeni", "Druh \\u0159\\u00edzen\\u00ed",
-                                "druhuj", "Druh \\u00fa\\u010detn\\u00ed jednotky",
-                                "finmisto", "Finan\\u010dn\\u00ed m\\u00edsto (kapitoly, OSS)",
-                                "forma", "Forma \\u00fa\\u010detn\\u00ed jednotky",
-                                "isektor", "Institucion\\u00e1ln\\u00ed sektor organizace",
-                                "kapitola", "Kapitola rozpo\\u010detu",
-                                "katobyv", "Kategorie po\\u010dtu obyvatel",
-                                "nace", "Sektor NACE",
-                                "nuts", "Klasifikace \\u00fazemn\\u00edch statistick\\u00fdch jednotek NUTS",
-                                "paragraf", "Paragraf",
-                                "paragraf_long", "Paragraf (\\u0161estim\\u00edstn\\u00fd k\\u00f3d)",
-                                "poddruhuj", "Poddruh \\u00fa\\u010detn\\u00ed jednotky",
-                                "polvyk", "Polo\\u017eka v\\u00fdkazu",
-                                "polozka", "Rozpo\\u010dtov\\u00e1 polo\\u017eka",
-                                "polvkk", "Z\\u00e1vazn\\u00e9 ukazatele st\\u00e1tn\\u00edho rozpo\\u010dtu (Do 2014)",
-                                "psuk", "Z\\u00e1vazn\\u00e9 ukazatele st\\u00e1tn\\u00edho rozpo\\u010dtu (Od 2015)",
-                                "pvs", "P\\u0159\\u00edjmov\\u00e1 a v\\u00fddajov\\u00e1 struktura: strukturn\\u00ed t\\u0159\\u00edd\\u011bn\\u00ed",
-                                "uctosnova", "Sm\\u011brn\\u00e1 \\u00fa\\u010dtov\\u00e1 osnova (polo\\u017eky \\u00fa\\u010detn\\u00edch v\\u00fdkaz\\u016f)",
-                                "typfinmista", "Typ finan\\u010dn\\u00edho m\\u00edst",
-                                "typorg", "Typ OSS",
-                                "rozprog", "Rozpo\\u010dtov\\u00fd program",
-                                "ucel", "\u00da\\u010del",
-                                "ucjed", "\\u00da\\u010detn\\u00ed jednotka",
-                                "ucelznak", "\\u00da\\u010delov\\u00fd znak",
-                                "vykaz", "\\u010c\\u00edseln\\u00edk v\\u00fdkaz\\u016f a tabulek",
-                                "zazjedn", "Z\\u00e1znamov\\u00e1 jednotka (konsolida\\u010dn\\u00ed t\\u0159\\u00edd\\u011bn\\u00ed)",
-                                "zdroj", "Zdroj",
-                                "nastroj", "N\\u00e1stroj",
-                                "nastrojanal", "N\\u00e1stroj - analytika",
-                                "zdrojfin", "Zdroj financov\\u00e1n\\u00ed organizac\\u00ed",
-                                "zpodm", "Zp\\u016fsob odm\\u011b\\u0148ov\\u00e1n\\u00ed",
-                                "zuj", "Z\\u00e1kladn\\u00ed \\u00fazemn\\u00ed jednotka") %>%
+sp_codelists <- tibble::tribble(
+  ~id             , ~name                                                                                                              ,
+  "aktorg"        , "Aktivn\\u00ed organizace"                                                                                         ,
+  "cofog"         , "Klasifikace funkc\\u00ed vl\\u00e1dn\\u00edch instituc\\u00ed COFOG"                                              ,
+  "druhrizeni"    , "Druh \\u0159\\u00edzen\\u00ed"                                                                                    ,
+  "druhuj"        , "Druh \\u00fa\\u010detn\\u00ed jednotky"                                                                           ,
+  "finmisto"      , "Finan\\u010dn\\u00ed m\\u00edsto (kapitoly, OSS)"                                                                 ,
+  "forma"         , "Forma \\u00fa\\u010detn\\u00ed jednotky"                                                                          ,
+  "isektor"       , "Institucion\\u00e1ln\\u00ed sektor organizace"                                                                    ,
+  "kapitola"      , "Kapitola rozpo\\u010detu"                                                                                         ,
+  "katobyv"       , "Kategorie po\\u010dtu obyvatel"                                                                                   ,
+  "nace"          , "Sektor NACE"                                                                                                      ,
+  "nuts"          , "Klasifikace \\u00fazemn\\u00edch statistick\\u00fdch jednotek NUTS"                                               ,
+  "paragraf"      , "Paragraf"                                                                                                         ,
+  "paragraf_long" , "Paragraf (\\u0161estim\\u00edstn\\u00fd k\\u00f3d)"                                                               ,
+  "poddruhuj"     , "Poddruh \\u00fa\\u010detn\\u00ed jednotky"                                                                        ,
+  "polvyk"        , "Polo\\u017eka v\\u00fdkazu"                                                                                       ,
+  "polozka"       , "Rozpo\\u010dtov\\u00e1 polo\\u017eka"                                                                             ,
+  "polvkk"        , "Z\\u00e1vazn\\u00e9 ukazatele st\\u00e1tn\\u00edho rozpo\\u010dtu (Do 2014)"                                      ,
+  "psuk"          , "Z\\u00e1vazn\\u00e9 ukazatele st\\u00e1tn\\u00edho rozpo\\u010dtu (Od 2015)"                                      ,
+  "pvs"           , "P\\u0159\\u00edjmov\\u00e1 a v\\u00fddajov\\u00e1 struktura: strukturn\\u00ed t\\u0159\\u00edd\\u011bn\\u00ed"    ,
+  "uctosnova"     , "Sm\\u011brn\\u00e1 \\u00fa\\u010dtov\\u00e1 osnova (polo\\u017eky \\u00fa\\u010detn\\u00edch v\\u00fdkaz\\u016f)" ,
+  "typfinmista"   , "Typ finan\\u010dn\\u00edho m\\u00edst"                                                                            ,
+  "typorg"        , "Typ OSS"                                                                                                          ,
+  "rozprog"       , "Rozpo\\u010dtov\\u00fd program"                                                                                   ,
+  "ucel"          , "\u00da\\u010del"                                                                                                  ,
+  "ucjed"         , "\\u00da\\u010detn\\u00ed jednotka"                                                                                ,
+  "ucelznak"      , "\\u00da\\u010delov\\u00fd znak"                                                                                   ,
+  "vykaz"         , "\\u010c\\u00edseln\\u00edk v\\u00fdkaz\\u016f a tabulek"                                                          ,
+  "zazjedn"       , "Z\\u00e1znamov\\u00e1 jednotka (konsolida\\u010dn\\u00ed t\\u0159\\u00edd\\u011bn\\u00ed)"                        ,
+  "zdroj"         , "Zdroj"                                                                                                            ,
+  "nastroj"       , "N\\u00e1stroj"                                                                                                    ,
+  "nastrojanal"   , "N\\u00e1stroj - analytika"                                                                                        ,
+  "zdrojfin"      , "Zdroj financov\\u00e1n\\u00ed organizac\\u00ed"                                                                   ,
+  "zpodm"         , "Zp\\u016fsob odm\\u011b\\u0148ov\\u00e1n\\u00ed"                                                                  ,
+  "zuj"           , "Z\\u00e1kladn\\u00ed \\u00fazemn\\u00ed jednotka"
+) %>%
   dplyr::mutate(name = stringi::stri_unescape_unicode(.data$name)) %>%
   dplyr::arrange(.data$id)
 # stringi::stri_escape_unicode("xxx")
 # usethis::use_data(sp_codelists, overwrite = TRUE)
-
 
 # https://stackoverflow.com/questions/62459736/how-do-i-use-tidyselect-where-in-a-custom-package
 # https://github.com/r-lib/tidyselect/issues/201
@@ -78,19 +78,32 @@ utils::globalVariables("where")
 #' @export
 sp_load_codelist <- function(path, n = NULL) {
   stopifnot(file.exists(path))
-  if(grepl("ucjed", path)) cli::cli_alert_info("Large codelist: this will take a while...")
+  if (grepl("ucjed", path)) {
+    cli::cli_alert_info("Large codelist: this will take a while...")
+  }
   xml_all <- xml2::read_xml(path)
   xml_children_all <- xml_all %>% xml2::xml_children()
-  xml_children <- if(is.null(n)) xml_children_all else xml_children_all[1:n]
+  xml_children <- if (is.null(n)) xml_children_all else xml_children_all[1:n]
+
+  if (length(xml_children) == 0) {
+    cli::cli_alert_warning(
+      "No content in codelist. Returning tibble with 0 rows and 0 columns"
+    )
+    return(tibble())
+  }
+
   nms <- xml2::xml_child(xml_all) %>% xml2::xml_children() %>% xml2::xml_name()
 
-  process_codelist <- function(x) {x %>% xml2::xml_children() %>%
+  process_codelist <- function(x) {
+    x %>%
+      xml2::xml_children() %>%
       xml2::xml_text() %>%
       # as.character() %>%
       t() %>%
       # purrr::set_names(nms) %>%
       as.data.frame() %>%
-      tibble::as_tibble(.name_repair = "minimal")}
+      tibble::as_tibble(.name_repair = "minimal")
+  }
 
   xvals_raw <- purrr::map_df(xml_children, process_codelist)
 
@@ -98,14 +111,26 @@ sp_load_codelist <- function(path, n = NULL) {
 
   xvals <- xvals_raw %>%
     purrr::set_names(nms) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::ends_with("_date")),
-                     ~lubridate::as_date(lubridate::parse_date_time(., orders = c("Ymd", "dmY")))) %>%
+    dplyr::mutate_at(
+      dplyr::vars(dplyr::ends_with("_date")),
+      ~ lubridate::as_date(lubridate::parse_date_time(
+        .,
+        orders = c("Ymd", "dmY")
+      ))
+    ) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::starts_with("kon_")), as.logical) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::matches("^vtab$")),
-                     ~stringr::str_pad(., 6, "left", "0")) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::matches("^vykaz$")),
-                     ~stringr::str_pad(., 3, "left", "0")) %>%
-    dplyr::mutate_at(dplyr::vars(dplyr::matches("^polvyk_order$")), as.numeric) %>%
+    dplyr::mutate_at(
+      dplyr::vars(dplyr::matches("^vtab$")),
+      ~ stringr::str_pad(., 6, "left", "0")
+    ) %>%
+    dplyr::mutate_at(
+      dplyr::vars(dplyr::matches("^vykaz$")),
+      ~ stringr::str_pad(., 3, "left", "0")
+    ) %>%
+    dplyr::mutate_at(
+      dplyr::vars(dplyr::matches("^polvyk_order$")),
+      as.numeric
+    ) %>%
     dplyr::mutate(dplyr::across(where(is.character), dplyr::na_if, ""))
 
   return(xvals)
@@ -133,24 +158,40 @@ sp_load_codelist <- function(path, n = NULL) {
 #' sp_get_codelist_file(url = codelist_url)
 #' }
 #' @export
-sp_get_codelist_file <- function(codelist_id = NULL, url = NULL, dest_dir = NULL, redownload = FALSE) {
-  if(is.null(dest_dir)) dest_dir <- getOption("statnipokladna.dest_dir",
-                                              default = tempdir())
+sp_get_codelist_file <- function(
+  codelist_id = NULL,
+  url = NULL,
+  dest_dir = NULL,
+  redownload = FALSE
+) {
+  if (is.null(dest_dir)) {
+    dest_dir <- getOption("statnipokladna.dest_dir", default = tempdir())
+  }
 
   td <- dest_dir
   dir.create(td, showWarnings = FALSE, recursive = TRUE)
 
-  filename <- ifelse(is.null(url),
-                     paste0(codelist_id, ".xml"),
-                     stringr::str_extract(url, "[a-zA-Z]*\\.xml$"))
+  filename <- ifelse(
+    is.null(url),
+    paste0(codelist_id, ".xml"),
+    stringr::str_extract(url, "[a-zA-Z]*\\.xml$")
+  )
 
   tf <- file.path(td, filename)
-  if(file.exists(tf) & !redownload) {
-    cli::cli_alert_info("Codelist file already in {.path {td}}, not downloading. Set {.code redownload = TRUE} if needed.")
+  if (file.exists(tf) & !redownload) {
+    cli::cli_alert_info(
+      "Codelist file already in {.path {td}}, not downloading. Set {.code redownload = TRUE} if needed."
+    )
   } else {
-    if(is.null(url)) url <- sp_get_codelist_url(codelist_id)
+    if (is.null(url)) {
+      url <- sp_get_codelist_url(codelist_id)
+    }
     cli::cli_alert_info("Storing codelist in {.path {td}}")
-    if(dest_dir == tempdir()) cli::cli_alert_info("Set {.var dest_dir} for more control over downloaded files.")
+    if (dest_dir == tempdir()) {
+      cli::cli_alert_info(
+        "Set {.var dest_dir} for more control over downloaded files."
+      )
+    }
     utils::download.file(url, tf, headers = c('User-Agent' = usr))
   }
   return(tf)
@@ -187,11 +228,93 @@ sp_get_codelist_file <- function(codelist_id = NULL, url = NULL, dest_dir = NULL
 #' @export
 #' @family Core workflow
 
-sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload = FALSE) {
-  tf <- sp_get_codelist_file(codelist_id, dest_dir = dest_dir, redownload = redownload)
+sp_get_codelist <- function(
+  codelist_id,
+  n = NULL,
+  dest_dir = NULL,
+  redownload = FALSE
+) {
+  tf <- sp_get_codelist_file(
+    codelist_id,
+    dest_dir = dest_dir,
+    redownload = redownload
+  )
   cl_parsed <- sp_load_codelist(tf, n)
   return(cl_parsed)
+}
 
+sp_load_codelist_new <- function(path, n = NULL) {
+  stopifnot(file.exists(path))
+  if (grepl("ucjed", path)) {
+    cli::cli_alert_info("Large codelist: this will take a while...")
+  }
+  xml_all <- xml2::read_xml(path)
+  xml_children_all <- xml2::xml_children(xml_all)
+  xml_children <- if (is.null(n)) xml_children_all else xml_children_all[1:n]
+
+  if (length(xml_children) == 0) {
+    cli::cli_warn(
+      "No content in codelist. Returning tibble with 0 rows and 0 columns"
+    )
+    return(tibble())
+  }
+
+  nms <- xml2::xml_name(xml2::xml_children(xml_children[[1]]))
+
+  n_rows <- length(xml_children)
+  n_cols <- length(nms)
+
+  mat <- matrix("", nrow = n_rows, ncol = n_cols)
+
+  for (i in seq_along(xml_children)) {
+    mat[i, ] <- xml2::xml_text(xml2::xml_children(xml_children[[i]]))
+  }
+
+  # print(xvals_raw)
+
+  xvals_raw <- as.data.frame(mat, stringsAsFactors = FALSE)
+  colnames(xvals_raw) <- nms
+
+  xvals <- xvals_raw %>%
+    tibble::as_tibble() |>
+    dplyr::mutate_at(
+      dplyr::vars(dplyr::ends_with("_date")),
+      ~ lubridate::as_date(lubridate::parse_date_time(
+        .,
+        orders = c("Ymd", "dmY")
+      ))
+    ) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::starts_with("kon_")), as.logical) %>%
+    dplyr::mutate_at(
+      dplyr::vars(dplyr::matches("^vtab$")),
+      ~ stringr::str_pad(., 6, "left", "0")
+    ) %>%
+    dplyr::mutate_at(
+      dplyr::vars(dplyr::matches("^vykaz$")),
+      ~ stringr::str_pad(., 3, "left", "0")
+    ) %>%
+    dplyr::mutate_at(
+      dplyr::vars(dplyr::matches("^polvyk_order$")),
+      as.numeric
+    ) %>%
+    dplyr::mutate(dplyr::across(where(is.character), dplyr::na_if, ""))
+
+  return(xvals)
+}
+
+sp_get_codelist_new <- function(
+  codelist_id,
+  n = NULL,
+  dest_dir = NULL,
+  redownload = FALSE
+) {
+  tf <- sp_get_codelist_file(
+    codelist_id,
+    dest_dir = dest_dir,
+    redownload = redownload
+  )
+  cl_parsed <- sp_load_codelist_new(tf, n)
+  return(cl_parsed)
 }
 
 #' Get/open URL of codelist viewer
@@ -205,12 +328,22 @@ sp_get_codelist <- function(codelist_id, n = NULL, dest_dir = NULL, redownload =
 #' @family Utilities
 #' @keywords internal
 sp_get_codelist_viewer <- function(codelist_id, open = TRUE) {
-  if(!is.character(codelist_id) | length(codelist_id) > 1) cli::cli_abort("Codelist ID must be a character vector of length one.")
-  if(!(codelist_id %in% sp_codelists$id)) cli::cli_abort("Not a valid codelist ID")
+  if (!is.character(codelist_id) | length(codelist_id) > 1) {
+    cli::cli_abort("Codelist ID must be a character vector of length one.")
+  }
+  if (!(codelist_id %in% sp_codelists$id)) {
+    cli::cli_abort("Not a valid codelist ID")
+  }
   codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
-  cli::cli_alert_info("Building URL for codelist {.value {codelist_id}} - {.value {codelist_name}}")
-  x <- stringr::str_glue("{sp_base_url}/datovy-katalog/ciselniky/prohlizec/{codelist_id}")
-  if(open) utils::browseURL(x)
+  cli::cli_alert_info(
+    "Building URL for codelist {.value {codelist_id}} - {.value {codelist_name}}"
+  )
+  x <- stringr::str_glue(
+    "{sp_base_url}/datovy-katalog/ciselniky/prohlizec/{codelist_id}"
+  )
+  if (open) {
+    utils::browseURL(x)
+  }
   return(x)
 }
 
@@ -262,21 +395,32 @@ sp_get_codelist_viewer <- function(codelist_id, open = TRUE) {
 #'   sp_add_codelist(pol) %>%
 #'   sp_add_codelist(par)
 #' }
-sp_add_codelist <- function(data, codelist = NULL, period_column = .data$vykaz_date,
-                            by = NULL,
-                            redownload = FALSE,
-                            dest_dir = NULL) {
-  if(is.null(codelist)) stop("Please supply a codelist")
+sp_add_codelist <- function(
+  data,
+  codelist = NULL,
+  period_column = .data$vykaz_date,
+  by = NULL,
+  redownload = FALSE,
+  dest_dir = NULL
+) {
+  if (is.null(codelist)) {
+    stop("Please supply a codelist")
+  }
   # print(rlang::as_label({{period_column}}))
-  stopifnot("data.frame" %in% class(data),
-            "data.frame" %in% class(codelist) | is.character(codelist))
-  if(is.character(codelist)) stopifnot(length(codelist) == 1)
+  stopifnot(
+    "data.frame" %in% class(data),
+    "data.frame" %in% class(codelist) | is.character(codelist)
+  )
+  if (is.character(codelist)) {
+    stopifnot(length(codelist) == 1)
+  }
 
-
-
-  if(is.character(codelist)) {
-    cl_data <- sp_get_codelist(codelist, redownload = redownload,
-                               dest_dir = dest_dir)
+  if (is.character(codelist)) {
+    cl_data <- sp_get_codelist(
+      codelist,
+      redownload = redownload,
+      dest_dir = dest_dir
+    )
     codelist_name <- codelist
   } else {
     cl_data <- codelist
@@ -285,44 +429,62 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$vykaz_d
   common_columns <- names(data)[names(data) %in% names(cl_data)]
   overlap <- length(common_columns)
   if (overlap > 1 & is.null(by)) {
-    cli::cli_alert_info("Joining on {.value {overlap}} columns: {.value {stringr::str_c(common_columns, collapse = ', ')}}. This may indicate a problem with the data. Set {.var by} if needed.", wrap = TRUE)
-  } else if(overlap == 0) {cli::cli_abort(c(x = "No columns to join by.",
-                                            "{cli::symbol$pointer} Are you sure you are merging the right codelist onto the right data?",
-                                            i = "Set {.value by} if needed."))}
+    cli::cli_alert_info(
+      "Joining on {.value {overlap}} columns: {.value {stringr::str_c(common_columns, collapse = ', ')}}. This may indicate a problem with the data. Set {.var by} if needed.",
+      wrap = TRUE
+    )
+  } else if (overlap == 0) {
+    cli::cli_abort(c(
+      x = "No columns to join by.",
+      "{cli::symbol$pointer} Are you sure you are merging the right codelist onto the right data?",
+      i = "Set {.value by} if needed."
+    ))
+  }
 
   slepit <- function(.x, .y) {
     # print(.x)
     # print(.y)
     nrows_start <- nrow(.x)
-    this_period <- dplyr::pull(.y, {{period_column}})
+    this_period <- dplyr::pull(.y, {{ period_column }})
     # print(this_period)
     codelist_filtered <- cl_data %>%
-      dplyr::filter(.data$end_date >= this_period & .data$start_date <= this_period) %>%
-      dplyr::rename_at(dplyr::vars(dplyr::ends_with("_date")), ~paste0(codelist_name, "_", .)) %>%
-      dplyr::rename_at(dplyr::vars(dplyr::matches("^nazev$")), ~paste0(codelist_name, "_", .))
+      dplyr::filter(
+        .data$end_date >= this_period & .data$start_date <= this_period
+      ) %>%
+      dplyr::rename_at(
+        dplyr::vars(dplyr::ends_with("_date")),
+        ~ paste0(codelist_name, "_", .)
+      ) %>%
+      dplyr::rename_at(
+        dplyr::vars(dplyr::matches("^nazev$")),
+        ~ paste0(codelist_name, "_", .)
+      )
 
     # print(codelist_filtered)
     slp <- suppressMessages(dplyr::left_join(.x, codelist_filtered, by = by))
-    if(nrow(slp) != nrows_start) {
-      cli::cli_abort(c(x = "Something went wrong with matching the codelist to the data for period {.value {this_period}}.",
-                       i = "Please inspect the dates on the codelist to make sure there are no duplicate items valid for one given date. You may want to filter/edit the codelist manually and pass it to the {.fn add_codelist} function as an object."))
+    if (nrow(slp) != nrows_start) {
+      cli::cli_abort(c(
+        x = "Something went wrong with matching the codelist to the data for period {.value {this_period}}.",
+        i = "Please inspect the dates on the codelist to make sure there are no duplicate items valid for one given date. You may want to filter/edit the codelist manually and pass it to the {.fn add_codelist} function as an object."
+      ))
     }
     return(slp)
   }
 
-  if("start_date" %in% names(cl_data) & "end_date" %in% names(cl_data)) {
+  if ("start_date" %in% names(cl_data) & "end_date" %in% names(cl_data)) {
     slepeno <- data %>%
       dplyr::ungroup() %>%
-      dplyr::group_by({{period_column}}) %>%
+      dplyr::group_by({{ period_column }}) %>%
       dplyr::group_map(slepit, .keep = TRUE) %>%
       dplyr::bind_rows()
   } else {
-    slepeno <- suppressMessages(data %>%
-                                  dplyr::left_join(cl_data, by = by))
+    slepeno <- suppressMessages(
+      data %>%
+        dplyr::left_join(cl_data, by = by)
+    )
   }
   return(slepeno)
 }
-
 
 
 #' Get URL of a given codelist
@@ -343,12 +505,16 @@ sp_add_codelist <- function(data, codelist = NULL, period_column = .data$vykaz_d
 #' }
 #' @export
 sp_get_codelist_url <- function(codelist_id, check_if_exists = TRUE) {
-  if(!is.character(codelist_id) | length(codelist_id) > 1) cli::cli_abort("Codelist ID must be a character vector of length one.")
-  if(!(codelist_id %in% sp_codelists$id)) cli::cli_abort("Not a valid codelist ID")
+  if (!is.character(codelist_id) | length(codelist_id) > 1) {
+    cli::cli_abort("Codelist ID must be a character vector of length one.")
+  }
+  if (!(codelist_id %in% sp_codelists$id)) {
+    cli::cli_abort("Not a valid codelist ID")
+  }
   codelist_name <- sp_codelists[sp_codelists$id == codelist_id, "name"]
   # cli::cli_alert_info("Building URL for codelist {.value {codelist_id}} - {.value {codelist_name}}")
   x <- paste(sp_base_url, "data/xml", paste0(codelist_id, ".xml"), sep = "/")
-  if(check_if_exists) {
+  if (check_if_exists) {
     check_online(x)
   }
   return(x)
